@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "974564109158",
+    "project_id": "eyeque-1311"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:974564109158:android:487b7ef21f00e879",
+        "android_client_info": {
+          "package_name": "com.eyeque.mono"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "974564109158-gl6plvuks2qqpolss67g94658k2sda0d.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.eyeque.mono",
+            "certificate_hash": "4718168F642F261DDEC3F597E23F515223BBF49C"
+          }
+        },
+        {
+          "client_id": "974564109158-7iecgbo5d52rdm2kacvs4kc573p7r7dn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAI02OuJZoq-Zb-dX3KreSieT_9z0GwZIM"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
