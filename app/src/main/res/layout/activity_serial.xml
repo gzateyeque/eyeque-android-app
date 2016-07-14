@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.eyeque.mono.SerialActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop = "15sp"
+        android:text="@string/serialHeaderTextString"
+        android:id="@+id/serialHeaderTextView"
+        android:layout_below="@+id/bannerWebView"
+        android:textColor="@color/background_material_dark"
+        android:textSize="20sp"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop = "15sp"
+        android:id="@+id/serialHeaderDivView"
+        android:layout_below="@+id/serialHeaderTextView"
+        android:background="@android:color/darker_gray"/>
+
+    <ScrollView
+        android:id="@+id/serialScrollView"
+        android:layout_below="@+id/serialHeaderDivView"
+        android:scrollbars="none"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:id="@+id/serialView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop = "20dp"
+            android:text="@string/serialTitleTextString"
+            android:id="@+id/serialTitleTextView"
+            android:textColor="#046EEA"
+            android:textSize="20sp"
+            android:layout_centerHorizontal="true" />
+
+        <EditText
+            android:id="@+id/serialEditText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginTop = "20dp"
+            android:layout_below="@+id/serialTitleTextView"
+            android:hint="Your serial number"
+            android:textColorHint="@android:color/darker_gray"
+            android:inputType="textCapCharacters"
+            android:ems="10"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:textSize="30sp"
+            android:layout_centerHorizontal="true" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop = "60dp"
+                android:gravity="center_horizontal"
+                android:text="@string/serialOrderTextString"
+                android:id="@+id/serialOrderText"
+                android:textColor="#046EEA"
+                android:textSize="15sp"
+                android:layout_below="@+id/serialEditText"
+                android:layout_alignParentStart="true" />
+
+            <Button
+                style="?android:textAppearanceSmall"
+                android:id="@+id/serialOrderButton"
+                android:layout_below="@+id/serialOrderText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginTop="20dp"
+                android:text="@string/orderButtonTextString"
+                android:textStyle="bold"
+                android:layout_centerVertical="true"
+                android:layout_alignParentStart="true"
+                android:textColor="#ffffff"
+                android:background="@android:color/holo_blue_dark" />
+
+        <Button
+            android:id="@+id/serialNextButton"
+            android:layout_width="170dip"
+            android:layout_height="50dip"
+            android:layout_marginTop="150dp"
+            android:layout_below="@+id/serialOrderButton"
+            android:text="@string/nextButtonTextString"
+            android:textAllCaps="false"
+            android:gravity="center"
+            android:background="?attr/selectableItemBackground"
+            android:textColor="#046EEA"
+            android:textSize="25sp"
+            android:textStyle="normal"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center_horizontal" />
+
+        </RelativeLayout>
+    </ScrollView>
+
+</RelativeLayout>

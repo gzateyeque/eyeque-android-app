@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.eyeque.mono.NameActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop = "15sp"
+        android:text="@string/nameHeaderTextString"
+        android:id="@+id/nameHeaderTextView"
+        android:layout_below="@+id/bannerWebView"
+        android:textColor="@color/background_material_dark"
+        android:textSize="20sp"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop = "15sp"
+        android:id="@+id/nameHeaderDivView"
+        android:layout_below="@+id/nameHeaderTextView"
+        android:background="@android:color/darker_gray"/>
+
+    <ScrollView
+        android:id="@+id/nameScrollView"
+        android:layout_below="@+id/nameHeaderDivView"
+        android:scrollbars="none"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:id="@+id/nameView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop = "20dp"
+            android:text="@string/nameTitleTextString"
+            android:id="@+id/nameTitleTextView"
+            android:textColor="#046EEA"
+            android:textSize="20sp"
+            android:layout_centerHorizontal="true" />
+
+        <EditText
+            android:id="@+id/firstNameEditText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginTop = "30dp"
+            android:layout_below="@+id/nameTitleTextView"
+            android:inputType="textPersonName"
+            android:hint="Firstname"
+            android:textColorHint="@android:color/darker_gray"
+            android:ems="10"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:textSize="30sp"
+            android:layout_centerHorizontal="true" />
+
+        <EditText
+            android:id="@+id/lastNameEditText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginTop = "5dp"
+            android:layout_below="@+id/firstNameEditText"
+            android:inputType="textPersonName"
+            android:hint="Lastname"
+            android:textColorHint="@android:color/darker_gray"
+            android:ems="10"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:textSize="30sp"
+            android:layout_centerHorizontal="true" />
+
+        <Button
+            android:id="@+id/nameNextButton"
+            android:layout_width="170dip"
+            android:layout_height="50dip"
+            android:layout_marginTop="200dp"
+            android:layout_below="@+id/lastNameEditText"
+            android:text="@string/nextButtonTextString"
+            android:textAllCaps="false"
+            android:gravity="center"
+            android:background="?attr/selectableItemBackground"
+            android:textColor="#046EEA"
+            android:textSize="25sp"
+            android:textStyle="normal"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center_horizontal" />
+
+        </RelativeLayout>
+    </ScrollView>
+</RelativeLayout>

@@ -1,0 +1,444 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/fragmentDashboard"
+    tools:context="com.eyeque.mono.DashboardFragment"
+    android:background="#F9F7F9">
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:id="@+id/resultScrollView">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#F9F7F9"
+            android:fitsSystemWindows="true"
+            >
+
+            <!-- TODO: Update blank fragment layout -->
+            <TextView
+                android:id="@+id/visionRecordTitle"
+                android:layout_width="match_parent"
+                android:layout_height="50dip"
+                android:gravity="center_vertical"
+                android:text="VISION RECORD"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:textColor="#1DADF3"
+                android:paddingStart="15dip" />
+
+            <TableLayout
+                android:id="@+id/resultTableLayout"
+                android:layout_below="@+id/visionRecordTitle"
+                android:layout_marginTop = "0sp"
+                android:stretchColumns="*"
+                android:background="#FFFFFF"
+                android:layout_width="fill_parent"
+                android:layout_height="120dp" >
+
+                <TableRow
+                    android:id="@+id/tableResultTime"
+                    android:layout_width="0dp"
+                    android:paddingTop="12dp"
+                    android:layout_height="wrap_content" >
+
+                    <TextView
+                        android:id="@+id/testTimeView"
+                        android:text="2016-06-20 15:37"
+                        android:layout_column="0"
+                        android:textSize="12sp"
+                        android:gravity="center"
+                        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                </TableRow>
+
+                <TableRow
+                    android:id="@+id/tableHeaderRow"
+                    android:layout_width="0dp"
+                    android:paddingTop="5dp"
+                    android:layout_height="wrap_content" >
+
+                    <TextView
+                        android:id="@+id/sphTextView"
+                        android:text="SPHERICAL"
+                        android:textStyle="bold"
+                        android:textSize="14sp"
+                        android:gravity="center"
+                        android:layout_column="1"
+                        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                    <TextView
+                        android:id="@+id/cylTextView"
+                        android:text="CYLINDRICAL"
+                        android:textStyle="bold"
+                        android:textSize="14sp"
+                        android:gravity="center"
+                        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                    <TextView
+                        android:id="@+id/axisTextView"
+                        android:text="AXIS"
+                        android:textStyle="bold"
+                        android:textSize="14sp"
+                        android:gravity="center"
+                        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                </TableRow>
+
+                <TableRow
+                    android:id="@+id/tableOdRow"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content" >
+
+                    <TextView
+                        android:id="@+id/odTitleTextView"
+                        android:text="RIGHT (O.D.)"
+                        android:textStyle="bold"
+                        android:textSize="14sp"
+                        android:gravity="center"
+                        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                    <TextView
+                        android:id="@+id/odSphTextView"
+                        android:text="-2.25"
+                        android:gravity="center"
+                        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                    <TextView
+                        android:id="@+id/odCylTextView"
+                        android:text="-0.5"
+                        android:gravity="center"
+                        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                    <TextView
+                        android:id="@+id/odAxisTextView"
+                        android:text="30"
+                        android:gravity="center"
+                        android:textAppearance="?android:attr/textAppearanceMedium" />
+                </TableRow>
+
+
+                <TableRow
+                    android:id="@+id/tableOsRow"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content" >
+
+                    <TextView
+                        android:id="@+id/osTitleTextView"
+                        android:text="LEFT (O.S.)"
+                        android:textSize="14sp"
+                        android:gravity="center"
+                        android:textStyle="bold"
+                        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                    <TextView
+                        android:id="@+id/osSphTextView"
+                        android:text="-2.75"
+                        android:gravity="center"
+                        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                    <TextView
+                        android:id="@+id/osCylTextView"
+                        android:text="-0.5"
+                        android:gravity="center"
+                        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                    <TextView
+                        android:id="@+id/osAxisTextView"
+                        android:text="50"
+                        android:gravity="center"
+                        android:textAppearance="?android:attr/textAppearanceMedium" />
+                </TableRow>
+            </TableLayout>
+
+            <TextView
+                android:id="@+id/visionSnapshotTitle"
+                android:layout_width="match_parent"
+                android:layout_height="50dip"
+                android:gravity="center_vertical"
+                android:text="VISION SNAPSHOT"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:textColor="#1DADF3"
+                android:paddingStart="15dip"
+                android:layout_below="@+id/resultTableLayout"
+                android:layout_alignParentStart="true" />
+
+            <LinearLayout android:background="#FFFFFF"
+                android:id="@+id/snapshotLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/visionSnapshotTitle"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/snapshotSummary"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="30dp"
+                    android:gravity="center"
+                    android:text="You have low nearsightness, low astigmstism on both the left eye and the right eye"
+                    android:textSize="15sp"
+                    android:layout_alignParentStart="true"
+                    android:background="@drawable/text_border"/>
+
+                <TextView
+                    android:id="@+id/farsightnessTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center"
+                    android:text="FARSIGHTNESS"
+                    android:textSize="12sp"
+                    android:layout_alignParentStart="true" />
+
+                <LinearLayout android:background="#FFFFFF"
+                    android:id="@+id/labelLayout"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/leftTitle"
+                        android:layout_width="0dp"
+                        android:layout_weight="2"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="left"
+                        android:textStyle="bold"
+                        android:gravity="right"
+                        android:text="LEFT  "
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/numTitle"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:text="+10D"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/rightTitle"
+                        android:layout_width="0dp"
+                        android:layout_weight="2"
+                        android:layout_height="wrap_content"
+                        android:gravity="left"
+                        android:layout_gravity="right"
+                        android:textStyle="bold"
+                        android:text="  RIGHT"
+                        android:textSize="14sp" />
+
+                </LinearLayout>
+
+                <LinearLayout android:background="#FFFFFF"
+                    android:id="@+id/chartLayout"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/astigmatismLeftTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:paddingTop="90dp"
+                        android:gravity="center"
+                        android:text="ASTIGMATISM\n-4D"
+                        android:textSize="12sp" />
+
+                    <ImageView
+                        android:id="@+id/visionMap"
+                        android:layout_width="wrap_content"
+                        android:layout_height="200dp"
+                        android:layout_weight="1"
+                        android:background="@color/white"
+                        android:src="@drawable/vision_map_orange"/>
+
+                    <TextView
+                        android:id="@+id/astigmatismRightTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:paddingTop="90dp"
+                        android:gravity="center"
+                        android:text="ASTIGMATISM\n-4D"
+                        android:textSize="12sp" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/nearsightnessTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:gravity="center"
+                    android:text="NEARSIGHTNESS\n-10D"
+                    android:textSize="12sp"
+                    android:layout_alignParentStart="true" />
+
+                <LinearLayout android:background="#FFFFFF"
+                    android:id="@+id/legendLayout"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="10dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/empty1Text"
+                        android:layout_width="wrap_content"
+                        android:layout_weight="2"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text=""
+                        android:textSize="10sp" />
+
+                    <ImageView
+                        android:id="@+id/lowLegend"
+                        android:layout_width="wrap_content"
+                        android:paddingTop = "5dp"
+                        android:paddingBottom = "5dp"
+                        android:layout_height="20dp"
+                        android:layout_weight="1"
+                        android:background="@color/white"
+                        android:src="@drawable/square_green"/>
+
+                    <TextView
+                        android:id="@+id/lowText"
+                        android:layout_width="wrap_content"
+                        android:layout_weight="1"
+                        android:paddingTop = "3dp"
+                        android:layout_height="20dp"
+                        android:gravity="left"
+                        android:text="LOW"
+                        android:textSize="10sp" />
+
+                    <ImageView
+                        android:id="@+id/moderateLegend"
+                        android:layout_width="wrap_content"
+                        android:paddingTop = "5dp"
+                        android:paddingBottom = "5dp"
+                        android:layout_height="20dp"
+                        android:layout_weight="1"
+                        android:background="@color/white"
+                        android:src="@drawable/square_yellow"/>
+
+                    <TextView
+                        android:id="@+id/moderateText"
+                        android:layout_width="wrap_content"
+                        android:layout_weight="1"
+                        android:paddingTop = "3dp"
+                        android:layout_height="wrap_content"
+                        android:gravity="left"
+                        android:text="MODERATE"
+                        android:textSize="10sp" />
+
+                    <ImageView
+                        android:id="@+id/highLegend"
+                        android:layout_width="wrap_content"
+                        android:paddingTop = "5dp"
+                        android:paddingBottom = "5dp"
+                        android:layout_height="20dp"
+                        android:layout_weight="1"
+                        android:background="@color/white"
+                        android:src="@drawable/square_orange"/>
+
+                    <TextView
+                        android:id="@+id/highText"
+                        android:layout_width="wrap_content"
+                        android:layout_weight="1"
+                        android:paddingTop = "3dp"
+                        android:layout_height="wrap_content"
+                        android:gravity="left"
+                        android:text="HIGH"
+                        android:textSize="10sp" />
+
+                    <TextView
+                        android:id="@+id/empty2Text"
+                        android:layout_width="wrap_content"
+                        android:layout_weight="2"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text=""
+                        android:textSize="10sp" />
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/trackingDataTitle"
+                android:layout_below="@id/snapshotLayout"
+                android:layout_width="match_parent"
+                android:layout_height="50dip"
+                android:gravity="center_vertical"
+                android:text="TRACKING DATA"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:textColor="#1DADF3"
+                android:paddingStart="15dip" />
+
+            <TextView
+                android:id="@+id/trackingDataOdTitle"
+                android:layout_below="@id/trackingDataTitle"
+                android:layout_width="match_parent"
+                android:background="#FFFFFF"
+                android:layout_height="80dip"
+                android:text="SPHERICAL EQUIVALENT (RIGHT O.D.)"
+                android:textStyle="bold"
+                android:textSize="14sp"
+                android:gravity="center"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            <LinearLayout android:background="#FFFFFF"
+                android:id="@+id/trackingDataOdLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/trackingDataOdTitle">
+                <WebView
+                    android:id="@+id/trackingDataOdWebView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30sp"
+                    android:layout_marginRight="30sp"
+                    android:layout_marginBottom="10sp"
+                    android:color="#FFFFFF"
+                    android:scaleType="fitXY">
+                </WebView>
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/trackingDataOsTitle"
+                android:layout_below="@id/trackingDataOdLayout"
+                android:layout_width="match_parent"
+                android:background="#FFFFFF"
+                android:layout_height="80dip"
+                android:text="SPHERICAL EQUIVALENT (LEFT O.S.)"
+                android:textStyle="bold"
+                android:textSize="14sp"
+                android:gravity="center"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            <LinearLayout android:background="#FFFFFF"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/trackingDataOsTitle">
+                <WebView
+                    android:id="@+id/trackingDataOsWebView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="50sp"
+                    android:layout_marginLeft="30sp"
+                    android:layout_marginRight="30sp"
+                    android:color="#FFFFFF"
+                    android:scaleType="fitXY">
+                </WebView>
+            </LinearLayout>
+        </RelativeLayout>
+    </ScrollView>
+</FrameLayout>

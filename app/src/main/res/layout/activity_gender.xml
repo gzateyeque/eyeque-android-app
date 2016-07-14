@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.eyeque.mono.GenderActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop = "15sp"
+        android:text="@string/genderHeaderTextString"
+        android:id="@+id/genderHeaderTextView"
+        android:layout_below="@+id/bannerWebView"
+        android:textColor="@color/background_material_dark"
+        android:textSize="20sp"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop = "15sp"
+        android:id="@+id/genderHeaderDivView"
+        android:layout_below="@+id/genderHeaderTextView"
+        android:background="@android:color/darker_gray"/>
+
+    <ScrollView
+        android:id="@+id/nameScrollView"
+        android:layout_below="@+id/genderHeaderDivView"
+        android:scrollbars="none"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:id="@+id/nameView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop = "20dp"
+            android:text="@string/genderTitleTextString"
+            android:id="@+id/genderTitleTextView"
+            android:textColor="#046EEA"
+            android:textSize="20sp"
+            android:layout_centerHorizontal="true" />
+
+            <LinearLayout
+                android:id="@+id/LinearLayout"
+                android:layout_below="@+id/genderTitleTextView"
+                android:layout_marginTop="50dp"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content">
+
+                <ImageButton
+                    android:id="@+id/femaleButton"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:layout_marginTop="0dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="0dp"
+                    android:layout_weight="1"
+                    android:adjustViewBounds="true"
+                    android:padding="10dp"
+                    android:scaleType="fitXY" >
+                </ImageButton>
+
+                <TextView
+                    android:layout_width="50dp"
+                    android:layout_height="150dp"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="0dp"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="@string/genderSlashTextString"
+                    android:textSize="60dp"
+                    android:textColor="@android:color/darker_gray"
+                    android:id="@+id/textView"
+                    android:layout_weight="1" />
+
+                <ImageButton
+                    android:id="@+id/maleButton"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:layout_marginTop="0dp"
+                    android:layout_marginLeft="0dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:adjustViewBounds="true"
+                    android:padding="10dp"
+                    android:scaleType="fitXY">
+                </ImageButton>
+            </LinearLayout>
+
+        <Button
+            android:id="@+id/genderNextButton"
+            android:layout_width="170dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="150dp"
+            android:layout_below="@+id/LinearLayout"
+            android:text="@string/nextButtonTextString"
+            android:textAllCaps="false"
+            android:gravity="center"
+            android:background="?attr/selectableItemBackground"
+            android:textColor="#046EEA"
+            android:textSize="25sp"
+            android:textStyle="normal"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center_horizontal" />
+
+        </RelativeLayout>
+    </ScrollView>
+
+</RelativeLayout>
