@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Window;
 import android.view.WindowManager;
+import android.app.Fragment;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -20,7 +21,11 @@ import android.widget.Toast;
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnMenuTabSelectedListener;
 
-public class TopActivity extends AppCompatActivity implements DashboardFragment.OnFragmentInteractionListener {
+public class TopActivity extends AppCompatActivity
+        implements TestFragment.OnFragmentInteractionListener,
+                    DashboardFragment.OnFragmentInteractionListener,
+                    SettingFragment.OnFragmentInteractionListener {
+
     private CoordinatorLayout coordinatorLayout;
     private static final String TAG = "Home";
 
@@ -39,15 +44,30 @@ public class TopActivity extends AppCompatActivity implements DashboardFragment.
         window.setStatusBarColor(this.getResources().getColor(R.color.colorPrimaryDark));
 
         coordinatorLayout = (CoordinatorLayout) findViewById(R.id.top_activity);
+        // get fragment manager
+        /*
+        FragmentManager fm = getFragmentManager();
+        FragmentTransaction ft = fm.beginTransaction();
+        Fragment dashboardFragment = new DashboardFragment();
+        Fragment testFragment = new TestFragment();
+        // ft.add(R.id.frame_container, dashboardFragment, "dashboard");
+        ft.add(R.id.frame_container, testFragment, "test");
+        ft.commit();
+        */
 
         BottomBar bottomBar = BottomBar.attach(this, savedInstanceState);
         bottomBar.setItemsFromMenu(R.menu.three_buttons_menu, new OnMenuTabSelectedListener() {
             @Override
             public void onMenuItemSelected(int itemId) {
+                selectMenuItem(itemId);
+                /*
                 switch (itemId) {
                     case R.id.home_item:
                         // setContentView(R.layout.activity_top);
                         Snackbar.make(coordinatorLayout, "Home Item Selected", Snackbar.LENGTH_LONG).show();
+                        ft.add(R.id.frame_container, dashboardFragment, "dashboard");
+                        ft.addToBackStack(null);
+                        ft.commit();
                         break;
                     case R.id.test_item:
                         Intent i = new Intent(getBaseContext(), MainActivity.class);
@@ -58,22 +78,26 @@ public class TopActivity extends AppCompatActivity implements DashboardFragment.
                         break;
                     case R.id.account_item:
                         Snackbar.make(coordinatorLayout, "Account Item Selected", Snackbar.LENGTH_LONG).show();
+                        // ft.remove(dashboardFragment);
+                        ft.add(R.id.frame_container, testFragment, "test");
+                        ft.addToBackStack(null);
+                        ft.commit();
                         break;
                 }
+                */
             }
         });
 
         // Set the color for the active tab. Ignored on mobile when there are more than three tabs.
         // bottomBar.setActiveTabColor("#C2185B");
         bottomBar.setActiveTabColor("#046EEA");
+        selectMenuItem(R.id.home_item);
 
-        // get fragment manager
-        FragmentManager fm = getFragmentManager();
-        FragmentTransaction ft = fm.beginTransaction();
-        ft.add(R.id.frame_container, new DashboardFragment(), "dashboard");
+
+        // ft.add(R.id.frame_container, new DashboardFragment(), "dashboard");
         // alternatively add it with a tag
         // trx.add(R.id.your_placehodler, new YourFragment(), "detail");
-        ft.commit();
+        // ft.commit();
 
 
         // Use the dark theme. Ignored on mobile when there are more than three tabs.
@@ -87,5 +111,42 @@ public class TopActivity extends AppCompatActivity implements DashboardFragment.
         //bottomBar.setTypeFace("MyFont.ttf");
     }
 
-    public void onFragmentInteraction(Uri uri) {}
+    public void selectMenuItem(int menuItem) {
+        // Create a new fragment and specify the fragment to show based on nav item clicked
+        Fragment fragment = null;
+        Class fragmentClass;
+        switch(menuItem) {
+            case R.id.home_item:
+                fragmentClass = DashboardFragment.class;
+                break;
+            case R.id.test_item:
+                fragmentClass = TestFragment.class;
+                break;
+            case R.id.account_item:
+                fragmentClass = SettingFragment.class;
+                break;
+            default:
+                fragmentClass = DashboardFragment.class;
+        }
+
+        try {
+            fragment = (Fragment) fragmentClass.newInstance();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        // Insert the fragment by replacing any existing fragment
+        FragmentManager fragmentManager = getFragmentManager();
+        fragmentManager.beginTransaction().replace(R.id.frame_container, fragment).commit();
+
+    }
+
+    @Override
+    public void onTestFragmentInteraction(Uri uri) {}
+
+    @Override
+    public void onDashboardFragmentInteraction(Uri uri) {}
+
+    @Override
+    public void onSettingFragmentInteraction(Uri uri) {}
 }

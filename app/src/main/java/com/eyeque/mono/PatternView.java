@@ -10,6 +10,7 @@ import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.view.View;
 import android.graphics.DashPathEffect;
+import android.graphics.Typeface;
 import android.util.Log;
 import android.graphics.RectF;
 import java.util.Calendar;
@@ -25,6 +26,7 @@ public class PatternView extends View {
     private float aniRadius;
     private int aniColor;
     private double radiansToDraw;
+    private boolean drawDeviceOnly = false;
 
     // Tag for log message
     private static final String TAG = PatternView.class.getSimpleName();
@@ -37,7 +39,6 @@ public class PatternView extends View {
         invalidate();
 
         // Try animation
-
         final int strokeWidth = 36;
         p = new Paint();
         p.setAntiAlias(true);
@@ -46,7 +47,6 @@ public class PatternView extends View {
         //Circle color
         p.setColor(Color.RED);
 
-
     }
 
     public void setDeviceId(int id) {
@@ -54,8 +54,13 @@ public class PatternView extends View {
         pattern.setDeviceId(id);
     }
 
+    public void setdrawDeviceOnly(boolean value) {
+        drawDeviceOnly = value;
+    }
+
     public void start() {
-        pattern.start();
+        if (!drawDeviceOnly)
+            pattern.start();
         // pattern.setDrawAxis();
         invalidate();
     }
@@ -121,90 +126,107 @@ public class PatternView extends View {
                 break;
         }
 
-        if ((deviceId != 4 && pattern.getPattenIndex() > 0) || (deviceId == 4)) {
-            int angle = pattern.getRotateAngle();
-            cv.save();
-            cv.rotate(angle, 720, 520);
-        } else {
-            cv.save();
-            cv.rotate(0);
-        }
-
-
-        // Draw Accormodation Pattern
-        /***
-         p.setColor(Color.BLUE);  // p.setColor(getAniColor());
-         p.setStyle(Paint.Style.STROKE);
-         if (deviceId != 2) {
-         p.setStrokeWidth(5);
-         if (getAniRadius() > 20)
-         cv.drawCircle(720, 520, getAniRadius()-20, p);
-         cv.drawCircle(720, 520, getAniRadius(), p);
-         }
-         else {
-         p.setStrokeWidth(24);
-         cv.drawCircle(855, 520, getAniRadius(), p);
-         }
-         ***/
-
         p.setPathEffect(null);
-        for (float ii = 150; ii >= 0; ii -= 0.5) {
-            // cv.save();
-            aniRadius = ii + 20;
-            rColor = 0.6* 0.5 * (0.4 + ii / 125f) * (1.0 - 1.0 * (Math.cos((double) (2 * Constants.PI * (radiansToDraw + ii * ((1 - ii / 125f) * 0.005 + 0.015))))));
-            rColor = rColor * 255;
-            if (rColor > 255)
-                rColor = 255;
-            color = Color.rgb(0, 0, (int) (rColor));
+        if (drawDeviceOnly) {
             p.setColor(color);
-            // Log.i("DEBUG", String.valueOf(ii));
 
-            if (deviceId >= 2 && deviceId != 4)
-                // cv.drawCircle(855, 520, ii, p);
-                cv.drawCircle(pattern.getGreenStartX()-100, 520, ii, p);
-            else
-                cv.drawCircle(720, 520, ii, p);
-        }
-
-        p.setColor(Color.RED);
-        if (deviceId == 2 || deviceId == 3) {
-            p.setStrokeWidth(36);
-            cv.drawLine(pattern.getRedStartX(), pattern.getRedStartY(),
-                    pattern.getRedEndX(), pattern.getRedEndY(), p);
-            // cv.drawLine(pattern.getRedStartX() + 36, pattern.getRedStartY() + 148,
-            // pattern.getRedEndX() + 36, pattern.getRedEndY(), p);
-            // cv.drawLine(pattern.getRedStartX() - 50, pattern.getRedStartY(),
-            // pattern.getRedEndX()-1, pattern.getRedStartY(), p);
-        } else if (deviceId == 4) {
-            p.setStrokeWidth(30);
-            cv.drawLine(pattern.getRedStartX(), pattern.getRedStartY(),
-                    pattern.getRedEndX(), pattern.getRedEndY(), p);
+            // p.setStrokeWidth(2);
+            // cv.drawText("Please attach device here", 720-500, 520, p);
+            int fontSize = 72;
+            Typeface typeface = Typeface.create(Typeface.SANS_SERIF, Typeface.NORMAL);
+            String text = "Please attach device here";
+            p.setTypeface(typeface);
+            p.setTextSize(fontSize);
+            p.setStrokeWidth(6);
+            float textWidth = p.measureText(text);
+            // int xOffset = (int)((1440-textWidth)/2f) - (int)(fontSize/2f);
+            int xOffset = (int)((1440-textWidth)/2f);
+            cv.drawText(text, xOffset, 520, p);
         } else {
-            p.setStrokeWidth(1);
-            cv.drawLine(pattern.getRedStartX(), pattern.getRedStartY(),
-                    pattern.getRedEndX(), pattern.getRedEndY(), p);
-        }
+            if ((deviceId != 4 && pattern.getPattenIndex() > 0) || (deviceId == 4)) {
+                int angle = pattern.getRotateAngle();
+                cv.save();
+                cv.rotate(angle, 720, 520);
+            } else {
+                cv.save();
+                cv.rotate(0);
+            }
 
-        // Draw GREEN line
-        p.setColor(Color.GREEN);
-        if (deviceId == 2 || deviceId ==3) {
-            p.setStrokeWidth(36);
-            cv.drawLine(pattern.getGreenStartX(), pattern.getGreenStartY(),
-                    pattern.getGreenEndX(), pattern.getGreenEndY(), p);
-            // cv.drawLine(pattern.getGreenStartX() - 36, pattern.getGreenStartY(),
-            // pattern.getGreenEndX() - 36, pattern.getGreenEndY() - 148, p);
-            // cv.drawLine(pattern.getGreenStartX() + 1, pattern.getGreenStartY(),
-            // pattern.getGreenEndX() + 50, pattern.getGreenStartY(), p);
-        } else if (deviceId == 4) {
-            color = Color.rgb(0, 127, 0);
-            p.setColor(color);
-            p.setStrokeWidth(30);
-            cv.drawLine(pattern.getGreenStartX(), pattern.getGreenStartY(),
-                    pattern.getGreenEndX(), pattern.getGreenEndY(), p);
-        } else {
-            p.setStrokeWidth(1);
-            cv.drawLine(pattern.getGreenStartX(), pattern.getGreenStartY(),
-                    pattern.getGreenEndX(), pattern.getGreenEndY(), p);
+
+            // Draw Accormodation Pattern
+            /***
+             p.setColor(Color.BLUE);  // p.setColor(getAniColor());
+             p.setStyle(Paint.Style.STROKE);
+             if (deviceId != 2) {
+             p.setStrokeWidth(5);
+             if (getAniRadius() > 20)
+             cv.drawCircle(720, 520, getAniRadius()-20, p);
+             cv.drawCircle(720, 520, getAniRadius(), p);
+             }
+             else {
+             p.setStrokeWidth(24);
+             cv.drawCircle(855, 520, getAniRadius(), p);
+             }
+             ***/
+
+            for (float ii = 150; ii >= 0; ii -= 0.5) {
+                // cv.save();
+                aniRadius = ii + 20;
+                rColor = 0.6 * 0.5 * (0.4 + ii / 125f) * (1.0 - 1.0 * (Math.cos((double) (2 * Constants.PI * (radiansToDraw + ii * ((1 - ii / 125f) * 0.005 + 0.015))))));
+                rColor = rColor * 255;
+                if (rColor > 255)
+                    rColor = 255;
+                color = Color.rgb(0, 0, (int) (rColor));
+                p.setColor(color);
+                // Log.i("DEBUG", String.valueOf(ii));
+
+                if (deviceId >= 2 && deviceId != 4)
+                    // cv.drawCircle(855, 520, ii, p);
+                    cv.drawCircle(pattern.getGreenStartX() - 100, 520, ii, p);
+                else
+                    cv.drawCircle(720, 520, ii, p);
+            }
+
+            p.setColor(Color.RED);
+            if (deviceId == 2 || deviceId == 3) {
+                p.setStrokeWidth(36);
+                cv.drawLine(pattern.getRedStartX(), pattern.getRedStartY(),
+                        pattern.getRedEndX(), pattern.getRedEndY(), p);
+                // cv.drawLine(pattern.getRedStartX() + 36, pattern.getRedStartY() + 148,
+                // pattern.getRedEndX() + 36, pattern.getRedEndY(), p);
+                // cv.drawLine(pattern.getRedStartX() - 50, pattern.getRedStartY(),
+                // pattern.getRedEndX()-1, pattern.getRedStartY(), p);
+            } else if (deviceId == 4) {
+                p.setStrokeWidth(30);
+                cv.drawLine(pattern.getRedStartX(), pattern.getRedStartY(),
+                        pattern.getRedEndX(), pattern.getRedEndY(), p);
+            } else {
+                p.setStrokeWidth(1);
+                cv.drawLine(pattern.getRedStartX(), pattern.getRedStartY(),
+                        pattern.getRedEndX(), pattern.getRedEndY(), p);
+            }
+
+            // Draw GREEN line
+            p.setColor(Color.GREEN);
+            if (deviceId == 2 || deviceId == 3) {
+                p.setStrokeWidth(36);
+                cv.drawLine(pattern.getGreenStartX(), pattern.getGreenStartY(),
+                        pattern.getGreenEndX(), pattern.getGreenEndY(), p);
+                // cv.drawLine(pattern.getGreenStartX() - 36, pattern.getGreenStartY(),
+                // pattern.getGreenEndX() - 36, pattern.getGreenEndY() - 148, p);
+                // cv.drawLine(pattern.getGreenStartX() + 1, pattern.getGreenStartY(),
+                // pattern.getGreenEndX() + 50, pattern.getGreenStartY(), p);
+            } else if (deviceId == 4) {
+                color = Color.rgb(0, 127, 0);
+                p.setColor(color);
+                p.setStrokeWidth(30);
+                cv.drawLine(pattern.getGreenStartX(), pattern.getGreenStartY(),
+                        pattern.getGreenEndX(), pattern.getGreenEndY(), p);
+            } else {
+                p.setStrokeWidth(1);
+                cv.drawLine(pattern.getGreenStartX(), pattern.getGreenStartY(),
+                        pattern.getGreenEndX(), pattern.getGreenEndY(), p);
+            }
         }
 
     }

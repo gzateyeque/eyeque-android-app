@@ -34,6 +34,7 @@ public class Constants {
 
     // Content URL
     public static final String UrlBanner = ContentRestFulBaseURL + "banner";
+    public static final String UrlYoutube = "http://54.201.220.133:8080/tutorial_video/index.html";
     public static final String UrlTermsOfService = ContentRestFulBaseURL + "user_agreement/terms";
     public static final String UrlPrivacyPolicy = ContentRestFulBaseURL + "user_agreement/policy";
     public static final String UrlBuyDevice = apiRestfulBaseURL + "eyeque-pocket-refractor.html";

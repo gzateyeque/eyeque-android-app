@@ -25,12 +25,12 @@ import android.widget.Toast;
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link DashboardFragment.OnFragmentInteractionListener} interface
+ * {@link SettingFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
  * Use the {@link DashboardFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class DashboardFragment extends Fragment {
+public class SettingFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -39,12 +39,10 @@ public class DashboardFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-    private WebView trackingDataOdWebView;
-    private WebView trackingDataOsWebView;
 
     private OnFragmentInteractionListener mListener;
 
-    public DashboardFragment() {
+    public SettingFragment() {
         // Required empty public constructor
     }
 
@@ -57,8 +55,8 @@ public class DashboardFragment extends Fragment {
      * @return A new instance of fragment DashboardFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static DashboardFragment newInstance(String param1, String param2) {
-        DashboardFragment fragment = new DashboardFragment();
+    public static SettingFragment newInstance(String param1, String param2) {
+        SettingFragment fragment = new SettingFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -79,53 +77,7 @@ public class DashboardFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         int color;
-        View rootView = inflater.inflate(R.layout.fragment_dashboard, container, false);
-
-        BitmapFactory.Options myOptions = new BitmapFactory.Options();
-        myOptions.inDither = true;
-        myOptions.inScaled = false;
-        myOptions.inPreferredConfig = Bitmap.Config.ARGB_8888;// important
-        myOptions.inPurgeable = true;
-
-        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.vision_map_orange3,myOptions);
-        Paint paint = new Paint();
-        paint.setAntiAlias(true);
-        color = Color.rgb(29, 173, 243);
-        // paint.setColor(Color.WHITE);
-        paint.setColor(color);
-
-        Bitmap workingBitmap = Bitmap.createBitmap(bitmap);
-        Bitmap mutableBitmap = workingBitmap.copy(Bitmap.Config.ARGB_8888, true);
-
-        Canvas canvas = new Canvas(mutableBitmap);
-        paint.setColor(Color.WHITE);
-        canvas.drawCircle(200, 305, 20, paint);
-        canvas.drawCircle(300, 275, 20, paint);
-        paint.setColor(color);
-        canvas.drawCircle(200, 305, 12, paint);
-        canvas.drawCircle(300, 275, 12, paint);
-
-
-        final ImageView imageView = (ImageView) rootView.findViewById(R.id.visionMap);
-        imageView.setAdjustViewBounds(true);
-        imageView.setImageBitmap(mutableBitmap);
-
-        // Rendering tracking data
-        this.trackingDataOdWebView = (WebView) rootView.findViewById(R.id.trackingDataOdWebView);
-        WebSettings settings1 = trackingDataOdWebView.getSettings();
-        settings1.setJavaScriptEnabled(true);
-        // webview.setScrollBarStyle(WebView.SCROLLBARS_OUTSIDE_OVERLAY);
-        trackingDataOdWebView.getSettings().setLoadWithOverviewMode(true);
-        trackingDataOdWebView.getSettings().setUseWideViewPort(true);
-        trackingDataOdWebView.loadUrl(Constants.UrlTrackingDataOd);
-
-        this.trackingDataOsWebView = (WebView) rootView.findViewById(R.id.trackingDataOsWebView);
-        WebSettings settings2 = trackingDataOsWebView.getSettings();
-        settings2.setJavaScriptEnabled(true);
-        // webview.setScrollBarStyle(WebView.SCROLLBARS_OUTSIDE_OVERLAY);
-        trackingDataOsWebView.getSettings().setLoadWithOverviewMode(true);
-        trackingDataOsWebView.getSettings().setUseWideViewPort(true);
-        trackingDataOsWebView.loadUrl(Constants.UrlTrackingDataOs);
+        View rootView = inflater.inflate(R.layout.fragment_setting, container, false);
 
         // Inflate the layout for this fragment
         // return inflater.inflate(R.layout.fragment_dashboard, container, false);
@@ -135,7 +87,7 @@ public class DashboardFragment extends Fragment {
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
-            mListener.onDashboardFragmentInteraction(uri);
+            mListener.onSettingFragmentInteraction(uri);
         }
     }
 
@@ -146,7 +98,7 @@ public class DashboardFragment extends Fragment {
             mListener = (OnFragmentInteractionListener) context;
         } else {
             throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
+                    + " must implement OnSettingFragmentInteractionListener");
         }
     }
 
@@ -168,6 +120,6 @@ public class DashboardFragment extends Fragment {
      */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
-        void onDashboardFragmentInteraction(Uri uri);
+        void onSettingFragmentInteraction(Uri uri);
     }
 }
