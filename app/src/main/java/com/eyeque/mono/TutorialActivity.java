@@ -49,5 +49,14 @@ public class TutorialActivity extends AppCompatActivity {
         webview.getSettings().setLoadWithOverviewMode(true);
         webview.getSettings().setUseWideViewPort(true);
         webview.loadUrl(Constants.UrlYoutube);
+
+        Button tutorialContinueButton = (Button) findViewById(R.id.tutorialContinueButton);
+        tutorialContinueButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getBaseContext(), TestConditionActivity.class);
+                startActivity(i);
+            }
+        });
     }
 }
