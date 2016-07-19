@@ -4,6 +4,7 @@ package com.eyeque.mono;
  */
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -54,6 +55,7 @@ public class ResultActivity extends Activity {
     private static boolean netLinkStatus = true;
     boolean isUploadComplete = false;
     private static int numMeasurement;
+    private PatternView patternView;
 
     // Tag for log message
     private static final String TAG = ResultActivity.class.getSimpleName();
@@ -99,6 +101,7 @@ public class ResultActivity extends Activity {
         osCylTextView.setText(String.format("%.2f", osCyl));
         osAxisTextView.setText(Integer.toString((int) osAxis));
 
+        /*
         angleList[0] = getIntent().getDoubleExtra("Angle-1", 0.00);
         angleList[1] = getIntent().getDoubleExtra("Angle-2", 0.00);
         angleList[2] = getIntent().getDoubleExtra("Angle-3", 0.00);
@@ -164,6 +167,7 @@ public class ResultActivity extends Activity {
             rightDistList[8] = getIntent().getIntExtra("R-Dist-9", 8);
         }
 
+
         final TextView l1TextView = (TextView) findViewById(R.id.l1TextView);
         final TextView l2TextView = (TextView) findViewById(R.id.l2TextView);
         final TextView l3TextView = (TextView) findViewById(R.id.l3TextView);
@@ -227,6 +231,7 @@ public class ResultActivity extends Activity {
             mStr = String.format("%.2f", rightPowerList[8]) + " " + String.format("%.1f", angleList[8]) + (char) 0x00B0;
             r9TextView.setText(mStr);
         }
+        */
 
         uploadButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -315,7 +320,9 @@ public class ResultActivity extends Activity {
                                 Log.i(TAG, response);
                                 isUploadComplete = true;
                                 Toast.makeText(ResultActivity.this,
-                                        "Uploaded to Server Successfully", Toast.LENGTH_SHORT).show();
+                                        "Test Saved", Toast.LENGTH_SHORT).show();
+                                Intent i = new Intent(getBaseContext(), TopActivity.class);
+                                startActivity(i);
                             }
                         }, new Response.ErrorListener() {
                             @Override
@@ -346,448 +353,6 @@ public class ResultActivity extends Activity {
                         RetryPolicy policy = new DefaultRetryPolicy(Constants.NETCONN_TIMEOUT_VALUE, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
                         postRequest.setRetryPolicy(policy);
                         queue.add(postRequest);
-
-                        /*
-                        if (serverId == 0) {
-                            // Upload Measurement Data
-                            // for (int i = 0; i < 6; i++ ) {
-                            // Add code
-                            // }
-                            url = Constants.RestfulBaseURL + "/eyecloud/api/measurements";
-                            postRequest = new StringRequest(Request.Method.POST, url,
-                                    new Response.Listener<String>() {
-                                        @Override
-                                        public void onResponse(String response) {
-                                            // response
-                                            // isUploadComplete = true;
-                                            // Toast.makeText(ResultActivity.this,
-                                            // "Uploaded Measurement to Server Successfully", Toast.LENGTH_SHORT).show();
-                                            Log.d("Response", response);
-                                        }
-                                    }, new Response.ErrorListener() {
-
-                                @Override
-                                public void onErrorResponse(VolleyError error) {
-                                    // error
-                                    Toast.makeText(ResultActivity.this,
-                                            "Can't connect to the server", Toast.LENGTH_SHORT).show();
-                                    Log.d("Error.Response", error.toString());
-                                }
-                            }
-                            ) {
-                                @Override
-                                protected Map<String, String> getParams() {
-                                    Map<String, String> params = new HashMap<String, String>();
-                                    params.put("angle", String.format("%.1f", angleList[0]));
-                                    params.put("distance", Integer.toString(rightDistList[0]));
-                                    params.put("mId", "test-R-1");
-                                    params.put("rightEye", "true");
-                                    params.put("power", String.format("%.2f", rightPowerList[0]));
-                                    params.put("subjectID", String.valueOf(subjectId));
-                                    params.put("testID", String.valueOf(idOne));
-                                    return params;
-                                }
-                            };
-                            queue.add(postRequest);
-
-                            postRequest = new StringRequest(Request.Method.POST, url,
-                                    new Response.Listener<String>() {
-                                        @Override
-                                        public void onResponse(String response) {
-                                            // response
-                                            // isUploadComplete = true;
-                                            // Toast.makeText(ResultActivity.this,
-                                            // "Uploaded Measurement to Server Successfully", Toast.LENGTH_SHORT).show();
-                                            Log.d("Response", response);
-                                        }
-                                    }, new Response.ErrorListener() {
-
-                                @Override
-                                public void onErrorResponse(VolleyError error) {
-                                    // error
-                                    Toast.makeText(ResultActivity.this,
-                                            "Can't connect to the server", Toast.LENGTH_SHORT).show();
-                                    Log.d("Error.Response", error.toString());
-                                }
-                            }
-                            ) {
-                                @Override
-                                protected Map<String, String> getParams() {
-                                    Map<String, String> params = new HashMap<String, String>();
-                                    params.put("angle", String.format("%.1f", angleList[1]));
-                                    params.put("distance", Integer.toString(rightDistList[1]));
-                                    params.put("mId", "test-R-2");
-                                    params.put("rightEye", "true");
-                                    params.put("power", String.format("%.2f", rightPowerList[1]));
-                                    params.put("subjectID", String.valueOf(subjectId));
-                                    params.put("testID", String.valueOf(idOne));
-                                    return params;
-                                }
-                            };
-                            queue.add(postRequest);
-
-                            postRequest = new StringRequest(Request.Method.POST, url,
-                                    new Response.Listener<String>() {
-                                        @Override
-                                        public void onResponse(String response) {
-                                            // response
-                                            // isUploadComplete = true;
-                                            // Toast.makeText(ResultActivity.this,
-                                            // "Uploaded Measurement to Server Successfully", Toast.LENGTH_SHORT).show();
-                                            Log.d("Response", response);
-                                        }
-                                    }, new Response.ErrorListener() {
-
-                                @Override
-                                public void onErrorResponse(VolleyError error) {
-                                    // error
-                                    Toast.makeText(ResultActivity.this,
-                                            "Can't connect to the server", Toast.LENGTH_SHORT).show();
-                                    Log.d("Error.Response", error.toString());
-                                }
-                            }
-                            ) {
-                                @Override
-                                protected Map<String, String> getParams() {
-                                    Map<String, String> params = new HashMap<String, String>();
-                                    params.put("angle", String.format("%.1f", angleList[2]));
-                                    params.put("distance", Integer.toString(rightDistList[2]));
-                                    params.put("mId", "test-R-3");
-                                    params.put("rightEye", "true");
-                                    params.put("power", String.format("%.2f", rightPowerList[2]));
-                                    params.put("subjectID", String.valueOf(subjectId));
-                                    params.put("testID", String.valueOf(idOne));
-                                    return params;
-                                }
-                            };
-                            queue.add(postRequest);
-
-                            postRequest = new StringRequest(Request.Method.POST, url,
-                                    new Response.Listener<String>() {
-                                        @Override
-                                        public void onResponse(String response) {
-                                            // response
-                                            // isUploadComplete = true;
-                                            // Toast.makeText(ResultActivity.this,
-                                            // "Uploaded Measurement to Server Successfully", Toast.LENGTH_SHORT).show();
-                                            Log.d("Response", response);
-                                        }
-                                    }, new Response.ErrorListener() {
-
-                                @Override
-                                public void onErrorResponse(VolleyError error) {
-                                    // error
-                                    Toast.makeText(ResultActivity.this,
-                                            "Can't connect to the server", Toast.LENGTH_SHORT).show();
-                                    Log.d("Error.Response", error.toString());
-                                }
-                            }
-                            ) {
-                                @Override
-                                protected Map<String, String> getParams() {
-                                    Map<String, String> params = new HashMap<String, String>();
-                                    params.put("angle", String.format("%.1f", angleList[3]));
-                                    params.put("distance", Integer.toString(rightDistList[3]));
-                                    params.put("mId", "test-R-4");
-                                    params.put("rightEye", "true");
-                                    params.put("power", String.format("%.2f", rightPowerList[3]));
-                                    params.put("subjectID", String.valueOf(subjectId));
-                                    params.put("testID", String.valueOf(idOne));
-                                    return params;
-                                }
-                            };
-                            queue.add(postRequest);
-
-                            postRequest = new StringRequest(Request.Method.POST, url,
-                                    new Response.Listener<String>() {
-                                        @Override
-                                        public void onResponse(String response) {
-                                            // response
-                                            // isUploadComplete = true;
-                                            // Toast.makeText(ResultActivity.this,
-                                            // "Uploaded Measurement to Server Successfully", Toast.LENGTH_SHORT).show();
-                                            Log.d("Response", response);
-                                        }
-                                    }, new Response.ErrorListener() {
-
-                                @Override
-                                public void onErrorResponse(VolleyError error) {
-                                    // error
-                                    Toast.makeText(ResultActivity.this,
-                                            "Can't connect to the server", Toast.LENGTH_SHORT).show();
-                                    Log.d("Error.Response", error.toString());
-                                }
-                            }
-                            ) {
-                                @Override
-                                protected Map<String, String> getParams() {
-                                    Map<String, String> params = new HashMap<String, String>();
-                                    params.put("angle", String.format("%.1f", angleList[4]));
-                                    params.put("distance", Integer.toString(rightDistList[4]));
-                                    params.put("mId", "test-R-5");
-                                    params.put("rightEye", "true");
-                                    params.put("power", String.format("%.2f", rightPowerList[4]));
-                                    params.put("subjectID", String.valueOf(subjectId));
-                                    params.put("testID", String.valueOf(idOne));
-                                    return params;
-                                }
-                            };
-                            queue.add(postRequest);
-
-                            postRequest = new StringRequest(Request.Method.POST, url,
-                                    new Response.Listener<String>() {
-                                        @Override
-                                        public void onResponse(String response) {
-                                            // response
-                                            // isUploadComplete = true;
-                                            // Toast.makeText(ResultActivity.this,
-                                            // "Uploaded Measurement to Server Successfully", Toast.LENGTH_SHORT).show();
-                                            Log.d("Response", response);
-                                        }
-                                    }, new Response.ErrorListener() {
-
-                                @Override
-                                public void onErrorResponse(VolleyError error) {
-                                    // error
-                                    Toast.makeText(ResultActivity.this,
-                                            "Can't connect to the server", Toast.LENGTH_SHORT).show();
-                                    Log.d("Error.Response", error.toString());
-                                }
-                            }
-                            ) {
-                                @Override
-                                protected Map<String, String> getParams() {
-                                    Map<String, String> params = new HashMap<String, String>();
-                                    params.put("angle", String.format("%.1f", angleList[5]));
-                                    params.put("distance", Integer.toString(rightDistList[5]));
-                                    params.put("mId", "test-R-6");
-                                    params.put("rightEye", "true");
-                                    params.put("power", String.format("%.2f", rightPowerList[5]));
-                                    params.put("subjectID", String.valueOf(subjectId));
-                                    params.put("testID", String.valueOf(idOne));
-                                    return params;
-                                }
-                            };
-                            queue.add(postRequest);
-
-                            postRequest = new StringRequest(Request.Method.POST, url,
-                                    new Response.Listener<String>() {
-                                        @Override
-                                        public void onResponse(String response) {
-                                            // response
-                                            // isUploadComplete = true;
-                                            // Toast.makeText(ResultActivity.this,
-                                            // "Uploaded Measurement to Server Successfully", Toast.LENGTH_SHORT).show();
-                                            Log.d("Response", response);
-                                        }
-                                    }, new Response.ErrorListener() {
-
-                                @Override
-                                public void onErrorResponse(VolleyError error) {
-                                    // error
-                                    Toast.makeText(ResultActivity.this,
-                                            "Can't connect to the server", Toast.LENGTH_SHORT).show();
-                                    Log.d("Error.Response", error.toString());
-                                }
-                            }
-                            ) {
-                                @Override
-                                protected Map<String, String> getParams() {
-                                    Map<String, String> params = new HashMap<String, String>();
-                                    params.put("angle", String.format("%.1f", angleList[0]));
-                                    params.put("distance", Integer.toString(leftDistList[0]));
-                                    params.put("mId", "test-L-1");
-                                    params.put("rightEye", "false");
-                                    params.put("power", String.format("%.2f", leftPowerList[0]));
-                                    params.put("subjectID", String.valueOf(subjectId));
-                                    params.put("testID", String.valueOf(idOne));
-                                    return params;
-                                }
-                            };
-                            queue.add(postRequest);
-
-                            postRequest = new StringRequest(Request.Method.POST, url,
-                                    new Response.Listener<String>() {
-                                        @Override
-                                        public void onResponse(String response) {
-                                            // response
-                                            // isUploadComplete = true;
-                                            // Toast.makeText(ResultActivity.this,
-                                            // "Uploaded Measurement to Server Successfully", Toast.LENGTH_SHORT).show();
-                                            Log.d("Response", response);
-                                        }
-                                    }, new Response.ErrorListener() {
-
-                                @Override
-                                public void onErrorResponse(VolleyError error) {
-                                    // error
-                                    Toast.makeText(ResultActivity.this,
-                                            "Can't connect to the server", Toast.LENGTH_SHORT).show();
-                                    Log.d("Error.Response", error.toString());
-                                }
-                            }
-                            ) {
-                                @Override
-                                protected Map<String, String> getParams() {
-                                    Map<String, String> params = new HashMap<String, String>();
-                                    params.put("angle", String.format("%.1f", angleList[1]));
-                                    params.put("distance", Integer.toString(leftDistList[1]));
-                                    params.put("mId", "test-L-2");
-                                    params.put("rightEye", "false");
-                                    params.put("power", String.format("%.2f", leftPowerList[1]));
-                                    params.put("subjectID", String.valueOf(subjectId));
-                                    params.put("testID", String.valueOf(idOne));
-                                    return params;
-                                }
-                            };
-                            queue.add(postRequest);
-
-                            postRequest = new StringRequest(Request.Method.POST, url,
-                                    new Response.Listener<String>() {
-                                        @Override
-                                        public void onResponse(String response) {
-                                            // response
-                                            // isUploadComplete = true;
-                                            // Toast.makeText(ResultActivity.this,
-                                            // "Uploaded Measurement to Server Successfully", Toast.LENGTH_SHORT).show();
-                                            Log.d("Response", response);
-                                        }
-                                    }, new Response.ErrorListener() {
-
-                                @Override
-                                public void onErrorResponse(VolleyError error) {
-                                    // error
-                                    Toast.makeText(ResultActivity.this,
-                                            "Can't connect to the server", Toast.LENGTH_SHORT).show();
-                                    Log.d("Error.Response", error.toString());
-                                }
-                            }
-                            ) {
-                                @Override
-                                protected Map<String, String> getParams() {
-                                    Map<String, String> params = new HashMap<String, String>();
-                                    params.put("angle", String.format("%.1f", angleList[2]));
-                                    params.put("distance", Integer.toString(leftDistList[2]));
-                                    params.put("mId", "test-L-3");
-                                    params.put("rightEye", "false");
-                                    params.put("power", String.format("%.2f", leftPowerList[2]));
-                                    params.put("subjectID", String.valueOf(subjectId));
-                                    params.put("testID", String.valueOf(idOne));
-                                    return params;
-                                }
-                            };
-                            queue.add(postRequest);
-
-                            postRequest = new StringRequest(Request.Method.POST, url,
-                                    new Response.Listener<String>() {
-                                        @Override
-                                        public void onResponse(String response) {
-                                            // response
-                                            // isUploadComplete = true;
-                                            // Toast.makeText(ResultActivity.this,
-                                            // "Uploaded Measurement to Server Successfully", Toast.LENGTH_SHORT).show();
-                                            Log.d("Response", response);
-                                        }
-                                    }, new Response.ErrorListener() {
-
-                                @Override
-                                public void onErrorResponse(VolleyError error) {
-                                    // error
-                                    Toast.makeText(ResultActivity.this,
-                                            "Can't connect to the server", Toast.LENGTH_SHORT).show();
-                                    Log.d("Error.Response", error.toString());
-                                }
-                            }
-                            ) {
-                                @Override
-                                protected Map<String, String> getParams() {
-                                    Map<String, String> params = new HashMap<String, String>();
-                                    params.put("angle", String.format("%.1f", angleList[3]));
-                                    params.put("distance", Integer.toString(leftDistList[3]));
-                                    params.put("mId", "test-L-4");
-                                    params.put("rightEye", "false");
-                                    params.put("power", String.format("%.2f", leftPowerList[3]));
-                                    params.put("subjectID", String.valueOf(subjectId));
-                                    params.put("testID", String.valueOf(idOne));
-                                    return params;
-                                }
-                            };
-                            queue.add(postRequest);
-
-                            postRequest = new StringRequest(Request.Method.POST, url,
-                                    new Response.Listener<String>() {
-                                        @Override
-                                        public void onResponse(String response) {
-                                            // response
-                                            // isUploadComplete = true;
-                                            // Toast.makeText(ResultActivity.this,
-                                            // "Uploaded Measurement to Server Successfully", Toast.LENGTH_SHORT).show();
-                                            Log.d("Response", response);
-                                        }
-                                    }, new Response.ErrorListener() {
-
-                                @Override
-                                public void onErrorResponse(VolleyError error) {
-                                    // error
-                                    Toast.makeText(ResultActivity.this,
-                                            "Can't connect to the server", Toast.LENGTH_SHORT).show();
-                                    Log.d("Error.Response", error.toString());
-                                }
-                            }
-                            ) {
-                                @Override
-                                protected Map<String, String> getParams() {
-                                    Map<String, String> params = new HashMap<String, String>();
-                                    params.put("angle", String.format("%.1f", angleList[4]));
-                                    params.put("distance", Integer.toString(leftDistList[4]));
-                                    params.put("mId", "test-L-5");
-                                    params.put("rightEye", "false");
-                                    params.put("power", String.format("%.2f", leftPowerList[4]));
-                                    params.put("subjectID", String.valueOf(subjectId));
-                                    params.put("testID", String.valueOf(idOne));
-                                    return params;
-                                }
-                            };
-                            queue.add(postRequest);
-
-                            postRequest = new StringRequest(Request.Method.POST, url,
-                                    new Response.Listener<String>() {
-                                        @Override
-                                        public void onResponse(String response) {
-                                            // response
-                                            // isUploadComplete = true;
-                                            // Toast.makeText(ResultActivity.this,
-                                            // "Uploaded Measurement to Server Successfully", Toast.LENGTH_SHORT).show();
-                                            Log.d("Response", response);
-                                        }
-                                    }, new Response.ErrorListener() {
-
-                                @Override
-                                public void onErrorResponse(VolleyError error) {
-                                    // error
-                                    Toast.makeText(ResultActivity.this,
-                                            "Can't connect to the server", Toast.LENGTH_SHORT).show();
-                                    Log.d("Error.Response", error.toString());
-                                }
-                            }
-                            ) {
-                                @Override
-                                protected Map<String, String> getParams() {
-                                    Map<String, String> params = new HashMap<String, String>();
-                                    params.put("angle", String.format("%.1f", angleList[5]));
-                                    params.put("distance", Integer.toString(leftDistList[5]));
-                                    params.put("mId", "test-L-6");
-                                    params.put("rightEye", "false");
-                                    params.put("power", String.format("%.2f", leftPowerList[5]));
-                                    params.put("subjectID", String.valueOf(subjectId));
-                                    params.put("testID", String.valueOf(idOne));
-                                    return params;
-                                }
-                            };
-                            queue.add(postRequest);
-
-                        }
-                        */
 
                     } else
                         Toast.makeText(ResultActivity.this,
