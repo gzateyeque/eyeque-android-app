@@ -48,7 +48,7 @@
         <WebView
             android:id="@+id/tutorialWebView"
             android:layout_width="fill_parent"
-            android:layout_height="200dp"
+            android:layout_height="220dp"
             android:scaleType="fitXY">
         </WebView>
 
@@ -60,7 +60,7 @@
             android:layout_marginTop="15dp"
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
-            android:text="Continue"
+            android:text="Next"
             android:textStyle="bold"
             android:background="@android:color/holo_blue_dark"
             android:textColor="#FFFFFF" />
