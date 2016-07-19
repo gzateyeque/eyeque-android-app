@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context="com.eyeque.mono.TestConditionActivity">
+
+    <com.eyeque.mono.PatternView
+        android:layout_width="fill_parent"
+        android:layout_height="260sp"
+        android:id="@+id/drawView"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop = "10sp"
+        android:text="Test Condition"
+        android:id="@+id/testConditionHeaderTextView"
+        android:textColor="@color/background_material_dark"
+        android:textSize="20sp"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop = "10sp"
+        android:id="@+id/testConditionDivider"
+        android:background="@android:color/darker_gray"/>
+
+    <ScrollView
+        android:id="@+id/testConditionScrollView"
+        android:scrollbars="none"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/test_condition_form"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:gravity="center_horizontal"
+                android:text="To ensure the test accuracy, please take your glasses off during the test"
+                android:id="@+id/testConditionText"
+                android:textColor="#046EEA"
+                android:textSize="15sp"/>
+
+            <android.support.v7.widget.SwitchCompat
+                android:id="@+id/glassesOnOffSwitch"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="20dp"
+                android:text="Have your glasses on/off during the test"
+                android:checked="false"/>
+
+            <android.support.v7.widget.SwitchCompat
+                android:id="@+id/screenProtectorOnOffSwitch"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="25dp"
+                android:text="Has screen protector on this phone"
+                android:checked="false"/>
+
+            <Button
+                android:id="@+id/testConditionContinueButton"
+                style="?android:textAppearanceSmall"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="50dp"
+                android:layout_marginBottom="30dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:text="Start Test"
+                android:textStyle="bold"
+                android:background="@android:color/holo_blue_dark"
+                android:textColor="#FFFFFF" />
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>
