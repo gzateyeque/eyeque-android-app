@@ -1,0 +1,38 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/fragmentTest"
+    tools:context="com.eyeque.mono.SettingFragment"
+    android:background="#F9F7F9">
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:id="@+id/resultScrollView">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#F9F7F9"
+            android:fitsSystemWindows="true"
+            >
+
+            <TextView
+                android:id="@+id/testTitle"
+                android:layout_width="match_parent"
+                android:layout_height="50dip"
+                android:gravity="center_vertical"
+                android:text="SETTING PAGES"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:textColor="#1DADF3"
+                android:paddingStart="15dip"
+                android:layout_below="@+id/resultTableLayout"
+                android:layout_alignParentStart="true" />
+
+        </RelativeLayout>
+    </ScrollView>
+</FrameLayout>
+
+
