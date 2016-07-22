@@ -12,6 +12,7 @@ public class SingeltonDataHolder {
     }
 
     // Singleton value set
+    public static int loginType = 1;
     public static String token = "";
     public static String email = "";
     public static String firstName = "";
@@ -21,6 +22,8 @@ public class SingeltonDataHolder {
     public static String deviceSerialNum = "";
 
     // Singleton method
+    public static int getLoginType() { return loginType; }
+    public static void setLoginType(int val) { loginType = val; }
     public static String getToken() { return token; }
     public static void setToken(String val) { token = val; }
     public static String getEmail() { return email; }

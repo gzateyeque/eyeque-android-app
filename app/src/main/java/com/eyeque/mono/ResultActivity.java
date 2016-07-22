@@ -4,9 +4,13 @@ package com.eyeque.mono;
  */
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
 import java.util.Map;
@@ -65,6 +69,14 @@ public class ResultActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_result);
 
+        Window window = this.getWindow();
+        // clear FLAG_TRANSLUCENT_STATUS flag:
+        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        // add FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS flag to the window
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+        // finally change the color
+        window.setStatusBarColor(this.getResources().getColor(R.color.colorPrimaryDark));
+
         subjectId = getIntent().getIntExtra("subjectId", 0);
         deviceId = getIntent().getIntExtra("deviceId", 0);
         serverId = getIntent().getIntExtra("serverId", 0);
@@ -94,12 +106,12 @@ public class ResultActivity extends Activity {
         final TextView osCylTextView = (TextView) findViewById(R.id.osCylTextView);
         final TextView osAxisTextView = (TextView) findViewById(R.id.osAxisTextView);
 
-        odSphTextView.setText(String.format("%.2f", odSph));
-        odCylTextView.setText(String.format("%.2f", odCyl));
-        odAxisTextView.setText(Integer.toString((int) odAxis));
-        osSphTextView.setText(String.format("%.2f", osSph));
-        osCylTextView.setText(String.format("%.2f", osCyl));
-        osAxisTextView.setText(Integer.toString((int) osAxis));
+        // odSphTextView.setText(String.format("%.2f", odSph));
+        // odCylTextView.setText(String.format("%.2f", odCyl));
+        // odAxisTextView.setText(Integer.toString((int) odAxis));
+        // osSphTextView.setText(String.format("%.2f", osSph));
+        // osCylTextView.setText(String.format("%.2f", osCyl));
+        // osAxisTextView.setText(Integer.toString((int) osAxis));
 
         /*
         angleList[0] = getIntent().getDoubleExtra("Angle-1", 0.00);
@@ -233,6 +245,55 @@ public class ResultActivity extends Activity {
         }
         */
 
+        // Tap  Don't use textView
+        TextView dontUseThisTest = (TextView) findViewById(R.id.dontUseTextView);
+        dontUseThisTest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder alertDialog = new AlertDialog.Builder(
+                        ResultActivity.this);
+
+                // Setting Dialog Title
+                alertDialog.setTitle("Confirm");
+                // Setting Dialog Message
+                alertDialog.setMessage("Are you sure you don't want to use this test record?");
+                // Setting Positive "Yes" Btn
+                alertDialog.setPositiveButton("YES",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                Toast.makeText(ResultActivity.this, "Record Discarded", Toast.LENGTH_SHORT).show();
+                                finish();
+                                Intent i = new Intent(getBaseContext(), TopActivity.class);
+                                startActivity(i);
+                            }
+                        });
+
+                // Setting Negative "NO" Btn
+                alertDialog.setNegativeButton("NO",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                // Write your code here to execute after dialog
+                                // Toast.makeText(getApplicationContext(),
+                                // "You clicked on NO", Toast.LENGTH_SHORT)
+                                // .show();
+                                dialog.cancel();
+                            }
+                        });
+                // Showing Alert Dialog
+                alertDialog.show();
+            }
+        });
+
+        uploadButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Toast.makeText(ResultActivity.this, "Record Discarded", Toast.LENGTH_SHORT).show();
+                Intent i = new Intent(getBaseContext(), TopActivity.class);
+                startActivity(i);
+            }
+        });
+
+        /***
         uploadButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -320,7 +381,7 @@ public class ResultActivity extends Activity {
                                 Log.i(TAG, response);
                                 isUploadComplete = true;
                                 Toast.makeText(ResultActivity.this,
-                                        "Test Saved", Toast.LENGTH_SHORT).show();
+                                        "Use this record", Toast.LENGTH_SHORT).show();
                                 Intent i = new Intent(getBaseContext(), TopActivity.class);
                                 startActivity(i);
                             }
@@ -362,6 +423,7 @@ public class ResultActivity extends Activity {
                             "Already Uploaded", Toast.LENGTH_SHORT).show();
             }
         });
+        ****/
 
     }
 }

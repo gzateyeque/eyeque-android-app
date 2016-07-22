@@ -68,9 +68,10 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.common.api.ResultCallback;
+import com.google.android.gms.common.api.Status;
 import android.view.WindowManager;
 import android.view.Window;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -112,6 +113,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private CallbackManager callbackManager;
     private GoogleApiClient mGoogleApiClient;
     private static SQLiteDatabase myDb = null;
+    private static int loginType = 1;
     private static String socialMediaType;
     private static String socialMediaId;
     private static String socialMediaEmail;
@@ -120,6 +122,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private static String gPassword;
     private static int signUpType = 1;   /* 1: Email 2: Social Media */
     private static AccessToken tok;
+    private static int retVal = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -209,6 +212,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         mEmailSignInButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
+                loginType = 1;
                 attemptLogin();
             }
         });
@@ -288,6 +292,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         facebookBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                loginType = 2;
                 LoginManager.getInstance().logOut();
                 LoginManager.getInstance().logInWithReadPermissions(LoginActivity.this, Arrays.asList("public_profile", "email"));
             }
@@ -308,12 +313,31 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         googleBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                LoginManager.getInstance().logOut();
+                loginType = 2;
+                // if (mGoogleApiClient.isConnected()) {
+                    mGoogleApiClient.disconnect();
+                    LoginManager.getInstance().logOut();
+                    // signOut();
+                // }
                 mGoogleApiClient.connect();
                 Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
                 startActivityForResult(signInIntent, 200);
             }
         });
+    }
+
+    private void signOut() {
+        Auth.GoogleSignInApi.signOut(mGoogleApiClient).setResultCallback(
+                new ResultCallback<Status>() {
+                    @Override
+                    public void onResult(Status status) {
+                        socialMediaId = "";
+                        socialMediaTok = "";
+                        socialMediaEmail = "";
+                        socialMediaType = "";
+
+                    }
+                });
     }
 
     private void handleSignInResult(GoogleSignInResult result) {
@@ -456,6 +480,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             try {
                 params.put("type", socialMediaType);
                 params.put("social_id", socialMediaId);
+                params.put("social_token", socialMediaTok);
                 params.put("email", socialMediaEmail);
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -473,6 +498,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                             emailRegIntent = new Intent(getBaseContext(), SmEmailRegActivity.class);
                             emailRegIntent.putExtra("type", socialMediaType);
                             emailRegIntent.putExtra("id", socialMediaId);
+                            emailRegIntent.putExtra("token", socialMediaTok);
                             emailRegIntent.putExtra("email", socialMediaEmail);
                             startActivity(emailRegIntent);
                             break;
@@ -481,6 +507,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                             emailRegIntent = new Intent(getBaseContext(), SmEmailRegActivity.class);
                             emailRegIntent.putExtra("type", socialMediaType);
                             emailRegIntent.putExtra("id", socialMediaId);
+                            emailRegIntent.putExtra("token", socialMediaTok);
                             emailRegIntent.putExtra("email", socialMediaEmail);
                             startActivity(emailRegIntent);
                             break;
@@ -557,8 +584,10 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                     // Pass authentication
                     response = response.replace("\"", "");
                     SingeltonDataHolder.setToken(response);
-                    SingeltonDataHolder.setEmail(gEmail);
-
+                    if (loginType != 1)
+                        SingeltonDataHolder.setEmail(socialMediaEmail);
+                    else
+                        SingeltonDataHolder.setEmail(gEmail);
                     CheckOnboard();
                 }
             }, new Response.ErrorListener() {
@@ -566,15 +595,19 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 public void onErrorResponse(VolleyError error) {
                     showProgress(false);
                     Log.d("Error.Response", error.toString());
-                    // Try SignUp
-                    String email = mEmailView.getText().toString();
-                    String password = mPasswordView.getText().toString();
-                    SignUp(email, password, 1);
+
+                    if (loginType == 1) {
+                        // Try SignUp
+                        String email = mEmailView.getText().toString();
+                        String password = mPasswordView.getText().toString();
+                        SignUp(email, password, 1);
+                    } else
+                        Toast.makeText(LoginActivity.this, "Login failed, please try it again", Toast.LENGTH_SHORT).show();
                 }
             }) {
                 @Override
                 public byte[] getBody() throws AuthFailureError {
-                    Log.i("$$$---JSON---$$$", params.toString());
+                    Log.i("$$$---JSON2---$$$", params.toString());
                     return params.toString().getBytes();
                 }
 
@@ -638,7 +671,10 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                     Log.i(TAG, response);
                     // Pass authentication
                     showProgress(false);
-                    SingeltonDataHolder.setEmail(gEmail);
+                    if (loginType != 1)
+                        SingeltonDataHolder.setEmail(socialMediaEmail);
+                    else
+                        SingeltonDataHolder.setEmail(gEmail);
 
                     if (signUpType == 2) {
                         SignIn(socialMediaId, socialMediaTok);
@@ -661,7 +697,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             }) {
                 @Override
                 public byte[] getBody() throws AuthFailureError {
-                    Log.i("$$$---JSON---$$$", params.toString());
+                    Log.i("$$$---JSON1---$$$", params.toString());
                     return params.toString().getBytes();
                 }
 
@@ -705,32 +741,38 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                     //Parse the JOSN response
                     try {
                         JSONObject jsonResponse = new JSONObject(response);
-                        JSONArray jsonCustArrArray = jsonResponse.getJSONArray("custom_attributes");
+                        if (jsonResponse.has("custom_attributes")) {
+                            JSONArray jsonCustArrArray = jsonResponse.getJSONArray("custom_attributes");
 
-                        for (int i = 0; i < jsonCustArrArray.length(); i++) {
-                            JSONObject objectInArray = jsonCustArrArray.getJSONObject(i);
-                            String attrName = objectInArray.getString("attribute_code");
-                            String attrValue = objectInArray.getString("value");
-                            // Log.i("********1*********", Integer.toString(i));
-                            // Log.i("********2*********", attrName);
-                            // Log.i("********3*********", attrValue);
+                            for (int i = 0; i < jsonCustArrArray.length(); i++) {
+                                JSONObject objectInArray = jsonCustArrArray.getJSONObject(i);
+                                String attrName = objectInArray.getString("attribute_code");
+                                String attrValue = objectInArray.getString("value");
+                                // Log.i("********1*********", Integer.toString(i));
+                                // Log.i("********2*********", attrName);
+                                // Log.i("********3*********", attrValue);
 
-                            if (attrName.matches("device_number")) {
-                                if (attrValue.matches("") || (attrValue.matches("null") || attrValue == null)) {
-                                    Log.i("********4*********", "true");
-                                    isOnBoardNeeded = true;
-                                    Intent nameIntent = new Intent(getBaseContext(), NameActivity.class);
-                                    startActivity(nameIntent);
+                                if (attrName.matches("device_number")) {
+                                    if (attrValue.matches("") || (attrValue.matches("null") || attrValue == null)) {
+                                        Log.i("********4*********", "true");
+                                        isOnBoardNeeded = true;
+                                        Intent nameIntent = new Intent(getBaseContext(), NameActivity.class);
+                                        startActivity(nameIntent);
+                                    } else {
+                                        Log.i("********5*********", "false");
+                                        isOnBoardNeeded = false;
+                                        Intent topIntent = new Intent(getBaseContext(), TopActivity.class);
+                                        startActivity(topIntent);
+                                    }
+                                    finish();
+                                    break;
                                 }
-                                else {
-                                    Log.i("********5*********", "false");
-                                    isOnBoardNeeded = false;
-                                    Intent topIntent = new Intent(getBaseContext(), TopActivity.class);
-                                    startActivity(topIntent);
-                                }
-                                finish();
-                                break;
                             }
+                        } else {
+                            Log.i("********4*********", "true");
+                            isOnBoardNeeded = true;
+                            Intent nameIntent = new Intent(getBaseContext(), NameActivity.class);
+                            startActivity(nameIntent);
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();

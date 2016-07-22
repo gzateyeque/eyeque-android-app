@@ -148,7 +148,9 @@ public class AgreementActivity extends AppCompatActivity {
             final JSONObject tmpParams = new JSONObject();
             final JSONArray attrArray = new JSONArray();
             final JSONObject finalParams = new JSONObject();
+
             try {
+                finalParams.put("token", SingeltonDataHolder.getToken());
                 params.put("email", SingeltonDataHolder.getEmail());
                 params.put("firstname", SingeltonDataHolder.getFirstName());
                 params.put("lastname", SingeltonDataHolder.getLastName());

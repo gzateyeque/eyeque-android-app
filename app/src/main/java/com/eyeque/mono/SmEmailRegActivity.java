@@ -80,6 +80,7 @@ public class SmEmailRegActivity extends AppCompatActivity implements LoaderCallb
     private static String sm_type;
     private static String sm_id;
     private static String sm_email;
+    private static String sm_token;
 
     /**
      * Id to identity READ_CONTACTS permission request.
@@ -132,6 +133,7 @@ public class SmEmailRegActivity extends AppCompatActivity implements LoaderCallb
         sm_type = getIntent().getExtras().getString("type");
         sm_id = getIntent().getExtras().getString("id");
         sm_email = getIntent().getExtras().getString("email");
+        sm_token = getIntent().getExtras().getString("token");
 
         // Check local persistent mono.db database
         try {
@@ -282,6 +284,7 @@ public class SmEmailRegActivity extends AppCompatActivity implements LoaderCallb
                 params.put("redirectUrl", "");
                 params.put("type", sm_type);
                 params.put("social_id", sm_id);
+                params.put("social_token", sm_token);
             } catch (JSONException e) {
                 e.printStackTrace();
             }
