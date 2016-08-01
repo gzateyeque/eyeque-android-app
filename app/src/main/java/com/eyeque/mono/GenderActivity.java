@@ -30,7 +30,7 @@ public class GenderActivity extends AppCompatActivity {
         // add FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS flag to the window
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         // finally change the color
-        window.setStatusBarColor(this.getResources().getColor(R.color.colorPrimaryDark));
+        // window.setStatusBarColor(this.getResources().getColor(R.color.colorPrimaryDark));
 
         final ImageButton femaleButton = (ImageButton) findViewById(R.id.femaleButton);
         final ImageButton maleButton = (ImageButton) findViewById(R.id.maleButton);

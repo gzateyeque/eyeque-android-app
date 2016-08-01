@@ -11,7 +11,9 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.view.Menu;
+import android.graphics.Color;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.Window;
@@ -48,7 +50,12 @@ public class MainActivity extends Activity {
     private static int subjectId;
     private static int deviceId;
     private static int serverId;
-    long seconds;
+    private static long seconds;
+    // private static int brightColor = Color.rgb(96, 96, 96);
+    // private static int darkColor = Color.rgb(21, 21, 21);
+    private static int brightColor = Color.rgb(255, 255, 255);
+    private static int darkColor = Color.rgb(96, 96, 96);
+
 
     // Tag for log message
     private static final String TAG = MainActivity.class.getSimpleName();
@@ -68,7 +75,7 @@ public class MainActivity extends Activity {
         // add FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS flag to the window
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         // finally change the color
-        window.setStatusBarColor(this.getResources().getColor(R.color.colorPrimaryDark));
+        // window.setStatusBarColor(this.getResources().getColor(R.color.colorPrimaryDark));
 
         subjectId = getIntent().getIntExtra("subjectId", 0);
         deviceId = getIntent().getIntExtra("deviceId", 0);
@@ -81,8 +88,10 @@ public class MainActivity extends Activity {
                 longPressStep = 5;
                 break;
             case 3:
-                minVal = Constants.MINVAL_DEVICE_5;
-                maxVal = Constants.MAXVAL_DEVICE_5;
+                // minVal = Constants.MINVAL_DEVICE_5;
+                // maxVal = Constants.MAXVAL_DEVICE_5;
+                minVal = Constants.MIN_DISTANCE;
+                maxVal = Constants.MAX_DISTANCE - Constants.MIN_DISTANCE;
                 longPressStep = 5;
                 break;
             case 4:
@@ -113,9 +122,11 @@ public class MainActivity extends Activity {
         /**
          * Widgets requires modification during interaction
          */
+        final TextView inTestTv = (TextView) findViewById(R.id.testHeaderTextView);
         final TextView tv = (TextView) findViewById(R.id.powerText);
         final TextView dtv = (TextView) findViewById(R.id.distText);
         final TextView atv = (TextView) findViewById(R.id.angleText);
+
         // final PatternView patternView = (PatternView) findViewById(R.id.drawView);
         // final Pattern pattern = patternView.getPatternInstance();
         patternView = (PatternView) findViewById(R.id.drawView);
@@ -131,7 +142,10 @@ public class MainActivity extends Activity {
         patternView.startAnimation(animation);
         // }
 
-        final TextView etv = (TextView) findViewById(R.id.eyeText);
+        final TextView eyeLeftText = (TextView) findViewById(R.id.eyeLeftText);
+        final TextView eyeRightText = (TextView) findViewById(R.id.eyeRightText);
+        final ImageView eyeImageView = (ImageView) findViewById(R.id.eyeImage);
+
         final SeekBar alignSeekBar = (SeekBar) findViewById(R.id.alignSeekBar);
         alignSeekBar.setMax(maxVal);
         prevStopValue = maxVal;
@@ -192,11 +206,16 @@ public class MainActivity extends Activity {
             }
         });
 
-        if (pattern.getWhichEye())
-            etv.setText("Right Eye");
-        else
-            etv.setText("Left Eye");
-
+        if (pattern.getWhichEye()) {
+            eyeRightText.setTextColor(brightColor);
+            eyeLeftText.setTextColor(darkColor);
+            eyeImageView.setImageResource(R.drawable.eye_right1);
+        }  else {
+            eyeRightText.setTextColor(darkColor);
+            eyeLeftText.setTextColor(brightColor);
+            eyeImageView.setImageResource(R.drawable.eye_left1);
+        }
+        inTestTv.setText("Test 1/9");
         /**
          * Add callback handler to change the pattern in pattern view
          */
@@ -204,6 +223,7 @@ public class MainActivity extends Activity {
         final MediaPlayer mp = new MediaPlayer();
         Button contButton = (Button) findViewById(R.id.contButton);
         contButton.setOnClickListener(new View.OnClickListener() {
+            String str;
             @Override
             public void onClick(View v) {
                 Log.i(TAG, "Next Button clicked.");
@@ -375,10 +395,15 @@ public class MainActivity extends Activity {
                 DecimalFormat precision = new DecimalFormat("#.##");
                 Double i2 = Double.valueOf(precision.format(pattern.getPowerValue()));
                 tv.setText("Power: " + String.valueOf(i2));
-                if (pattern.getWhichEye())
-                    etv.setText("Right Eye");
-                else
-                    etv.setText("Left Eye");
+                if (pattern.getWhichEye()) {
+                    eyeRightText.setTextColor(brightColor);
+                    eyeLeftText.setTextColor(darkColor);
+                    eyeImageView.setImageResource(R.drawable.eye_right1);
+                }  else {
+                    eyeRightText.setTextColor(darkColor);
+                    eyeLeftText.setTextColor(brightColor);
+                    eyeImageView.setImageResource(R.drawable.eye_left1);
+                }
                 Log.d(TAG, String.valueOf(pattern.getDistance()));
                 prevStopValue = maxVal;
                 // currStopValue = maxVal;
@@ -390,14 +415,23 @@ public class MainActivity extends Activity {
                         || (deviceId == 3 && patternIndex == 8)
                         || (deviceId == 4 && patternIndex == 8)))
                     calcResult();
+                else {
+                    if (patternIndex == 8)
+                        str = "Test " + Integer.toString((patternIndex + 2) % 9) + "/9";
+                    else
+                        str = "Test " + Integer.toString(patternIndex + 2) + "/9";
+                    inTestTv.setText(str);
+                }
             }
         });
 
-        Button closerButton = (Button) findViewById(R.id.closerButton);
+        final Button closerButton = (Button) findViewById(R.id.closerButton);
         closerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Log.i(TAG, "Closer Button clicked.");
+                // int pressedColor = Color.rgb(255,255,255);
+                // closerButton.setTextColor(pressedColor);
                 int lineSpace = pattern.getDistance();
                 if (lineSpace >= minVal + 1) {
                     patternView.closerDraw(1);
@@ -428,12 +462,21 @@ public class MainActivity extends Activity {
                 if (event.getAction() == MotionEvent.ACTION_UP && inLongPressMode) {
                     inLongPressMode = false;
                 }
+                if (event.getAction() == MotionEvent.ACTION_DOWN ||
+                        event.getAction() == MotionEvent.ACTION_CANCEL ) {
+                    int releasedColor = Color.rgb(255,255,255);
+                    closerButton.setTextColor(releasedColor);
+                }
+                else if (event.getAction() == MotionEvent.ACTION_UP) {
+                    int pressedColor = Color.rgb(64,64,64);
+                    closerButton.setTextColor(pressedColor);
+                }
                 return false;
             }
         });
 
 
-        Button furtherButton = (Button) findViewById(R.id.furtherButton);
+        final Button furtherButton = (Button) findViewById(R.id.furtherButton);
         furtherButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -452,6 +495,7 @@ public class MainActivity extends Activity {
             }
         });
 
+
         furtherButton.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
@@ -467,6 +511,15 @@ public class MainActivity extends Activity {
             public boolean onTouch(View v, MotionEvent event) {
                 if (event.getAction() == MotionEvent.ACTION_UP && inLongPressMode) {
                     inLongPressMode = false;
+                }
+                if (event.getAction() == MotionEvent.ACTION_DOWN ||
+                        event.getAction() == MotionEvent.ACTION_CANCEL ) {
+                    int releasedColor = Color.rgb(255,255,255);
+                    furtherButton.setTextColor(releasedColor);
+                }
+                else if (event.getAction() == MotionEvent.ACTION_UP) {
+                    int pressedColor = Color.rgb(64,64,64);
+                    furtherButton.setTextColor(pressedColor);
                 }
                 return false;
             }

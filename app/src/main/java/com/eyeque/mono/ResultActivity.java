@@ -75,7 +75,7 @@ public class ResultActivity extends Activity {
         // add FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS flag to the window
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         // finally change the color
-        window.setStatusBarColor(this.getResources().getColor(R.color.colorPrimaryDark));
+        // window.setStatusBarColor(this.getResources().getColor(R.color.colorPrimaryDark));
 
         subjectId = getIntent().getIntExtra("subjectId", 0);
         deviceId = getIntent().getIntExtra("deviceId", 0);

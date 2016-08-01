@@ -53,7 +53,7 @@ public class ForgotPswdActivity extends AppCompatActivity {
         // add FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS flag to the window
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         // finally change the color
-        window.setStatusBarColor(this.getResources().getColor(R.color.colorPrimaryDark));
+        // window.setStatusBarColor(this.getResources().getColor(R.color.colorPrimaryDark));
 
         mProgressView = findViewById(R.id.reset_password_progress);
 

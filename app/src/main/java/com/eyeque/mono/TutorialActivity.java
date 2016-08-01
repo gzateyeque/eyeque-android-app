@@ -32,7 +32,7 @@ public class TutorialActivity extends AppCompatActivity {
         // add FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS flag to the window
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         // finally change the color
-        window.setStatusBarColor(this.getResources().getColor(R.color.colorPrimaryDark));
+        // window.setStatusBarColor(this.getResources().getColor(R.color.colorPrimaryDark));
 
         patternView = (PatternView) findViewById(R.id.drawView);
         // Draw the device mounting line. Hard code for now.

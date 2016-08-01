@@ -135,13 +135,13 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         // add FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS flag to the window
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         // finally change the color
-        window.setStatusBarColor(this.getResources().getColor(R.color.colorPrimary));
+        // window.setStatusBarColor(this.getResources().getColor(R.color.colorPrimary));
 
         String manufacturer = android.os.Build.MANUFACTURER;
         String brand = android.os.Build.BRAND;
         String product = android.os.Build.PRODUCT;
         String model = android.os.Build.MODEL;
-        Log.i("Phone Type", manufacturer + " " + brand + " " + product + " " + model);
+        Log.d("************Phone Type", manufacturer + " " + brand + " " + product + " " + model);
         // Check local persistent mono.db database
         try {
             String email, token;
@@ -165,7 +165,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
         webview.setWebViewClient(new WebViewClient() {
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                Log.i(TAG, "Processing webview url click...");
+                Log.i(TAG, "Loading...");
                 view.loadUrl(url);
                 return true;
             }
@@ -179,15 +179,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
             public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
                 Log.e(TAG, "Error: " + description);
-                Toast.makeText(LoginActivity.this, "loading webview failed" + description, Toast.LENGTH_SHORT).show();
-                alertDialog.setTitle("Error");
-                alertDialog.setMessage(description);
-                alertDialog.setButton("OK", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        return;
-                    }
-                });
-                alertDialog.show();
+                Toast.makeText(LoginActivity.this, "No Inernet Connection", Toast.LENGTH_LONG).show();
+                view.loadUrl("about:blank");
             }
         });
         webview.loadUrl(Constants.UrlBanner);

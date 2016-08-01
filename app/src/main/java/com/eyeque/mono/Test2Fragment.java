@@ -27,15 +27,17 @@ import android.widget.Toast;
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link TestFragment.OnFragmentInteractionListener} interface
+ * {@link Test2Fragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
  * Use the {@link DashboardFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class TestFragment extends Fragment {
+public class Test2Fragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
-    private PatternView patternView;
+    // private PatternView patternView;
     private static int deviceId;
+    private PatternView patternView;
+
 
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -47,7 +49,7 @@ public class TestFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    public TestFragment() {
+    public Test2Fragment() {
         // Required empty public constructor
     }
 
@@ -60,8 +62,8 @@ public class TestFragment extends Fragment {
      * @return A new instance of fragment DashboardFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static TestFragment newInstance(String param1, String param2) {
-        TestFragment fragment = new TestFragment();
+    public static Test2Fragment newInstance(String param1, String param2) {
+        Test2Fragment fragment = new Test2Fragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -82,26 +84,12 @@ public class TestFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         int color;
-        View rootView = inflater.inflate(R.layout.fragment_test, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_test2, container, false);
 
-        patternView = (PatternView) rootView.findViewById(R.id.drawView);
 
         // Draw the device mounting line. Hard code for now.
         // Need to dynamically populate when supporting multiple devices
         deviceId = 3;
-        patternView.setDeviceId((int) deviceId);
-        patternView.setdrawDeviceOnly(true);
-        patternView.start();
-
-        Button attachDeviceContinueButton = (Button) rootView.findViewById(R.id.attachDeviceContinueButton);
-        attachDeviceContinueButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(getActivity(), TutorialActivity.class);
-                startActivity(i);
-            }
-        });
-
         // Inflate the layout for this fragment
         // return inflater.inflate(R.layout.fragment_dashboard, container, false);
         return rootView;
@@ -110,7 +98,7 @@ public class TestFragment extends Fragment {
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
-            mListener.onTestFragmentInteraction(uri);
+            mListener.onTest2FragmentInteraction(uri);
         }
     }
 
@@ -121,7 +109,7 @@ public class TestFragment extends Fragment {
             mListener = (OnFragmentInteractionListener) context;
         } else {
             throw new RuntimeException(context.toString()
-                    + " must implement OnTestFragmentInteractionListener");
+                    + " must implement OnTest2FragmentInteractionListener");
         }
     }
 
@@ -143,6 +131,6 @@ public class TestFragment extends Fragment {
      */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
-        void onTestFragmentInteraction(Uri uri);
+        void onTest2FragmentInteraction(Uri uri);
     }
 }

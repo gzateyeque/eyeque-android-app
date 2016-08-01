@@ -22,7 +22,8 @@ import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnMenuTabSelectedListener;
 
 public class TopActivity extends AppCompatActivity
-        implements TestFragment.OnFragmentInteractionListener,
+        implements AttachDeviceFragment.OnFragmentInteractionListener,
+                   Test2Fragment.OnFragmentInteractionListener,
                     DashboardFragment.OnFragmentInteractionListener,
                     SettingFragment.OnFragmentInteractionListener {
 
@@ -41,7 +42,7 @@ public class TopActivity extends AppCompatActivity
         // add FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS flag to the window
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         // finally change the color
-        window.setStatusBarColor(this.getResources().getColor(R.color.colorPrimaryDark));
+        // window.setStatusBarColor(this.getResources().getColor(R.color.colorPrimaryDark));
 
         coordinatorLayout = (CoordinatorLayout) findViewById(R.id.top_activity);
         // get fragment manager
@@ -120,7 +121,10 @@ public class TopActivity extends AppCompatActivity
                 fragmentClass = DashboardFragment.class;
                 break;
             case R.id.test_item:
-                fragmentClass = TestFragment.class;
+                if (Constants.PHONE_TYPE == "HTC One ")
+                    fragmentClass = AttachDeviceFragment.class;
+                else
+                    fragmentClass = Test2Fragment.class;
                 break;
             case R.id.account_item:
                 fragmentClass = SettingFragment.class;
@@ -142,7 +146,10 @@ public class TopActivity extends AppCompatActivity
     }
 
     @Override
-    public void onTestFragmentInteraction(Uri uri) {}
+    public void onAttachDeviceFragmentInteraction(Uri uri) {}
+
+    @Override
+    public void onTest2FragmentInteraction(Uri uri) {}
 
     @Override
     public void onDashboardFragmentInteraction(Uri uri) {}

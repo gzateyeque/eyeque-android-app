@@ -10,7 +10,7 @@ import android.util.Log;
 
 public class Pattern {
 
-    private static int[] centerPoint = {720, 520};  // Galaxy S6 resolution is 1440 x
+    private static int[] centerPoint = {Constants.CENTER_X, Constants.CENTER_Y};
     private static int[] centerOffset = {0, 0};
     private static int lineLength;
     private static int lineSpace;
@@ -34,34 +34,37 @@ public class Pattern {
 
     private static final int[] PATTERN_ANGLE_LIST_DEVICE_1 = {0, 30, -30, 0, 30, -30};
     // private static final int[] PATTERN_ANGLE_LIST_DEVICE_3 = {0, 150, 120, 90, 60, 30};
-    private static final int[] PATTERN_ANGLE_LIST_DEVICE_3 = {0, 320, 280, 240, 200, 160, 120, 80, 40};
+    // private static final int[] PATTERN_ANGLE_LIST_DEVICE_3 = {0, 320, 280, 240, 200, 160, 120, 80, 40};
+    private static final int[] PATTERN_ANGLE_LIST_DEVICE_3 = Constants.PATTERN_ANGLE_LIST;
     private static final int[] PATTERN_ANGLE_LIST_DEVICE_6 = {20, 0, -10, -20, 20, 10, 0, -10, -20};
     private static final double[] PATTERN_CALC_ANGLE_LIST_DEVICE_1 = {90.0, 120.0, 60.0, 0.0, 30.0, 150.0};
     // private static final double[] PATTERN_CALC_ANGLE_LIST_DEVICE_3 = {0.0, 150.0, 120.0, 90.0, 60.0, 30.0};
-    private static final double[] PATTERN_CALC_ANGLE_LIST_DEVICE_3 = {0.0, 320.0, 280.0, 240.0, 200.0, 160.0, 120.0, 80.0, 40.0};
+    // private static final double[] PATTERN_CALC_ANGLE_LIST_DEVICE_3 = {0.0, 320.0, 280.0, 240.0, 200.0, 160.0, 120.0, 80.0, 40.0};
+    private static final double[] PATTERN_CALC_ANGLE_LIST_DEVICE_3 = Constants.CALC_ANGLE_LIST;
     private static final double[] PATTERN_CALC_ANGLE_LIST_DEVICE_6 = {20.0, 0.0, 170.0, 160.0, 110.0, 100.0, 90.0, 80.0, 70.0};
     private static final int[] PATTERN_ROTATE_ANGLE_LIST_DEVICE_1 = {0, 0, 0, 0, 0, 0};
     // private static final int[] PATTERN_ROTATE_ANGLE_LIST_DEVICE_3 = {180, 30, 60, 90, 120, 150};
-    private static final int[] PATTERN_ROTATE_ANGLE_LIST_DEVICE_3 = {180, 40, 80, 120, 160, 200, 240, 280, 320};
+    // private static final int[] PATTERN_ROTATE_ANGLE_LIST_DEVICE_3 = {180, 40, 80, 120, 160, 200, 240, 280, 320};
+    private static final int[] PATTERN_ROTATE_ANGLE_LIST_DEVICE_3 = Constants.ROTATE_ANGLE_LIST;
     private static final int[] PATTERN_ROTATE_ANGLE_LIST_DEVICE_6 = {270, 270, 270, 270, 0, 0, 0, 0, 0};
 
-    private static final int BASE_DISTANCE_DEVICE_1 = 299;
-    private static final int BASE_DISTANCE_DEVICE_3 = 326;
-    private static final int BASE_DISTANCE_DEVICE_5 = 328;
-    private static final int BASE_DISTANCE_DEVICE_6 = 205;
+    private static final int INIT_DISTANCE_DEVICE_1 = 299;
+    private static final int INIT_DISTANCE_DEVICE_3 = Constants.INIT_DISTANCE;
+    private static final int INIT_DISTANCE_DEVICE_5 = Constants.INIT_DISTANCE;
+    private static final int INIT_DISTANCE_DEVICE_6 = 205;
 
-    private static final int INIT_DISTANCE_DEVICE_1 = 330;
-    private static final int INIT_DISTANCE_DEVICE_3 = 410;
-    private static final int INIT_DISTANCE_DEVICE_5 = 410;
-    private static final int INIT_DISTANCE_DEVICE_6 = 270;
+    private static final int MAX_DISTANCE_DEVICE_1 = 330;
+    private static final int MAX_DISTANCE_DEVICE_3 = Constants.MAX_DISTANCE;
+    private static final int MAX_DISTANCE_DEVICE_5 = Constants.MAX_DISTANCE;
+    private static final int MAX_DISTANCE_DEVICE_6 = 270;
 
     private static final int LINE_LENGTH_DEVICE_1 = 80;
     private static final int LINE_LENGTH_DEVICE_3 = 130;
-    private static final int LINE_LENGTH_DEVICE_5 = 130;
+    private static final int LINE_LENGTH_DEVICE_5 = Constants.LINE_LENGTH;
     private static final int LINE_LENGTH_DEVICE_6 = 120;
 
+    private static int maxDist;
     private static int initDist;
-    private static int baseDist;
     private static int[] patternAngleList;
     private static double[] patternCalcAngleList;
     private static int[] patternRotateAngleList;
@@ -101,7 +104,7 @@ public class Pattern {
         centerPoint[0] += centerOffset[0];
         centerPoint[1] += centerOffset[1];
         lineLength = 80;
-        lineSpace = initDist;
+        lineSpace = maxDist;
 
         redStartX = centerPoint[0] - lineLength / 2;
         redStartY = centerPoint[1] - lineSpace / 2;
@@ -293,8 +296,8 @@ public class Pattern {
         switch (deviceId) {
             case 0:
                 numOfPattern = 6;
-                baseDist = BASE_DISTANCE_DEVICE_1;
                 initDist = INIT_DISTANCE_DEVICE_1;
+                maxDist = MAX_DISTANCE_DEVICE_1;
                 lineLength = LINE_LENGTH_DEVICE_1;
                 patternAngleList = PATTERN_ANGLE_LIST_DEVICE_1;
                 patternCalcAngleList = PATTERN_CALC_ANGLE_LIST_DEVICE_1;
@@ -302,8 +305,8 @@ public class Pattern {
                 break;
             case 2:
                 numOfPattern = 9;
-                baseDist = BASE_DISTANCE_DEVICE_3;
                 initDist = INIT_DISTANCE_DEVICE_3;
+                maxDist = MAX_DISTANCE_DEVICE_3;
                 lineLength = LINE_LENGTH_DEVICE_3;
                 patternAngleList = PATTERN_ANGLE_LIST_DEVICE_3;
                 patternCalcAngleList = PATTERN_CALC_ANGLE_LIST_DEVICE_3;
@@ -311,8 +314,8 @@ public class Pattern {
                 break;
             case 3:
                 numOfPattern = 9;
-                baseDist = BASE_DISTANCE_DEVICE_5;
                 initDist = INIT_DISTANCE_DEVICE_5;
+                maxDist = MAX_DISTANCE_DEVICE_5;
                 lineLength = LINE_LENGTH_DEVICE_5;
                 patternAngleList = PATTERN_ANGLE_LIST_DEVICE_3;
                 patternCalcAngleList = PATTERN_CALC_ANGLE_LIST_DEVICE_3;
@@ -320,8 +323,8 @@ public class Pattern {
                 break;
             case 4:
                 numOfPattern = 9;
-                baseDist = BASE_DISTANCE_DEVICE_6;
                 initDist = INIT_DISTANCE_DEVICE_6;
+                maxDist = MAX_DISTANCE_DEVICE_6;
                 lineLength = LINE_LENGTH_DEVICE_6;
                 patternAngleList = PATTERN_ANGLE_LIST_DEVICE_6;
                 patternCalcAngleList = PATTERN_CALC_ANGLE_LIST_DEVICE_6;
@@ -330,7 +333,7 @@ public class Pattern {
             default:
                 break;
         }
-        lineSpace = initDist;
+        lineSpace = maxDist;
         drawPatternByDevice();
     }
 
@@ -378,7 +381,7 @@ public class Pattern {
         if (whichPattern > numOfPattern*2 -1) {
             whichPattern = 0;
         }
-        lineSpace =initDist;
+        lineSpace =maxDist;
         drawPatternByDevice();
     }
 
@@ -565,7 +568,7 @@ public class Pattern {
         double[] SphericalStep3 = {1.44623238e-04, -8.88602824e-05, -1.49620452e-04, 1.44623238e-04, -8.88602824e-05, -1.49620452e-04};
 
         int dist = getDistance();
-        int diff = baseDist - dist;
+        int diff = initDist - dist;
         powerValue = SphericalStep0[patternIndex] + SphericalStep1[patternIndex]*diff
                 + SphericalStep2[patternIndex]*diff*diff + SphericalStep3[patternIndex]*diff*diff*diff;
 
@@ -588,7 +591,7 @@ public class Pattern {
         double SphericalStep1 = 1.1879E-01;
 
         int dist = getDistance();
-        int diff = dist - baseDist;   // baseDist = 330
+        int diff = dist - initDist;   // initDist = 330
 
         /* Previous Caliculation
         powerValue = SphericalStep0 + SphericalStep1*deltaDist
@@ -618,7 +621,7 @@ public class Pattern {
         double SphericalStep2 = 6.454937531E-05;
 
         int dist = getDistance();
-        int diff = dist - baseDist;   // baseDist = 330
+        int diff = dist - initDist;   // initDist = 330
         /* Previous Caliculation
         powerValue = SphericalStep0 + SphericalStep1*deltaDist
                 + SphericalStep2*deltaDist*deltaDist + SphericalStep3*deltaDist*deltaDist*deltaDist;
@@ -639,7 +642,7 @@ public class Pattern {
         double[] SphericalStep3 = {4.72320739e-05, 4.72320739e-05, 4.72320739e-05, 4.72320739e-05, 4.72320739e-05, 4.72320739e-05, 4.72320739e-05, 4.72320739e-05, 4.72320739e-05};
 
         int dist = getDistance();
-        int diff = dist - baseDist;
+        int diff = dist - initDist;
         powerValue = SphericalStep0[patternIndex] + SphericalStep1[patternIndex]*diff;
         // + SphericalStep2[patternIndex]*diff*diff + SphericalStep3[patternIndex]*diff*diff*diff;
 
