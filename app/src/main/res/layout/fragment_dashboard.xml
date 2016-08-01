@@ -24,7 +24,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dip"
                 android:gravity="center_vertical"
-                android:text="EYEGLASS NUMBER"
+                android:text="EYEGLASS NUMBERS"
                 android:textStyle="bold"
                 android:textSize="16sp"
                 android:textColor="#1DADF3"
@@ -174,6 +174,35 @@
                 android:layout_below="@id/visionSnapshotTitle"
                 android:orientation="vertical">
 
+            <LinearLayout android:background="#FFFFFF"
+                android:id="@+id/summary"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="20dp"
+                android:orientation="horizontal">
+
+                <TextView
+                android:id="@+id/leftText"
+                android:layout_width="wrap_content"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:text="LEFT\nNEARSIGHTNESS: LOW\nASTIGMATISM: LOW"
+                android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/rightText"
+                    android:layout_width="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:text="RIGHT\nNEARSIGHTNESS: LOW\nASTIGMATISM: LOW"
+                    android:textSize="12sp" />
+
+            </LinearLayout>
+                <!--
                 <TextView
                     android:id="@+id/snapshotSummary"
                     android:layout_width="match_parent"
@@ -186,6 +215,9 @@
                     android:textSize="15sp"
                     android:layout_alignParentStart="true"
                     android:background="@drawable/text_border"/>
+                    -->
+
+
 
                 <TextView
                     android:id="@+id/farsightnessTitle"
@@ -203,6 +235,7 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
 
+                    <!--
                     <TextView
                         android:id="@+id/leftTitle"
                         android:layout_width="0dp"
@@ -223,7 +256,7 @@
                         android:layout_gravity="right"
                         android:textStyle="bold"
                         android:text="  RIGHT"
-                        android:textSize="14sp" />
+                    -->
 
                 </LinearLayout>
 

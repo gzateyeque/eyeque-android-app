@@ -48,15 +48,135 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
                 android:gravity="center_horizontal"
-                android:text="To ensure the test accuracy, please take your glasses off during the test"
+                android:text="For accurate results, please remove your glasses or contacts"
                 android:id="@+id/testConditionText"
                 android:textColor="#046EEA"
                 android:textSize="15sp"/>
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:gravity="center_horizontal"
+                android:text="Have you removed your glasses or contacts?"
+                android:id="@+id/glassOnText"
+                android:textColor="@android:color/darker_gray"
+                android:textSize="14sp"/>
+
+            <LinearLayout
+                android:id="@+id/LinearLayout01"
+                android:layout_height="30dp"
+                android:layout_width="wrap_content"
+                android:layout_marginTop="1dp">
+
+                <CheckBox
+                    android:id="@+id/glassOnYesCheckbox"
+                    android:layout_width="30dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="0dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:adjustViewBounds="true"
+                    android:scaleType="fitCenter"
+                    android:onClick="glassOnYesClicked" >
+                </CheckBox>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Yes"
+                    android:id="@+id/glassOnYesTextView"
+                    android:textColor="@android:color/darker_gray"
+                    android:textSize="15sp"
+                    android:layout_centerHorizontal="true" >
+                </TextView>
+                <CheckBox
+                    android:id="@+id/glassOnNoCheckbox"
+                    android:layout_width="30dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="0dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="10dp"
+                    android:adjustViewBounds="true"
+                    android:scaleType="fitCenter"
+                    android:onClick="glassOnNoClicked" >
+                </CheckBox>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="No"
+                    android:id="@+id/glassOnNoTextView"
+                    android:textColor="@android:color/darker_gray"
+                    android:textSize="15sp"
+                    android:layout_centerHorizontal="true" >
+                </TextView>
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:gravity="left"
+                android:text="Do you have a screen protector on this phone?"
+                android:id="@+id/screenProtectorOnText"
+                android:textColor="@android:color/darker_gray"
+                android:textSize="14sp"/>
+            <LinearLayout
+                android:id="@+id/LinearLayout02"
+                android:layout_height="30dp"
+                android:layout_width="wrap_content"
+                android:layout_marginTop="1dp">
+
+                <CheckBox
+                    android:id="@+id/screenProtectorOnYesCheckbox"
+                    android:layout_width="30dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="0dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:adjustViewBounds="true"
+                    android:scaleType="fitCenter"
+                    android:onClick="screenProtectorOnYesClicked" >
+                </CheckBox>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Yes"
+                    android:id="@+id/screenProtectorOnYesTextView"
+                    android:textColor="@android:color/darker_gray"
+                    android:textSize="15sp"
+                    android:layout_centerHorizontal="true" >
+                </TextView>
+                <CheckBox
+                    android:id="@+id/screenProtectorOnNoCheckbox"
+                    android:layout_width="30dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="0dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="10dp"
+                    android:adjustViewBounds="true"
+                    android:scaleType="fitCenter"
+                    android:onClick="screenProtectorOnNoClicked" >
+                </CheckBox>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="No"
+                    android:id="@+id/screenProtectorOnNoTextView"
+                    android:textColor="@android:color/darker_gray"
+                    android:textSize="15sp"
+                    android:layout_centerHorizontal="true" >
+                </TextView>
+            </LinearLayout>
+
+            <!--
             <android.support.v7.widget.SwitchCompat
                 android:id="@+id/glassesOnOffSwitch"
                 android:layout_width="match_parent"
@@ -64,7 +184,7 @@
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
                 android:layout_marginTop="20dp"
-                android:text="Have your glasses on/off during the test"
+                android:text="Do you wear glasses or contact lens during the test"
                 android:checked="false"/>
 
             <android.support.v7.widget.SwitchCompat
@@ -76,6 +196,7 @@
                 android:layout_marginTop="25dp"
                 android:text="Has screen protector on this phone"
                 android:checked="false"/>
+             -->
 
             <Button
                 android:id="@+id/testConditionContinueButton"

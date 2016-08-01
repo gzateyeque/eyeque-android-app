@@ -133,21 +133,6 @@
 
                     <TextView
                         android:id="@+id/osTitleTextView"
-                        android:text="LEFT (O.S.)"
-                        android:gravity="center"
-                        android:textStyle="bold"
-                        android:textSize="14dp"
-                        android:textAppearance="?android:attr/textAppearanceMedium" />
-
-                    <TextView
-                        android:id="@+id/osSphTextView"
-                        android:text="-2.75"
-                        android:gravity="left"
-                        android:textSize="28dp"
-                        android:textAppearance="?android:attr/textAppearanceMedium" />
-
-                    <TextView
-                        android:id="@+id/osCylTextView"
                         android:text="RIGHT (O.D.)"
                         android:gravity="center"
                         android:textStyle="bold"
@@ -155,8 +140,24 @@
                         android:textAppearance="?android:attr/textAppearanceMedium" />
 
                     <TextView
+                        android:id="@+id/osSphTextView"
+                        android:text="-2.25"
+                        android:gravity="left"
+                        android:textSize="28dp"
+                        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                    <TextView
+                        android:id="@+id/osCylTextView"
+                        android:text="LEFT (O.S.)"
+                        android:gravity="center"
+                        android:textStyle="bold"
+                        android:textSize="14dp"
+                        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+
+                    <TextView
                         android:id="@+id/osAxisTextView"
-                        android:text="-3.25"
+                        android:text="-2.75"
                         android:gravity="left"
                         android:textSize="28dp"
                         android:textAppearance="?android:attr/textAppearanceMedium" />

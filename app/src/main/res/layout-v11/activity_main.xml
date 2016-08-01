@@ -20,7 +20,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/exitButton"
         android:text="@string/exitTextString"
-        android:textColor="#646464"
+        android:textColor="#FFFFFF"
         android:background="?attr/selectableItemBackground"
         android:textAllCaps="false"
         android:textSize="20sp"
@@ -37,7 +37,7 @@
         android:text="@string/testHeaderTextString"
         android:id="@+id/testHeaderTextView"
         android:layout_below="@+id/drawView"
-        android:textColor="#646464"
+        android:textColor="#FFFFFF"
         android:textSize="20sp"/>
 
     <Button
@@ -48,7 +48,7 @@
         android:gravity="right"
         android:id="@+id/contButton"
         android:text="@string/nextTextString"
-        android:textColor="#646464"
+        android:textColor="#FFFFFF"
         android:background="?attr/selectableItemBackground"
         android:textAllCaps="false"
         android:textSize="20sp"
@@ -59,7 +59,7 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="1dp"
+        android:layout_height="0.1dp"
         android:layout_marginTop = "15sp"
         android:id="@+id/testHeaderDivView"
         android:layout_below="@+id/testHeaderTextView"
@@ -95,19 +95,45 @@
         android:layout_marginRight="20sp"
         android:layout_marginTop="10sp" />
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5sp"
-        android:id="@+id/eyeText"
-        android:text="@string/eyeButtonTextString"
-        android:textAllCaps="false"
-        android:enabled="false"
-        android:background="?android:attr/selectableItemBackground"
-        android:textColor="#646464"
-        android:textSize="15sp"
-        android:layout_below="@+id/testHeaderDivView"
-        android:layout_centerHorizontal="true" />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/eyeLeftText"
+            android:text="L"
+            android:enabled="false"
+            android:background="?android:attr/selectableItemBackground"
+            android:textColor="@color/bb_darkBackgroundColor"
+            android:textSize="16sp"
+            android:layout_below="@+id/testHeaderDivView"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginLeft="65sp"
+            android:layout_marginTop="5sp"/>
+
+        <ImageView
+            android:id="@+id/eyeImage"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_below="@+id/testHeaderDivView"
+            android:layout_marginTop="20sp"
+            android:layout_centerHorizontal="true"
+            android:background="?android:attr/selectableItemBackground"
+            android:src="@drawable/eye_right"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/eyeRightText"
+            android:text="R"
+            android:enabled="false"
+            android:background="?android:attr/selectableItemBackground"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp"
+            android:layout_below="@+id/testHeaderDivView"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginRight="65sp"
+            android:layout_marginTop="5sp"/>
 
     <SeekBar
         android:layout_width="wrap_content"
