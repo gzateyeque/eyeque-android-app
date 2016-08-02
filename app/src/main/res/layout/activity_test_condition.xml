@@ -21,7 +21,7 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginTop = "10sp"
-        android:text="Test Condition"
+        android:text="Test Preparation"
         android:id="@+id/testConditionHeaderTextView"
         android:textColor="@color/background_material_dark"
         android:textSize="20sp"/>
@@ -63,7 +63,7 @@
                 android:layout_marginTop="20dp"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
-                android:gravity="center_horizontal"
+                android:gravity="left"
                 android:text="Have you removed your glasses or contacts?"
                 android:id="@+id/glassOnText"
                 android:textColor="@android:color/darker_gray"

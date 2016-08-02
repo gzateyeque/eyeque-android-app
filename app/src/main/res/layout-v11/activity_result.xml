@@ -391,7 +391,7 @@
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
                 android:gravity="center_horizontal"
-                android:text="Please check the dashboard to view more information about your vision including vision record, vision snapshot and tracking chart"
+                android:text="Get more details about your vision and track your vision history by logging into your dashboard at EyeQue.com."
                 android:id="@+id/testResultText"
                 android:textColor="@android:color/darker_gray"
                 android:textSize="15sp"/>
@@ -401,7 +401,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
                 android:layout_marginTop="30dp"
-                android:text="Don't want to use this test record? tap here"
+                android:text="Discard this test"
                 android:id="@+id/dontUseTextView"
                 android:onClick="onClick"
                 android:clickable="true"
@@ -417,7 +417,7 @@
                 android:layout_marginBottom="30dp"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
-                android:text="Use this test record and Continue"
+                android:text="Save this record"
                 android:textStyle="bold"
                 android:background="@android:color/holo_blue_dark"
                 android:textColor="#FFFFFF" />

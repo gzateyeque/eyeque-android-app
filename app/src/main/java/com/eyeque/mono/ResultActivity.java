@@ -256,12 +256,12 @@ public class ResultActivity extends Activity {
                 // Setting Dialog Title
                 alertDialog.setTitle("Confirm");
                 // Setting Dialog Message
-                alertDialog.setMessage("Are you sure you don't want to use this test record?");
+                alertDialog.setMessage("Are you sure you want to discard this test?");
                 // Setting Positive "Yes" Btn
                 alertDialog.setPositiveButton("YES",
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
-                                Toast.makeText(ResultActivity.this, "Record Discarded", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(ResultActivity.this, "Test Discarded", Toast.LENGTH_SHORT).show();
                                 finish();
                                 Intent i = new Intent(getBaseContext(), TopActivity.class);
                                 startActivity(i);

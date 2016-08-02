@@ -121,7 +121,7 @@ public class TopActivity extends AppCompatActivity
                 fragmentClass = DashboardFragment.class;
                 break;
             case R.id.test_item:
-                if (Constants.PHONE_TYPE == "HTC One ")
+                if (Constants.PHONE_TYPE == "Galaxy 6")
                     fragmentClass = AttachDeviceFragment.class;
                 else
                     fragmentClass = Test2Fragment.class;
