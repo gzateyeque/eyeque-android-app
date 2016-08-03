@@ -49,6 +49,7 @@
                         android:id="@+id/testTimeView"
                         android:text="2016-06-20 15:37"
                         android:layout_column="0"
+                        android:layout_span="4"
                         android:textSize="12sp"
                         android:gravity="center"
                         android:textAppearance="?android:attr/textAppearanceMedium" />
@@ -103,19 +104,19 @@
 
                     <TextView
                         android:id="@+id/odSphTextView"
-                        android:text="-2.25"
+                        android:text="-2.50"
                         android:gravity="center"
                         android:textAppearance="?android:attr/textAppearanceMedium" />
 
                     <TextView
                         android:id="@+id/odCylTextView"
-                        android:text="-0.5"
+                        android:text="-1.00"
                         android:gravity="center"
                         android:textAppearance="?android:attr/textAppearanceMedium" />
 
                     <TextView
                         android:id="@+id/odAxisTextView"
-                        android:text="30"
+                        android:text="180"
                         android:gravity="center"
                         android:textAppearance="?android:attr/textAppearanceMedium" />
                 </TableRow>
@@ -136,19 +137,19 @@
 
                     <TextView
                         android:id="@+id/osSphTextView"
-                        android:text="-2.75"
+                        android:text="-3.00"
                         android:gravity="center"
                         android:textAppearance="?android:attr/textAppearanceMedium" />
 
                     <TextView
                         android:id="@+id/osCylTextView"
-                        android:text="-0.5"
+                        android:text="-0.50"
                         android:gravity="center"
                         android:textAppearance="?android:attr/textAppearanceMedium" />
 
                     <TextView
                         android:id="@+id/osAxisTextView"
-                        android:text="50"
+                        android:text="10"
                         android:gravity="center"
                         android:textAppearance="?android:attr/textAppearanceMedium" />
                 </TableRow>
