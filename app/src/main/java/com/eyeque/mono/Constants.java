@@ -43,8 +43,8 @@ public class Constants {
     public static final String UrlTermsOfService = ContentRestFulBaseURL + "user_agreement/terms";
     public static final String UrlPrivacyPolicy = ContentRestFulBaseURL + "user_agreement/policy";
     public static final String UrlBuyDevice = apiRestfulBaseURL + "eyeque-pocket-refractor.html";
-    public static final String UrlTrackingDataOd = ContentRestFulBaseURL + "axis_component/sphod.html";
-    public static final String UrlTrackingDataOs = ContentRestFulBaseURL + "axis_component/sphos.html";
+    public static final String UrlTrackingDataOd = ContentRestFulBaseURL + "userdata/index.html?hash=default&column=sphEOD";
+    public static final String UrlTrackingDataOs = ContentRestFulBaseURL + "userdata/index.html?hash=default&column=sphEOS";
 
     // Restful API URL
     // public static final String UrlSignIn = "http://54.201.218.215/index.php/rest/V1/integration/customer/token";
@@ -135,11 +135,12 @@ public class Constants {
     public static int INIT_DISTANCE = 326;
     public static int MIN_DISTANCE = 227;
     public static int MAX_DISTANCE = 410;
-    /*** For Video Shooting App
+    /***
+    // For Video Shooting App
     public static int INIT_DISTANCE = 99;
     public static int MIN_DISTANCE = 0;
     public static int MAX_DISTANCE = 183;
-     ****/
+     ***/
     public static final int[] PATTERN_ANGLE_LIST  = {0, 320, 280, 240, 200, 160, 120, 80, 40};
     public static final double[] CALC_ANGLE_LIST = {0.0, 320.0, 280.0, 240.0, 200.0, 160.0, 120.0, 80.0, 40.0};
     public static final int[] ROTATE_ANGLE_LIST = {180, 40, 80, 120, 160, 200, 240, 280, 320};
@@ -170,17 +171,21 @@ public class Constants {
      public static int INIT_DISTANCE = 326;
      public static int MIN_DISTANCE = 227;
      public static int MAX_DISTANCE = 410;
-     public static final int[] PATTERN_ANGLE_LIST  = {0, 320, 280, 240, 200, 160, 120, 80, 40};
-     public static final double[] CALC_ANGLE_LIST = {0.0, 320.0, 280.0, 240.0, 200.0, 160.0, 120.0, 80.0, 40.0};
-     public static final int[] ROTATE_ANGLE_LIST = {180, 40, 80, 120, 160, 200, 240, 280, 320};
-     // Color configuration
-     public static int RED_DEGREE = 0;
-     public static int GREEN_DEGREE = 0;
-     public static int BLUE_DEGREE = 0;
-     // Calculation configuration
-     public static double SphericalStep0 = 1.428405590E-01*577/PHONE_PPI;
-     public static double SphericalStep1 = 1.276384330E-01*577/PHONE_PPI;
-     public static double SphericalStep2 = 6.454937531E-05*(577/PHONE_PPI)*(577/PHONE_PPI);
+     /*** For Video Shooting App
+     public static int INIT_DISTANCE = 99;
+     public static int MIN_DISTANCE = 0;
+     public static int MAX_DISTANCE = 183;
+    public static final int[] PATTERN_ANGLE_LIST  = {0, 320, 280, 240, 200, 160, 120, 80, 40};
+    public static final double[] CALC_ANGLE_LIST = {0.0, 320.0, 280.0, 240.0, 200.0, 160.0, 120.0, 80.0, 40.0};
+    public static final int[] ROTATE_ANGLE_LIST = {180, 40, 80, 120, 160, 200, 240, 280, 320};
+    // Color configuration
+    public static int RED_DEGREE = 0;
+    public static int GREEN_DEGREE = 0;
+    public static int BLUE_DEGREE = 0;
+    // Calculation configuration
+    public static double SphericalStep0 = 1.428405590E-01*577/PHONE_PPI;
+    public static double SphericalStep1 = 1.276384330E-01*577/PHONE_PPI;
+    public static double SphericalStep2 = 6.454937531E-05*(577/PHONE_PPI)*(577/PHONE_PPI);
 
 
      // Phone profile for Galaxy 5
