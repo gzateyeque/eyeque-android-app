@@ -99,11 +99,11 @@ public class DashboardFragment extends Fragment {
 
         Canvas canvas = new Canvas(mutableBitmap);
         paint.setColor(Color.WHITE);
-        canvas.drawCircle(200, 305, 20, paint);
-        canvas.drawCircle(300, 275, 20, paint);
+        canvas.drawCircle(200, 310, 20, paint);
+        canvas.drawCircle(310, 285, 20, paint);
         paint.setColor(color);
-        canvas.drawCircle(200, 305, 12, paint);
-        canvas.drawCircle(300, 275, 12, paint);
+        canvas.drawCircle(200, 310, 12, paint);
+        canvas.drawCircle(310, 285, 12, paint);
 
 
         final ImageView imageView = (ImageView) rootView.findViewById(R.id.visionMap);
