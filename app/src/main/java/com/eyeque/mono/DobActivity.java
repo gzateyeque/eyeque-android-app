@@ -44,7 +44,7 @@ public class DobActivity extends AppCompatActivity {
                     int num = Integer.parseInt(dob);
                     int currentYear = Calendar.getInstance().get(Calendar.YEAR);
                     if (num >= (currentYear - 100) && num <= (currentYear - 10)) {
-                        SingeltonDataHolder.setBirthYear(num);
+                        SingletonDataHolder.setBirthYear(num);
                         Intent serialIntent = new Intent(getBaseContext(), SerialActivity.class);
                         startActivity(serialIntent);
                     } else

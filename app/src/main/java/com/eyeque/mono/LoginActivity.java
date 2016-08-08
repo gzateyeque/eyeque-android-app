@@ -137,11 +137,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         // finally change the color
         // window.setStatusBarColor(this.getResources().getColor(R.color.colorPrimary));
 
-        String manufacturer = android.os.Build.MANUFACTURER;
-        String brand = android.os.Build.BRAND;
-        String product = android.os.Build.PRODUCT;
-        String model = android.os.Build.MODEL;
-        Log.d("************Phone Type", manufacturer + " " + brand + " " + product + " " + model);
         // Check local persistent mono.db database
         try {
             String email, token;
@@ -576,11 +571,11 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                     // Log.d(TAG, tok.getUserId());
                     // Pass authentication
                     response = response.replace("\"", "");
-                    SingeltonDataHolder.setToken(response);
+                    SingletonDataHolder.setToken(response);
                     if (loginType != 1)
-                        SingeltonDataHolder.setEmail(socialMediaEmail);
+                        SingletonDataHolder.setEmail(socialMediaEmail);
                     else
-                        SingeltonDataHolder.setEmail(gEmail);
+                        SingletonDataHolder.setEmail(gEmail);
                     CheckOnboard();
                 }
             }, new Response.ErrorListener() {
@@ -665,9 +660,9 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                     // Pass authentication
                     showProgress(false);
                     if (loginType != 1)
-                        SingeltonDataHolder.setEmail(socialMediaEmail);
+                        SingletonDataHolder.setEmail(socialMediaEmail);
                     else
-                        SingeltonDataHolder.setEmail(gEmail);
+                        SingletonDataHolder.setEmail(gEmail);
 
                     if (signUpType == 2) {
                         SignIn(socialMediaId, socialMediaTok);
@@ -804,7 +799,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 @Override
                 public Map<String, String> getHeaders() throws AuthFailureError {
                     Map<String, String> headers = new HashMap<>();
-                    String authStr = "Bearer " + SingeltonDataHolder.getToken();
+                    String authStr = "Bearer " + SingletonDataHolder.getToken();
                     headers.put("Content-Type", "application/json;charset=UTF-8");
                     headers.put("Authorization", authStr);
                     return headers;

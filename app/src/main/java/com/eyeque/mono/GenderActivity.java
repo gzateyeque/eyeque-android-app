@@ -79,9 +79,9 @@ public class GenderActivity extends AppCompatActivity {
                     Toast.makeText(GenderActivity.this, "Please select your gender", Toast.LENGTH_SHORT).show();
                 else {
                     if (maleToggle)
-                        SingeltonDataHolder.setGender(1);
+                        SingletonDataHolder.setGender(1);
                     else
-                        SingeltonDataHolder.setGender(2);
+                        SingletonDataHolder.setGender(2);
                     Intent dobIntent = new Intent(getBaseContext(), DobActivity.class);
                     startActivity(dobIntent);
                 }

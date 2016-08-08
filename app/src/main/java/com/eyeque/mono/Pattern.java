@@ -10,7 +10,7 @@ import android.util.Log;
 
 public class Pattern {
 
-    private static int[] centerPoint = {Constants.CENTER_X, Constants.CENTER_Y};
+    private static int[] centerPoint = {SingletonDataHolder.centerX, SingletonDataHolder.centerY};
     private static int[] centerOffset = {0, 0};
     private static int lineLength;
     private static int lineSpace;
@@ -35,32 +35,32 @@ public class Pattern {
     private static final int[] PATTERN_ANGLE_LIST_DEVICE_1 = {0, 30, -30, 0, 30, -30};
     // private static final int[] PATTERN_ANGLE_LIST_DEVICE_3 = {0, 150, 120, 90, 60, 30};
     // private static final int[] PATTERN_ANGLE_LIST_DEVICE_3 = {0, 320, 280, 240, 200, 160, 120, 80, 40};
-    private static final int[] PATTERN_ANGLE_LIST_DEVICE_3 = Constants.PATTERN_ANGLE_LIST;
+    private static final int[] PATTERN_ANGLE_LIST_DEVICE_3 = SingletonDataHolder.patternAngleList;
     private static final int[] PATTERN_ANGLE_LIST_DEVICE_6 = {20, 0, -10, -20, 20, 10, 0, -10, -20};
     private static final double[] PATTERN_CALC_ANGLE_LIST_DEVICE_1 = {90.0, 120.0, 60.0, 0.0, 30.0, 150.0};
     // private static final double[] PATTERN_CALC_ANGLE_LIST_DEVICE_3 = {0.0, 150.0, 120.0, 90.0, 60.0, 30.0};
     // private static final double[] PATTERN_CALC_ANGLE_LIST_DEVICE_3 = {0.0, 320.0, 280.0, 240.0, 200.0, 160.0, 120.0, 80.0, 40.0};
-    private static final double[] PATTERN_CALC_ANGLE_LIST_DEVICE_3 = Constants.CALC_ANGLE_LIST;
+    private static final double[] PATTERN_CALC_ANGLE_LIST_DEVICE_3 = SingletonDataHolder.calcAngleList;
     private static final double[] PATTERN_CALC_ANGLE_LIST_DEVICE_6 = {20.0, 0.0, 170.0, 160.0, 110.0, 100.0, 90.0, 80.0, 70.0};
     private static final int[] PATTERN_ROTATE_ANGLE_LIST_DEVICE_1 = {0, 0, 0, 0, 0, 0};
     // private static final int[] PATTERN_ROTATE_ANGLE_LIST_DEVICE_3 = {180, 30, 60, 90, 120, 150};
     // private static final int[] PATTERN_ROTATE_ANGLE_LIST_DEVICE_3 = {180, 40, 80, 120, 160, 200, 240, 280, 320};
-    private static final int[] PATTERN_ROTATE_ANGLE_LIST_DEVICE_3 = Constants.ROTATE_ANGLE_LIST;
+    private static final int[] PATTERN_ROTATE_ANGLE_LIST_DEVICE_3 = SingletonDataHolder.rotateAngleList;
     private static final int[] PATTERN_ROTATE_ANGLE_LIST_DEVICE_6 = {270, 270, 270, 270, 0, 0, 0, 0, 0};
 
     private static final int INIT_DISTANCE_DEVICE_1 = 299;
-    private static final int INIT_DISTANCE_DEVICE_3 = Constants.INIT_DISTANCE;
-    private static final int INIT_DISTANCE_DEVICE_5 = Constants.INIT_DISTANCE;
+    private static final int INIT_DISTANCE_DEVICE_3 = SingletonDataHolder.initDistance;
+    private static final int INIT_DISTANCE_DEVICE_5 = SingletonDataHolder.initDistance;
     private static final int INIT_DISTANCE_DEVICE_6 = 205;
 
     private static final int MAX_DISTANCE_DEVICE_1 = 330;
-    private static final int MAX_DISTANCE_DEVICE_3 = Constants.MAX_DISTANCE;
-    private static final int MAX_DISTANCE_DEVICE_5 = Constants.MAX_DISTANCE;
+    private static final int MAX_DISTANCE_DEVICE_3 = SingletonDataHolder.maxDistance;
+    private static final int MAX_DISTANCE_DEVICE_5 = SingletonDataHolder.maxDistance;
     private static final int MAX_DISTANCE_DEVICE_6 = 270;
 
     private static final int LINE_LENGTH_DEVICE_1 = 80;
     private static final int LINE_LENGTH_DEVICE_3 = 130;
-    private static final int LINE_LENGTH_DEVICE_5 = Constants.LINE_LENGTH;
+    private static final int LINE_LENGTH_DEVICE_5 = SingletonDataHolder.lineLength;
     private static final int LINE_LENGTH_DEVICE_6 = 120;
 
     private static int maxDist;

@@ -21,9 +21,11 @@ public class Constants {
     // public final static String LocalRestfulBaseURL = "http://192.168.110.85:8080";
     public final static String AccessToken = "e46cghc52pqd8kvgqmv8ovsi1ufcfetg";
     public static String RestfulBaseURL = AwsEc2RestfulBaseURL;
-    public static String apiRestfulBaseURL = "http://api.eyeque.com/";
-    public static String ContentRestFulBaseURL = "http://api.eyeque.com:8080/";
+    // public static String apiRestfulBaseURL = "http://api.eyeque.com/";
+    // public static String ContentRestFulBaseURL = "http://api.eyeque.com:8080/";
     // public final static String AccessToken = "472h0onmgk3o18bn8kj629m8s2tke6k0";
+    public static String apiRestfulBaseURL = "http://54.218.73.222/";
+    public static String ContentRestFulBaseURL = "http://54.218.73.222:8080/";
 
     // Line distance scale parameters
     public static final int MINVAL_DEVICE_1 = 270;
@@ -39,7 +41,8 @@ public class Constants {
 
     // Content URL
     public static final String UrlBanner = ContentRestFulBaseURL + "banner";
-    public static final String UrlYoutube = "http://54.201.220.133:8080/tutorial_video/index.html";
+    // public static final String UrlYoutube = "http://54.201.220.133:8080/tutorial_video/index.html";
+    public static final String UrlYoutube = "http://54.218.73.222:8080/tutorial_video/index.html";
     public static final String UrlTermsOfService = ContentRestFulBaseURL + "user_agreement/terms";
     public static final String UrlPrivacyPolicy = ContentRestFulBaseURL + "user_agreement/policy";
     public static final String UrlBuyDevice = apiRestfulBaseURL + "eyeque-pocket-refractor.html";
@@ -55,6 +58,7 @@ public class Constants {
     public static final String UrlCheckSerialNum = apiRestfulBaseURL + "index.php/rest/V1/sncheck/check";
     public static final String UrlVerifySocMediaLogin = apiRestfulBaseURL + "index.php/rest/V1/socialcustomers/validate";
     public static final String UrlSocMediaSignUp = apiRestfulBaseURL + "index.php/rest/V1/socialcustomers";
+    public static final String UrlPhoneConfig = apiRestfulBaseURL + "index.php/rest/eyecloud/api/V2/devices";
 
     // Database parameters
     public static final String DB_NAME = "mono.db";
@@ -135,23 +139,22 @@ public class Constants {
     public static int INIT_DISTANCE = 326;
     public static int MIN_DISTANCE = 227;
     public static int MAX_DISTANCE = 410;
-    /***
-    // For Video Shooting App
-    public static int INIT_DISTANCE = 99;
-    public static int MIN_DISTANCE = 0;
-    public static int MAX_DISTANCE = 183;
-     ***/
-    public static final int[] PATTERN_ANGLE_LIST  = {0, 320, 280, 240, 200, 160, 120, 80, 40};
-    public static final double[] CALC_ANGLE_LIST = {0.0, 320.0, 280.0, 240.0, 200.0, 160.0, 120.0, 80.0, 40.0};
-    public static final int[] ROTATE_ANGLE_LIST = {180, 40, 80, 120, 160, 200, 240, 280, 320};
-    // Color configuration
-    public static int RED_DEGREE = 0;
-    public static int GREEN_DEGREE = 0;
-    public static int BLUE_DEGREE = 0;
-    // Calculation configuration
-    public static double SphericalStep0 = 1.428405590E-01*577/PHONE_PPI;
-    public static double SphericalStep1 = 1.276384330E-01*577/PHONE_PPI;
-    public static double SphericalStep2 = 6.454937531E-05*(577/PHONE_PPI)*(577/PHONE_PPI);
+    /*** For Video Shooting App
+     public static int INIT_DISTANCE = 99;
+     public static int MIN_DISTANCE = 0;
+     public static int MAX_DISTANCE = 183;
+     ****/
+     public static final int[] PATTERN_ANGLE_LIST  = {0, 320, 280, 240, 200, 160, 120, 80, 40};
+     public static final double[] CALC_ANGLE_LIST = {0.0, 320.0, 280.0, 240.0, 200.0, 160.0, 120.0, 80.0, 40.0};
+     public static final int[] ROTATE_ANGLE_LIST = {180, 40, 80, 120, 160, 200, 240, 280, 320};
+     // Color configuration
+     public static int RED_DEGREE = 0;
+     public static int GREEN_DEGREE = 0;
+     public static int BLUE_DEGREE = 0;
+     // Calculation configuration
+     public static double SphericalStep0 = 1.428405590E-01*577/PHONE_PPI;
+     public static double SphericalStep1 = 1.276384330E-01*577/PHONE_PPI;
+     public static double SphericalStep2 = 6.454937531E-05*(577/PHONE_PPI)*(577/PHONE_PPI);
 
     /*****
      // Phone profile for Galaxy 6

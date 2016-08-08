@@ -18,8 +18,23 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.RetryPolicy;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnMenuTabSelectedListener;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class TopActivity extends AppCompatActivity
         implements AttachDeviceFragment.OnFragmentInteractionListener,
@@ -29,6 +44,7 @@ public class TopActivity extends AppCompatActivity
 
     private CoordinatorLayout coordinatorLayout;
     private static final String TAG = "Home";
+    private static int retVal = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -121,7 +137,7 @@ public class TopActivity extends AppCompatActivity
                 fragmentClass = DashboardFragment.class;
                 break;
             case R.id.test_item:
-                if (Constants.PHONE_TYPE == "Galaxy 6")
+                if (SingletonDataHolder.phoneType == "Galaxy 6")
                     fragmentClass = AttachDeviceFragment.class;
                 else
                     fragmentClass = Test2Fragment.class;
@@ -156,4 +172,78 @@ public class TopActivity extends AppCompatActivity
 
     @Override
     public void onSettingFragmentInteraction(Uri uri) {}
+
+    private int CheckPhoneCompatibility(String phoneBrand, String phoneModel) {
+
+        NetConnection conn = new NetConnection();
+        if (conn.isConnected(getApplicationContext())) {
+
+            // Show a progress spinner, and kick off a background task to
+            // perform the user login attempt.
+            // showProgress(true);
+
+            RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
+            final String url = Constants.UrlPhoneConfig;
+            final JSONObject params = new JSONObject();
+            try {
+                params.put("name", "Device5");
+                params.put("phoneBrand", SingletonDataHolder.phoneBrand);
+                params.put("phoneModel", SingletonDataHolder.phoneModel);
+                params.put("phoneType", SingletonDataHolder.phoneType);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            StringRequest postRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+                @Override
+                public void onResponse(String string) {
+                    // Parse serial check response
+                    try {
+                        JSONObject jsonObj = new JSONObject(string);
+                        int ret_code = jsonObj.getInt("return_code");
+
+                        retVal = 0;
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                        Toast.makeText(TopActivity.this, "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Log.d("Error.Response", error.toString());
+                    Toast.makeText(TopActivity.this, "Validation failed", Toast.LENGTH_SHORT).show();
+                }
+            }) {
+                @Override
+                public byte[] getBody() throws AuthFailureError {
+                    Log.i("JSON data", params.toString());
+                    return params.toString().getBytes();
+                }
+
+                @Override
+                public String getBodyContentType() {
+                    return "application/json";
+                }
+
+                @Override
+                public Map<String, String> getHeaders() throws AuthFailureError {
+                    Map<String, String> headers = new HashMap<>();
+                    String authString = "Bearer " + SingletonDataHolder.getToken();
+                    headers.put("Content-Type", "application/json;charset=UTF-8");
+                    headers.put("Authorization", authString);
+                    Log.i("$$$---HEADER---$$$", headers.toString());
+                    return headers;
+                }
+            };
+            RetryPolicy policy = new DefaultRetryPolicy(Constants.NETCONN_TIMEOUT_VALUE, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+            postRequest.setRetryPolicy(policy);
+            queue.add(postRequest);
+        }
+        else
+            Toast.makeText(TopActivity.this, "Can't connect to the Internet", Toast.LENGTH_SHORT).show();
+
+        return retVal;
+    }
+
 }

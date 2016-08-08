@@ -53,13 +53,13 @@ public class AgreementActivity extends AppCompatActivity {
         // finally change the color
         // window.setStatusBarColor(this.getResources().getColor(R.color.colorPrimaryDark));
 
-        Log.i("** Token **", SingeltonDataHolder.getToken());
-        Log.i("** Email **", SingeltonDataHolder.getEmail());
-        Log.i("** First Name **", SingeltonDataHolder.getFirstName());
-        Log.i("** Last Name **", SingeltonDataHolder.getLastName());
-        Log.i("** Gender **", SingeltonDataHolder.getGender().toString());
-        Log.i("** Birth Yr **", SingeltonDataHolder.getBirthYear().toString());
-        Log.i("** Serial **", SingeltonDataHolder.getDeviceSerialNum());
+        Log.i("** Token **", SingletonDataHolder.getToken());
+        Log.i("** Email **", SingletonDataHolder.getEmail());
+        Log.i("** First Name **", SingletonDataHolder.getFirstName());
+        Log.i("** Last Name **", SingletonDataHolder.getLastName());
+        Log.i("** Gender **", SingletonDataHolder.getGender().toString());
+        Log.i("** Birth Yr **", SingletonDataHolder.getBirthYear().toString());
+        Log.i("** Serial **", SingletonDataHolder.getDeviceSerialNum());
 
         SpannableString ss = new SpannableString("I agree to EyeQue's Terms of Service and Privacy Policy");
         ClickableSpan clickableSpan1 = new ClickableSpan() {
@@ -150,16 +150,16 @@ public class AgreementActivity extends AppCompatActivity {
             final JSONObject finalParams = new JSONObject();
 
             try {
-                finalParams.put("token", SingeltonDataHolder.getToken());
-                params.put("email", SingeltonDataHolder.getEmail());
-                params.put("firstname", SingeltonDataHolder.getFirstName());
-                params.put("lastname", SingeltonDataHolder.getLastName());
+                finalParams.put("token", SingletonDataHolder.getToken());
+                params.put("email", SingletonDataHolder.getEmail());
+                params.put("firstname", SingletonDataHolder.getFirstName());
+                params.put("lastname", SingletonDataHolder.getLastName());
                 params.put("website_id", 1);
                 params.put("store_id", 1);
-                params.put("gender", SingeltonDataHolder.getGender());
-                params.put("dob", Integer.toString(SingeltonDataHolder.getBirthYear()) + "-01-01");
+                params.put("gender", SingletonDataHolder.getGender());
+                params.put("dob", Integer.toString(SingletonDataHolder.getBirthYear()) + "-01-01");
                 tmpParams.put("attribute_code", "device_number");
-                tmpParams.put("value", SingeltonDataHolder.getDeviceSerialNum());
+                tmpParams.put("value", SingletonDataHolder.getDeviceSerialNum());
                 attrArray.put(tmpParams);
                 params.put("custom_attributes", attrArray);
                 finalParams.put("customer", params);
@@ -198,7 +198,7 @@ public class AgreementActivity extends AppCompatActivity {
                 @Override
                 public Map<String, String> getHeaders() throws AuthFailureError {
                     Map<String, String> headers = new HashMap<>();
-                    String authString = "Bearer " + SingeltonDataHolder.getToken();
+                    String authString = "Bearer " + SingletonDataHolder.token;
                     headers.put("Content-Type", "application/json;charset=UTF-8");
                     headers.put("Authorization", authString);
                     Log.i("$$$---HEADER---$$$", headers.toString());

@@ -90,8 +90,8 @@ public class MainActivity extends Activity {
             case 3:
                 // minVal = Constants.MINVAL_DEVICE_5;
                 // maxVal = Constants.MAXVAL_DEVICE_5;
-                minVal = Constants.MIN_DISTANCE;
-                maxVal = Constants.MAX_DISTANCE - Constants.MIN_DISTANCE;
+                minVal = SingletonDataHolder.minDistance;
+                maxVal = SingletonDataHolder.maxDistance - SingletonDataHolder.minDistance;
                 longPressStep = 5;
                 break;
             case 4:

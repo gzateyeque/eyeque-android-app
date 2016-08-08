@@ -294,7 +294,7 @@ public class SmEmailRegActivity extends AppCompatActivity implements LoaderCallb
                     Log.i(TAG, response);
                     // Pass authentication
                     showProgress(false);
-                    SingeltonDataHolder.setEmail(sm_email);
+                    SingletonDataHolder.setEmail(sm_email);
                     Intent nameIntent = new Intent(getBaseContext(), NameActivity.class);
                     startActivity(nameIntent);
                     finish();

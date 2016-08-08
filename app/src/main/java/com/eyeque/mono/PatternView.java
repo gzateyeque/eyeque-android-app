@@ -97,27 +97,27 @@ public class PatternView extends View {
                 p.setColor(color);
                 p.setStrokeWidth(5);
                 // sqrHalfSize = 562;
-                sqrHalfSizeX = (int) (Constants.DEVICE_WIDTH * Constants.PHONE_PPI /2);
+                sqrHalfSizeX = (int) (SingletonDataHolder.deviceWidth * SingletonDataHolder.phonePpi /2);
                 sqrHalfSizeY = sqrHalfSizeX;
                 p.setPathEffect(new DashPathEffect(new float[] {10,20}, 0));
-                cv.drawRect(Constants.CENTER_X - sqrHalfSizeX, Constants.CENTER_Y - sqrHalfSizeY, Constants.CENTER_X + sqrHalfSizeX, Constants.CENTER_Y + sqrHalfSizeY, p);
+                cv.drawRect(SingletonDataHolder.centerX - sqrHalfSizeX, SingletonDataHolder.centerY - sqrHalfSizeY, SingletonDataHolder.centerX + sqrHalfSizeX, SingletonDataHolder.centerY + sqrHalfSizeY, p);
                 p.setColor(Color.BLACK);
                 p.setStrokeWidth(10);
-                cv.drawRect(Constants.CENTER_X - sqrHalfSizeX + 10, Constants.CENTER_Y - sqrHalfSizeY + 10, Constants.CENTER_X + sqrHalfSizeX - 10, Constants.CENTER_Y + sqrHalfSizeY - 10, p);
+                cv.drawRect(SingletonDataHolder.centerX - sqrHalfSizeX + 10, SingletonDataHolder.centerY - sqrHalfSizeY + 10, SingletonDataHolder.centerX + sqrHalfSizeX - 10, SingletonDataHolder.centerY + sqrHalfSizeY - 10, p);
                 break;
             case 3:
                 p.setColor(color);
                 p.setStrokeWidth(5);
                 // sqrHalfSize = 562;
-                sqrHalfSizeX = (int) (Constants.DEVICE_WIDTH * Constants.PHONE_PPI /2);
-                sqrHalfSizeY = (int) (Constants.DEVICE_HEIGHT * Constants.PHONE_PPI /2);
+                sqrHalfSizeX = (int) (SingletonDataHolder.deviceWidth * SingletonDataHolder.phonePpi /2);
+                sqrHalfSizeY = (int) (SingletonDataHolder.deviceHeight * SingletonDataHolder.phonePpi /2);
                 // Log.i("*******************", Integer.toString(sqrHalfSizeY));
                 p.setPathEffect(new DashPathEffect(new float[] {10,20}, 0));
-                // RectF r = new RectF(Constants.CENTER_X - sqrHalfSizeX, Constants.CENTER_Y - sqrHalfSizeX + 165,
-                        // Constants.CENTER_X + sqrHalfSizeX, Constants.CENTER_Y + sqrHalfSizeX - 165);
-                RectF r = new RectF(Constants.CENTER_X - sqrHalfSizeX, Constants.CENTER_Y - sqrHalfSizeY, Constants.CENTER_X + sqrHalfSizeX, Constants.CENTER_Y + sqrHalfSizeY);
+                // RectF r = new RectF(SingletonDataHolder.centerX - sqrHalfSizeX, SingletonDataHolder.centerY - sqrHalfSizeX + 165,
+                        // SingletonDataHolder.centerX + sqrHalfSizeX, SingletonDataHolder.centerY + sqrHalfSizeX - 165);
+                RectF r = new RectF(SingletonDataHolder.centerX - sqrHalfSizeX, SingletonDataHolder.centerY - sqrHalfSizeY, SingletonDataHolder.centerX + sqrHalfSizeX, SingletonDataHolder.centerY + sqrHalfSizeY);
                 cv.drawRoundRect(r, 60, 60, p);
-                // cv.drawRect(Constants.CENTER_X - sqrHalfSize, Constants.CENTER_Y - sqrHalfSize + 165, Constants.CENTER_X + sqrHalfSize, Constants.CENTER_Y + sqrHalfSize - 165, p);
+                // cv.drawRect(SingletonDataHolder.centerX - sqrHalfSize, SingletonDataHolder.centerY - sqrHalfSize + 165, SingletonDataHolder.centerX + sqrHalfSize, SingletonDataHolder.centerY + sqrHalfSize - 165, p);
                 p.setColor(Color.BLACK);
                 p.setStrokeWidth(10);
                 break;
@@ -125,7 +125,7 @@ public class PatternView extends View {
                 p.setColor(color);
                 p.setStrokeWidth(5);
                 sqrHalfSizeX = 562;
-                cv.drawRect(Constants.CENTER_X - sqrHalfSizeX, Constants.CENTER_Y - sqrHalfSizeX + 100, Constants.CENTER_X + sqrHalfSizeX, Constants.CENTER_Y + sqrHalfSizeX - 100, p);
+                cv.drawRect(SingletonDataHolder.centerX - sqrHalfSizeX, SingletonDataHolder.centerY - sqrHalfSizeX + 100, SingletonDataHolder.centerX + sqrHalfSizeX, SingletonDataHolder.centerY + sqrHalfSizeX - 100, p);
                 p.setColor(Color.BLACK);
                 p.setStrokeWidth(10);
                 break;
@@ -139,21 +139,21 @@ public class PatternView extends View {
 
             // p.setStrokeWidth(2);
             // cv.drawText("Please attach device here", 720-500, 520, p);
-            int fontSize = 72 * Constants.PHONE_PPI / 576;
+            int fontSize = 72 * SingletonDataHolder.phonePpi / 576;
             Typeface typeface = Typeface.create(Typeface.SANS_SERIF, Typeface.NORMAL);
             String text = "Please attach device here";
             p.setTypeface(typeface);
             p.setTextSize(fontSize);
-            p.setStrokeWidth(6 * Constants.PHONE_PPI / 576);
+            p.setStrokeWidth(6 * SingletonDataHolder.phonePpi / 576);
             float textWidth = p.measureText(text);
             // int xOffset = (int)((1440-textWidth)/2f) - (int)(fontSize/2f);
-            int xOffset = (int)(Constants.CENTER_X-(textWidth/2f));
-            cv.drawText(text, xOffset, Constants.CENTER_Y, p);
+            int xOffset = (int)(SingletonDataHolder.centerX-(textWidth/2f));
+            cv.drawText(text, xOffset, SingletonDataHolder.centerY, p);
         } else {
             if ((deviceId != 4 && pattern.getPattenIndex() > 0) || (deviceId == 4)) {
                 int angle = pattern.getRotateAngle();
                 cv.save();
-                cv.rotate(angle, Constants.CENTER_X, Constants.CENTER_Y);
+                cv.rotate(angle, SingletonDataHolder.centerX, SingletonDataHolder.centerY);
             } else {
                 cv.save();
                 cv.rotate(0);
@@ -176,7 +176,7 @@ public class PatternView extends View {
              }
              ***/
 
-            for (float ii = 150*Constants.PHONE_PPI/562; ii >= 0; ii -= 0.5) {
+            for (float ii = 150*SingletonDataHolder.phonePpi/562; ii >= 0; ii -= 0.5) {
                 // cv.save();
                 aniRadius = ii + 20;
                 rColor = 0.6 * 0.5 * (0.4 + ii / 125f) * (1.0 - 1.0 * (Math.cos((double) (2 * Constants.PI * (radiansToDraw + ii * ((1 - ii / 125f) * 0.005 + 0.015))))));
@@ -189,14 +189,14 @@ public class PatternView extends View {
 
                 if (deviceId >= 2 && deviceId != 4)
                     // cv.drawCircle(855, 520, ii, p);
-                    cv.drawCircle(pattern.getGreenStartX() - Constants.PHONE_PPI*100/562, Constants.CENTER_Y, ii, p);
+                    cv.drawCircle(pattern.getGreenStartX() - SingletonDataHolder.phonePpi*100/562, SingletonDataHolder.centerY, ii, p);
                 else
-                    cv.drawCircle(Constants.CENTER_X, Constants.CENTER_Y, ii, p);
+                    cv.drawCircle(SingletonDataHolder.centerX, SingletonDataHolder.centerY, ii, p);
             }
 
             p.setColor(Color.RED);
             if (deviceId == 2 || deviceId == 3) {
-                p.setStrokeWidth(Constants.LINE_WIDTH);
+                p.setStrokeWidth(SingletonDataHolder.lineWidth);
                 cv.drawLine(pattern.getRedStartX(), pattern.getRedStartY(),
                         pattern.getRedEndX(), pattern.getRedEndY(), p);
                 // cv.drawLine(pattern.getRedStartX() + 36, pattern.getRedStartY() + 148,
@@ -220,7 +220,7 @@ public class PatternView extends View {
                 if (pattern.getGreenStartX() == pattern.getRedStartX()
                     && pattern.getGreenStartY() == pattern.getRedStartY())
                     p.setColor(yellowColor);
-                p.setStrokeWidth(Constants.LINE_WIDTH);
+                p.setStrokeWidth(SingletonDataHolder.lineWidth);
                 cv.drawLine(pattern.getGreenStartX(), pattern.getGreenStartY(),
                         pattern.getGreenEndX(), pattern.getGreenEndY(), p);
                 // cv.drawLine(pattern.getGreenStartX() - 36, pattern.getGreenStartY(),
