@@ -729,6 +729,9 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                     //Parse the JOSN response
                     try {
                         JSONObject jsonResponse = new JSONObject(response);
+                        SingletonDataHolder.userId = Integer.parseInt(jsonResponse.getString("id"));
+                        Log.i("*** customer id ***", Integer.toString(SingletonDataHolder.userId));
+
                         if (jsonResponse.has("custom_attributes")) {
                             JSONArray jsonCustArrArray = jsonResponse.getJSONArray("custom_attributes");
 

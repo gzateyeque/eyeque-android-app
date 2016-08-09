@@ -21,11 +21,10 @@ public class Constants {
     // public final static String LocalRestfulBaseURL = "http://192.168.110.85:8080";
     public final static String AccessToken = "e46cghc52pqd8kvgqmv8ovsi1ufcfetg";
     public static String RestfulBaseURL = AwsEc2RestfulBaseURL;
-    // public static String apiRestfulBaseURL = "http://api.eyeque.com/";
-    // public static String ContentRestFulBaseURL = "http://api.eyeque.com:8080/";
-    // public final static String AccessToken = "472h0onmgk3o18bn8kj629m8s2tke6k0";
-    public static String apiRestfulBaseURL = "http://54.218.73.222/";
+
+    public static String ApiRestfulBaseURL = "http://54.218.73.222/";
     public static String ContentRestFulBaseURL = "http://54.218.73.222:8080/";
+    public static String UserdataRestfulBaseURL = "http://54.218.73.222:8987/";
 
     // Line distance scale parameters
     public static final int MINVAL_DEVICE_1 = 270;
@@ -41,24 +40,23 @@ public class Constants {
 
     // Content URL
     public static final String UrlBanner = ContentRestFulBaseURL + "banner";
-    // public static final String UrlYoutube = "http://54.201.220.133:8080/tutorial_video/index.html";
-    public static final String UrlYoutube = "http://54.218.73.222:8080/tutorial_video/index.html";
+    public static final String UrlYoutube = ContentRestFulBaseURL + "tutorial_video/index.html";
     public static final String UrlTermsOfService = ContentRestFulBaseURL + "user_agreement/terms";
     public static final String UrlPrivacyPolicy = ContentRestFulBaseURL + "user_agreement/policy";
-    public static final String UrlBuyDevice = apiRestfulBaseURL + "eyeque-pocket-refractor.html";
-    public static final String UrlTrackingDataOd = ContentRestFulBaseURL + "userdata/index.html?hash=default&column=sphEOD";
-    public static final String UrlTrackingDataOs = ContentRestFulBaseURL + "userdata/index.html?hash=default&column=sphEOS";
 
-    // Restful API URL
-    // public static final String UrlSignIn = "http://54.201.218.215/index.php/rest/V1/integration/customer/token";
-    public static final String UrlSignIn = apiRestfulBaseURL + "index.php/rest/V1/integration/customer/token";
-    public static final String UrlSignUp = apiRestfulBaseURL + "index.php/rest/V1/customers";
-    public static final String UrlUserProfile = apiRestfulBaseURL + "index.php/rest/V1/customers/me";
-    public static final String UrlForgotPassword = apiRestfulBaseURL + "index.php/rest/V1/customers/password";
-    public static final String UrlCheckSerialNum = apiRestfulBaseURL + "index.php/rest/V1/sncheck/check";
-    public static final String UrlVerifySocMediaLogin = apiRestfulBaseURL + "index.php/rest/V1/socialcustomers/validate";
-    public static final String UrlSocMediaSignUp = apiRestfulBaseURL + "index.php/rest/V1/socialcustomers";
-    public static final String UrlPhoneConfig = apiRestfulBaseURL + "index.php/rest/eyecloud/api/V2/devices";
+    // Restful API Call URL
+    public static final String UrlBuyDevice = ApiRestfulBaseURL + "eyeque-pocket-refractor.html";
+    public static final String UrlTrackingDataOd = UserdataRestfulBaseURL + "index.html?hash=default&column=sphEOD";
+    public static final String UrlTrackingDataOs = UserdataRestfulBaseURL + "index.html?hash=default&column=sphEOS";
+    public static final String UrlSignIn = ApiRestfulBaseURL + "index.php/rest/V1/integration/customer/token";
+    public static final String UrlSignUp = ApiRestfulBaseURL + "index.php/rest/V1/customers";
+    public static final String UrlUserProfile = ApiRestfulBaseURL + "index.php/rest/V1/customers/me";
+    public static final String UrlForgotPassword = ApiRestfulBaseURL + "index.php/rest/V1/customers/password";
+    public static final String UrlCheckSerialNum = ApiRestfulBaseURL + "index.php/rest/V1/sncheck/check";
+    public static final String UrlVerifySocMediaLogin = ApiRestfulBaseURL + "index.php/rest/V1/socialcustomers/validate";
+    public static final String UrlSocMediaSignUp = ApiRestfulBaseURL + "index.php/rest/V1/socialcustomers";
+    public static final String UrlPhoneConfig = ApiRestfulBaseURL + "index.php/rest/eyecloud/api/V2/devices";
+    public static final String UrlUploadTest = ApiRestfulBaseURL + "index.php/rest/eyecloud/api/V2/tests";
 
     // Database parameters
     public static final String DB_NAME = "mono.db";

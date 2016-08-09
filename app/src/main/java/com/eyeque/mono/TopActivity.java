@@ -44,7 +44,7 @@ public class TopActivity extends AppCompatActivity
 
     private CoordinatorLayout coordinatorLayout;
     private static final String TAG = "Home";
-    private static int retVal = -1;
+    private static boolean checkDeviceCompatibility = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -109,7 +109,7 @@ public class TopActivity extends AppCompatActivity
         // bottomBar.setActiveTabColor("#C2185B");
         bottomBar.setActiveTabColor("#046EEA");
         selectMenuItem(R.id.home_item);
-
+        CheckPhoneCompatibility();
 
         // ft.add(R.id.frame_container, new DashboardFragment(), "dashboard");
         // alternatively add it with a tag
@@ -137,10 +137,16 @@ public class TopActivity extends AppCompatActivity
                 fragmentClass = DashboardFragment.class;
                 break;
             case R.id.test_item:
+                if (checkDeviceCompatibility)
+                    fragmentClass = AttachDeviceFragment.class;
+                else
+                    fragmentClass = Test2Fragment.class;
+                /***
                 if (SingletonDataHolder.phoneType == "Galaxy 6")
                     fragmentClass = AttachDeviceFragment.class;
                 else
                     fragmentClass = Test2Fragment.class;
+                 ***/
                 break;
             case R.id.account_item:
                 fragmentClass = SettingFragment.class;
@@ -173,8 +179,9 @@ public class TopActivity extends AppCompatActivity
     @Override
     public void onSettingFragmentInteraction(Uri uri) {}
 
-    private int CheckPhoneCompatibility(String phoneBrand, String phoneModel) {
+    private void CheckPhoneCompatibility() {
 
+        checkDeviceCompatibility = false;
         NetConnection conn = new NetConnection();
         if (conn.isConnected(getApplicationContext())) {
 
@@ -186,7 +193,7 @@ public class TopActivity extends AppCompatActivity
             final String url = Constants.UrlPhoneConfig;
             final JSONObject params = new JSONObject();
             try {
-                params.put("name", "Device5");
+                params.put("name", SingletonDataHolder.devicName);
                 params.put("phoneBrand", SingletonDataHolder.phoneBrand);
                 params.put("phoneModel", SingletonDataHolder.phoneModel);
                 params.put("phoneType", SingletonDataHolder.phoneType);
@@ -199,10 +206,10 @@ public class TopActivity extends AppCompatActivity
                 public void onResponse(String string) {
                     // Parse serial check response
                     try {
+                        Log.i("*** JSON Device ***", string);
                         JSONObject jsonObj = new JSONObject(string);
-                        int ret_code = jsonObj.getInt("return_code");
-
-                        retVal = 0;
+                        checkDeviceCompatibility = true;
+                        SingletonDataHolder.phoneType = jsonObj.getString("phone_type");
                     } catch (JSONException e) {
                         e.printStackTrace();
                         Toast.makeText(TopActivity.this, "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
@@ -212,7 +219,7 @@ public class TopActivity extends AppCompatActivity
                 @Override
                 public void onErrorResponse(VolleyError error) {
                     Log.d("Error.Response", error.toString());
-                    Toast.makeText(TopActivity.this, "Validation failed", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(TopActivity.this, "Phone incompatible", Toast.LENGTH_SHORT).show();
                 }
             }) {
                 @Override
@@ -241,9 +248,6 @@ public class TopActivity extends AppCompatActivity
             queue.add(postRequest);
         }
         else
-            Toast.makeText(TopActivity.this, "Can't connect to the Internet", Toast.LENGTH_SHORT).show();
-
-        return retVal;
+            Toast.makeText(TopActivity.this, "Please connect to the Internet", Toast.LENGTH_SHORT).show();
     }
-
 }

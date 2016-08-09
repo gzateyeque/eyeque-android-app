@@ -14,6 +14,7 @@ public class SingletonDataHolder {
     // Session value set
     public static int loginType = 1;
     public static String token = "";
+    public static int userId = 0;
     public static String email = "";
     public static String firstName = "";
     public static String lastName = "";
@@ -40,13 +41,13 @@ public class SingletonDataHolder {
     public static void setDeviceSerialNum(String val) { deviceSerialNum = val; }
 
     // Phone parameters
-    public static String phoneManufacturer = "samsung";
-    public static String phoneBrand = "samsung";
-    public static String phoneProduct = "heroltexx";
-    public static String phoneModel = "SM-G930F";
-    public static String phoneType = "Galaxy 6";
+    public static String phoneManufacturer = "";
+    public static String phoneBrand = "";
+    public static String phoneProduct = "";
+    public static String phoneModel = "";
+    public static String phoneType = "";
     public static int phonePpi = 577;
-    public static String devicName = "Device 5";
+    public static String devicName = "Device5";
     public static double deviceWidth = 2.0f;
     public static double deviceHeight = 1.375f;
     // Pattern drawing configuration

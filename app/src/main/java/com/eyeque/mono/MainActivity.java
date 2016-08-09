@@ -26,8 +26,22 @@ import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.media.MediaPlayer;
 import android.net.Uri;
+import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.RetryPolicy;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.json.JSONArray;
 import java.text.DecimalFormat;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 
 public class MainActivity extends Activity {
@@ -228,13 +242,19 @@ public class MainActivity extends Activity {
             public void onClick(View v) {
                 Log.i(TAG, "Next Button clicked.");
 
+                int patternIndex = patternView.getPatternInstance().getPattenIndex();
+                if (pattern.isAllPatternComplete() && patternIndex == 0) {
+                    calcResult();
+                    return;
+                }
+
                 if (prevStopValue == maxVal)
                     return;
 
                 if (mp.isPlaying()) {
                     mp.stop();
                 }
-                int patternIndex = patternView.getPatternInstance().getPattenIndex();
+                // int patternIndex = patternView.getPatternInstance().getPattenIndex();
                 try {
                     mp.reset();
                     // int patternIndex = patternView.getPatternInstance().getPattenIndex();
@@ -554,108 +574,182 @@ public class MainActivity extends Activity {
     }
 
     public void calcResult() {
-        if (pattern.isAllPatternsComplete()) {
-            double[] results = pattern.calculateResults();
-            Intent resultIntent = new Intent(getBaseContext(), ResultActivity.class);
-            resultIntent.putExtra("subjectId", subjectId);
-            resultIntent.putExtra("deviceId", deviceId);
-            resultIntent.putExtra("serverId", serverId);
-            resultIntent.putExtra("ODS", results[0]);
-            resultIntent.putExtra("ODC", results[1]);
-            resultIntent.putExtra("ODA", results[2]);
-            resultIntent.putExtra("ODE", results[3]);
-            resultIntent.putExtra("ODR", results[4]);
-            resultIntent.putExtra("OSS", results[5]);
-            resultIntent.putExtra("OSC", results[6]);
-            resultIntent.putExtra("OSA", results[7]);
-            resultIntent.putExtra("OSE", results[8]);
-            resultIntent.putExtra("OSR", results[9]);
 
-            double[] patternCalcAngleList = pattern.getPatternCalcAngleList();
-            double[] leftPowerList = pattern.getLeftPowerValueList();
-            double[] rightPowerList = pattern.getRightPowerValueList();
-            int[] leftDistList = pattern.getLeftDistValueList();
-            int[] rightDistList = pattern.getRightDistValueList();
+        NetConnection conn = new NetConnection();
+        if (conn.isConnected(getApplicationContext())) {
+            RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
+            final String url = Constants.UrlUploadTest;
 
-            resultIntent.putExtra("Angle-1", patternCalcAngleList[0]);
-            resultIntent.putExtra("Angle-2", patternCalcAngleList[1]);
-            resultIntent.putExtra("Angle-3", patternCalcAngleList[2]);
-            resultIntent.putExtra("Angle-4", patternCalcAngleList[3]);
-            resultIntent.putExtra("Angle-5", patternCalcAngleList[4]);
-            resultIntent.putExtra("Angle-6", patternCalcAngleList[5]);
+            final JSONObject params = new JSONObject();
+            final JSONObject finalParam = new JSONObject();
+            try {
+                params.put("binoOp", "No binocular");
+                params.put("testType", "Full Refraction");
+                if (deviceId == 2)
+                    params.put("deviceName", "Device 3");
+                else if (deviceId == 3)
+                    params.put("deviceName", "Device5");
+                else
+                    params.put("deviceName", "Device 1");
+                params.put("phoneType", SingletonDataHolder.phoneType);
+                params.put("accomPattern", "AP5G");
+                params.put("screenProtect", "false");
+                params.put("wearGlasses", "false");
+                params.put("subjectID", SingletonDataHolder.userId);
+                params.put("lineLength", SingletonDataHolder.lineLength);
+                params.put("lineWidth", SingletonDataHolder.lineWidth);
 
-            if (deviceId >= 2) {
-                resultIntent.putExtra("Angle-7", patternCalcAngleList[6]);
-                resultIntent.putExtra("Angle-8", patternCalcAngleList[7]);
-                resultIntent.putExtra("Angle-9", patternCalcAngleList[8]);
+                // if (serverId > 0) {
+                JSONArray mDataArr = new JSONArray();
+                for (int i = 0; i < 9; i++) {
+                    JSONObject mDataObj = new JSONObject();
+                    mDataObj.put("subjectID", SingletonDataHolder.userId);
+                    mDataObj.put("angle", pattern.getPatternCalcAngleList()[i]);
+                    mDataObj.put("distance", pattern.getRightDistValueList()[i]);
+                    mDataObj.put("rightEye", 1);
+                    mDataObj.put("power", 0);
+                    mDataObj.put("duration", 23.2);
+                    mDataArr.put(mDataObj);
+                }
+                for (int i = 0; i < 9; i++) {
+                    JSONObject mDataObj = new JSONObject();
+                    mDataObj.put("subjectID", SingletonDataHolder.userId);
+                    mDataObj.put("angle", pattern.getPatternCalcAngleList()[i]);
+                    mDataObj.put("distance", pattern.getLeftDistValueList()[i]);
+                    mDataObj.put("rightEye", 0);
+                    mDataObj.put("power", 0);
+                    mDataObj.put("duration", 23.2);
+                    mDataArr.put(mDataObj);
+                }
+                params.put("measures", mDataArr);
+                finalParam.put("testdata", params);
+                // }
+            } catch (JSONException e) {
+                e.printStackTrace();
             }
 
-            resultIntent.putExtra("L-Power-1", leftPowerList[0]);
-            resultIntent.putExtra("L-Power-2", leftPowerList[1]);
-            resultIntent.putExtra("L-Power-3", leftPowerList[2]);
-            resultIntent.putExtra("L-Power-4", leftPowerList[3]);
-            resultIntent.putExtra("L-Power-5", leftPowerList[4]);
-            resultIntent.putExtra("L-Power-6", leftPowerList[5]);
 
-            if (deviceId >= 2) {
-                resultIntent.putExtra("L-Power-7", leftPowerList[6]);
-                resultIntent.putExtra("L-Power-8", leftPowerList[7]);
-                resultIntent.putExtra("L-Power-9", leftPowerList[8]);
-            }
+            StringRequest postRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+                    Log.i(TAG, response);
+                    Intent resultIntent = new Intent(getBaseContext(), ResultActivity.class);
+                    startActivity(resultIntent);
+                    finish();
+                    // Add Intent content
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Toast.makeText(MainActivity.this,
+                            "Can't connect to the server", Toast.LENGTH_SHORT).show();
+                    Log.d("Error.Response", error.toString());
+                }
+            }) {
+                @Override
+                public byte[] getBody() throws AuthFailureError {
+                    Log.i("$$$--UPLOAD JSON---$$$", finalParam.toString());
+                    return finalParam.toString().getBytes();
+                }
 
-            resultIntent.putExtra("R-Power-1", rightPowerList[0]);
-            resultIntent.putExtra("R-Power-2", rightPowerList[1]);
-            resultIntent.putExtra("R-Power-3", rightPowerList[2]);
-            resultIntent.putExtra("R-Power-4", rightPowerList[3]);
-            resultIntent.putExtra("R-Power-5", rightPowerList[4]);
-            resultIntent.putExtra("R-Power-6", rightPowerList[5]);
+                @Override
+                public String getBodyContentType() {
+                    return "application/json";
+                }
 
-            if (deviceId >= 2) {
-                resultIntent.putExtra("R-Power-7", rightPowerList[6]);
-                resultIntent.putExtra("R-Power-8", rightPowerList[7]);
-                resultIntent.putExtra("R-Power-9", rightPowerList[8]);
-            }
+                @Override
+                public Map<String, String> getHeaders() throws AuthFailureError {
+                    Map<String, String> headers = new HashMap<>();
+                    String authString = "Bearer " + SingletonDataHolder.getToken();
+                    headers.put("Content-Type", "application/json;charset=UTF-8");
+                    headers.put("Authorization", authString);
+                    Log.i("$$$---HEADER---$$$", headers.toString());
+                    return headers;
+                }
+            };
+            RetryPolicy policy = new DefaultRetryPolicy(Constants.NETCONN_TIMEOUT_VALUE, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+            postRequest.setRetryPolicy(policy);
+            queue.add(postRequest);
 
-            resultIntent.putExtra("L-Dist-1", leftDistList[0]);
-            resultIntent.putExtra("L-Dist-2", leftDistList[1]);
-            resultIntent.putExtra("L-Dist-3", leftDistList[2]);
-            resultIntent.putExtra("L-Dist-4", leftDistList[3]);
-            resultIntent.putExtra("L-Dist-5", leftDistList[4]);
-            resultIntent.putExtra("L-Dist-6", leftDistList[5]);
-
-            if (deviceId >= 2) {
-                resultIntent.putExtra("L-Dist-7", leftDistList[6]);
-                resultIntent.putExtra("L-Dist-8", leftDistList[7]);
-                resultIntent.putExtra("L-Dist-9", leftDistList[8]);
-            }
-
-            resultIntent.putExtra("R-Dist-1", rightDistList[0]);
-            resultIntent.putExtra("R-Dist-2", rightDistList[1]);
-            resultIntent.putExtra("R-Dist-3", rightDistList[2]);
-            resultIntent.putExtra("R-Dist-4", rightDistList[3]);
-            resultIntent.putExtra("R-Dist-5", rightDistList[4]);
-            resultIntent.putExtra("R-Dist-6", rightDistList[5]);
-
-            if (deviceId >= 2) {
-                resultIntent.putExtra("R-Dist-7", rightDistList[6]);
-                resultIntent.putExtra("R-Dist-8", rightDistList[7]);
-                resultIntent.putExtra("R-Dist-9", rightDistList[8]);
-            }
-
-            Log.i("MA-OD Spherical:  ", Double.toString(results[0]));
-            Log.i("MA-OD Cylindrical:  ", Double.toString(results[1]));
-            Log.i("MA-OD Axis:  ", Double.toString(results[2]));
-            Log.i("MA-OD SE:  ", Double.toString(results[3]));
-            Log.i("MA-OS Spherical:  ", Double.toString(results[5]));
-            Log.i("MA-OS Cylindrical:  ", Double.toString(results[6]));
-            Log.i("MA-OS Axis:  ", Double.toString(results[7]));
-            Log.i("MA-OS SE:  ", Double.toString(results[8]));
-
-            startActivity(resultIntent);
-            finish();
         } else
             Toast.makeText(MainActivity.this,
-                    "Need to complete all patterns", Toast.LENGTH_SHORT).show();
+                    "Please connect to the Internet to continue", Toast.LENGTH_SHORT).show();
+
+        /***
+        double[] results = pattern.calculateResults();
+        Intent resultIntent = new Intent(getBaseContext(), ResultActivity.class);
+        resultIntent.putExtra("subjectId", subjectId);
+        resultIntent.putExtra("deviceId", deviceId);
+        resultIntent.putExtra("serverId", serverId);
+        resultIntent.putExtra("ODS", results[0]);
+        resultIntent.putExtra("ODC", results[1]);
+        resultIntent.putExtra("ODA", results[2]);
+        resultIntent.putExtra("ODE", results[3]);
+        resultIntent.putExtra("ODR", results[4]);
+        resultIntent.putExtra("OSS", results[5]);
+        resultIntent.putExtra("OSC", results[6]);
+        resultIntent.putExtra("OSA", results[7]);
+        resultIntent.putExtra("OSE", results[8]);
+        resultIntent.putExtra("OSR", results[9]);
+
+        double[] patternCalcAngleList = pattern.getPatternCalcAngleList();
+        double[] leftPowerList = pattern.getLeftPowerValueList();
+        double[] rightPowerList = pattern.getRightPowerValueList();
+        int[] leftDistList = pattern.getLeftDistValueList();
+        int[] rightDistList = pattern.getRightDistValueList();
+
+        resultIntent.putExtra("Angle-1", patternCalcAngleList[0]);
+        resultIntent.putExtra("Angle-2", patternCalcAngleList[1]);
+        resultIntent.putExtra("Angle-3", patternCalcAngleList[2]);
+        resultIntent.putExtra("Angle-4", patternCalcAngleList[3]);
+        resultIntent.putExtra("Angle-5", patternCalcAngleList[4]);
+        resultIntent.putExtra("Angle-6", patternCalcAngleList[5]);
+
+        if (deviceId >= 2) {
+            resultIntent.putExtra("Angle-7", patternCalcAngleList[6]);
+            resultIntent.putExtra("Angle-8", patternCalcAngleList[7]);
+            resultIntent.putExtra("Angle-9", patternCalcAngleList[8]);
+        }
+
+        resultIntent.putExtra("L-Dist-1", leftDistList[0]);
+        resultIntent.putExtra("L-Dist-2", leftDistList[1]);
+        resultIntent.putExtra("L-Dist-3", leftDistList[2]);
+        resultIntent.putExtra("L-Dist-4", leftDistList[3]);
+        resultIntent.putExtra("L-Dist-5", leftDistList[4]);
+        resultIntent.putExtra("L-Dist-6", leftDistList[5]);
+
+        if (deviceId >= 2) {
+            resultIntent.putExtra("L-Dist-7", leftDistList[6]);
+            resultIntent.putExtra("L-Dist-8", leftDistList[7]);
+            resultIntent.putExtra("L-Dist-9", leftDistList[8]);
+        }
+
+        resultIntent.putExtra("R-Dist-1", rightDistList[0]);
+        resultIntent.putExtra("R-Dist-2", rightDistList[1]);
+        resultIntent.putExtra("R-Dist-3", rightDistList[2]);
+        resultIntent.putExtra("R-Dist-4", rightDistList[3]);
+        resultIntent.putExtra("R-Dist-5", rightDistList[4]);
+        resultIntent.putExtra("R-Dist-6", rightDistList[5]);
+
+        if (deviceId >= 2) {
+            resultIntent.putExtra("R-Dist-7", rightDistList[6]);
+            resultIntent.putExtra("R-Dist-8", rightDistList[7]);
+            resultIntent.putExtra("R-Dist-9", rightDistList[8]);
+        }
+
+        Log.i("MA-OD Spherical:  ", Double.toString(results[0]));
+        Log.i("MA-OD Cylindrical:  ", Double.toString(results[1]));
+        Log.i("MA-OD Axis:  ", Double.toString(results[2]));
+        Log.i("MA-OD SE:  ", Double.toString(results[3]));
+        Log.i("MA-OS Spherical:  ", Double.toString(results[5]));
+        Log.i("MA-OS Cylindrical:  ", Double.toString(results[6]));
+        Log.i("MA-OS Axis:  ", Double.toString(results[7]));
+        Log.i("MA-OS SE:  ", Double.toString(results[8]));
+
+        startActivity(resultIntent);
+        finish();
+        ***/
+
     }
 
     public void closerLongPressedAction() {
