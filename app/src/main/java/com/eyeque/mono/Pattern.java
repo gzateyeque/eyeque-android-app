@@ -68,6 +68,10 @@ public class Pattern {
     private static int[] patternAngleList;
     private static double[] patternCalcAngleList;
     private static int[] patternRotateAngleList;
+    private static long patternStartTs;
+    private static long patternEndTs;
+    public static double[] rightDurationList = {10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0};
+    public static double[] leftDurationList = {10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0};
     private static double[] rightPowerValueList = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
     private static double[] leftPowerValueList = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
     private static int[] rightDistValueList = {0, 0, 0, 0, 0, 0, 0, 0, 0};
@@ -287,10 +291,13 @@ public class Pattern {
     }
 
     public void start() {
+
         patternIndex = 0;
         whichPattern = 0;
         whichEye = true;
         completeAllPatterns = false;
+
+        patternStartTs = System.currentTimeMillis()/1000;
 
         // Initialize the base parameters
         switch (deviceId) {
@@ -359,16 +366,23 @@ public class Pattern {
 
     public void nextPattern() {
 
-        // Save the last power value
+        patternEndTs = System.currentTimeMillis()/1000;
         if (whichEye) {
             rightPowerValueList[patternIndex] = powerValue;
             rightDistValueList[patternIndex] = getDistance();
+            rightDurationList[patternIndex] = patternEndTs - patternStartTs;
         }
         else {
             leftPowerValueList[patternIndex] = powerValue;
             leftDistValueList[patternIndex] = getDistance();
+            leftDurationList[patternIndex] = patternEndTs - patternStartTs;
         }
 
+        patternStartTs = patternEndTs;
+        for (int i = 0; i < 9; i++)
+            Log.i("**** Right Duration ***", Integer.toString((int) rightDurationList[i]));
+        for (int i = 0; i < 9; i++)
+            Log.i("**** Left Duration ***", Integer.toString((int) leftDurationList[i]));
         patternIndex++;
         whichPattern++;
         if (patternIndex > numOfPattern - 1) {

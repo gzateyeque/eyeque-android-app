@@ -42,12 +42,12 @@ public class ResultActivity extends Activity {
     private static double odSph;
     private static double odCyl;
     private static double odAxis;
-    private static double odSe;
+    private static String odSe;
     private static double odRmse;
     private static double osSph;
     private static double osCyl;
     private static double osAxis;
-    private static double osSe;
+    private static String osSe;
     private static double osRmse;
 
     private static double[] angleList = {0, 0, 0, 0, 0, 0, 0, 0, 0};
@@ -89,22 +89,21 @@ public class ResultActivity extends Activity {
         odSph = getIntent().getDoubleExtra("ODS", 0.00);
         odCyl = getIntent().getDoubleExtra("ODC", 0.00);
         odAxis = getIntent().getDoubleExtra("ODA", 0.00);
-        odSe = getIntent().getDoubleExtra("ODE", 0.00);
+        odSe = getIntent().getStringExtra("ODE");
         odRmse = getIntent().getDoubleExtra("ODR", 0.00);
 
         osSph = getIntent().getDoubleExtra("OSS", 0.00);
         osCyl = getIntent().getDoubleExtra("OSC", 0.00);
         osAxis = getIntent().getDoubleExtra("OSA", 0.00);
-        osSe = getIntent().getDoubleExtra("OSE", 0.00);
+        osSe = getIntent().getStringExtra("OSE");
         osRmse = getIntent().getDoubleExtra("OSR", 0.00);
 
         Button uploadButton = (Button) findViewById(R.id.uploadButton);
-        final TextView odSphTextView = (TextView) findViewById(R.id.odSphTextView);
-        final TextView odCylTextView = (TextView) findViewById(R.id.odCylTextView);
-        final TextView odAxisTextView = (TextView) findViewById(R.id.odAxisTextView);
-        final TextView osSphTextView = (TextView) findViewById(R.id.osSphTextView);
-        final TextView osCylTextView = (TextView) findViewById(R.id.osCylTextView);
-        final TextView osAxisTextView = (TextView) findViewById(R.id.osAxisTextView);
+        final TextView odSpheTextView = (TextView) findViewById(R.id.odSpheTextView);
+        final TextView osSpheTextView = (TextView) findViewById(R.id.odSpheTextView);
+
+        odSpheTextView.setText(odSe);
+        osSpheTextView.setText(osSe);
 
         // odSphTextView.setText(String.format("%.2f", odSph));
         // odCylTextView.setText(String.format("%.2f", odCyl));
