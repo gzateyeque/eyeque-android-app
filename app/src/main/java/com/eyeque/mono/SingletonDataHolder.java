@@ -21,24 +21,26 @@ public class SingletonDataHolder {
     public static Integer gender = 1;
     public static Integer birthYear = Calendar.getInstance().get(Calendar.YEAR) - 20;
     public static String deviceSerialNum = "";
+    public static int screenProtect = 0;
+    public static int wearGlasses = 0;
 
     // Session method
-    public static int getLoginType() { return loginType; }
-    public static void setLoginType(int val) { loginType = val; }
-    public static String getToken() { return token; }
-    public static void setToken(String val) { token = val; }
-    public static String getEmail() { return email; }
-    public static void setEmail(String val) { email = val; }
-    public static String getFirstName() { return firstName; }
-    public static void setFirstName(String val) { firstName = val; }
-    public static String getLastName() { return lastName; }
-    public static void setLastName(String val) { lastName = val; }
-    public static Integer getGender() { return gender; }
-    public static void setGender(Integer val) { gender = val; }
-    public static Integer getBirthYear() { return birthYear; }
-    public static void setBirthYear(Integer val) { birthYear = val; }
-    public static String getDeviceSerialNum() { return deviceSerialNum; }
-    public static void setDeviceSerialNum(String val) { deviceSerialNum = val; }
+    // public static int getLoginType() { return loginType; }
+    // public static void setLoginType(int val) { loginType = val; }
+    // public static String getToken() { return token; }
+    // public static void setToken(String val) { token = val; }
+    // public static String getEmail() { return email; }
+    // public static void setEmail(String val) { email = val; }
+    // public static String getFirstName() { return firstName; }
+    // public static void setFirstName(String val) { firstName = val; }
+    // public static String getLastName() { return lastName; }
+    // public static void setLastName(String val) { lastName = val; }
+    // public static Integer getGender() { return gender; }
+    // public static void setGender(Integer val) { gender = val; }
+    // public static Integer getBirthYear() { return birthYear; }
+    // public static void setBirthYear(Integer val) { birthYear = val; }
+    // public static String getDeviceSerialNum() { return deviceSerialNum; }
+    // public static void setDeviceSerialNum(String val) { deviceSerialNum = val; }
 
     // Phone parameters
     public static String phoneManufacturer = "";
@@ -109,7 +111,6 @@ public class SingletonDataHolder {
      public static double SphericalStep1 = 1.276384330E-01*577/PHONE_PPI;
      public static double SphericalStep2 = 6.454937531E-05*(577/PHONE_PPI)*(577/PHONE_PPI);
 
-
      // Phone profile for Galaxy 5
      public static String PHONE_BRAND = "Samsung";      // Need to add it to database
      public static String PHONE_MODEL = "SM-G930F";     // Need to add it to database
@@ -138,7 +139,6 @@ public class SingletonDataHolder {
      public static double SphericalStep0 = 1.428405590E-01*577/PHONE_PPI;
      public static double SphericalStep1 = 1.276384330E-01*577/PHONE_PPI;
      public static double SphericalStep2 = 6.454937531E-05*(577/PHONE_PPI)*(577/PHONE_PPI);
-
 
      // Phone profile for Nexus 6P
      public static String PHONE_BRAND = "Huawei";      // Need to add it to database

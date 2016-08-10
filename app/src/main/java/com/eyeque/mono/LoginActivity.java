@@ -571,11 +571,11 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                     // Log.d(TAG, tok.getUserId());
                     // Pass authentication
                     response = response.replace("\"", "");
-                    SingletonDataHolder.setToken(response);
+                    SingletonDataHolder.token = response;
                     if (loginType != 1)
-                        SingletonDataHolder.setEmail(socialMediaEmail);
+                        SingletonDataHolder.email = socialMediaEmail;
                     else
-                        SingletonDataHolder.setEmail(gEmail);
+                        SingletonDataHolder.email = gEmail;
                     CheckOnboard();
                 }
             }, new Response.ErrorListener() {
@@ -660,9 +660,9 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                     // Pass authentication
                     showProgress(false);
                     if (loginType != 1)
-                        SingletonDataHolder.setEmail(socialMediaEmail);
+                        SingletonDataHolder.email = socialMediaEmail;
                     else
-                        SingletonDataHolder.setEmail(gEmail);
+                        SingletonDataHolder.email = gEmail;
 
                     if (signUpType == 2) {
                         SignIn(socialMediaId, socialMediaTok);
@@ -802,7 +802,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 @Override
                 public Map<String, String> getHeaders() throws AuthFailureError {
                     Map<String, String> headers = new HashMap<>();
-                    String authStr = "Bearer " + SingletonDataHolder.getToken();
+                    String authStr = "Bearer " + SingletonDataHolder.token;
                     headers.put("Content-Type", "application/json;charset=UTF-8");
                     headers.put("Authorization", authStr);
                     return headers;

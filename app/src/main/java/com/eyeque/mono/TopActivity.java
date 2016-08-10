@@ -196,7 +196,7 @@ public class TopActivity extends AppCompatActivity
                 params.put("name", SingletonDataHolder.devicName);
                 params.put("phoneBrand", SingletonDataHolder.phoneBrand);
                 params.put("phoneModel", SingletonDataHolder.phoneModel);
-                params.put("phoneType", SingletonDataHolder.phoneType);
+                params.put("phoneType", "");
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -236,7 +236,7 @@ public class TopActivity extends AppCompatActivity
                 @Override
                 public Map<String, String> getHeaders() throws AuthFailureError {
                     Map<String, String> headers = new HashMap<>();
-                    String authString = "Bearer " + SingletonDataHolder.getToken();
+                    String authString = "Bearer " + SingletonDataHolder.token;
                     headers.put("Content-Type", "application/json;charset=UTF-8");
                     headers.put("Authorization", authString);
                     Log.i("$$$---HEADER---$$$", headers.toString());

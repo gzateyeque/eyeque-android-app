@@ -593,8 +593,8 @@ public class MainActivity extends Activity {
                     params.put("deviceName", "Device 1");
                 params.put("phoneType", SingletonDataHolder.phoneType);
                 params.put("accomPattern", "AP5G");
-                params.put("screenProtect", "false");
-                params.put("wearGlasses", "false");
+                params.put("screenProtect", SingletonDataHolder.screenProtect);
+                params.put("wearGlasses", SingletonDataHolder.wearGlasses);
                 params.put("subjectID", SingletonDataHolder.userId);
                 params.put("lineLength", SingletonDataHolder.lineLength);
                 params.put("lineWidth", SingletonDataHolder.lineWidth);
@@ -608,7 +608,7 @@ public class MainActivity extends Activity {
                     mDataObj.put("distance", pattern.getRightDistValueList()[i]);
                     mDataObj.put("rightEye", 1);
                     mDataObj.put("power", 0);
-                    mDataObj.put("duration", 23.2);
+                    mDataObj.put("duration", pattern.rightDurationList[i]);
                     mDataArr.put(mDataObj);
                 }
                 for (int i = 0; i < 9; i++) {
@@ -618,7 +618,7 @@ public class MainActivity extends Activity {
                     mDataObj.put("distance", pattern.getLeftDistValueList()[i]);
                     mDataObj.put("rightEye", 0);
                     mDataObj.put("power", 0);
-                    mDataObj.put("duration", 23.2);
+                    mDataObj.put("duration", pattern.leftDurationList[i]);
                     mDataArr.put(mDataObj);
                 }
                 params.put("measures", mDataArr);
@@ -628,12 +628,20 @@ public class MainActivity extends Activity {
                 e.printStackTrace();
             }
 
-
             StringRequest postRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {
+
                     Log.i(TAG, response);
+
                     Intent resultIntent = new Intent(getBaseContext(), ResultActivity.class);
+                    try {
+                        final JSONObject result = new JSONObject(response);
+                        resultIntent.putExtra("ODE", String.format("%.2f", Double.parseDouble(result.getString("sphe_od"))));
+                        resultIntent.putExtra("OSE", String.format("%.2f", Double.parseDouble(result.getString("sphe_os"))));
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
                     startActivity(resultIntent);
                     finish();
                     // Add Intent content
@@ -660,7 +668,7 @@ public class MainActivity extends Activity {
                 @Override
                 public Map<String, String> getHeaders() throws AuthFailureError {
                     Map<String, String> headers = new HashMap<>();
-                    String authString = "Bearer " + SingletonDataHolder.getToken();
+                    String authString = "Bearer " + SingletonDataHolder.token;
                     headers.put("Content-Type", "application/json;charset=UTF-8");
                     headers.put("Authorization", authString);
                     Log.i("$$$---HEADER---$$$", headers.toString());

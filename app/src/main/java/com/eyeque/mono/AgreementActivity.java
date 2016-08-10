@@ -53,13 +53,13 @@ public class AgreementActivity extends AppCompatActivity {
         // finally change the color
         // window.setStatusBarColor(this.getResources().getColor(R.color.colorPrimaryDark));
 
-        Log.i("** Token **", SingletonDataHolder.getToken());
-        Log.i("** Email **", SingletonDataHolder.getEmail());
-        Log.i("** First Name **", SingletonDataHolder.getFirstName());
-        Log.i("** Last Name **", SingletonDataHolder.getLastName());
-        Log.i("** Gender **", SingletonDataHolder.getGender().toString());
-        Log.i("** Birth Yr **", SingletonDataHolder.getBirthYear().toString());
-        Log.i("** Serial **", SingletonDataHolder.getDeviceSerialNum());
+        Log.i("** Token **", SingletonDataHolder.token);
+        Log.i("** Email **", SingletonDataHolder.email);
+        Log.i("** First Name **", SingletonDataHolder.firstName);
+        Log.i("** Last Name **", SingletonDataHolder.lastName);
+        Log.i("** Gender **", SingletonDataHolder.gender.toString());
+        Log.i("** Birth Yr **", SingletonDataHolder.birthYear.toString());
+        Log.i("** Serial **", SingletonDataHolder.deviceSerialNum);
 
         SpannableString ss = new SpannableString("I agree to EyeQue's Terms of Service and Privacy Policy");
         ClickableSpan clickableSpan1 = new ClickableSpan() {
@@ -150,16 +150,16 @@ public class AgreementActivity extends AppCompatActivity {
             final JSONObject finalParams = new JSONObject();
 
             try {
-                finalParams.put("token", SingletonDataHolder.getToken());
-                params.put("email", SingletonDataHolder.getEmail());
-                params.put("firstname", SingletonDataHolder.getFirstName());
-                params.put("lastname", SingletonDataHolder.getLastName());
+                finalParams.put("token", SingletonDataHolder.token);
+                params.put("email", SingletonDataHolder.email);
+                params.put("firstname", SingletonDataHolder.firstName);
+                params.put("lastname", SingletonDataHolder.lastName);
                 params.put("website_id", 1);
                 params.put("store_id", 1);
-                params.put("gender", SingletonDataHolder.getGender());
-                params.put("dob", Integer.toString(SingletonDataHolder.getBirthYear()) + "-01-01");
+                params.put("gender", SingletonDataHolder.gender);
+                params.put("dob", Integer.toString(SingletonDataHolder.birthYear) + "-01-01");
                 tmpParams.put("attribute_code", "device_number");
-                tmpParams.put("value", SingletonDataHolder.getDeviceSerialNum());
+                tmpParams.put("value", SingletonDataHolder.deviceSerialNum);
                 attrArray.put(tmpParams);
                 params.put("custom_attributes", attrArray);
                 finalParams.put("customer", params);

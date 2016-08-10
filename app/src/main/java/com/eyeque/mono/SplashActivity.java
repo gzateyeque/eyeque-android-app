@@ -27,7 +27,7 @@ public class SplashActivity extends Activity {
         // finally change the color
         // window.setStatusBarColor(this.getResources().getColor(R.color.colorPrimaryDark));
 
-        if (SingletonDataHolder.getToken() != "") {
+        if (SingletonDataHolder.token != "") {
             Intent topIntent = new Intent(getBaseContext(), TopActivity.class);
             startActivity(topIntent);
             finish();

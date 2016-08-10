@@ -106,7 +106,7 @@ public class SerialActivity extends AppCompatActivity {
                         JSONObject jsonObj = new JSONObject(string);
                         int ret_code = jsonObj.getInt("return_code");
                         if (ret_code == 1) {
-                            SingletonDataHolder.setDeviceSerialNum(serialNum);
+                            SingletonDataHolder.deviceSerialNum = serialNum;
                             Intent agreementIntent = new Intent(getBaseContext(), AgreementActivity.class);
                             startActivity(agreementIntent);
                         } else

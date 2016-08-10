@@ -50,8 +50,8 @@ public class NameActivity extends AppCompatActivity {
                 else if (lastname.matches(""))
                     Toast.makeText(NameActivity.this, "Please enter your last name", Toast.LENGTH_SHORT).show();
                 else {
-                    SingletonDataHolder.setFirstName(firstname);
-                    SingletonDataHolder.setLastName(lastname);
+                    SingletonDataHolder.firstName = firstname;
+                    SingletonDataHolder.lastName = lastname;
                     Intent genderIntent = new Intent(getBaseContext(), GenderActivity.class);
                     startActivity(genderIntent);
                 }
