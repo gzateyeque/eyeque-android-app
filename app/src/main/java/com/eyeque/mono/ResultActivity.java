@@ -100,7 +100,7 @@ public class ResultActivity extends Activity {
 
         Button uploadButton = (Button) findViewById(R.id.uploadButton);
         final TextView odSpheTextView = (TextView) findViewById(R.id.odSpheTextView);
-        final TextView osSpheTextView = (TextView) findViewById(R.id.odSpheTextView);
+        final TextView osSpheTextView = (TextView) findViewById(R.id.osSpheTextView);
 
         odSpheTextView.setText(odSe);
         osSpheTextView.setText(osSe);
