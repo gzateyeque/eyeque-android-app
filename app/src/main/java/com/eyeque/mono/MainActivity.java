@@ -415,15 +415,7 @@ public class MainActivity extends Activity {
                 DecimalFormat precision = new DecimalFormat("#.##");
                 Double i2 = Double.valueOf(precision.format(pattern.getPowerValue()));
                 tv.setText("Power: " + String.valueOf(i2));
-                if (pattern.getWhichEye()) {
-                    eyeRightText.setTextColor(brightColor);
-                    eyeLeftText.setTextColor(darkColor);
-                    eyeImageView.setImageResource(R.drawable.eye_right1);
-                }  else {
-                    eyeRightText.setTextColor(darkColor);
-                    eyeLeftText.setTextColor(brightColor);
-                    eyeImageView.setImageResource(R.drawable.eye_left1);
-                }
+
                 Log.d(TAG, String.valueOf(pattern.getDistance()));
                 prevStopValue = maxVal;
                 // currStopValue = maxVal;
@@ -436,6 +428,15 @@ public class MainActivity extends Activity {
                         || (deviceId == 4 && patternIndex == 8)))
                     calcResult();
                 else {
+                    if (pattern.getWhichEye()) {
+                        eyeRightText.setTextColor(brightColor);
+                        eyeLeftText.setTextColor(darkColor);
+                        eyeImageView.setImageResource(R.drawable.eye_right1);
+                    }  else {
+                        eyeRightText.setTextColor(darkColor);
+                        eyeLeftText.setTextColor(brightColor);
+                        eyeImageView.setImageResource(R.drawable.eye_left1);
+                    }
                     if (patternIndex == 8)
                         str = "Test " + Integer.toString((patternIndex + 2) % 9) + "/9";
                     else
@@ -639,12 +640,13 @@ public class MainActivity extends Activity {
                         final JSONObject result = new JSONObject(response);
                         resultIntent.putExtra("ODE", String.format("%.2f", Double.parseDouble(result.getString("sphe_od"))));
                         resultIntent.putExtra("OSE", String.format("%.2f", Double.parseDouble(result.getString("sphe_os"))));
+                        startActivity(resultIntent);
+                        finish();
                     } catch (JSONException e) {
+                        Toast.makeText(MainActivity.this,
+                                "Operation failed, please try it again", Toast.LENGTH_SHORT).show();
                         e.printStackTrace();
                     }
-                    startActivity(resultIntent);
-                    finish();
-                    // Add Intent content
                 }
             }, new Response.ErrorListener() {
                 @Override
@@ -678,7 +680,6 @@ public class MainActivity extends Activity {
             RetryPolicy policy = new DefaultRetryPolicy(Constants.NETCONN_TIMEOUT_VALUE, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
             postRequest.setRetryPolicy(policy);
             queue.add(postRequest);
-
         } else
             Toast.makeText(MainActivity.this,
                     "Please connect to the Internet to continue", Toast.LENGTH_SHORT).show();
