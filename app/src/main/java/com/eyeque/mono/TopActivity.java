@@ -137,7 +137,9 @@ public class TopActivity extends AppCompatActivity
                 fragmentClass = DashboardFragment.class;
                 break;
             case R.id.test_item:
-                if (checkDeviceCompatibility)
+                if (SingletonDataHolder.phoneType == null || SingletonDataHolder.phoneType == "")
+                    CheckPhoneCompatibility();
+                if (checkDeviceCompatibility || SingletonDataHolder.phoneType == "")
                     fragmentClass = AttachDeviceFragment.class;
                 else
                     fragmentClass = Test2Fragment.class;
@@ -206,10 +208,20 @@ public class TopActivity extends AppCompatActivity
                 public void onResponse(String string) {
                     // Parse serial check response
                     try {
-                        Log.i("*** JSON Device ***", string);
+                        Log.i("*** JSON Device Rtn ***", string);
                         JSONObject jsonObj = new JSONObject(string);
                         checkDeviceCompatibility = true;
                         SingletonDataHolder.phoneType = jsonObj.getString("phone_type");
+                        SingletonDataHolder.phonePpi = jsonObj.getInt("phone_ppi");
+                        SingletonDataHolder.deviceHeight = jsonObj.getDouble("height");
+                        SingletonDataHolder.deviceWidth = jsonObj.getDouble("width");
+                        SingletonDataHolder.lineLength = jsonObj.getInt("line_length");
+                        SingletonDataHolder.lineWidth = jsonObj.getInt("line_width");
+                        SingletonDataHolder.centerX = jsonObj.getInt("center_x");
+                        SingletonDataHolder.centerY = jsonObj.getInt("center_y");
+                        SingletonDataHolder.initDistance = jsonObj.getInt("initial_distance");
+                        SingletonDataHolder.minDistance = jsonObj.getInt("min_distance");
+                        SingletonDataHolder.maxDistance = jsonObj.getInt("max_distance");
                     } catch (JSONException e) {
                         e.printStackTrace();
                         Toast.makeText(TopActivity.this, "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();

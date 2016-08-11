@@ -53,13 +53,13 @@ public class SingletonDataHolder {
     public static double deviceWidth = 2.0f;
     public static double deviceHeight = 1.375f;
     // Pattern drawing configuration
-    public static int centerX = 720;
-    public static int centerY = 520;
-    public static int lineLength = 130;
-    public static int lineWidth = 36;
-    public static int initDistance = 326;
-    public static int minDistance = 227;
-    public static int maxDistance = 410;
+    public static int centerX = 0;
+    public static int centerY = 0;
+    public static int lineLength = 0;
+    public static int lineWidth = 0;
+    public static int initDistance = 0;
+    public static int minDistance = 0;
+    public static int maxDistance = 0;
     /*** For Video Shooting App
      public static int INIT_DISTANCE = 99;
      public static int MIN_DISTANCE = 0;

@@ -1,4 +1,5 @@
 package com.eyeque.mono;
+
 /**
  * Created by georgez on 2/9/16.
  */
@@ -8,31 +9,17 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
-import java.util.Map;
-import java.util.HashMap;
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.AuthFailureError;
-import com.android.volley.RetryPolicy;
-import com.android.volley.DefaultRetryPolicy;
-import com.android.volley.toolbox.Volley;
-import com.android.volley.toolbox.JsonObjectRequest;
+import android.view.LayoutInflater;
+import android.view.ViewGroup.LayoutParams;
+import android.widget.PopupWindow;
 import android.widget.Toast;
-import java.util.UUID;
-import android.util.Log;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
-import org.json.JSONArray;
 
 public class ResultActivity extends Activity {
 
@@ -105,6 +92,32 @@ public class ResultActivity extends Activity {
         odSpheTextView.setText(odSe);
         osSpheTextView.setText(osSe);
 
+        final TextView btnOpenPopup = (TextView)findViewById(R.id.testResultTextView);
+        btnOpenPopup.setOnClickListener(new Button.OnClickListener(){
+
+            @Override
+            public void onClick(View arg0) {
+                LayoutInflater layoutInflater
+                        = (LayoutInflater)getBaseContext().getSystemService(LAYOUT_INFLATER_SERVICE);
+                View popupView = layoutInflater.inflate(R.layout.window_popup, null);
+                final PopupWindow popupWindow = new PopupWindow(
+                        popupView,
+                        LayoutParams.WRAP_CONTENT,
+                        LayoutParams.WRAP_CONTENT);
+                popupWindow.setFocusable(true);
+                popupWindow.setOutsideTouchable(true);
+                /**
+                Button btnDismiss = (Button)popupView.findViewById(R.id.dismiss);
+                btnDismiss.setOnClickListener(new Button.OnClickListener(){
+
+                    @Override
+                    public void onClick(View v) {
+                        // TODO Auto-generated method stub
+                        popupWindow.dismiss();
+                    }});
+                ***/
+                popupWindow.showAsDropDown(btnOpenPopup, -300, 10, Gravity.CENTER);
+            }});
         // odSphTextView.setText(String.format("%.2f", odSph));
         // odCylTextView.setText(String.format("%.2f", odCyl));
         // odAxisTextView.setText(Integer.toString((int) odAxis));
@@ -425,4 +438,5 @@ public class ResultActivity extends Activity {
         ****/
 
     }
+
 }

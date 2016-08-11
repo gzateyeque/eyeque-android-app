@@ -379,10 +379,12 @@ public class Pattern {
         }
 
         patternStartTs = patternEndTs;
+        /***
         for (int i = 0; i < 9; i++)
             Log.i("**** Right Duration ***", Integer.toString((int) rightDurationList[i]));
         for (int i = 0; i < 9; i++)
             Log.i("**** Left Duration ***", Integer.toString((int) leftDurationList[i]));
+         ***/
         patternIndex++;
         whichPattern++;
         if (patternIndex > numOfPattern - 1) {

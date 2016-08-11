@@ -10,8 +10,8 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.Toast;
 
-import static com.eyeque.mono.R.id.glassOnNoCheckbox;
-import static com.eyeque.mono.R.id.glassOnYesCheckbox;
+import static com.eyeque.mono.R.id.glassRemovedNoCheckbox;
+import static com.eyeque.mono.R.id.glassRemovedYesCheckbox;
 import static com.eyeque.mono.R.id.screenProtectorOnNoCheckbox;
 import static com.eyeque.mono.R.id.screenProtectorOnYesCheckbox;
 
@@ -19,12 +19,12 @@ public class TestConditionActivity extends AppCompatActivity {
 
     private PatternView patternView;
     private static int deviceId;
-    private boolean glassOnYesChecked = false;
-    private boolean glassOnNoChecked = false;
+    private boolean glassRemovedYesChecked = false;
+    private boolean glassRemovedNoChecked = false;
     private boolean screenProtectorOnYesChecked = false;
     private boolean screenProtectorOnNoChecked = false;
-    private CheckBox glassOnYesCheckBox;
-    private CheckBox glassOnNoCheckBox;
+    private CheckBox glassRemovedYesCheckBox;
+    private CheckBox glassRemovedNoCheckBox;
     private CheckBox screenProtectorOnYesCheckBox;
     private CheckBox screenProtectorOnNoCheckBox;
 
@@ -50,53 +50,63 @@ public class TestConditionActivity extends AppCompatActivity {
         patternView.start();
 
         Button testConditionContinueButton = (Button) findViewById(R.id.testConditionContinueButton);
+        assert testConditionContinueButton != null;
         testConditionContinueButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                if (!glassOnYesChecked && !glassOnNoChecked
+                if (!glassRemovedYesChecked && !glassRemovedNoChecked
                         || !screenProtectorOnYesChecked && !screenProtectorOnNoChecked)
                     Toast.makeText(TestConditionActivity.this, "Please confirm the test condition", Toast.LENGTH_SHORT).show();
                 else {
+                    if (glassRemovedYesChecked)
+                        SingletonDataHolder.wearGlasses = 0;
+                    else
+                        SingletonDataHolder.wearGlasses = 1;
+                    if (screenProtectorOnYesChecked)
+                        SingletonDataHolder.screenProtect = 1;
+                    else
+                        SingletonDataHolder.screenProtect = 0;
                     Intent i = new Intent(getBaseContext(), MainActivity.class);
                     i.putExtra("subjectId", 21);
                     i.putExtra("deviceId", 3);
                     i.putExtra("serverId", 1);
                     startActivity(i);
+                    finish();
                 }
             }
         });
 
-        glassOnYesCheckBox = (CheckBox) findViewById(glassOnYesCheckbox);
-        glassOnNoCheckBox = (CheckBox) findViewById(glassOnNoCheckbox);
+        glassRemovedYesCheckBox = (CheckBox) findViewById(glassRemovedYesCheckbox);
+        glassRemovedNoCheckBox = (CheckBox) findViewById(glassRemovedNoCheckbox);
         screenProtectorOnYesCheckBox = (CheckBox) findViewById(screenProtectorOnYesCheckbox);
         screenProtectorOnNoCheckBox = (CheckBox) findViewById(screenProtectorOnNoCheckbox);
      }
 
-    public void glassOnYesClicked(View v) {
+    public void glassRemovedYesClicked(View v) {
         //code to check if this checkbox is checked!
         CheckBox checkBox = (CheckBox) v;
         if (checkBox.isChecked()) {
-            glassOnYesChecked = true;
-            glassOnNoChecked = false;
-            glassOnNoCheckBox.setChecked(false);
-            glassOnNoCheckBox.setSelected(false);
+            glassRemovedYesChecked = true;
+            glassRemovedNoChecked = false;
+            glassRemovedNoCheckBox.setChecked(false);
+            glassRemovedNoCheckBox.setSelected(false);
         }
         else
-            glassOnYesChecked = false;
+            glassRemovedYesChecked = false;
     }
 
-    public void glassOnNoClicked(View v) {
+    public void glassRemovedNoClicked(View v) {
         //code to check if this checkbox is checked!
         CheckBox checkBox = (CheckBox) v;
         if (checkBox.isChecked()) {
-            glassOnYesChecked = false;
-            glassOnNoChecked = true;
-            glassOnYesCheckBox.setChecked(false);
-            glassOnYesCheckBox.setSelected(false);
+            glassRemovedYesChecked = false;
+            glassRemovedNoChecked = true;
+            glassRemovedYesCheckBox.setChecked(false);
+            glassRemovedYesCheckBox.setSelected(false);
         }
         else
-            glassOnNoChecked = false;
+            glassRemovedNoChecked = false;
     }
 
     public void screenProtectorOnYesClicked(View v) {
