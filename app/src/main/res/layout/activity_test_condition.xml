@@ -76,7 +76,7 @@
                 android:layout_marginTop="1dp">
 
                 <CheckBox
-                    android:id="@+id/glassOnYesCheckbox"
+                    android:id="@+id/glassRemovedYesCheckbox"
                     android:layout_width="30dp"
                     android:layout_height="match_parent"
                     android:layout_marginTop="0dp"
@@ -84,7 +84,7 @@
                     android:layout_marginRight="10dp"
                     android:adjustViewBounds="true"
                     android:scaleType="fitCenter"
-                    android:onClick="glassOnYesClicked" >
+                    android:onClick="glassRemovedYesClicked" >
                 </CheckBox>
                 <TextView
                     android:layout_width="wrap_content"
@@ -96,7 +96,7 @@
                     android:layout_centerHorizontal="true" >
                 </TextView>
                 <CheckBox
-                    android:id="@+id/glassOnNoCheckbox"
+                    android:id="@+id/glassRemovedNoCheckbox"
                     android:layout_width="30dp"
                     android:layout_height="match_parent"
                     android:layout_marginTop="0dp"
@@ -104,7 +104,7 @@
                     android:layout_marginRight="10dp"
                     android:adjustViewBounds="true"
                     android:scaleType="fitCenter"
-                    android:onClick="glassOnNoClicked" >
+                    android:onClick="glassRemovedNoClicked" >
                 </CheckBox>
                 <TextView
                     android:layout_width="wrap_content"

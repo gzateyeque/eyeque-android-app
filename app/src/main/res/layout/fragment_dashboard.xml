@@ -189,7 +189,7 @@
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
                 android:gravity="center"
-                android:text="LEFT\nNEARSIGHTNESS: LOW\nASTIGMATISM: LOW"
+                android:text="LEFT\nNEARSIGHTEDNESS: LOW\nASTIGMATISM: LOW"
                 android:textSize="12sp" />
 
                 <TextView
@@ -199,7 +199,7 @@
                     android:layout_height="wrap_content"
                     android:textStyle="bold"
                     android:gravity="center"
-                    android:text="RIGHT\nNEARSIGHTNESS: LOW\nASTIGMATISM: LOW"
+                    android:text="RIGHT\nNEARSIGHTEDNESS: LOW\nASTIGMATISM: LOW"
                     android:textSize="12sp" />
 
             </LinearLayout>
@@ -212,7 +212,7 @@
                     android:layout_marginLeft="30dp"
                     android:layout_marginRight="30dp"
                     android:gravity="center"
-                    android:text="You have low nearsightness, low astigmstism on both the left eye and the right eye"
+                    android:text="You have low nearsightedness, low astigmstism on both the left eye and the right eye"
                     android:textSize="15sp"
                     android:layout_alignParentStart="true"
                     android:background="@drawable/text_border"/>
@@ -226,7 +226,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:gravity="center"
-                    android:text="FARSIGHTNESS"
+                    android:text="FARSIGHTEDNESS"
                     android:textSize="12sp"
                     android:layout_alignParentStart="true" />
 
@@ -305,7 +305,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
                     android:gravity="center"
-                    android:text="NEARSIGHTNESS"
+                    android:text="NEARSIGHTEDNESS"
                     android:textSize="12sp"
                     android:layout_alignParentStart="true" />
 

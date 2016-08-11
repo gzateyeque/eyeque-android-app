@@ -51,11 +51,12 @@
 
             <TextView
                 android:id="@+id/testResultTextView"
-                android:layout_height="wrap_content"
+                android:layout_height="18dp"
                 android:layout_width="wrap_content"
                 android:layout_marginTop="10dp"
                 android:layout_centerHorizontal="true"
-                android:text="SPHERICAL EQUIVALENT"
+                android:drawableRight="@drawable/info"
+                android:text="SPHERICAL EQUIVALENT "
                 android:textStyle="bold"
                 android:textSize="14sp"
                 android:textAppearance="?android:attr/textAppearanceMedium"
@@ -63,68 +64,11 @@
 
             <TableLayout
                 android:id="@+id/resultTableLayout"
-                android:layout_marginTop = "10sp"
+                android:layout_marginTop = "5sp"
                 android:stretchColumns="*"
                 android:background="#FFFFFF"
                 android:layout_width="fill_parent"
                 android:layout_height="40dp" >
-
-                <!--
-                <TableRow
-                    android:id="@+id/tableHeaderRow"
-                    android:layout_width="0dp"
-                    android:paddingTop="5dp"
-                    android:layout_height="wrap_content" >
-
-                    <TextView
-                        android:id="@+id/sphTextView"
-                        android:text="SPHERICAL"
-                        android:textStyle="bold"
-                        android:gravity="center"
-                        android:layout_column="1"
-                        android:textAppearance="?android:attr/textAppearanceMedium" />
-
-                    <TextView
-                        android:id="@+id/cylTextView"
-                        android:text="EQUIVALENT"
-                        android:textStyle="bold"
-                        android:gravity="center"
-                        android:textAppearance="?android:attr/textAppearanceMedium" />
-
-                </TableRow>
-
-
-                <TableRow
-                    android:id="@+id/tableOdRow"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content" >
-
-                    <TextView
-                        android:id="@+id/odTitleTextView"
-                        android:text=""
-                        android:textStyle="bold"
-                        android:gravity="center"
-                        android:textAppearance="?android:attr/textAppearanceMedium" />
-
-                    <TextView
-                        android:id="@+id/odSphTextView"
-                        android:text=""
-                        android:gravity="center"
-                        android:textAppearance="?android:attr/textAppearanceMedium" />
-
-                    <TextView
-                        android:id="@+id/odCylTextView"
-                        android:text=""
-                        android:gravity="center"
-                        android:textAppearance="?android:attr/textAppearanceMedium" />
-
-                    <TextView
-                        android:id="@+id/odAxisTextView"
-                        android:text=""
-                        android:gravity="center"
-                        android:textAppearance="?android:attr/textAppearanceMedium" />
-                </TableRow>
-                -->
 
                 <TableRow
                     android:id="@+id/tableOsRow"
@@ -132,7 +76,7 @@
                     android:layout_height="wrap_content" >
 
                     <TextView
-                        android:id="@+id/osTitleTextView"
+                        android:id="@+id/odTitleTextView"
                         android:text="RIGHT (O.D.)"
                         android:gravity="center"
                         android:textStyle="bold"
@@ -140,14 +84,14 @@
                         android:textAppearance="?android:attr/textAppearanceMedium" />
 
                     <TextView
-                        android:id="@+id/osSphTextView"
-                        android:text="-2.25"
+                        android:id="@+id/odSpheTextView"
+                        android:text="0.00"
                         android:gravity="left"
                         android:textSize="28dp"
                         android:textAppearance="?android:attr/textAppearanceMedium" />
 
                     <TextView
-                        android:id="@+id/osCylTextView"
+                        android:id="@+id/osTitleTextView"
                         android:text="LEFT (O.S.)"
                         android:gravity="center"
                         android:textStyle="bold"
@@ -156,8 +100,8 @@
 
 
                     <TextView
-                        android:id="@+id/osAxisTextView"
-                        android:text="-2.75"
+                        android:id="@+id/osSpheTextView"
+                        android:text="0.00"
                         android:gravity="left"
                         android:textSize="28dp"
                         android:textAppearance="?android:attr/textAppearanceMedium" />
@@ -165,224 +109,6 @@
                 </TableRow>
 
             </TableLayout>
-
-            <!--
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Measurement"
-                android:id="@+id/measurementTextView"
-                android:layout_below="@+id/resultTableLayout"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="15dp"
-                android:textColor="#3F51B5"
-                android:textSize="20sp" />
-
-            <TableLayout
-                android:id="@+id/measurementTableLayout"
-                android:layout_below="@+id/measurementTextView"
-                android:layout_marginTop = "15sp"
-                android:stretchColumns="*"
-                android:background="#FFFFFF"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="80dp" >
-
-                <TableRow
-                    android:id="@+id/measurementTableHeaderRow"
-                    android:layout_width="0dp"
-                    android:paddingTop="5dp"
-                    android:layout_height="wrap_content" >
-
-                    <TextView
-                        android:id="@+id/measurementLeftEyeTextView"
-                        android:text="Left Eye"
-                        android:textStyle="bold"
-                        android:gravity="center"
-                        android:textAppearance="?android:attr/textAppearanceMedium" />
-
-                    <TextView
-                        android:id="@+id/measurementRightEyeTextView"
-                        android:text="Right Eye"
-                        android:textStyle="bold"
-                        android:gravity="center"
-                        android:textAppearance="?android:attr/textAppearanceMedium" />
-
-                </TableRow>
-
-                <TableRow
-                    android:id="@+id/line1TableRow"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content" >
-
-                    <TextView
-                        android:id="@+id/l1TextView"
-                        android:text="-0.04 45&#176;"
-                        android:gravity="center"
-                        android:textAppearance="?android:attr/textAppearanceMedium" />
-
-                    <TextView
-                        android:id="@+id/r1TextView"
-                        android:text="-0.04 45&#176;"
-                        android:gravity="center"
-                        android:textAppearance="?android:attr/textAppearanceMedium" />
-
-                </TableRow>
-
-                <TableRow
-                    android:id="@+id/line2TableRow"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content" >
-
-                    <TextView
-                        android:id="@+id/l2TextView"
-                        android:text="-0.04 45&#176;"
-                        android:gravity="center"
-                        android:textAppearance="?android:attr/textAppearanceMedium" />
-
-                    <TextView
-                        android:id="@+id/r2TextView"
-                        android:text="-0.04 45&#176;"
-                        android:gravity="center"
-                        android:textAppearance="?android:attr/textAppearanceMedium" />
-
-                </TableRow>
-
-                <TableRow
-                    android:id="@+id/line3TableRow"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content" >
-
-                    <TextView
-                        android:id="@+id/l3TextView"
-                        android:text="-0.04 45&#176;"
-                        android:gravity="center"
-                        android:textAppearance="?android:attr/textAppearanceMedium" />
-
-                    <TextView
-                        android:id="@+id/r3TextView"
-                        android:text="-0.04 45&#176;"
-                        android:gravity="center"
-                        android:textAppearance="?android:attr/textAppearanceMedium" />
-
-                </TableRow>
-
-                <TableRow
-                    android:id="@+id/line4tableRow"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content" >
-
-                    <TextView
-                        android:id="@+id/l4TextView"
-                        android:text="-0.04 45&#176;"
-                        android:gravity="center"
-                        android:textAppearance="?android:attr/textAppearanceMedium" />
-
-                    <TextView
-                        android:id="@+id/r4TextView"
-                        android:text="-0.04 45&#176;"
-                        android:gravity="center"
-                        android:textAppearance="?android:attr/textAppearanceMedium" />
-
-                </TableRow>
-
-                <TableRow
-                    android:id="@+id/line5TableRow"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content" >
-
-                    <TextView
-                        android:id="@+id/l5TextView"
-                        android:text="-0.04 45&#176;"
-                        android:gravity="center"
-                        android:textAppearance="?android:attr/textAppearanceMedium" />
-
-                    <TextView
-                        android:id="@+id/r5TextView"
-                        android:text="-0.04 45&#176;"
-                        android:gravity="center"
-                        android:textAppearance="?android:attr/textAppearanceMedium" />
-
-                </TableRow>
-
-                <TableRow
-                    android:id="@+id/line6TableRow"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content" >
-
-                    <TextView
-                        android:id="@+id/l6TextView"
-                        android:text="-0.04 45&#176;"
-                        android:gravity="center"
-                        android:textAppearance="?android:attr/textAppearanceMedium" />
-
-                    <TextView
-                        android:id="@+id/r6TextView"
-                        android:text="-0.04 45&#176;"
-                        android:gravity="center"
-                        android:textAppearance="?android:attr/textAppearanceMedium" />
-
-                </TableRow>
-
-                <TableRow
-                    android:id="@+id/line7TableRow"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content" >
-
-                    <TextView
-                        android:id="@+id/l7TextView"
-                        android:text=""
-                        android:gravity="center"
-                        android:textAppearance="?android:attr/textAppearanceMedium" />
-
-                    <TextView
-                        android:id="@+id/r7TextView"
-                        android:text=""
-                        android:gravity="center"
-                        android:textAppearance="?android:attr/textAppearanceMedium" />
-
-                </TableRow>
-
-                <TableRow
-                    android:id="@+id/line8TableRow"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content" >
-
-                    <TextView
-                        android:id="@+id/l8TextView"
-                        android:text=""
-                        android:gravity="center"
-                        android:textAppearance="?android:attr/textAppearanceMedium" />
-
-                    <TextView
-                        android:id="@+id/r8TextView"
-                        android:text=""
-                        android:gravity="center"
-                        android:textAppearance="?android:attr/textAppearanceMedium" />
-
-                </TableRow>
-
-                <TableRow
-                    android:id="@+id/line9TableRow"
-                    android:layout_width="0dp"
-                    android:layout_marginBottom="10dp"
-                    android:layout_height="wrap_content" >
-
-                    <TextView
-                        android:id="@+id/l9TextView"
-                        android:text=""
-                        android:gravity="center"
-                        android:textAppearance="?android:attr/textAppearanceMedium" />
-
-                    <TextView
-                        android:id="@+id/r9TextView"
-                        android:text=""
-                        android:gravity="center"
-                        android:textAppearance="?android:attr/textAppearanceMedium" />
-
-                </TableRow>
-            </TableLayout>
-            -->
 
             <TextView
                 android:layout_width="match_parent"
@@ -413,7 +139,7 @@
                 style="?android:textAppearanceSmall"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="25dp"
+                android:layout_marginTop="20dp"
                 android:layout_marginBottom="30dp"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
