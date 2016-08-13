@@ -69,7 +69,8 @@ public class MainActivity extends Activity {
     // private static int darkColor = Color.rgb(21, 21, 21);
     private static int brightColor = Color.rgb(255, 255, 255);
     private static int darkColor = Color.rgb(96, 96, 96);
-
+    private static Button contButton;
+    private static Button exitButton;
 
     // Tag for log message
     private static final String TAG = MainActivity.class.getSimpleName();
@@ -175,7 +176,7 @@ public class MainActivity extends Activity {
         atv.setVisibility(View.INVISIBLE);
         tv.setVisibility(View.INVISIBLE);
 
-        Button exitButton = (Button) findViewById(R.id.exitButton);
+        exitButton = (Button) findViewById(R.id.exitButton);
         exitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -235,7 +236,7 @@ public class MainActivity extends Activity {
          */
 
         final MediaPlayer mp = new MediaPlayer();
-        Button contButton = (Button) findViewById(R.id.contButton);
+        contButton = (Button) findViewById(R.id.contButton);
         contButton.setOnClickListener(new View.OnClickListener() {
             String str;
             @Override
@@ -578,6 +579,10 @@ public class MainActivity extends Activity {
 
         NetConnection conn = new NetConnection();
         if (conn.isConnected(getApplicationContext())) {
+            Toast.makeText(MainActivity.this,
+                    "Processing measurement data", Toast.LENGTH_LONG).show();
+            contButton.setEnabled(false);
+            exitButton.setEnabled(false);
             RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
             final String url = Constants.UrlUploadTest;
 
@@ -651,6 +656,8 @@ public class MainActivity extends Activity {
             }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
+                    contButton.setEnabled(true);
+                    exitButton.setEnabled(true);
                     Toast.makeText(MainActivity.this,
                             "Can't connect to the server", Toast.LENGTH_SHORT).show();
                     Log.d("Error.Response", error.toString());
