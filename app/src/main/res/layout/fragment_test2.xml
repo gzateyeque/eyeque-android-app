@@ -37,7 +37,7 @@
                 android:layout_marginRight="15dp"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop = "20sp"
-                android:text="  The EyeQue test is compatible with following Android devices. We work hard to continue adding more supprting Android devices. Please check back later if your device is currently not supported."
+                android:text="  Sorry, this phone is currently not supported by EyeQue. We work hard to continue adding more supprting Android devices. Please check back later if your device is currently not supported."
                 android:id="@+id/compatDeviceTextView"
                 android:layout_below="@+id/deviceCompatTitle"
                 android:textColor="@color/background_material_dark"
