@@ -137,9 +137,7 @@ public class TopActivity extends AppCompatActivity
                 fragmentClass = DashboardFragment.class;
                 break;
             case R.id.test_item:
-                if (SingletonDataHolder.phoneType == null || SingletonDataHolder.phoneType == "")
-                    CheckPhoneCompatibility();
-                if (checkDeviceCompatibility || SingletonDataHolder.phoneType == "")
+                if (checkDeviceCompatibility)
                     fragmentClass = AttachDeviceFragment.class;
                 else
                     fragmentClass = Test2Fragment.class;
@@ -231,6 +229,7 @@ public class TopActivity extends AppCompatActivity
                 @Override
                 public void onErrorResponse(VolleyError error) {
                     Log.d("Error.Response", error.toString());
+                    checkDeviceCompatibility = false;
                     Toast.makeText(TopActivity.this, "Phone incompatible", Toast.LENGTH_SHORT).show();
                 }
             }) {
