@@ -27,7 +27,6 @@
     <ScrollView
         android:id="@+id/dobScrollView"
         android:layout_below="@+id/dobHeaderDivView"
-        android:scrollbars="none"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -68,7 +67,8 @@
             android:id="@+id/dobNextButton"
             android:layout_width="170dip"
             android:layout_height="50dip"
-            android:layout_marginTop="300dp"
+            android:layout_marginTop="80dp"
+            android:layout_marginBottom="20dp"
             android:layout_below="@+id/dobEditText"
             android:text="@string/nextButtonTextString"
             android:textAllCaps="false"
@@ -77,7 +77,6 @@
             android:textColor="#046EEA"
             android:textSize="25sp"
             android:textStyle="normal"
-            android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:layout_gravity="center_horizontal" />
 

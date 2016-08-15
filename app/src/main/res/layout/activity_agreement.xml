@@ -109,7 +109,7 @@
                 android:id="@+id/agreementNextButton"
                 android:layout_width="170dip"
                 android:layout_height="50dip"
-                android:layout_marginTop="250dp"
+                android:layout_marginTop="70dp"
                 android:layout_below="@+id/LinearLayout02"
                 android:text="@string/startButtonTextString"
                 android:textAllCaps="false"

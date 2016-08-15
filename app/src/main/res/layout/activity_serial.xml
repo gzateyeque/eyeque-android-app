@@ -27,7 +27,6 @@
     <ScrollView
         android:id="@+id/serialScrollView"
         android:layout_below="@+id/serialHeaderDivView"
-        android:scrollbars="none"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -64,50 +63,34 @@
             android:textSize="30sp"
             android:layout_centerHorizontal="true" />
 
+            <Button
+                android:id="@+id/serialNextButton"
+                android:layout_width="170dip"
+                android:layout_height="50dip"
+                android:layout_marginTop="50dp"
+                android:layout_below="@+id/serialEditText"
+                android:text="@string/nextButtonTextString"
+                android:textAllCaps="false"
+                android:gravity="center"
+                android:background="?attr/selectableItemBackground"
+                android:textColor="#046EEA"
+                android:textSize="25sp"
+                android:textStyle="normal"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="center_horizontal" />
+
             <TextView
+                android:id="@+id/deviceOrderTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop = "60dp"
+                android:layout_marginTop = "10dp"
+                android:layout_marginBottom = "20dp"
                 android:gravity="center_horizontal"
                 android:text="@string/serialOrderTextString"
-                android:id="@+id/serialOrderText"
                 android:textColor="#046EEA"
                 android:textSize="15sp"
-                android:layout_below="@+id/serialEditText"
+                android:layout_below="@+id/serialNextButton"
                 android:layout_alignParentStart="true" />
-
-            <Button
-                style="?android:textAppearanceSmall"
-                android:id="@+id/serialOrderButton"
-                android:layout_below="@+id/serialOrderText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="30dp"
-                android:layout_marginRight="30dp"
-                android:layout_marginTop="20dp"
-                android:text="@string/orderButtonTextString"
-                android:textStyle="bold"
-                android:layout_centerVertical="true"
-                android:layout_alignParentStart="true"
-                android:textColor="#ffffff"
-                android:background="@android:color/holo_blue_dark" />
-
-        <Button
-            android:id="@+id/serialNextButton"
-            android:layout_width="170dip"
-            android:layout_height="50dip"
-            android:layout_marginTop="150dp"
-            android:layout_below="@+id/serialOrderButton"
-            android:text="@string/nextButtonTextString"
-            android:textAllCaps="false"
-            android:gravity="center"
-            android:background="?attr/selectableItemBackground"
-            android:textColor="#046EEA"
-            android:textSize="25sp"
-            android:textStyle="normal"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:layout_gravity="center_horizontal" />
 
         </RelativeLayout>
     </ScrollView>
