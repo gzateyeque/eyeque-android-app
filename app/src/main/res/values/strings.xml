@@ -72,7 +72,7 @@
     <string name="title_activity_login2">Sign in</string>
     <string name="nextButtonTextString">Next</string>
     <string name="orderButtonTextString">Order EyeQue Device</string>
-    <string name="action_forgot_password">Request email with reset password link</string>
+    <string name="action_forgot_password">Reset my password</string>
     <string name="action_register">Register</string>
 
     <!-- TODO: Remove or change this placeholder text -->
