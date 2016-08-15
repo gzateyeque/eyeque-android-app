@@ -10,6 +10,7 @@ public class SingletonDataHolder {
     public static SingletonDataHolder getInstance() {
         return ourInstance;
     }
+    private SingletonDataHolder() {}
 
     // Session value set
     public static int loginType = 1;
@@ -227,5 +228,5 @@ public class SingletonDataHolder {
      public static double SphericalStep2 = 6.454937531E-05*(577/PHONE_PPI)*(577/PHONE_PPI);
      ****/
 
-    private SingletonDataHolder() {}
+
 }

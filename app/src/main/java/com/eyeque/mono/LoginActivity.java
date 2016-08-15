@@ -75,6 +75,7 @@ import android.view.Window;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import android.content.ContentValues;
 
 /**
  * A login screen that offers login via email/password.
@@ -141,7 +142,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         try {
             String email, token;
             DatabaseHelper dbHelper = new DatabaseHelper(getApplicationContext());
-            myDb = dbHelper.getReadableDatabase();
+            myDb = dbHelper.getWritableDatabase();
             Log.d("TAG", "open database successfully");
         } catch (IOException e) {
             Log.d("TAG", "open database failed");
@@ -576,6 +577,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                         SingletonDataHolder.email = socialMediaEmail;
                     else
                         SingletonDataHolder.email = gEmail;
+                    DbStoreToken();
                     CheckOnboard();
                 }
             }, new Response.ErrorListener() {
@@ -730,6 +732,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                     try {
                         JSONObject jsonResponse = new JSONObject(response);
                         SingletonDataHolder.userId = Integer.parseInt(jsonResponse.getString("id"));
+                        SingletonDataHolder.firstName = jsonResponse.getString("firstname");
+                        SingletonDataHolder.lastName = jsonResponse.getString("lastname");
                         Log.i("*** customer id ***", Integer.toString(SingletonDataHolder.userId));
 
                         if (jsonResponse.has("custom_attributes")) {
@@ -813,6 +817,21 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             queue.add(postRequest);
         } else
             Toast.makeText(LoginActivity.this, "Network Connection Failed", Toast.LENGTH_SHORT).show();
+    }
+
+    private void DbStoreToken() {
+        // Create a new map of values, where column names are the keys
+        ContentValues values = new ContentValues();
+        values.put(Constants.USER_ENTITY_VERSION_COLUMN, 1);
+        values.put(Constants.USER_ENTITY_TOKEN_COLUMN, SingletonDataHolder.token);
+
+        // Insert the new row, returning the primary key value of the new row
+        long newRowId;
+        newRowId = myDb.insert(
+                Constants.USER_ENTITY_TABLE,
+                null,
+                values);
+        Log.d("**** Toekn DB ***", Long.toString(newRowId));
     }
 
     private boolean isEmailValid(String email) {

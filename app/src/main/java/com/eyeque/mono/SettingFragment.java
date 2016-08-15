@@ -4,6 +4,8 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
@@ -13,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebSettings;
 import android.webkit.WebViewClient;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.graphics.BitmapFactory;
 import android.graphics.Bitmap;
@@ -21,6 +24,8 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.webkit.WebView;
 import android.widget.Toast;
+
+import java.io.IOException;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -41,6 +46,9 @@ public class SettingFragment extends Fragment {
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
+
+    // Database instance
+    private static SQLiteDatabase myDb = null;
 
     public SettingFragment() {
         // Required empty public constructor
@@ -79,8 +87,28 @@ public class SettingFragment extends Fragment {
         int color;
         View rootView = inflater.inflate(R.layout.fragment_setting, container, false);
 
+        try {
+            String email, token;
+            DatabaseHelper dbHelper = new DatabaseHelper(container.getContext());
+            myDb = dbHelper.getWritableDatabase();
+            Log.d("TAG", "open database successfully");
+            String sql = "delete from " + Constants.USER_ENTITY_TABLE;
+            myDb.execSQL(sql);
+        } catch (IOException e) {
+            Log.d("TAG", "open database failed");
+        }
         // Inflate the layout for this fragment
         // return inflater.inflate(R.layout.fragment_dashboard, container, false);
+        // Check local persistent mono.db database
+
+        Button logoutButton = (Button) rootView.findViewById(R.id.logoutButton);
+        logoutButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getActivity(), LoginActivity.class);
+                startActivity(i);
+            }
+        });
         return rootView;
     }
 

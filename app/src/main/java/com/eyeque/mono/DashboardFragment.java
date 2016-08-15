@@ -21,6 +21,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.webkit.WebView;
 import android.widget.Toast;
+import android.widget.TextView;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -80,6 +81,13 @@ public class DashboardFragment extends Fragment {
                              Bundle savedInstanceState) {
         int color;
         View rootView = inflater.inflate(R.layout.fragment_dashboard, container, false);
+
+        final TextView eyeglassTitleTv = (TextView) rootView.findViewById(R.id.visionRecordTitle);
+        eyeglassTitleTv.setText("EYEGLASS NUMBER ("
+                                + SingletonDataHolder.firstName
+                                + " "
+                                + SingletonDataHolder.lastName
+                                + ")");
 
         BitmapFactory.Options myOptions = new BitmapFactory.Options();
         myOptions.inDither = true;

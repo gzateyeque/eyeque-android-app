@@ -23,18 +23,19 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
 
         String sql = String.format("create table if not exists %s (%s int primary key, " +
-                        "%s int, %s text, %s text, %s text, %s int, %s text, %s int, %s int, %s int)",
+                        // "%s int, %s text, %s text, %s text, %s int, %s text, %s int, %s int, %s int)",
+                        "%s int, %s text)",
                 Constants.USER_ENTITY_TABLE,
                 Constants.USER_ENTITY_ID_COLUMN,
                 Constants.USER_ENTITY_VERSION_COLUMN,
-                Constants.USER_ENTITY_EMAIL_COLUMN,
-                Constants.USER_ENTITY_TOKEN_COLUMN,
-                Constants.USER_ENTITY_NAME_COLUMN,
-                Constants.USER_ENTITY_GENDER_COLUMN,
-                Constants.USER_ENTITY_DEVICE_SERIAL_COLUMN,
-                Constants.USER_ENTITY_SIGNUP_STATUS,
-                Constants.USER_ENTITY_CREATED_AT_COLUMN,
-                Constants.USER_ENTITY_LAST_SYNCED_AT_COLUMN);
+                // Constants.USER_ENTITY_EMAIL_COLUMN,
+                Constants.USER_ENTITY_TOKEN_COLUMN);
+                // Constants.USER_ENTITY_NAME_COLUMN,
+                // Constants.USER_ENTITY_GENDER_COLUMN,
+                // Constants.USER_ENTITY_DEVICE_SERIAL_COLUMN,
+                // Constants.USER_ENTITY_SIGNUP_STATUS,
+                // Constants.USER_ENTITY_CREATED_AT_COLUMN,
+                // Constants.USER_ENTITY_LAST_SYNCED_AT_COLUMN);
         Log.d(TAG, "create user_entity table");
         db.execSQL(sql);
 

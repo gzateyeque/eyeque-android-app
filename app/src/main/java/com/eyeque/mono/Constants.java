@@ -69,14 +69,14 @@ public class Constants {
     // Columns for user entity table
     public static final String USER_ENTITY_ID_COLUMN  = BaseColumns._ID;
     public static final String USER_ENTITY_VERSION_COLUMN  = "version";
-    public static final String USER_ENTITY_EMAIL_COLUMN  = "email";
+    // public static final String USER_ENTITY_EMAIL_COLUMN  = "email";
     public static final String USER_ENTITY_TOKEN_COLUMN  = "token";
-    public static final String USER_ENTITY_NAME_COLUMN  = "name";
-    public static final String USER_ENTITY_GENDER_COLUMN  = "gender";
-    public static final String USER_ENTITY_DEVICE_SERIAL_COLUMN  = "device_serial";
-    public static final String USER_ENTITY_SIGNUP_STATUS = "signup_status";
-    public static final String USER_ENTITY_CREATED_AT_COLUMN  = "created_at";
-    public static final String USER_ENTITY_LAST_SYNCED_AT_COLUMN  = "last_synced_at";
+    // public static final String USER_ENTITY_NAME_COLUMN  = "name";
+    // public static final String USER_ENTITY_GENDER_COLUMN  = "gender";
+    // public static final String USER_ENTITY_DEVICE_SERIAL_COLUMN  = "device_serial";
+    // public static final String USER_ENTITY_SIGNUP_STATUS = "signup_status";
+    // public static final String USER_ENTITY_CREATED_AT_COLUMN  = "created_at";
+    // public static final String USER_ENTITY_LAST_SYNCED_AT_COLUMN  = "last_synced_at";
 
     // Columns for test_subject table
     public static final String TEST_SUBJECT_ID_COLUMN  = BaseColumns._ID;
