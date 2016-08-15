@@ -17,19 +17,29 @@
             android:background="#F9F7F9"
             android:fitsSystemWindows="true"
             >
-
             <TextView
                 android:id="@+id/testTitle"
                 android:layout_width="match_parent"
                 android:layout_height="50dip"
                 android:gravity="center_vertical"
-                android:text="SETTING PAGES"
+                android:text="SETTING PAGES v0.9.5"
                 android:textStyle="bold"
                 android:textSize="16sp"
                 android:textColor="#1DADF3"
                 android:paddingStart="15dip"
                 android:layout_below="@+id/resultTableLayout"
                 android:layout_alignParentStart="true" />
+
+            <Button
+                android:id="@+id/logoutButton"
+                style="?android:textAppearanceSmall"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="500dp"
+                android:text="Logout"
+                android:textStyle="bold"
+                android:background="@android:color/darker_gray"
+                android:textColor="#FFFFFF" />
 
         </RelativeLayout>
     </ScrollView>
