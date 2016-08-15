@@ -45,7 +45,7 @@ public class Constants {
     public static final String UrlPrivacyPolicy = ContentRestFulBaseURL + "user_agreement/policy";
 
     // Restful API Call URL
-    public static final String UrlBuyDevice = ApiRestfulBaseURL + "eyeque-pocket-refractor.html";
+    public static final String UrlBuyDevice = ApiRestfulBaseURL + "eyeque-mini-scope.html";
     public static final String UrlTrackingDataOd = UserdataRestfulBaseURL + "index.html?hash=default&column=sphEOD";
     public static final String UrlTrackingDataOs = UserdataRestfulBaseURL + "index.html?hash=default&column=sphEOS";
     public static final String UrlSignIn = ApiRestfulBaseURL + "index.php/rest/V1/integration/customer/token";
@@ -59,7 +59,7 @@ public class Constants {
     public static final String UrlUploadTest = ApiRestfulBaseURL + "index.php/rest/eyecloud/api/V2/tests";
 
     // Database parameters
-    public static final String DB_NAME = "mono.db";
+    public static final String DB_NAME = "scope.db";
     public static final int DB_VERSION = 1;
     public static final String USER_ENTITY_TABLE = "user_entity";
     public static final String TEST_SUBJECT_TABLE = "test_subject";
