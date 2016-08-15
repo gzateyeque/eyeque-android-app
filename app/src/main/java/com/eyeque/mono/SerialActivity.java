@@ -13,6 +13,7 @@ import android.net.Uri;
 import android.widget.Toast;
 import android.view.WindowManager;
 import android.view.Window;
+import android.widget.TextView;
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
@@ -51,8 +52,8 @@ public class SerialActivity extends AppCompatActivity {
         serialEt = (EditText) findViewById(R.id.serialEditText);
         serialEt.setHint(Html.fromHtml("<small>" + "Serial number" + "</small>" ));
 
-        Button orderButton = (Button) findViewById(R.id.serialOrderButton);
-        orderButton.setOnClickListener(new View.OnClickListener() {
+        TextView orderTv = (TextView) findViewById(R.id.deviceOrderTextView);
+        orderTv.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
             Uri uri =  Uri.parse(Constants.UrlBuyDevice);
             Intent intent = new Intent(Intent.ACTION_VIEW, uri);
