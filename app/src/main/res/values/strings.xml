@@ -19,7 +19,7 @@
     <string name="serialHeaderTextString">Setup (4/5)</string>
     <string name="agreementHeaderTextString">Setup (5/5)</string>
     <string name="serialTitleTextString">What\&#39;s your device serial number</string>
-    <string name="serialOrderTextString">Don\&#39;t have a device?</string>
+    <string name="serialOrderTextString">Don\&#39;t have a device? Order now</string>
     <string name="forgotPswdHeaderTextString">Forgot Password</string>
     <string name="smemailHeaderTextString">EyeQue Email Link</string>
 
