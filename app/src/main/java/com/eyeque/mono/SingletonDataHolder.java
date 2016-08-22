@@ -61,11 +61,11 @@ public class SingletonDataHolder {
     public static int initDistance = 0;
     public static int minDistance = 0;
     public static int maxDistance = 0;
-    /*** For Video Shooting App
-     public static int INIT_DISTANCE = 99;
-     public static int MIN_DISTANCE = 0;
-     public static int MAX_DISTANCE = 183;
-     ****/
+    /*** For video shooting
+     public static int initDistance = 99;
+     public static int minDistance = 0;
+     public static int maxDistance = 183;
+     ***/
     public static final int[] patternAngleList  = {0, 320, 280, 240, 200, 160, 120, 80, 40};
     public static final double[] calcAngleList = {0.0, 320.0, 280.0, 240.0, 200.0, 160.0, 120.0, 80.0, 40.0};
     public static final int[] rotateAngleList = {180, 40, 80, 120, 160, 200, 240, 280, 320};
