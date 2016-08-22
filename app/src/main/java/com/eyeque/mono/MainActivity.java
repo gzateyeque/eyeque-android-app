@@ -645,6 +645,10 @@ public class MainActivity extends Activity {
                         final JSONObject result = new JSONObject(response);
                         resultIntent.putExtra("ODE", String.format("%.2f", Double.parseDouble(result.getString("sphe_od"))));
                         resultIntent.putExtra("OSE", String.format("%.2f", Double.parseDouble(result.getString("sphe_os"))));
+                        /**** For video shooting
+                        resultIntent.putExtra("ODE", "-2.25");
+                        resultIntent.putExtra("OSE", "-2.75");
+                         ****/
                         startActivity(resultIntent);
                         finish();
                     } catch (JSONException e) {
@@ -774,7 +778,7 @@ public class MainActivity extends Activity {
         final Pattern pattern = patternView.getPatternInstance();
         final TextView dtv = (TextView) findViewById(R.id.distText);
         final SeekBar alignSeekBar = (SeekBar) findViewById(R.id.alignSeekBar);
-        if (pattern.getDistance() >=minVal+2) {
+        if (pattern.getDistance() >=minVal+6) {
             patternView.closerDraw(longPressStep);
             dtv.setText("Distance: " + String.valueOf(pattern.getDistance()));
             DecimalFormat precision = new DecimalFormat("#.##");
