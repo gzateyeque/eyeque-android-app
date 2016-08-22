@@ -176,6 +176,7 @@ public class PatternView extends View {
              }
              ***/
 
+            /***
             for (float ii = 150*SingletonDataHolder.phonePpi/562; ii >= 0; ii -= 0.5) {
                 // cv.save();
                 aniRadius = ii + 20;
@@ -193,7 +194,7 @@ public class PatternView extends View {
                 else
                     cv.drawCircle(SingletonDataHolder.centerX, SingletonDataHolder.centerY, ii, p);
             }
-
+            ***/
             p.setColor(Color.RED);
             if (deviceId == 2 || deviceId == 3) {
                 p.setStrokeWidth(SingletonDataHolder.lineWidth);
@@ -216,17 +217,31 @@ public class PatternView extends View {
             // Draw GREEN line
             p.setColor(Color.GREEN);
             if (deviceId == 2 || deviceId == 3) {
+                /*** For video shooting
                 int yellowColor = Color.rgb(255, 255, 0);
-                if (pattern.getGreenStartX() == pattern.getRedStartX()
-                    && pattern.getGreenStartY() == pattern.getRedStartY())
+                if ((pattern.getGreenStartX() - pattern.getRedStartX() < SingletonDataHolder.lineWidth)
+                        && (pattern.getGreenStartX() - pattern.getRedStartX()) > 0) {
+                    int yellowWidth = SingletonDataHolder.lineWidth - (pattern.getGreenStartX() - pattern.getRedStartX());
+                    p.setStrokeWidth(yellowWidth);
                     p.setColor(yellowColor);
-                p.setStrokeWidth(SingletonDataHolder.lineWidth);
-                cv.drawLine(pattern.getGreenStartX(), pattern.getGreenStartY(),
-                        pattern.getGreenEndX(), pattern.getGreenEndY(), p);
-                // cv.drawLine(pattern.getGreenStartX() - 36, pattern.getGreenStartY(),
-                // pattern.getGreenEndX() - 36, pattern.getGreenEndY() - 148, p);
-                // cv.drawLine(pattern.getGreenStartX() + 1, pattern.getGreenStartY(),
-                // pattern.getGreenEndX() + 50, pattern.getGreenStartY(), p);
+                    cv.drawLine(pattern.getGreenStartX(), pattern.getGreenStartY(),
+                            pattern.getGreenEndX(), pattern.getGreenEndY(), p);
+                    p.setStrokeWidth(SingletonDataHolder.lineWidth - yellowWidth);
+                    p.setColor(Color.GREEN);
+                    cv.drawLine(pattern.getGreenStartX()+yellowWidth/2, pattern.getGreenStartY(),
+                            pattern.getGreenEndX()+yellowWidth/2, pattern.getGreenEndY(), p);
+                }
+                    if (pattern.getGreenStartX() == pattern.getRedStartX()
+                            && pattern.getGreenStartY() == pattern.getRedStartY())
+                        p.setColor(yellowColor);
+                 ***/
+                    p.setStrokeWidth(SingletonDataHolder.lineWidth);
+                    cv.drawLine(pattern.getGreenStartX(), pattern.getGreenStartY(),
+                            pattern.getGreenEndX(), pattern.getGreenEndY(), p);
+                    // cv.drawLine(pattern.getGreenStartX() - 36, pattern.getGreenStartY(),
+                    // pattern.getGreenEndX() - 36, pattern.getGreenEndY() - 148, p);
+                    // cv.drawLine(pattern.getGreenStartX() + 1, pattern.getGreenStartY(),
+                    // pattern.getGreenEndX() + 50, pattern.getGreenStartY(), p);
             } else if (deviceId == 4) {
                 color = Color.rgb(0, 127, 0);
                 p.setColor(color);
