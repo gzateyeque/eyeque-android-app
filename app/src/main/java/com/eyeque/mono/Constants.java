@@ -21,10 +21,9 @@ public class Constants {
     // public final static String LocalRestfulBaseURL = "http://192.168.110.85:8080";
     public final static String AccessToken = "e46cghc52pqd8kvgqmv8ovsi1ufcfetg";
     public static String RestfulBaseURL = AwsEc2RestfulBaseURL;
-
-    public static String ApiRestfulBaseURL = "http://54.218.73.222/";
-    public static String ContentRestFulBaseURL = "http://54.218.73.222:8080/";
-    public static String UserdataRestfulBaseURL = "http://54.218.73.222:8987/";
+    public static String ApiRestfulBaseURL = "http://apidev.eyeque.com/";
+    public static String ContentRestFulBaseURL = "http://apidev.eyeque.com:8080/";
+    public static String UserdataRestfulBaseURL = "http://apidev.eyeque.com:8987/";
 
     // Line distance scale parameters
     public static final int MINVAL_DEVICE_1 = 270;
