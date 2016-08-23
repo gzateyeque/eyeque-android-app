@@ -1,27 +1,29 @@
 package com.eyeque.mono;
 
-import android.app.AlertDialog;
-import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
-import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebSettings;
-import android.webkit.WebViewClient;
 import android.widget.ImageView;
+import android.graphics.Typeface;
 import android.graphics.BitmapFactory;
 import android.graphics.Bitmap;
 import android.graphics.Paint;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.webkit.WebView;
-import android.widget.Toast;
 import android.widget.TextView;
+import android.widget.Button;
+import android.widget.ProgressBar;
+import android.widget.TableLayout;
+import android.widget.TableRow;
+import android.view.ViewGroup.LayoutParams;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -42,7 +44,6 @@ public class DashboardFragment extends Fragment {
     private String mParam2;
     private WebView trackingDataOdWebView;
     private WebView trackingDataOsWebView;
-
     private OnFragmentInteractionListener mListener;
 
     public DashboardFragment() {
@@ -88,6 +89,214 @@ public class DashboardFragment extends Fragment {
                                 + " "
                                 + SingletonDataHolder.lastName
                                 + ")");
+
+        // Progress bar
+        final ProgressBar progressBar = (ProgressBar) rootView.findViewById(R.id.progessSeekBar);
+        final Button newEyeglassNumberBtn = (Button) rootView.findViewById(R.id.newEyeglassNumber);
+
+        if (true) {
+            progressBar.setProgress(100);
+            newEyeglassNumberBtn.setClickable(true);
+        } else {
+            progressBar.setProgress(90);
+            newEyeglassNumberBtn.setClickable(false);
+            newEyeglassNumberBtn.setBackgroundColor(Color.LTGRAY);
+            newEyeglassNumberBtn.setTextColor(Color.WHITE);
+        }
+
+
+        // Populate EyeGlass record
+        TableLayout tl=(TableLayout) rootView.findViewById(R.id.resultTableLayout);
+        int numRow = 4;
+        for (int i = 0; i < numRow; i++) {
+
+            // Add datetime of the eyeglass number
+            TableRow dateTblRow = new TableRow(this.getContext());
+            dateTblRow.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
+            TextView dataTextView = new TextView(this.getContext());
+            dataTextView.setText("2016-06-20 15:37");
+            //textview.getTextColors(R.color.)
+            dataTextView.setTextColor(Color.BLACK);
+
+            TableRow.LayoutParams dateTextViewParams = new TableRow.LayoutParams();
+            // dateTextViewParams.width = LayoutParams.MATCH_PARENT;
+            // dateTextViewParams.height = LayoutParams.WRAP_CONTENT;
+            dateTextViewParams.column = 0;
+            dateTextViewParams.span = 4;
+            dateTextViewParams.gravity = Gravity.CENTER;
+            dateTextViewParams.topMargin = 20;
+            dateTblRow.addView(dataTextView, dateTextViewParams);
+            tl.addView(dateTblRow);
+
+            // Add datetime of the eyeglass number
+            TableRow  herderTableRow = new TableRow(this.getContext());
+            herderTableRow.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
+
+            TextView sphTextView = new TextView(this.getContext());
+            sphTextView.setTextColor(Color.BLACK);
+            sphTextView.setGravity(1);
+            sphTextView.setText("SPHERICAL");
+            sphTextView.setTextColor(Color.BLACK);
+            sphTextView.setTypeface(null, Typeface.BOLD);
+            TableRow.LayoutParams sphTextViewParams = new TableRow.LayoutParams();
+            sphTextViewParams.width = LayoutParams.MATCH_PARENT;
+            sphTextViewParams.height = LayoutParams.WRAP_CONTENT;
+            sphTextViewParams.column = 1;
+            sphTextViewParams.gravity = Gravity.CENTER;
+            herderTableRow.addView(sphTextView, sphTextViewParams);
+
+            TextView cylTextView = new TextView(this.getContext());
+            cylTextView.setTextColor(Color.BLACK);
+            cylTextView.setGravity(1);
+            cylTextView.setText("CYLINDRICAL");
+            cylTextView.setLayoutParams(new TableRow.LayoutParams(2));
+            cylTextView.setTextColor(Color.BLACK);
+            cylTextView.setTypeface(null, Typeface.BOLD);
+            herderTableRow.addView(cylTextView);
+
+            TextView axisTextView = new TextView(this.getContext());
+            axisTextView.setTextColor(Color.BLACK);
+            axisTextView.setGravity(1);
+            axisTextView.setText("AXIS");
+            axisTextView.setLayoutParams(new TableRow.LayoutParams(3));
+            axisTextView.setTextColor(Color.BLACK);
+            axisTextView.setTypeface(null, Typeface.BOLD);
+            herderTableRow.addView(axisTextView);
+            tl.addView(herderTableRow, new TableLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
+
+
+            //Add OD Values of eyeglass number
+            TableRow  odTableRow = new TableRow(this.getContext());
+            odTableRow.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
+
+            TextView odHeaderTextView = new TextView(this.getContext());
+            odHeaderTextView.setTextColor(Color.BLACK);
+            odHeaderTextView.setGravity(1);
+            odHeaderTextView.setText("OD (Right)");
+            odHeaderTextView.setTextColor(Color.BLACK);
+            odHeaderTextView.setTypeface(null, Typeface.BOLD);
+            TableRow.LayoutParams odHeaderTextViewParams = new TableRow.LayoutParams();
+            odHeaderTextViewParams.width = LayoutParams.MATCH_PARENT;
+            odHeaderTextViewParams.height = LayoutParams.WRAP_CONTENT;
+            odHeaderTextViewParams.column = 0;
+            odHeaderTextViewParams.gravity = Gravity.CENTER;
+            odTableRow.addView(odHeaderTextView, odHeaderTextViewParams);
+
+            TextView odSphTextView = new TextView(this.getContext());
+            odSphTextView.setTextColor(Color.BLACK);
+            odSphTextView.setGravity(1);
+            odSphTextView.setText("-2.25");
+            odSphTextView.setTextColor(Color.BLACK);
+            odSphTextView.setTypeface(null, Typeface.BOLD);
+            TableRow.LayoutParams odSphTextViewParams = new TableRow.LayoutParams();
+            odSphTextViewParams.width = LayoutParams.MATCH_PARENT;
+            odSphTextViewParams.height = LayoutParams.WRAP_CONTENT;
+            odSphTextViewParams.column = 1;
+            odSphTextViewParams.gravity = Gravity.CENTER;
+            odTableRow.addView(odSphTextView, odSphTextViewParams);
+
+
+            TextView odCylTextView = new TextView(this.getContext());
+            odCylTextView.setTextColor(Color.BLACK);
+            odCylTextView.setGravity(1);
+            odCylTextView.setText("-0.50");
+            odCylTextView.setLayoutParams(new TableRow.LayoutParams(2));
+            odCylTextView.setTextColor(Color.BLACK);
+            odCylTextView.setTypeface(null, Typeface.BOLD);
+            TableRow.LayoutParams odCylTextViewParams = new TableRow.LayoutParams();
+            odCylTextViewParams.width = LayoutParams.MATCH_PARENT;
+            odCylTextViewParams.height = LayoutParams.WRAP_CONTENT;
+            odCylTextViewParams.column = 2;
+            odCylTextViewParams.gravity = Gravity.CENTER;
+            odTableRow.addView(odCylTextView, odCylTextViewParams);
+
+            TextView odAxisTextView = new TextView(this.getContext());
+            odAxisTextView.setTextColor(Color.BLACK);
+            odAxisTextView.setGravity(1);
+            odAxisTextView.setText("24");
+            odAxisTextView.setLayoutParams(new TableRow.LayoutParams(3));
+            odAxisTextView.setTextColor(Color.BLACK);
+            odAxisTextView.setTypeface(null, Typeface.BOLD);
+            TableRow.LayoutParams odAxisTextViewParams = new TableRow.LayoutParams();
+            odAxisTextViewParams.width = LayoutParams.MATCH_PARENT;
+            odAxisTextViewParams.height = LayoutParams.WRAP_CONTENT;
+            odAxisTextViewParams.column = 3;
+            odAxisTextViewParams.gravity = Gravity.CENTER;
+            odTableRow.addView(odAxisTextView, odAxisTextViewParams);
+
+            tl.addView(odTableRow, new TableLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
+
+            // Add OS Values of eyeglass number
+            TableRow  osTableRow = new TableRow(this.getContext());
+            // osTableRow.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
+            TableRow.LayoutParams osTAbleRowParams = new TableRow.LayoutParams();
+            osTAbleRowParams.bottomMargin = 20;
+
+            TextView osHeaderTextView = new TextView(this.getContext());
+            osHeaderTextView.setTextColor(Color.BLACK);
+            osHeaderTextView.setGravity(1);
+            osHeaderTextView.setText("OS (Left)");
+            osHeaderTextView.setTextColor(Color.BLACK);
+            osHeaderTextView.setTypeface(null, Typeface.BOLD);
+            TableRow.LayoutParams osHeaderTextViewParams = new TableRow.LayoutParams();
+            osHeaderTextViewParams.width = LayoutParams.MATCH_PARENT;
+            osHeaderTextViewParams.height = LayoutParams.WRAP_CONTENT;
+            osHeaderTextViewParams.column = 0;
+            osHeaderTextViewParams.gravity = Gravity.CENTER;
+            osTableRow.addView(osHeaderTextView, osHeaderTextViewParams);
+
+            TextView osSphTextView = new TextView(this.getContext());
+            osSphTextView.setTextColor(Color.BLACK);
+            osSphTextView.setGravity(1);
+            osSphTextView.setText("-2.75");
+            osSphTextView.setTextColor(Color.BLACK);
+            osSphTextView.setTypeface(null, Typeface.BOLD);
+            TableRow.LayoutParams osSphTextViewParams = new TableRow.LayoutParams();
+            osSphTextViewParams.width = LayoutParams.MATCH_PARENT;
+            osSphTextViewParams.height = LayoutParams.WRAP_CONTENT;
+            osSphTextViewParams.column = 1;
+            osSphTextViewParams.gravity = Gravity.CENTER;
+            osTableRow.addView(osSphTextView, osSphTextViewParams);
+
+
+            TextView osCylTextView = new TextView(this.getContext());
+            osCylTextView.setTextColor(Color.BLACK);
+            osCylTextView.setGravity(1);
+            osCylTextView.setText("-0.25");
+            osCylTextView.setLayoutParams(new TableRow.LayoutParams(2));
+            osCylTextView.setTextColor(Color.BLACK);
+            osCylTextView.setTypeface(null, Typeface.BOLD);
+            TableRow.LayoutParams osCylTextViewParams = new TableRow.LayoutParams();
+            osCylTextViewParams.width = LayoutParams.MATCH_PARENT;
+            osCylTextViewParams.height = LayoutParams.WRAP_CONTENT;
+            osCylTextViewParams.column = 2;
+            osCylTextViewParams.gravity = Gravity.CENTER;
+            osTableRow.addView(osCylTextView, osCylTextViewParams);
+
+            TextView osAxisTextView = new TextView(this.getContext());
+            osAxisTextView.setTextColor(Color.BLACK);
+            osAxisTextView.setGravity(1);
+            osAxisTextView.setText("153");
+            osAxisTextView.setLayoutParams(new TableRow.LayoutParams(3));
+            osAxisTextView.setTextColor(Color.BLACK);
+            osAxisTextView.setTypeface(null, Typeface.BOLD);
+            TableRow.LayoutParams osAxisTextViewParams = new TableRow.LayoutParams();
+            osAxisTextViewParams.width = LayoutParams.MATCH_PARENT;
+            osAxisTextViewParams.height = LayoutParams.WRAP_CONTENT;
+            osAxisTextViewParams.column = 3;
+            osAxisTextViewParams.gravity = Gravity.CENTER;
+            osTableRow.addView(osAxisTextView, osAxisTextViewParams);
+
+            tl.addView(osTableRow, osTAbleRowParams);
+
+            if (i < numRow - 1) {
+                TextView divLine = new TextView(this.getContext());
+                divLine.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, 1));
+                divLine.setBackgroundColor(Color.rgb(51, 51, 51));
+                tl.addView(divLine);
+            }
+        }
+
 
         BitmapFactory.Options myOptions = new BitmapFactory.Options();
         myOptions.inDither = true;
