@@ -1,9 +1,6 @@
 package com.eyeque.mono;
 
-import android.app.AlertDialog;
-import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
@@ -14,18 +11,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebSettings;
-import android.webkit.WebViewClient;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.graphics.BitmapFactory;
-import android.graphics.Bitmap;
-import android.graphics.Paint;
-import android.graphics.Canvas;
-import android.graphics.Color;
 import android.webkit.WebView;
-import android.widget.Toast;
-
+import android.webkit.WebViewClient;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.ListView;
 import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -49,6 +42,14 @@ public class SettingFragment extends Fragment {
 
     // Database instance
     private static SQLiteDatabase myDb = null;
+    private WebView webview;
+
+    // Data container for list view
+    ArrayList<String> listItems = new ArrayList<String>();
+    // Defining a string adapter whcih will handle the data of the ListView
+    ArrayAdapter<String> adapter;
+    int clickCounter = 0;  // record how many times the button has been clicked
+    String[] items;
 
     public SettingFragment() {
         // Required empty public constructor
@@ -85,10 +86,44 @@ public class SettingFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         int color;
+
         View rootView = inflater.inflate(R.layout.fragment_setting, container, false);
 
+        final ListView settingListView = (ListView) rootView.findViewById(R.id.settingListView);
+        listItems.add("Account Information");
+        listItems.add("Buy Device");
+        listItems.add("Frequent Asked Questions");
+        listItems.add("About");
+        adapter = new ArrayAdapter<String>(rootView.getContext(), android.R.layout.simple_list_item_1, listItems);
+        settingListView.setAdapter(adapter);
+
+        settingListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Uri uri;
+                Intent intent;
+                switch (position) {
+                    case 1:
+                        uri = Uri.parse(Constants.UrlBuyDevice);
+                        intent = new Intent(Intent.ACTION_VIEW, uri);
+                        startActivity(intent);
+                        break;
+                    case 2:
+                        uri = Uri.parse("http://api.eyeque.com:8080/tmpweb/#/page/faq");
+                        intent = new Intent(Intent.ACTION_VIEW, uri);
+                        startActivity(intent);
+                        break;
+                    case 3:
+                        intent = new Intent(getActivity(), AboutActivity.class);
+                        startActivity(intent);
+                        break;
+                    default:
+                        break;
+                }
+            }
+        });
+
         try {
-            String email, token;
             DatabaseHelper dbHelper = new DatabaseHelper(container.getContext());
             myDb = dbHelper.getWritableDatabase();
             Log.d("TAG", "open database successfully");
@@ -101,6 +136,27 @@ public class SettingFragment extends Fragment {
         // return inflater.inflate(R.layout.fragment_dashboard, container, false);
         // Check local persistent mono.db database
 
+        this.webview = (WebView) rootView.findViewById(R.id.bannerWebView);
+        WebSettings settings = webview.getSettings();
+        settings.setJavaScriptEnabled(true);
+        // webview.setScrollBarStyle(WebView.SCROLLBARS_OUTSIDE_OVERLAY);
+        webview.getSettings().setLoadWithOverviewMode(true);
+        webview.getSettings().setUseWideViewPort(true);
+
+        webview.setWebViewClient(new WebViewClient() {
+            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                view.loadUrl(url);
+                return true;
+            }
+
+            public void onPageFinished(WebView view, String url) {
+            }
+
+            public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
+                view.loadUrl("about:blank");
+            }
+        });
+        webview.loadUrl(Constants.UrlBanner);
         Button logoutButton = (Button) rootView.findViewById(R.id.logoutButton);
         logoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
