@@ -54,7 +54,7 @@
                 android:text="MyEyeQue Android App"
                 android:id="@+id/appTextStringView"
                 android:layout_below="@+id/LogoImageView"
-                android:textSize="20sp"
+                android:textSize="22sp"
                 android:layout_centerHorizontal="true" >
             </TextView>
 
@@ -67,7 +67,7 @@
                 android:text="Version 1.0.1"
                 android:id="@+id/verTextStringView"
                 android:layout_below="@+id/appTextStringView"
-                android:textSize="14sp"
+                android:textSize="16sp"
                 android:layout_centerHorizontal="true" >
             </TextView>
 
@@ -81,7 +81,7 @@
                 android:id="@+id/rateAppTextStringView"
                 android:layout_below="@+id/verTextStringView"
                 android:textColor="@android:color/holo_blue_light"
-                android:textSize="13sp"
+                android:textSize="16sp"
                 android:layout_centerHorizontal="true" >
             </TextView>
 
@@ -91,10 +91,10 @@
                 android:layout_marginTop = "50dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:text="For more information, please visit EyeQue website"
+                android:text="Visit EyeQue.com for more information"
                 android:id="@+id/visitWebTextStringView"
                 android:layout_below="@+id/rateAppTextStringView"
-                android:textSize="14sp"
+                android:textSize="16sp"
                 android:layout_centerHorizontal="true" >
             </TextView>
 
@@ -104,18 +104,18 @@
                 android:layout_marginTop = "10dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:text="www.eyeque.com"
+                android:text="www.EyeQue.com"
                 android:id="@+id/websiteTextStringView"
                 android:layout_below="@+id/visitWebTextStringView"
                 android:textColor="@android:color/holo_blue_light"
-                android:textSize="13sp"
+                android:textSize="17sp"
                 android:layout_centerHorizontal="true" >
             </TextView>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop = "100dp"
+                android:layout_marginTop = "160dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:text="Copyright &#169; EyeQue Corp. All Rights Reserved"
