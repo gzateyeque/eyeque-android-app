@@ -2,9 +2,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
     android:id="@+id/fragmentSetting"
     tools:context="com.eyeque.mono.SettingFragment"
-    android:background="#F9F7F9">
+    android:background="@color/colorLayoutBase">
 
     <ScrollView
         android:layout_width="fill_parent"
@@ -15,20 +16,22 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="#F9F7F9"
-            android:fitsSystemWindows="true"
             >
-            <TextView
-                android:id="@+id/testTitle"
-                android:layout_width="match_parent"
-                android:layout_height="50dip"
-                android:gravity="center_vertical"
-                android:text="SETTING PAGES v0.9.5"
-                android:textStyle="bold"
-                android:textSize="16sp"
-                android:textColor="#1DADF3"
-                android:paddingStart="15dip"
-                android:layout_below="@+id/resultTableLayout"
-                android:layout_alignParentStart="true" />
+
+            <WebView
+                android:id="@+id/bannerWebView"
+                android:layout_width="fill_parent"
+                android:layout_height="175dp"
+                android:scaleType="fitXY">
+            </WebView>
+
+            <ListView
+                android:id="@+id/settingListView"
+                android:layout_width="fill_parent"
+                android:layout_height="300sp"
+                android:drawSelectorOnTop="false"
+                android:headerDividersEnabled="true"
+                android:layout_below="@+id/bannerWebView" />
 
             <Button
                 android:id="@+id/logoutButton"
