@@ -37,14 +37,23 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop = "50dp"
+                android:layout_marginLeft="100dp"
+                android:layout_marginRight="100dp"
+                android:src="@drawable/eyeque_logo"
+                android:id="@+id/LogoImageView"
+                 />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop = "100dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
+                android:layout_marginTop = "10dp"
                 android:text="MyEyeQue Android App"
                 android:id="@+id/appTextStringView"
+                android:layout_below="@+id/LogoImageView"
                 android:textSize="20sp"
                 android:layout_centerHorizontal="true" >
             </TextView>
@@ -99,6 +108,19 @@
                 android:id="@+id/websiteTextStringView"
                 android:layout_below="@+id/visitWebTextStringView"
                 android:textColor="@android:color/holo_blue_light"
+                android:textSize="13sp"
+                android:layout_centerHorizontal="true" >
+            </TextView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop = "100dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:text="Copyright &#169; EyeQue Corp. All Rights Reserved"
+                android:id="@+id/copyrightTextStringView"
+                android:layout_below="@+id/websiteTextStringView"
                 android:textSize="13sp"
                 android:layout_centerHorizontal="true" >
             </TextView>
