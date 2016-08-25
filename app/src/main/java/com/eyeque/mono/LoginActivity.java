@@ -734,6 +734,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                         SingletonDataHolder.userId = Integer.parseInt(jsonResponse.getString("id"));
                         SingletonDataHolder.firstName = jsonResponse.getString("firstname");
                         SingletonDataHolder.lastName = jsonResponse.getString("lastname");
+                        SingletonDataHolder.deviceSerialNum = "";
                         Log.i("*** customer id ***", Integer.toString(SingletonDataHolder.userId));
 
                         if (jsonResponse.has("custom_attributes")) {
@@ -756,6 +757,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                                     } else {
                                         Log.i("********5*********", "false");
                                         isOnBoardNeeded = false;
+                                        SingletonDataHolder.deviceSerialNum = attrValue;
                                         Intent topIntent = new Intent(getBaseContext(), TopActivity.class);
                                         startActivity(topIntent);
                                     }
