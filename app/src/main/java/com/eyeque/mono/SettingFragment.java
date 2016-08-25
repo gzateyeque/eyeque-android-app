@@ -90,7 +90,7 @@ public class SettingFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_setting, container, false);
 
         final ListView settingListView = (ListView) rootView.findViewById(R.id.settingListView);
-        listItems.add("Account Information");
+        listItems.add("Account");
         listItems.add("Buy Device");
         listItems.add("Frequent Asked Questions");
         listItems.add("About");
@@ -103,6 +103,10 @@ public class SettingFragment extends Fragment {
                 Uri uri;
                 Intent intent;
                 switch (position) {
+                    case 0:
+                        intent = new Intent(getActivity(), AccountActivity.class);
+                        startActivity(intent);
+                        break;
                     case 1:
                         uri = Uri.parse(Constants.UrlBuyDevice);
                         intent = new Intent(Intent.ACTION_VIEW, uri);
