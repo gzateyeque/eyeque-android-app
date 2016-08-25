@@ -9,6 +9,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
@@ -20,12 +21,31 @@ import android.view.ViewGroup.LayoutParams;
 import android.widget.PopupWindow;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.RetryPolicy;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
+
 
 public class ResultActivity extends Activity {
 
     private static int subjectId;
     private static int deviceId;
     private static int serverId;
+    private static int testId;
+    private static int confirmCode = 2;
     private static double odSph;
     private static double odCyl;
     private static double odAxis;
@@ -73,6 +93,7 @@ public class ResultActivity extends Activity {
         else
             numMeasurement = 6;
 
+        testId = getIntent().getIntExtra("TestId", 0);
         odSph = getIntent().getDoubleExtra("ODS", 0.00);
         odCyl = getIntent().getDoubleExtra("ODC", 0.00);
         odAxis = getIntent().getDoubleExtra("ODA", 0.00);
@@ -273,10 +294,8 @@ public class ResultActivity extends Activity {
                 alertDialog.setPositiveButton("YES",
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
-                                Toast.makeText(ResultActivity.this, "Test Discarded", Toast.LENGTH_SHORT).show();
-                                finish();
-                                Intent i = new Intent(getBaseContext(), TopActivity.class);
-                                startActivity(i);
+                                confirmCode = 1;
+                                ConfirmTest();
                             }
                         });
 
@@ -300,8 +319,8 @@ public class ResultActivity extends Activity {
             @Override
             public void onClick(View v) {
                 // Toast.makeText(ResultActivity.this, "Record Discarded", Toast.LENGTH_SHORT).show();
-                Intent i = new Intent(getBaseContext(), TopActivity.class);
-                startActivity(i);
+                confirmCode = 2;
+                ConfirmTest();
             }
         });
 
@@ -437,6 +456,73 @@ public class ResultActivity extends Activity {
         });
         ****/
 
+    }
+
+    private void ConfirmTest() {
+
+        String url = Constants.UrlConfirmTest;
+        NetConnection conn = new NetConnection();
+        if (conn.isConnected(getApplicationContext())) {
+
+            // Show a progress spinner, and kick off a background task to
+            // perform the user login attempt.
+            // showProgress(true);
+
+            RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
+
+            final JSONObject params = new JSONObject();
+            try {
+                params.put("test_condition_id", testId);
+                params.put("discarded", confirmCode);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            StringRequest postRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+                    Log.i(TAG, response);
+                    if (confirmCode == 2)
+                        Toast.makeText(ResultActivity.this, "Test Saved", Toast.LENGTH_SHORT).show();
+                    else
+                        Toast.makeText(ResultActivity.this, "Test Discarded", Toast.LENGTH_SHORT).show();
+                    Intent i = new Intent(getBaseContext(), TopActivity.class);
+                    startActivity(i);
+                    finish();
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    // showProgress(false);
+                    Log.d("Error.Response", error.toString());
+                    Toast.makeText(ResultActivity.this, "Save failed, please try it again", Toast.LENGTH_SHORT).show();
+                }
+            }) {
+                @Override
+                public byte[] getBody() throws AuthFailureError {
+                    Log.i("$$$---DC JSON---$$$", params.toString());
+                    return params.toString().getBytes();
+                }
+
+                @Override
+                public String getBodyContentType() {
+                    return "application/json";
+                }
+
+                @Override
+                public Map<String, String> getHeaders() throws AuthFailureError {
+                    Map<String, String> headers = new HashMap<>();
+                    String authString = "Bearer " + SingletonDataHolder.token;
+                    headers.put("Content-Type", "application/json;charset=UTF-8");
+                    headers.put("Authorization", authString);
+                    Log.i("$$$---HEADER---$$$", headers.toString());
+                    return headers;
+                }
+            };
+            RetryPolicy policy = new DefaultRetryPolicy(Constants.NETCONN_TIMEOUT_VALUE, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+            postRequest.setRetryPolicy(policy);
+            queue.add(postRequest);
+        } else
+            Toast.makeText(ResultActivity.this, "Network Connection Failed", Toast.LENGTH_SHORT).show();
     }
 
 }

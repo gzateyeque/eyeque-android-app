@@ -24,6 +24,11 @@ public class SingletonDataHolder {
     public static String deviceSerialNum = "";
     public static int screenProtect = 0;
     public static int wearGlasses = 0;
+    public static String urlOdTracking = "";
+    public static String urlOSTracking = "";
+    public static String urlVsiionSummary = "";
+    public static int score = 0;
+    public static Boolean eyeglassNumPurchasable= false;
 
     // Session method
     // public static int getLoginType() { return loginType; }

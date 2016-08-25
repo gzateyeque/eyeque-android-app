@@ -643,8 +643,10 @@ public class MainActivity extends Activity {
                     Intent resultIntent = new Intent(getBaseContext(), ResultActivity.class);
                     try {
                         final JSONObject result = new JSONObject(response);
+                        resultIntent.putExtra("TestId", result.getInt("test_condition_id"));
                         resultIntent.putExtra("ODE", String.format("%.2f", Double.parseDouble(result.getString("sphe_od"))));
                         resultIntent.putExtra("OSE", String.format("%.2f", Double.parseDouble(result.getString("sphe_os"))));
+
                         /**** For video shooting
                         resultIntent.putExtra("ODE", "-2.25");
                         resultIntent.putExtra("OSE", "-2.75");

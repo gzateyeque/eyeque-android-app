@@ -56,6 +56,8 @@ public class Constants {
     public static final String UrlSocMediaSignUp = ApiRestfulBaseURL + "index.php/rest/V1/socialcustomers";
     public static final String UrlPhoneConfig = ApiRestfulBaseURL + "index.php/rest/eyecloud/api/V2/devices";
     public static final String UrlUploadTest = ApiRestfulBaseURL + "index.php/rest/eyecloud/api/V2/tests";
+    public static final String UrlConfirmTest = ApiRestfulBaseURL + "index.php/rest/eyecloud/api/V2/discardtest";
+    public static final String UrlDashboard = ApiRestfulBaseURL + "index.php/rest/eyecloud/api/V2/getdashboardinfo";
 
     // Database parameters
     public static final String DB_NAME = "scope.db";
