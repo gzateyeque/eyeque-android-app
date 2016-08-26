@@ -179,6 +179,10 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 view.loadUrl("about:blank");
             }
         });
+        NetConnection conn = new NetConnection();
+        if (!conn.isConnected(getApplicationContext())) {
+            webview.getSettings().setCacheMode( WebSettings.LOAD_CACHE_ELSE_NETWORK );
+        }
         webview.loadUrl(Constants.UrlBanner);
 
         // Set up the login form.
