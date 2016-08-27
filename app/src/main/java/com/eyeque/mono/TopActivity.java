@@ -109,7 +109,11 @@ public class TopActivity extends AppCompatActivity
         // bottomBar.setActiveTabColor("#C2185B");
         bottomBar.setActiveTabColor("#046EEA");
         selectMenuItem(R.id.home_item);
-        CheckPhoneCompatibility();
+        NetConnection conn = new NetConnection();
+        if (conn.isConnected(getApplicationContext())) {
+            CheckPhoneCompatibility();
+        }
+
 
         // ft.add(R.id.frame_container, new DashboardFragment(), "dashboard");
         // alternatively add it with a tag
