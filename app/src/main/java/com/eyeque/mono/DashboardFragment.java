@@ -69,6 +69,7 @@ public class DashboardFragment extends Fragment {
     private WebView visionSummarydWebView;
     private WebView trackingDataOdWebView;
     private WebView trackingDataOsWebView;
+    private TableRow pdTblRow;
     private TableRow dateTblRow;
     private TableRow herderTableRow;
     private TableRow odTableRow;
@@ -468,14 +469,15 @@ public class DashboardFragment extends Fragment {
                         final JSONObject eyeglassResult = result.getJSONObject("eyeglassnumbers");
                         final JSONArray eyeglassNumList = eyeglassResult.getJSONArray("purchasednumbers");
 
-                        SingletonDataHolder.currentTestScore = eyeglassResult.getInt("score");
-                        SingletonDataHolder.eyeglassNumPurchasable = eyeglassResult.getBoolean("purchasable");
                         SingletonDataHolder.urlOdTracking = result.getString("url_spheod");
                         SingletonDataHolder.urlOSTracking = result.getString("url_spheos");
                         SingletonDataHolder.urlVisionSummary = result.getString("url_vision_summary");
+                        SingletonDataHolder.pupillaryDistance = eyeglassResult.getInt("pd") + 62;
+                        SingletonDataHolder.currentTestScore = eyeglassResult.getInt("score");
+                        SingletonDataHolder.eyeglassNumPurchasable = eyeglassResult.getBoolean("purchasable");
                         SingletonDataHolder.eyeglassNumCount = eyeglassNumList.length();
 
-                        Log.i("*eyeglassNumCount*", Integer.toString(SingletonDataHolder.eyeglassNumCount));
+                        Log.i("*****PD******", Integer.toString(SingletonDataHolder.pupillaryDistance));
                         Log.i("*** Purchasable ***", Boolean.toString(SingletonDataHolder.eyeglassNumPurchasable));
 
                         SingletonDataHolder.eyeglassNumberList = new SingletonDataHolder.EyeglassNumber[SingletonDataHolder.eyeglassNumCount];
@@ -563,6 +565,8 @@ public class DashboardFragment extends Fragment {
 
     private void loadEyeglassNumber() {
 
+        if (pdTblRow != null)
+            eyeglassTableLayout.removeView(pdTblRow);
         if (dateTblRow != null)
             eyeglassTableLayout.removeView(dateTblRow);
         if (odTableRow != null)
@@ -571,12 +575,28 @@ public class DashboardFragment extends Fragment {
             eyeglassTableLayout.removeView(osTableRow);
         if (osTableRow != null)
             eyeglassTableLayout.removeView(herderTableRow);
+
+        if (SingletonDataHolder.pupillaryDistance > 0) {
+            pdTblRow = new TableRow(getActivity());
+            pdTblRow.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
+            TextView pdTextView = new TextView(getActivity());
+            pdTextView.setText("PD: " + Integer.toString(SingletonDataHolder.pupillaryDistance));
+            pdTextView.setTextColor(Color.BLACK);
+            TableRow.LayoutParams pdTextViewParams = new TableRow.LayoutParams();
+            pdTextViewParams.column = 0;
+            pdTextViewParams.span = 4;
+            pdTextViewParams.gravity = Gravity.CENTER;
+            pdTextViewParams.topMargin = 20;
+            pdTblRow.addView(pdTextView, pdTextViewParams);
+            eyeglassTableLayout.addView(pdTblRow);
+        }
         for (int i = 0; i < SingletonDataHolder.eyeglassNumCount; i++) {
 
             // Add datetime of the eyeglass number
-            dateTblRow = new TableRow(this.getContext());
+            // dateTblRow = new TableRow(this.getContext());
+            dateTblRow = new TableRow(getActivity());
             dateTblRow.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
-            TextView dataTextView = new TextView(this.getContext());
+            TextView dataTextView = new TextView(getActivity());
             dataTextView.setText(SingletonDataHolder.eyeglassNumberList[i].createdAt);
             //textview.getTextColors(R.color.)
             dataTextView.setTextColor(Color.BLACK);
@@ -592,10 +612,10 @@ public class DashboardFragment extends Fragment {
             eyeglassTableLayout.addView(dateTblRow);
 
             // Add datetime of the eyeglass number
-            herderTableRow = new TableRow(this.getContext());
+            herderTableRow = new TableRow(getActivity());
             herderTableRow.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
 
-            TextView sphTextView = new TextView(this.getContext());
+            TextView sphTextView = new TextView(getActivity());
             sphTextView.setTextColor(Color.BLACK);
             sphTextView.setGravity(1);
             sphTextView.setText("SPHERICAL");
@@ -608,7 +628,7 @@ public class DashboardFragment extends Fragment {
             sphTextViewParams.gravity = Gravity.CENTER;
             herderTableRow.addView(sphTextView, sphTextViewParams);
 
-            TextView cylTextView = new TextView(this.getContext());
+            TextView cylTextView = new TextView(getActivity());
             cylTextView.setTextColor(Color.BLACK);
             cylTextView.setGravity(1);
             cylTextView.setText("CYLINDRICAL");
@@ -617,7 +637,7 @@ public class DashboardFragment extends Fragment {
             cylTextView.setTypeface(null, Typeface.BOLD);
             herderTableRow.addView(cylTextView);
 
-            TextView axisTextView = new TextView(this.getContext());
+            TextView axisTextView = new TextView(getActivity());
             axisTextView.setTextColor(Color.BLACK);
             axisTextView.setGravity(1);
             axisTextView.setText("AXIS");
@@ -629,10 +649,10 @@ public class DashboardFragment extends Fragment {
 
 
             //Add OD Values of eyeglass number
-            odTableRow = new TableRow(this.getContext());
+            odTableRow = new TableRow(getActivity());
             odTableRow.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
 
-            TextView odHeaderTextView = new TextView(this.getContext());
+            TextView odHeaderTextView = new TextView(getActivity());
             odHeaderTextView.setTextColor(Color.BLACK);
             odHeaderTextView.setGravity(1);
             odHeaderTextView.setText("OD (Right)");
@@ -645,7 +665,7 @@ public class DashboardFragment extends Fragment {
             odHeaderTextViewParams.gravity = Gravity.CENTER;
             odTableRow.addView(odHeaderTextView, odHeaderTextViewParams);
 
-            TextView odSphTextView = new TextView(this.getContext());
+            TextView odSphTextView = new TextView(getActivity());
             odSphTextView.setTextColor(Color.BLACK);
             odSphTextView.setGravity(1);
             odSphTextView.setText(String.format("%.2f", SingletonDataHolder.eyeglassNumberList[i].odSph));
@@ -659,7 +679,7 @@ public class DashboardFragment extends Fragment {
             odTableRow.addView(odSphTextView, odSphTextViewParams);
 
 
-            TextView odCylTextView = new TextView(this.getContext());
+            TextView odCylTextView = new TextView(getActivity());
             odCylTextView.setTextColor(Color.BLACK);
             odCylTextView.setGravity(1);
             odCylTextView.setText(String.format("%.2f", SingletonDataHolder.eyeglassNumberList[i].odCyl));
@@ -673,7 +693,7 @@ public class DashboardFragment extends Fragment {
             odCylTextViewParams.gravity = Gravity.CENTER;
             odTableRow.addView(odCylTextView, odCylTextViewParams);
 
-            TextView odAxisTextView = new TextView(this.getContext());
+            TextView odAxisTextView = new TextView(getActivity());
             odAxisTextView.setTextColor(Color.BLACK);
             odAxisTextView.setGravity(1);
             odAxisTextView.setText(Integer.toString(SingletonDataHolder.eyeglassNumberList[i].odAxis));
@@ -690,12 +710,12 @@ public class DashboardFragment extends Fragment {
             eyeglassTableLayout.addView(odTableRow, new TableLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
 
             // Add OS Values of eyeglass number
-            osTableRow = new TableRow(this.getContext());
+            osTableRow = new TableRow(getActivity());
             // osTableRow.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
             TableRow.LayoutParams osTAbleRowParams = new TableRow.LayoutParams();
             osTAbleRowParams.bottomMargin = 20;
 
-            TextView osHeaderTextView = new TextView(this.getContext());
+            TextView osHeaderTextView = new TextView(getActivity());
             osHeaderTextView.setTextColor(Color.BLACK);
             osHeaderTextView.setGravity(1);
             osHeaderTextView.setText("OS (Left)");
@@ -708,7 +728,7 @@ public class DashboardFragment extends Fragment {
             osHeaderTextViewParams.gravity = Gravity.CENTER;
             osTableRow.addView(osHeaderTextView, osHeaderTextViewParams);
 
-            TextView osSphTextView = new TextView(this.getContext());
+            TextView osSphTextView = new TextView(getActivity());
             osSphTextView.setTextColor(Color.BLACK);
             osSphTextView.setGravity(1);
             osSphTextView.setText(String.format("%.2f", SingletonDataHolder.eyeglassNumberList[i].osSph));
@@ -722,7 +742,7 @@ public class DashboardFragment extends Fragment {
             osTableRow.addView(osSphTextView, osSphTextViewParams);
 
 
-            TextView osCylTextView = new TextView(this.getContext());
+            TextView osCylTextView = new TextView(getActivity());
             osCylTextView.setTextColor(Color.BLACK);
             osCylTextView.setGravity(1);
             osCylTextView.setText(String.format("%.2f", SingletonDataHolder.eyeglassNumberList[i].osCyl));
@@ -736,7 +756,7 @@ public class DashboardFragment extends Fragment {
             osCylTextViewParams.gravity = Gravity.CENTER;
             osTableRow.addView(osCylTextView, osCylTextViewParams);
 
-            TextView osAxisTextView = new TextView(this.getContext());
+            TextView osAxisTextView = new TextView(getActivity());
             osAxisTextView.setTextColor(Color.BLACK);
             osAxisTextView.setGravity(1);
             osAxisTextView.setText(Integer.toString(SingletonDataHolder.eyeglassNumberList[i].osAxis));
@@ -753,7 +773,7 @@ public class DashboardFragment extends Fragment {
             eyeglassTableLayout.addView(osTableRow, osTAbleRowParams);
 
             if (i < SingletonDataHolder.eyeglassNumCount - 1) {
-                TextView divLine = new TextView(this.getContext());
+                TextView divLine = new TextView(getActivity());
                 divLine.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, 1));
                 divLine.setBackgroundColor(Color.rgb(51, 51, 51));
                 eyeglassTableLayout.addView(divLine);
