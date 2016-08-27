@@ -59,7 +59,7 @@
                     android:max="100"
                     android:clickable="false"
                     android:layout_centerHorizontal="true"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="0dp"
                     android:layout_marginLeft="30dp"
                     android:layout_marginRight="30dp" />
 
@@ -67,7 +67,7 @@
                     android:id="@+id/eyeglassNumberDescription"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="0dp"
                     android:text="Your new eyeglass number is available"
                     android:textSize="16sp"
                     android:gravity="center"
@@ -78,7 +78,7 @@
                     style="?android:textAppearanceSmall"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="5dp"
                     android:text="Get new eyeglasss number"
                     android:textStyle="bold"
                     android:background="@android:color/holo_orange_dark"
@@ -91,8 +91,8 @@
                 <TableLayout
                     android:id="@+id/resultTableLayout"
                     android:layout_below="@+id/scoreLayout"
-                    android:layout_marginTop = "5sp"
-                    android:layout_marginBottom="10sp"
+                    android:layout_marginTop = "10sp"
+                    android:layout_marginBottom="5sp"
                     android:stretchColumns="*"
                     android:background="#FFFFFF"
                     android:layout_width="fill_parent"
@@ -215,6 +215,16 @@
 
                     -->
                 </TableLayout>
+
+                <ImageButton
+                    android:id="@+id/expandButton"
+                    android:layout_width="40dp"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="0dp"
+                    android:layout_gravity="center"
+                    android:adjustViewBounds="true"
+                    android:scaleType="fitXY" >
+                </ImageButton>
             </LinearLayout>
 
             <TextView
