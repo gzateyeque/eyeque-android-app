@@ -1,6 +1,7 @@
 package com.eyeque.mono;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
@@ -10,12 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebSettings;
-import android.widget.ImageView;
 import android.graphics.Typeface;
-import android.graphics.BitmapFactory;
-import android.graphics.Bitmap;
-import android.graphics.Paint;
-import android.graphics.Canvas;
 import android.graphics.Color;
 import android.webkit.WebView;
 import android.widget.TextView;
@@ -25,7 +21,6 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.Toast;
-
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
@@ -35,11 +30,9 @@ import com.android.volley.RetryPolicy;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -351,9 +344,6 @@ public class DashboardFragment extends Fragment {
 
         // Show vision summary webview
         visionSummarydWebView = (WebView) rootView.findViewById(R.id.visionSummaryWebView);
-        // WebSettings settings0 = visionSummarydWebView.getSettings();
-        // settings0.setJavaScriptEnabled(true);
-        // webview.setScrollBarStyle(WebView.SCROLLBARS_OUTSIDE_OVERLAY);
         visionSummarydWebView.getSettings().setLoadWithOverviewMode(true);
         visionSummarydWebView.getSettings().setUseWideViewPort(true);
         visionSummarydWebView.getSettings().setAppCachePath( getActivity().getCacheDir().getAbsolutePath() );
@@ -361,11 +351,6 @@ public class DashboardFragment extends Fragment {
         visionSummarydWebView.getSettings().setAppCacheEnabled( true );
         visionSummarydWebView.getSettings().setJavaScriptEnabled( true );
         visionSummarydWebView.getSettings().setCacheMode( WebSettings.LOAD_DEFAULT ); // load online by default
-
-
-
-
-        // visionSummarydWebView.loadUrl(SingletonDataHolder.urlVisionSummary);
 
         // Rendering tracking data
         trackingDataOdWebView = (WebView) rootView.findViewById(R.id.trackingDataOdWebView);
@@ -376,8 +361,6 @@ public class DashboardFragment extends Fragment {
         trackingDataOdWebView.getSettings().setAppCacheEnabled( true );
         trackingDataOdWebView.getSettings().setJavaScriptEnabled( true );
         trackingDataOdWebView.getSettings().setCacheMode( WebSettings.LOAD_DEFAULT ); // load online by default
-
-        // trackingDataOdWebView.loadUrl(SingletonDataHolder.urlOdTracking);
 
         trackingDataOsWebView = (WebView) rootView.findViewById(R.id.trackingDataOsWebView);
         trackingDataOsWebView.getSettings().setLoadWithOverviewMode(true);
@@ -401,9 +384,13 @@ public class DashboardFragment extends Fragment {
         }
         // trackingDataOsWebView.loadUrl(SingletonDataHolder.urlOSTracking);
 
-        // Log.i("**** DEBUG ****", "Recall onCreate()");
-        // Inflate the layout for this fragment
-        // return inflater.inflate(R.layout.fragment_dashboard, container, false);
+
+        newEyeglassNumberBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                GetNewEyeglassNumber();
+            }
+        });
         return rootView;
     }
 
@@ -472,7 +459,7 @@ public class DashboardFragment extends Fragment {
                         SingletonDataHolder.urlOdTracking = result.getString("url_spheod");
                         SingletonDataHolder.urlOSTracking = result.getString("url_spheos");
                         SingletonDataHolder.urlVisionSummary = result.getString("url_vision_summary");
-                        SingletonDataHolder.pupillaryDistance = eyeglassResult.getInt("pd") + 62;
+                        // SingletonDataHolder.pupillaryDistance = eyeglassResult.getInt("pd") + 62;
                         SingletonDataHolder.currentTestScore = eyeglassResult.getInt("score");
                         SingletonDataHolder.eyeglassNumPurchasable = eyeglassResult.getBoolean("purchasable");
                         SingletonDataHolder.eyeglassNumCount = eyeglassNumList.length();
@@ -491,6 +478,10 @@ public class DashboardFragment extends Fragment {
                                     eyeglassNumber.getDouble("cylOS"),
                                     eyeglassNumber.getInt("axisOS"),
                                     eyeglassNumber.getString("createdAt"));
+                            Log.i("***--- AXIS-0 ---***", Integer.toString(SingletonDataHolder.eyeglassNumberList[i].odAxis));
+                        }
+                        for (int i = 0; i < SingletonDataHolder.eyeglassNumCount; i++) {
+                            Log.i("***--- AXIS-1 ---***", Integer.toString(SingletonDataHolder.eyeglassNumberList[i].odAxis));
                         }
                         loadData();
                         loadEyeglassNumber();
@@ -576,6 +567,9 @@ public class DashboardFragment extends Fragment {
         if (osTableRow != null)
             eyeglassTableLayout.removeView(herderTableRow);
 
+        for (int i = 0; i < SingletonDataHolder.eyeglassNumCount; i++) {
+            Log.i("***--- AXIS-2 ---***", Integer.toString(SingletonDataHolder.eyeglassNumberList[i].odAxis));
+        }
         if (SingletonDataHolder.pupillaryDistance > 0) {
             pdTblRow = new TableRow(getActivity());
             pdTblRow.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
@@ -587,9 +581,21 @@ public class DashboardFragment extends Fragment {
             pdTextViewParams.span = 4;
             pdTextViewParams.gravity = Gravity.CENTER;
             pdTextViewParams.topMargin = 20;
+            pdTextViewParams.bottomMargin = 10;
             pdTblRow.addView(pdTextView, pdTextViewParams);
             eyeglassTableLayout.addView(pdTblRow);
         }
+
+        if (SingletonDataHolder.eyeglassNumCount > 0) {
+            TextView divLine = new TextView(getActivity());
+            divLine.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, 1));
+            divLine.setBackgroundColor(Color.rgb(51, 51, 51));
+            eyeglassTableLayout.addView(divLine);
+        }
+        for (int i = 0; i < SingletonDataHolder.eyeglassNumCount; i++) {
+            Log.i("***--- AXIS-3 ---***", Integer.toString(SingletonDataHolder.eyeglassNumberList[i].odAxis));
+        }
+
         for (int i = 0; i < SingletonDataHolder.eyeglassNumCount; i++) {
 
             // Add datetime of the eyeglass number
@@ -607,7 +613,7 @@ public class DashboardFragment extends Fragment {
             dateTextViewParams.column = 0;
             dateTextViewParams.span = 4;
             dateTextViewParams.gravity = Gravity.CENTER;
-            dateTextViewParams.topMargin = 20;
+            dateTextViewParams.topMargin = 10;
             dateTblRow.addView(dataTextView, dateTextViewParams);
             eyeglassTableLayout.addView(dateTblRow);
 
@@ -696,6 +702,7 @@ public class DashboardFragment extends Fragment {
             TextView odAxisTextView = new TextView(getActivity());
             odAxisTextView.setTextColor(Color.BLACK);
             odAxisTextView.setGravity(1);
+            Log.i("***--- AXIS ---***", Integer.toString(SingletonDataHolder.eyeglassNumberList[i].odAxis));
             odAxisTextView.setText(Integer.toString(SingletonDataHolder.eyeglassNumberList[i].odAxis));
             odAxisTextView.setLayoutParams(new TableRow.LayoutParams(3));
             odAxisTextView.setTextColor(Color.BLACK);
@@ -780,4 +787,53 @@ public class DashboardFragment extends Fragment {
             }
         }
     }
+
+    private void GetNewEyeglassNumber() {
+
+        String url = Constants.UrlPurchaseEyeglassNumber;
+        NetConnection conn = new NetConnection();
+        if (conn.isConnected(getActivity())) {
+
+            // Show a progress spinner, and kick off a background task to
+            // perform the user login attempt.
+            // showProgress(true);
+            RequestQueue queue = Volley.newRequestQueue(getActivity());
+            StringRequest postRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+                    // Log.i(TAG, response);
+                    Toast.makeText(getActivity(), "Succeeded", Toast.LENGTH_LONG).show();
+                    loadData();
+                    loadEyeglassNumber();
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    // showProgress(false);
+                    Log.d("Error.Response", error.toString());
+                    Toast.makeText(getActivity(), "Operation failed, please try it again", Toast.LENGTH_SHORT).show();
+                }
+            }) {
+                @Override
+                public String getBodyContentType() {
+                    return "application/json";
+                }
+
+                @Override
+                public Map<String, String> getHeaders() throws AuthFailureError {
+                    Map<String, String> headers = new HashMap<>();
+                    String authString = "Bearer " + SingletonDataHolder.token;
+                    headers.put("Content-Type", "application/json;charset=UTF-8");
+                    headers.put("Authorization", authString);
+                    Log.i("$$$---HEADER---$$$", headers.toString());
+                    return headers;
+                }
+            };
+            RetryPolicy policy = new DefaultRetryPolicy(Constants.NETCONN_TIMEOUT_VALUE, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+            postRequest.setRetryPolicy(policy);
+            queue.add(postRequest);
+        } else
+            Toast.makeText(getActivity(), "Network Connection Failed", Toast.LENGTH_SHORT).show();
+    }
+
 }

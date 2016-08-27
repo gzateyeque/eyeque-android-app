@@ -33,13 +33,13 @@ public class SingletonDataHolder {
 
     // Eyeglass Number
     public static class EyeglassNumber {
-        public static double odSph;
-        public static double odCyl;
-        public static int odAxis;
-        public static double osSph;
-        public static double osCyl;
-        public static int osAxis;
-        public static String createdAt;
+        public double odSph;
+        public double odCyl;
+        public int odAxis;
+        public double osSph;
+        public double osCyl;
+        public int osAxis;
+        public String createdAt;
 
         public EyeglassNumber(double odSphVal, double odCylVal, int odAxisVal,
                               double osSphVal, double osCylVal, int osAxisVal, String timeVal) {
