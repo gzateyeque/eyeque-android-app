@@ -14,6 +14,8 @@ import android.webkit.WebSettings;
 import android.graphics.Typeface;
 import android.graphics.Color;
 import android.webkit.WebView;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Button;
 import android.widget.ProgressBar;
@@ -21,6 +23,8 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.Toast;
+import android.widget.ToggleButton;
+
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
@@ -50,7 +54,7 @@ public class DashboardFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-
+    private static Context thisContext;
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
@@ -58,6 +62,7 @@ public class DashboardFragment extends Fragment {
     private TextView eyeglassNumDescTv;
     private ProgressBar progressBar;
     private Button newEyeglassNumberBtn;
+    private ImageButton eyeglassNumListExpandIv;
     private TableLayout eyeglassTableLayout;
     private WebView visionSummarydWebView;
     private WebView trackingDataOdWebView;
@@ -67,6 +72,7 @@ public class DashboardFragment extends Fragment {
     private TableRow herderTableRow;
     private TableRow odTableRow;
     private TableRow osTableRow;
+    private Boolean eyeglassNumListToggle = false;
     private OnFragmentInteractionListener mListener;
 
     public DashboardFragment() {
@@ -106,6 +112,7 @@ public class DashboardFragment extends Fragment {
         int color;
         View rootView = inflater.inflate(R.layout.fragment_dashboard, container, false);
 
+        thisContext = getActivity().getApplicationContext();
         final TextView eyeglassTitleTv = (TextView) rootView.findViewById(R.id.visionRecordTitle);
         eyeglassTitleTv.setText("EYEGLASS NUMBER ("
                                 + SingletonDataHolder.firstName
@@ -120,16 +127,24 @@ public class DashboardFragment extends Fragment {
         progressBar = (ProgressBar) rootView.findViewById(R.id.progessSeekBar);
         newEyeglassNumberBtn = (Button) rootView.findViewById(R.id.newEyeglassNumber);
         eyeglassTableLayout=(TableLayout) rootView.findViewById(R.id.resultTableLayout);
+        eyeglassNumListExpandIv = (ImageButton) rootView.findViewById(R.id.expandButton);
 
+        eyeglassNumListExpandIv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                eyeglassNumListToggle = !eyeglassNumListToggle;
+                loadEyeglassNumber();
+            }
+        });
         // Populate EyeGlass record
         /**
         int numRow = 1;
         for (int i = 0; i < numRow; i++) {
 
             // Add datetime of the eyeglass number
-            TableRow dateTblRow = new TableRow(this.getContext());
+            TableRow dateTblRow = new TableRow(thisContext);
             dateTblRow.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
-            TextView dataTextView = new TextView(this.getContext());
+            TextView dataTextView = new TextView(thisContext);
             dataTextView.setText("2016-06-20 15:37");
             //textview.getTextColors(R.color.)
             dataTextView.setTextColor(Color.BLACK);
@@ -145,10 +160,10 @@ public class DashboardFragment extends Fragment {
             eyeglassTableLayout.addView(dateTblRow);
 
             // Add datetime of the eyeglass number
-            TableRow  herderTableRow = new TableRow(this.getContext());
+            TableRow  herderTableRow = new TableRow(thisContext);
             herderTableRow.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
 
-            TextView sphTextView = new TextView(this.getContext());
+            TextView sphTextView = new TextView(thisContext);
             sphTextView.setTextColor(Color.BLACK);
             sphTextView.setGravity(1);
             sphTextView.setText("SPHERICAL");
@@ -161,7 +176,7 @@ public class DashboardFragment extends Fragment {
             sphTextViewParams.gravity = Gravity.CENTER;
             herderTableRow.addView(sphTextView, sphTextViewParams);
 
-            TextView cylTextView = new TextView(this.getContext());
+            TextView cylTextView = new TextView(thisContext);
             cylTextView.setTextColor(Color.BLACK);
             cylTextView.setGravity(1);
             cylTextView.setText("CYLINDRICAL");
@@ -170,7 +185,7 @@ public class DashboardFragment extends Fragment {
             cylTextView.setTypeface(null, Typeface.BOLD);
             herderTableRow.addView(cylTextView);
 
-            TextView axisTextView = new TextView(this.getContext());
+            TextView axisTextView = new TextView(thisContext);
             axisTextView.setTextColor(Color.BLACK);
             axisTextView.setGravity(1);
             axisTextView.setText("AXIS");
@@ -182,10 +197,10 @@ public class DashboardFragment extends Fragment {
 
 
             //Add OD Values of eyeglass number
-            TableRow  odTableRow = new TableRow(this.getContext());
+            TableRow  odTableRow = new TableRow(thisContext);
             odTableRow.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
 
-            TextView odHeaderTextView = new TextView(this.getContext());
+            TextView odHeaderTextView = new TextView(thisContext);
             odHeaderTextView.setTextColor(Color.BLACK);
             odHeaderTextView.setGravity(1);
             odHeaderTextView.setText("OD (Right)");
@@ -198,7 +213,7 @@ public class DashboardFragment extends Fragment {
             odHeaderTextViewParams.gravity = Gravity.CENTER;
             odTableRow.addView(odHeaderTextView, odHeaderTextViewParams);
 
-            TextView odSphTextView = new TextView(this.getContext());
+            TextView odSphTextView = new TextView(thisContext);
             odSphTextView.setTextColor(Color.BLACK);
             odSphTextView.setGravity(1);
             odSphTextView.setText("-2.25");
@@ -212,7 +227,7 @@ public class DashboardFragment extends Fragment {
             odTableRow.addView(odSphTextView, odSphTextViewParams);
 
 
-            TextView odCylTextView = new TextView(this.getContext());
+            TextView odCylTextView = new TextView(thisContext);
             odCylTextView.setTextColor(Color.BLACK);
             odCylTextView.setGravity(1);
             odCylTextView.setText("-0.50");
@@ -226,7 +241,7 @@ public class DashboardFragment extends Fragment {
             odCylTextViewParams.gravity = Gravity.CENTER;
             odTableRow.addView(odCylTextView, odCylTextViewParams);
 
-            TextView odAxisTextView = new TextView(this.getContext());
+            TextView odAxisTextView = new TextView(thisContext);
             odAxisTextView.setTextColor(Color.BLACK);
             odAxisTextView.setGravity(1);
             odAxisTextView.setText("24");
@@ -243,12 +258,12 @@ public class DashboardFragment extends Fragment {
             eyeglassTableLayout.addView(odTableRow, new TableLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
 
             // Add OS Values of eyeglass number
-            TableRow  osTableRow = new TableRow(this.getContext());
+            TableRow  osTableRow = new TableRow(thisContext);
             // osTableRow.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
             TableRow.LayoutParams osTAbleRowParams = new TableRow.LayoutParams();
             osTAbleRowParams.bottomMargin = 20;
 
-            TextView osHeaderTextView = new TextView(this.getContext());
+            TextView osHeaderTextView = new TextView(thisContext);
             osHeaderTextView.setTextColor(Color.BLACK);
             osHeaderTextView.setGravity(1);
             osHeaderTextView.setText("OS (Left)");
@@ -261,7 +276,7 @@ public class DashboardFragment extends Fragment {
             osHeaderTextViewParams.gravity = Gravity.CENTER;
             osTableRow.addView(osHeaderTextView, osHeaderTextViewParams);
 
-            TextView osSphTextView = new TextView(this.getContext());
+            TextView osSphTextView = new TextView(thisContext);
             osSphTextView.setTextColor(Color.BLACK);
             osSphTextView.setGravity(1);
             osSphTextView.setText("-2.75");
@@ -275,7 +290,7 @@ public class DashboardFragment extends Fragment {
             osTableRow.addView(osSphTextView, osSphTextViewParams);
 
 
-            TextView osCylTextView = new TextView(this.getContext());
+            TextView osCylTextView = new TextView(thisContext);
             osCylTextView.setTextColor(Color.BLACK);
             osCylTextView.setGravity(1);
             osCylTextView.setText("-0.25");
@@ -289,7 +304,7 @@ public class DashboardFragment extends Fragment {
             osCylTextViewParams.gravity = Gravity.CENTER;
             osTableRow.addView(osCylTextView, osCylTextViewParams);
 
-            TextView osAxisTextView = new TextView(this.getContext());
+            TextView osAxisTextView = new TextView(thisContext);
             osAxisTextView.setTextColor(Color.BLACK);
             osAxisTextView.setGravity(1);
             osAxisTextView.setText("153");
@@ -306,7 +321,7 @@ public class DashboardFragment extends Fragment {
             eyeglassTableLayout.addView(osTableRow, osTAbleRowParams);
 
             if (i < numRow - 1) {
-                TextView divLine = new TextView(this.getContext());
+                TextView divLine = new TextView(thisContext);
                 divLine.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, 1));
                 divLine.setBackgroundColor(Color.rgb(51, 51, 51));
                 eyeglassTableLayout.addView(divLine);
@@ -346,7 +361,7 @@ public class DashboardFragment extends Fragment {
         visionSummarydWebView = (WebView) rootView.findViewById(R.id.visionSummaryWebView);
         visionSummarydWebView.getSettings().setLoadWithOverviewMode(true);
         visionSummarydWebView.getSettings().setUseWideViewPort(true);
-        visionSummarydWebView.getSettings().setAppCachePath( getActivity().getCacheDir().getAbsolutePath() );
+        visionSummarydWebView.getSettings().setAppCachePath( thisContext.getCacheDir().getAbsolutePath() );
         visionSummarydWebView.getSettings().setAllowFileAccess( true );
         visionSummarydWebView.getSettings().setAppCacheEnabled( true );
         visionSummarydWebView.getSettings().setJavaScriptEnabled( true );
@@ -356,7 +371,7 @@ public class DashboardFragment extends Fragment {
         trackingDataOdWebView = (WebView) rootView.findViewById(R.id.trackingDataOdWebView);
         trackingDataOdWebView.getSettings().setLoadWithOverviewMode(true);
         trackingDataOdWebView.getSettings().setUseWideViewPort(true);
-        trackingDataOdWebView.getSettings().setAppCachePath( getActivity().getCacheDir().getAbsolutePath() );
+        trackingDataOdWebView.getSettings().setAppCachePath( thisContext.getCacheDir().getAbsolutePath() );
         trackingDataOdWebView.getSettings().setAllowFileAccess( true );
         trackingDataOdWebView.getSettings().setAppCacheEnabled( true );
         trackingDataOdWebView.getSettings().setJavaScriptEnabled( true );
@@ -365,7 +380,7 @@ public class DashboardFragment extends Fragment {
         trackingDataOsWebView = (WebView) rootView.findViewById(R.id.trackingDataOsWebView);
         trackingDataOsWebView.getSettings().setLoadWithOverviewMode(true);
         trackingDataOsWebView.getSettings().setUseWideViewPort(true);
-        trackingDataOsWebView.getSettings().setAppCachePath( getActivity().getCacheDir().getAbsolutePath() );
+        trackingDataOsWebView.getSettings().setAppCachePath( thisContext.getCacheDir().getAbsolutePath() );
         trackingDataOsWebView.getSettings().setAllowFileAccess( true );
         trackingDataOsWebView.getSettings().setAppCacheEnabled( true );
         trackingDataOsWebView.getSettings().setJavaScriptEnabled( true );
@@ -373,13 +388,13 @@ public class DashboardFragment extends Fragment {
 
         GetDahsboardInfo();
         NetConnection conn = new NetConnection();
-        if (!conn.isConnected(getActivity())) {
+        if (!conn.isConnected(thisContext)) {
             visionSummarydWebView.getSettings().setCacheMode( WebSettings.LOAD_CACHE_ELSE_NETWORK );
         }
-        if (!conn.isConnected(getActivity())) {
+        if (!conn.isConnected(thisContext)) {
             trackingDataOdWebView.getSettings().setCacheMode( WebSettings.LOAD_CACHE_ELSE_NETWORK );
         }
-        if (!conn.isConnected(getActivity())) {
+        if (!conn.isConnected(thisContext)) {
             trackingDataOsWebView.getSettings().setCacheMode( WebSettings.LOAD_CACHE_ELSE_NETWORK );
         }
         // trackingDataOsWebView.loadUrl(SingletonDataHolder.urlOSTracking);
@@ -437,12 +452,12 @@ public class DashboardFragment extends Fragment {
 
         String url = Constants.UrlDashboard;
         NetConnection conn = new NetConnection();
-        if (conn.isConnected(getActivity())) {
+        if (conn.isConnected(thisContext)) {
 
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
             // showProgress(true);
-            RequestQueue queue = Volley.newRequestQueue(getActivity());
+            RequestQueue queue = Volley.newRequestQueue(thisContext);
 
             final JSONObject params = new JSONObject();
             final JSONArray eyeglassNumArray = new JSONArray();
@@ -489,12 +504,13 @@ public class DashboardFragment extends Fragment {
                         // Log.i("*** Tracking OS ***", result.getString("url_spheos"));
                         // Log.i("*** Score ***", Integer.toString(SingletonDataHolder.currentTestScore));
                         // Log.i("*** Purchasable ***", Boolean.toString(SingletonDataHolder.eyeglassNumPurchasable));
-                        // trackingDataOdWebView.clearCache(true);
+                        visionSummarydWebView.clearCache(true);
                         visionSummarydWebView.loadUrl(SingletonDataHolder.urlVisionSummary);
+                        trackingDataOdWebView.clearCache(true);
                         trackingDataOdWebView.loadUrl(SingletonDataHolder.urlOdTracking);
                         trackingDataOsWebView.loadUrl(SingletonDataHolder.urlOSTracking);
                     } catch (JSONException e) {
-                        Toast.makeText(getActivity(),
+                        Toast.makeText(thisContext,
                                 "Operation failed, please try it again", Toast.LENGTH_SHORT).show();
                         e.printStackTrace();
                     }
@@ -504,7 +520,7 @@ public class DashboardFragment extends Fragment {
                 public void onErrorResponse(VolleyError error) {
                     // showProgress(false);
                     Log.d("Error.Response", error.toString());
-                    Toast.makeText(getActivity(), "Server Error", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(thisContext, "Server Error", Toast.LENGTH_SHORT).show();
                 }
             }) {
 
@@ -537,13 +553,19 @@ public class DashboardFragment extends Fragment {
 
     private void loadData() {
         scoreTv.setText("Your test score: " + Integer.toString(SingletonDataHolder.currentTestScore));
-        if (SingletonDataHolder.currentTestScore >= 100) {
+
+        if (SingletonDataHolder.currentTestScore >= 100)
             progressBar.setProgress(100);
-            eyeglassNumDescTv.setText("Your new eyeglass number is available");
-        } else {
+        else
             progressBar.setProgress(SingletonDataHolder.currentTestScore);
+
+        if (SingletonDataHolder.eyeglassNumPurchasable)
+            eyeglassNumDescTv.setText("Your new eyeglass number is available");
+        else if (!SingletonDataHolder.eyeglassNumPurchasable && SingletonDataHolder.currentTestScore >= 100)
+            eyeglassNumDescTv.setText("No updated eyeglass number");
+        else
             eyeglassNumDescTv.setText("Your eyeglass number will be avaiable once your test score reaches 100");
-        }
+
 
         if (SingletonDataHolder.eyeglassNumPurchasable)
             newEyeglassNumberBtn.setClickable(true);
@@ -555,7 +577,11 @@ public class DashboardFragment extends Fragment {
     }
 
     private void loadEyeglassNumber() {
+        int displayNumRow;
 
+        if (pdTblRow != null || dateTblRow != null)
+            eyeglassTableLayout.removeAllViewsInLayout();
+        /***
         if (pdTblRow != null)
             eyeglassTableLayout.removeView(pdTblRow);
         if (dateTblRow != null)
@@ -566,14 +592,15 @@ public class DashboardFragment extends Fragment {
             eyeglassTableLayout.removeView(osTableRow);
         if (osTableRow != null)
             eyeglassTableLayout.removeView(herderTableRow);
+         ***/
 
         for (int i = 0; i < SingletonDataHolder.eyeglassNumCount; i++) {
             Log.i("***--- AXIS-2 ---***", Integer.toString(SingletonDataHolder.eyeglassNumberList[i].odAxis));
         }
         if (SingletonDataHolder.pupillaryDistance > 0) {
-            pdTblRow = new TableRow(getActivity());
+            pdTblRow = new TableRow(thisContext);
             pdTblRow.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
-            TextView pdTextView = new TextView(getActivity());
+            TextView pdTextView = new TextView(thisContext);
             pdTextView.setText("PD: " + Integer.toString(SingletonDataHolder.pupillaryDistance));
             pdTextView.setTextColor(Color.BLACK);
             TableRow.LayoutParams pdTextViewParams = new TableRow.LayoutParams();
@@ -586,8 +613,22 @@ public class DashboardFragment extends Fragment {
             eyeglassTableLayout.addView(pdTblRow);
         }
 
+        // Set display row
+        if (eyeglassNumListToggle)
+            displayNumRow = SingletonDataHolder.eyeglassNumCount;
+        else
+            displayNumRow = 1;
+
+        // Set arrow button dynamically
+        if (SingletonDataHolder.eyeglassNumCount <= 1)
+            eyeglassNumListExpandIv.setEnabled(false);
+        else if (eyeglassNumListToggle)
+            eyeglassNumListExpandIv.setImageResource(R.drawable.arrow_up);
+        else
+            eyeglassNumListExpandIv.setImageResource(R.drawable.arrow_down);
+
         if (SingletonDataHolder.eyeglassNumCount > 0) {
-            TextView divLine = new TextView(getActivity());
+            TextView divLine = new TextView(thisContext);
             divLine.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, 1));
             divLine.setBackgroundColor(Color.rgb(51, 51, 51));
             eyeglassTableLayout.addView(divLine);
@@ -595,14 +636,15 @@ public class DashboardFragment extends Fragment {
         for (int i = 0; i < SingletonDataHolder.eyeglassNumCount; i++) {
             Log.i("***--- AXIS-3 ---***", Integer.toString(SingletonDataHolder.eyeglassNumberList[i].odAxis));
         }
-
-        for (int i = 0; i < SingletonDataHolder.eyeglassNumCount; i++) {
+        Log.i("***--- DROW ---***", Integer.toString(displayNumRow));
+        int count = 0;
+        for (int i = SingletonDataHolder.eyeglassNumCount-1; i >=0;  i--) {
 
             // Add datetime of the eyeglass number
-            // dateTblRow = new TableRow(this.getContext());
-            dateTblRow = new TableRow(getActivity());
+            // dateTblRow = new TableRow(thisContext);
+            dateTblRow = new TableRow(thisContext);
             dateTblRow.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
-            TextView dataTextView = new TextView(getActivity());
+            TextView dataTextView = new TextView(thisContext);
             dataTextView.setText(SingletonDataHolder.eyeglassNumberList[i].createdAt);
             //textview.getTextColors(R.color.)
             dataTextView.setTextColor(Color.BLACK);
@@ -618,10 +660,10 @@ public class DashboardFragment extends Fragment {
             eyeglassTableLayout.addView(dateTblRow);
 
             // Add datetime of the eyeglass number
-            herderTableRow = new TableRow(getActivity());
+            herderTableRow = new TableRow(thisContext);
             herderTableRow.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
 
-            TextView sphTextView = new TextView(getActivity());
+            TextView sphTextView = new TextView(thisContext);
             sphTextView.setTextColor(Color.BLACK);
             sphTextView.setGravity(1);
             sphTextView.setText("SPHERICAL");
@@ -634,7 +676,7 @@ public class DashboardFragment extends Fragment {
             sphTextViewParams.gravity = Gravity.CENTER;
             herderTableRow.addView(sphTextView, sphTextViewParams);
 
-            TextView cylTextView = new TextView(getActivity());
+            TextView cylTextView = new TextView(thisContext);
             cylTextView.setTextColor(Color.BLACK);
             cylTextView.setGravity(1);
             cylTextView.setText("CYLINDRICAL");
@@ -643,7 +685,7 @@ public class DashboardFragment extends Fragment {
             cylTextView.setTypeface(null, Typeface.BOLD);
             herderTableRow.addView(cylTextView);
 
-            TextView axisTextView = new TextView(getActivity());
+            TextView axisTextView = new TextView(thisContext);
             axisTextView.setTextColor(Color.BLACK);
             axisTextView.setGravity(1);
             axisTextView.setText("AXIS");
@@ -655,10 +697,10 @@ public class DashboardFragment extends Fragment {
 
 
             //Add OD Values of eyeglass number
-            odTableRow = new TableRow(getActivity());
+            odTableRow = new TableRow(thisContext);
             odTableRow.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
 
-            TextView odHeaderTextView = new TextView(getActivity());
+            TextView odHeaderTextView = new TextView(thisContext);
             odHeaderTextView.setTextColor(Color.BLACK);
             odHeaderTextView.setGravity(1);
             odHeaderTextView.setText("OD (Right)");
@@ -671,7 +713,7 @@ public class DashboardFragment extends Fragment {
             odHeaderTextViewParams.gravity = Gravity.CENTER;
             odTableRow.addView(odHeaderTextView, odHeaderTextViewParams);
 
-            TextView odSphTextView = new TextView(getActivity());
+            TextView odSphTextView = new TextView(thisContext);
             odSphTextView.setTextColor(Color.BLACK);
             odSphTextView.setGravity(1);
             odSphTextView.setText(String.format("%.2f", SingletonDataHolder.eyeglassNumberList[i].odSph));
@@ -685,7 +727,7 @@ public class DashboardFragment extends Fragment {
             odTableRow.addView(odSphTextView, odSphTextViewParams);
 
 
-            TextView odCylTextView = new TextView(getActivity());
+            TextView odCylTextView = new TextView(thisContext);
             odCylTextView.setTextColor(Color.BLACK);
             odCylTextView.setGravity(1);
             odCylTextView.setText(String.format("%.2f", SingletonDataHolder.eyeglassNumberList[i].odCyl));
@@ -699,7 +741,7 @@ public class DashboardFragment extends Fragment {
             odCylTextViewParams.gravity = Gravity.CENTER;
             odTableRow.addView(odCylTextView, odCylTextViewParams);
 
-            TextView odAxisTextView = new TextView(getActivity());
+            TextView odAxisTextView = new TextView(thisContext);
             odAxisTextView.setTextColor(Color.BLACK);
             odAxisTextView.setGravity(1);
             Log.i("***--- AXIS ---***", Integer.toString(SingletonDataHolder.eyeglassNumberList[i].odAxis));
@@ -717,12 +759,12 @@ public class DashboardFragment extends Fragment {
             eyeglassTableLayout.addView(odTableRow, new TableLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
 
             // Add OS Values of eyeglass number
-            osTableRow = new TableRow(getActivity());
+            osTableRow = new TableRow(thisContext);
             // osTableRow.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
             TableRow.LayoutParams osTAbleRowParams = new TableRow.LayoutParams();
             osTAbleRowParams.bottomMargin = 20;
 
-            TextView osHeaderTextView = new TextView(getActivity());
+            TextView osHeaderTextView = new TextView(thisContext);
             osHeaderTextView.setTextColor(Color.BLACK);
             osHeaderTextView.setGravity(1);
             osHeaderTextView.setText("OS (Left)");
@@ -735,7 +777,7 @@ public class DashboardFragment extends Fragment {
             osHeaderTextViewParams.gravity = Gravity.CENTER;
             osTableRow.addView(osHeaderTextView, osHeaderTextViewParams);
 
-            TextView osSphTextView = new TextView(getActivity());
+            TextView osSphTextView = new TextView(thisContext);
             osSphTextView.setTextColor(Color.BLACK);
             osSphTextView.setGravity(1);
             osSphTextView.setText(String.format("%.2f", SingletonDataHolder.eyeglassNumberList[i].osSph));
@@ -749,7 +791,7 @@ public class DashboardFragment extends Fragment {
             osTableRow.addView(osSphTextView, osSphTextViewParams);
 
 
-            TextView osCylTextView = new TextView(getActivity());
+            TextView osCylTextView = new TextView(thisContext);
             osCylTextView.setTextColor(Color.BLACK);
             osCylTextView.setGravity(1);
             osCylTextView.setText(String.format("%.2f", SingletonDataHolder.eyeglassNumberList[i].osCyl));
@@ -763,7 +805,7 @@ public class DashboardFragment extends Fragment {
             osCylTextViewParams.gravity = Gravity.CENTER;
             osTableRow.addView(osCylTextView, osCylTextViewParams);
 
-            TextView osAxisTextView = new TextView(getActivity());
+            TextView osAxisTextView = new TextView(thisContext);
             osAxisTextView.setTextColor(Color.BLACK);
             osAxisTextView.setGravity(1);
             osAxisTextView.setText(Integer.toString(SingletonDataHolder.eyeglassNumberList[i].osAxis));
@@ -779,12 +821,16 @@ public class DashboardFragment extends Fragment {
 
             eyeglassTableLayout.addView(osTableRow, osTAbleRowParams);
 
-            if (i < SingletonDataHolder.eyeglassNumCount - 1) {
-                TextView divLine = new TextView(getActivity());
+            if (i >= 0) {
+                TextView divLine = new TextView(thisContext);
                 divLine.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, 1));
                 divLine.setBackgroundColor(Color.rgb(51, 51, 51));
                 eyeglassTableLayout.addView(divLine);
             }
+
+            count++;
+            if (count >= displayNumRow)
+                break;
         }
     }
 
@@ -792,17 +838,17 @@ public class DashboardFragment extends Fragment {
 
         String url = Constants.UrlPurchaseEyeglassNumber;
         NetConnection conn = new NetConnection();
-        if (conn.isConnected(getActivity())) {
+        if (conn.isConnected(thisContext)) {
 
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
             // showProgress(true);
-            RequestQueue queue = Volley.newRequestQueue(getActivity());
+            RequestQueue queue = Volley.newRequestQueue(thisContext);
             StringRequest postRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {
                     // Log.i(TAG, response);
-                    Toast.makeText(getActivity(), "Succeeded", Toast.LENGTH_LONG).show();
+                    Toast.makeText(thisContext, "Succeeded", Toast.LENGTH_LONG).show();
                     loadData();
                     loadEyeglassNumber();
                 }
@@ -811,7 +857,7 @@ public class DashboardFragment extends Fragment {
                 public void onErrorResponse(VolleyError error) {
                     // showProgress(false);
                     Log.d("Error.Response", error.toString());
-                    Toast.makeText(getActivity(), "Operation failed, please try it again", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(thisContext, "Operation failed, please try it again", Toast.LENGTH_SHORT).show();
                 }
             }) {
                 @Override
@@ -833,7 +879,7 @@ public class DashboardFragment extends Fragment {
             postRequest.setRetryPolicy(policy);
             queue.add(postRequest);
         } else
-            Toast.makeText(getActivity(), "Network Connection Failed", Toast.LENGTH_SHORT).show();
+            Toast.makeText(thisContext, "Network Connection Failed", Toast.LENGTH_SHORT).show();
     }
 
 }
