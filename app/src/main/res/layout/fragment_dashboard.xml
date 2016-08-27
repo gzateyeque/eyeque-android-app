@@ -222,7 +222,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dip"
                 android:gravity="center_vertical"
-                android:text="VISION SNAPSHOT"
+                android:text="VISION SUMMARY"
                 android:textStyle="bold"
                 android:textSize="16sp"
                 android:textColor="#1DADF3"
@@ -230,6 +230,25 @@
                 android:layout_below="@+id/scoreLayout"
                 android:layout_alignParentStart="true" />
 
+            <LinearLayout android:background="#FFFFFF"
+                android:id="@+id/visionSummaryLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/visionSnapshotTitle">
+                <WebView
+                    android:id="@+id/visionSummaryWebView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30sp"
+                    android:layout_marginRight="30sp"
+                    android:layout_marginTop="20sp"
+                    android:layout_marginBottom="20sp"
+                    android:color="#FFFFFF"
+                    android:scaleType="fitXY">
+                </WebView>
+            </LinearLayout>
+
+            <!--
             <LinearLayout android:background="#FFFFFF"
                 android:id="@+id/snapshotLayout"
                 android:layout_width="match_parent"
@@ -265,7 +284,6 @@
                     android:textSize="12sp" />
 
             </LinearLayout>
-                <!--
                 <TextView
                     android:id="@+id/snapshotSummary"
                     android:layout_width="match_parent"
@@ -278,7 +296,6 @@
                     android:textSize="15sp"
                     android:layout_alignParentStart="true"
                     android:background="@drawable/text_border"/>
-                    -->
 
 
 
@@ -298,7 +315,7 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
 
-                    <!--
+
                     <TextView
                         android:id="@+id/leftTitle"
                         android:layout_width="0dp"
@@ -319,7 +336,7 @@
                         android:layout_gravity="right"
                         android:textStyle="bold"
                         android:text="  RIGHT"
-                    -->
+
 
                 </LinearLayout>
 
@@ -458,10 +475,11 @@
 
                 </LinearLayout>
             </LinearLayout>
+            -->
 
             <TextView
                 android:id="@+id/trackingDataTitle"
-                android:layout_below="@id/snapshotLayout"
+                android:layout_below="@id/visionSummaryLayout"
                 android:layout_width="match_parent"
                 android:layout_height="50dip"
                 android:gravity="center_vertical"
