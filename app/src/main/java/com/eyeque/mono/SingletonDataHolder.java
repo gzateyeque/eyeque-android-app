@@ -26,9 +26,34 @@ public class SingletonDataHolder {
     public static int wearGlasses = 0;
     public static String urlOdTracking = "";
     public static String urlOSTracking = "";
-    public static String urlVsiionSummary = "";
-    public static int score = 0;
+    public static String urlVisionSummary = "";
+    public static int currentTestScore = 0;
+    public static int pupillaryDistance = 0;
     public static Boolean eyeglassNumPurchasable= false;
+
+    // Eyeglass Number
+    public static class EyeglassNumber {
+        public static double odSph;
+        public static double odCyl;
+        public static int odAxis;
+        public static double osSph;
+        public static double osCyl;
+        public static int osAxis;
+        public static String createdAt;
+
+        public EyeglassNumber(double odSphVal, double odCylVal, int odAxisVal,
+                              double osSphVal, double osCylVal, int osAxisVal, String timeVal) {
+            odSph = odSphVal;
+            odCyl = odCylVal;
+            odAxis = odAxisVal;
+            osSph = osSphVal;
+            osCyl = osCylVal;
+            osAxis = osAxisVal;
+            createdAt = timeVal;
+        }
+    }
+    public static EyeglassNumber[] eyeglassNumberList;
+    public static int eyeglassNumCount = 0;
 
     // Session method
     // public static int getLoginType() { return loginType; }
