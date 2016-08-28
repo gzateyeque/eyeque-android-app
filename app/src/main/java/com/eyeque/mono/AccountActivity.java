@@ -58,10 +58,11 @@ public class AccountActivity extends AppCompatActivity {
 
         // Set up the account form.
         mEmailView = (EditText) findViewById(R.id.email);
-        if (!SingletonDataHolder.email.equals("")) {
+        if (!SingletonDataHolder.email.matches(""))
             mEmailView.setText(SingletonDataHolder.email);
-            mEmailView.setEnabled(false);
-        }
+        else
+            mEmailView.setText("Your registered email");
+        mEmailView.setEnabled(false);
 
         firstnameEt = (EditText) findViewById(R.id.firstName);
         // firstnameEt.requestFocus();
