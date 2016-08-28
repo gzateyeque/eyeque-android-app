@@ -175,7 +175,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
             public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
                 Log.e(TAG, "Error: " + description);
-                Toast.makeText(LoginActivity.this, "No Inernet Connection", Toast.LENGTH_LONG).show();
+                Toast.makeText(LoginActivity.this, "No Internet Connection", Toast.LENGTH_LONG).show();
                 view.loadUrl("about:blank");
             }
         });
