@@ -223,6 +223,7 @@
                     android:layout_marginTop="0dp"
                     android:layout_gravity="center"
                     android:adjustViewBounds="true"
+                    android:background="#FFFFFF"
                     android:scaleType="fitXY" >
                 </ImageButton>
             </LinearLayout>
