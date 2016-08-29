@@ -148,7 +148,7 @@ public class SerialActivity extends AppCompatActivity {
             queue.add(postRequest);
         }
         else
-            Toast.makeText(SerialActivity.this, "Network Connection Failed", Toast.LENGTH_SHORT).show();
+            Toast.makeText(SerialActivity.this, "No Internet Connection", Toast.LENGTH_SHORT).show();
     }
 
 }

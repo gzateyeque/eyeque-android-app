@@ -330,7 +330,7 @@ public class SmEmailRegActivity extends AppCompatActivity implements LoaderCallb
             queue.add(postRequest);
         }
         else
-            Toast.makeText(SmEmailRegActivity.this, "Network Connection Failed", Toast.LENGTH_SHORT).show();
+            Toast.makeText(SmEmailRegActivity.this, "No Internet Connection", Toast.LENGTH_SHORT).show();
     }
 
     private boolean isEmailValid(String email) {

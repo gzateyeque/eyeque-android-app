@@ -879,7 +879,7 @@ public class DashboardFragment extends Fragment {
             postRequest.setRetryPolicy(policy);
             queue.add(postRequest);
         } else
-            Toast.makeText(thisContext, "Network Connection Failed", Toast.LENGTH_SHORT).show();
+            Toast.makeText(thisContext, "No Internet Connection", Toast.LENGTH_SHORT).show();
     }
 
 }

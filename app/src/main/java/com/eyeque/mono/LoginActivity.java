@@ -544,7 +544,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             postRequest.setRetryPolicy(policy);
             queue.add(postRequest);
         } else
-            Toast.makeText(LoginActivity.this, "Network Connection Failed", Toast.LENGTH_SHORT).show();
+            Toast.makeText(LoginActivity.this, "No Internet Connection", Toast.LENGTH_SHORT).show();
     }
 
     private void SignIn(String email, String password) {
@@ -621,7 +621,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             postRequest.setRetryPolicy(policy);
             queue.add(postRequest);
         } else
-            Toast.makeText(LoginActivity.this, "Network Connection Failed", Toast.LENGTH_SHORT).show();
+            Toast.makeText(LoginActivity.this, "No Internet Connection", Toast.LENGTH_SHORT).show();
     }
 
     private void SignUp(String email, String password, int type) {
@@ -711,7 +711,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             postRequest.setRetryPolicy(policy);
             queue.add(postRequest);
         } else
-            Toast.makeText(LoginActivity.this, "Network Connection Failed", Toast.LENGTH_SHORT).show();
+            Toast.makeText(LoginActivity.this, "No Internet Connection", Toast.LENGTH_SHORT).show();
     }
 
     private void CheckOnboard() {
@@ -822,7 +822,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             postRequest.setRetryPolicy(policy);
             queue.add(postRequest);
         } else
-            Toast.makeText(LoginActivity.this, "Network Connection Failed", Toast.LENGTH_SHORT).show();
+            Toast.makeText(LoginActivity.this, "No Internet Connection", Toast.LENGTH_SHORT).show();
     }
 
     private void DbStoreToken() {

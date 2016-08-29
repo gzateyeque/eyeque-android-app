@@ -121,7 +121,7 @@ public class ForgotPswdActivity extends AppCompatActivity {
                     showProgress(true);
                     queue.add(postRequest);
                 } else
-                    Toast.makeText(ForgotPswdActivity.this, "Network Connection Failed", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ForgotPswdActivity.this, "No Internet Connection", Toast.LENGTH_SHORT).show();
             }
         });
     }

@@ -522,7 +522,7 @@ public class ResultActivity extends Activity {
             postRequest.setRetryPolicy(policy);
             queue.add(postRequest);
         } else
-            Toast.makeText(ResultActivity.this, "Network Connection Failed", Toast.LENGTH_SHORT).show();
+            Toast.makeText(ResultActivity.this, "No Internet Connection", Toast.LENGTH_SHORT).show();
     }
 
 }

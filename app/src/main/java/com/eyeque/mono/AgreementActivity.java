@@ -209,6 +209,6 @@ public class AgreementActivity extends AppCompatActivity {
             postRequest.setRetryPolicy(policy);
             queue.add(postRequest);
         } else
-            Toast.makeText(AgreementActivity.this, "Network Connection Failed", Toast.LENGTH_SHORT).show();
+            Toast.makeText(AgreementActivity.this, "No Internet Connection", Toast.LENGTH_SHORT).show();
     }
 }

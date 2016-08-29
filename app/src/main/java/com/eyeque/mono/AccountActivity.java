@@ -120,7 +120,6 @@ public class AccountActivity extends AppCompatActivity {
                     }
                 }
                 UpdateProfile();
-                finish();
             }
         });
     }
@@ -235,6 +234,6 @@ public class AccountActivity extends AppCompatActivity {
             postRequest.setRetryPolicy(policy);
             queue.add(postRequest);
         } else
-            Toast.makeText(AccountActivity.this, "Network Connection Failed", Toast.LENGTH_SHORT).show();
+            Toast.makeText(AccountActivity.this, "No Internet Connection", Toast.LENGTH_SHORT).show();
     }
 }
