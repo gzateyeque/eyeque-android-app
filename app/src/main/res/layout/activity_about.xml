@@ -65,7 +65,7 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:text="Version 1.0.1"
-                android:id="@+id/verTextStringView"
+                android:id="@+id/verStringTextView"
                 android:layout_below="@+id/appTextStringView"
                 android:textSize="16dp"
                 android:layout_centerHorizontal="true" >
@@ -79,7 +79,7 @@
                 android:layout_marginRight="10dp"
                 android:text="Rate the App on Play Store"
                 android:id="@+id/rateAppTextStringView"
-                android:layout_below="@+id/verTextStringView"
+                android:layout_below="@+id/verStringTextView"
                 android:textColor="@android:color/holo_blue_light"
                 android:textSize="16dp"
                 android:layout_centerHorizontal="true" >
