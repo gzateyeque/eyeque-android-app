@@ -15,6 +15,9 @@ public class AboutActivity extends AppCompatActivity {
         setContentView(R.layout.activity_about);
 
         TextView rateAppTv = (TextView) findViewById(R.id.rateAppTextStringView);
+        TextView verStringTv = (TextView) findViewById(R.id.verStringTextView);
+        verStringTv.setText("Version " + Constants.BuildNumber);
+
         rateAppTv.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Uri uri =  Uri.parse("http://www.eyeque.com");
