@@ -217,13 +217,18 @@ public class TopActivity extends AppCompatActivity
                         SingletonDataHolder.phonePpi = jsonObj.getInt("phone_ppi");
                         SingletonDataHolder.deviceHeight = jsonObj.getDouble("height");
                         SingletonDataHolder.deviceWidth = jsonObj.getDouble("width");
-                        SingletonDataHolder.lineLength = jsonObj.getInt("line_length");
-                        SingletonDataHolder.lineWidth = jsonObj.getInt("line_width");
                         SingletonDataHolder.centerX = jsonObj.getInt("center_x");
                         SingletonDataHolder.centerY = jsonObj.getInt("center_y");
+                        SingletonDataHolder.lineLength = jsonObj.getInt("line_length");
+                        SingletonDataHolder.lineWidth = jsonObj.getInt("line_width");
                         SingletonDataHolder.initDistance = jsonObj.getInt("initial_distance");
                         SingletonDataHolder.minDistance = jsonObj.getInt("min_distance");
                         SingletonDataHolder.maxDistance = jsonObj.getInt("max_distance");
+                        // SingletonDataHolder.lineLength = 130*SingletonDataHolder.phonePpi/577;
+                        // SingletonDataHolder.lineWidth = 36*SingletonDataHolder.phonePpi/577;
+                        // SingletonDataHolder.initDistance = 326*SingletonDataHolder.phonePpi/577;;
+                        // SingletonDataHolder.minDistance = 227*SingletonDataHolder.phonePpi/577;
+                        // SingletonDataHolder.maxDistance = 410*SingletonDataHolder.phonePpi/577;
                     } catch (JSONException e) {
                         e.printStackTrace();
                         Toast.makeText(TopActivity.this, "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
