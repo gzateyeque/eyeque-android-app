@@ -20,7 +20,7 @@
 
             <com.eyeque.mono.PatternView
                 android:layout_width="fill_parent"
-                android:layout_height="260sp"
+                android:layout_height="260dp"
                 android:id="@+id/drawView"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentLeft="true"
@@ -30,17 +30,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop = "10sp"
+                android:layout_marginTop = "10dp"
                 android:text="Attach Device"
                 android:id="@+id/attachDevieHeaderTextView"
                 android:layout_below="@+id/drawView"
                 android:textColor="@color/background_material_dark"
-                android:textSize="20sp"/>
+                android:textSize="20dp"/>
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:layout_marginTop = "10sp"
+                android:layout_marginTop = "10dp"
                 android:id="@+id/attachDevieDivider"
                 android:layout_below="@+id/attachDevieHeaderTextView"
                 android:background="@android:color/darker_gray"/>
@@ -62,7 +62,7 @@
                         android:id="@+id/attachDeviceImageView"
                         android:layout_width="wrap_content"
                         android:layout_height="170dp"
-                        android:layout_marginTop = "5sp"
+                        android:layout_marginTop = "5dp"
                         android:layout_centerHorizontal="true"
                         android:src="@drawable/attach_device" />
 

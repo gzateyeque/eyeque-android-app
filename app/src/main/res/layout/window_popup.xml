@@ -24,7 +24,7 @@
                 android:id="@+id/popupText"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
-                android:textSize="18sp"
+                android:textSize="18dp"
                 android:textColor="@android:color/darker_gray"
                 android:text="SPHERICAL EQUVALENT\n\nA spherical power whose focal point coincides with the circle of least confusion of a spherocylindrical lens. Hence, the spherical equivalent of a prescription is equal to the algebraic sum of the value of the sphere and half the cylindrical value." />
 

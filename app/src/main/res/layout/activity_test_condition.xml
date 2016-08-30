@@ -10,7 +10,7 @@
 
     <com.eyeque.mono.PatternView
         android:layout_width="fill_parent"
-        android:layout_height="260sp"
+        android:layout_height="260dp"
         android:id="@+id/drawView"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
@@ -20,16 +20,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop = "10sp"
+        android:layout_marginTop = "10dp"
         android:text="Test Preparation"
         android:id="@+id/testConditionHeaderTextView"
         android:textColor="@color/background_material_dark"
-        android:textSize="20sp"/>
+        android:textSize="20dp"/>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_marginTop = "10sp"
+        android:layout_marginTop = "10dp"
         android:id="@+id/testConditionDivider"
         android:background="@android:color/darker_gray"/>
 
@@ -55,7 +55,7 @@
                 android:text="For accurate results, please remove your glasses or contacts"
                 android:id="@+id/testConditionText"
                 android:textColor="#046EEA"
-                android:textSize="15sp"/>
+                android:textSize="15dp"/>
 
             <TextView
                 android:layout_width="match_parent"
@@ -67,7 +67,7 @@
                 android:text="Have you removed your glasses or contacts?"
                 android:id="@+id/glassOnText"
                 android:textColor="@android:color/darker_gray"
-                android:textSize="14sp"/>
+                android:textSize="14dp"/>
 
             <LinearLayout
                 android:id="@+id/LinearLayout01"
@@ -92,7 +92,7 @@
                     android:text="Yes"
                     android:id="@+id/glassOnYesTextView"
                     android:textColor="@android:color/darker_gray"
-                    android:textSize="15sp"
+                    android:textSize="15dp"
                     android:layout_centerHorizontal="true" >
                 </TextView>
                 <CheckBox
@@ -112,7 +112,7 @@
                     android:text="No"
                     android:id="@+id/glassOnNoTextView"
                     android:textColor="@android:color/darker_gray"
-                    android:textSize="15sp"
+                    android:textSize="15dp"
                     android:layout_centerHorizontal="true" >
                 </TextView>
             </LinearLayout>
@@ -127,7 +127,7 @@
                 android:text="Do you have a screen protector on this phone?"
                 android:id="@+id/screenProtectorOnText"
                 android:textColor="@android:color/darker_gray"
-                android:textSize="14sp"/>
+                android:textSize="14dp"/>
             <LinearLayout
                 android:id="@+id/LinearLayout02"
                 android:layout_height="30dp"
@@ -151,7 +151,7 @@
                     android:text="Yes"
                     android:id="@+id/screenProtectorOnYesTextView"
                     android:textColor="@android:color/darker_gray"
-                    android:textSize="15sp"
+                    android:textSize="15dp"
                     android:layout_centerHorizontal="true" >
                 </TextView>
                 <CheckBox
@@ -171,7 +171,7 @@
                     android:text="No"
                     android:id="@+id/screenProtectorOnNoTextView"
                     android:textColor="@android:color/darker_gray"
-                    android:textSize="15sp"
+                    android:textSize="15dp"
                     android:layout_centerHorizontal="true" >
                 </TextView>
             </LinearLayout>

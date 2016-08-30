@@ -26,7 +26,7 @@
                 android:gravity="center_vertical"
                 android:text="EYEGLASS NUMBERS"
                 android:textStyle="bold"
-                android:textSize="16sp"
+                android:textSize="16dp"
                 android:textColor="#1DADF3"
                 android:paddingStart="15dip" />
 
@@ -48,7 +48,7 @@
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:background="#FFFFFF"
                     android:text="Your test score: 115"
-                    android:textSize="16sp" />
+                    android:textSize="16dp" />
 
                 <ProgressBar
                     android:layout_width="match_parent"
@@ -69,7 +69,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="0dp"
                     android:text="Your new eyeglass number is available"
-                    android:textSize="16sp"
+                    android:textSize="16dp"
                     android:gravity="center"
                     android:textAppearance="?android:attr/textAppearanceMedium" />
 
@@ -91,8 +91,8 @@
                 <TableLayout
                     android:id="@+id/resultTableLayout"
                     android:layout_below="@+id/scoreLayout"
-                    android:layout_marginTop = "10sp"
-                    android:layout_marginBottom="5sp"
+                    android:layout_marginTop = "10dp"
+                    android:layout_marginBottom="5dp"
                     android:stretchColumns="*"
                     android:background="#FFFFFF"
                     android:layout_width="fill_parent"
@@ -109,7 +109,7 @@
                             android:text="2016-06-20 15:37"
                             android:layout_column="0"
                             android:layout_span="4"
-                            android:textSize="12sp"
+                            android:textSize="12dp"
                             android:gravity="center"
                             android:textAppearance="?android:attr/textAppearanceMedium" />
 
@@ -125,7 +125,7 @@
                             android:id="@+id/sphTextView"
                             android:text="SPHERICAL"
                             android:textStyle="bold"
-                            android:textSize="14sp"
+                            android:textSize="14dp"
                             android:gravity="center"
                             android:layout_column="1"
                             android:textAppearance="?android:attr/textAppearanceMedium" />
@@ -134,7 +134,7 @@
                             android:id="@+id/cylTextView"
                             android:text="CYLINDRICAL"
                             android:textStyle="bold"
-                            android:textSize="14sp"
+                            android:textSize="14dp"
                             android:gravity="center"
                             android:textAppearance="?android:attr/textAppearanceMedium" />
 
@@ -142,7 +142,7 @@
                             android:id="@+id/axisTextView"
                             android:text="AXIS"
                             android:textStyle="bold"
-                            android:textSize="14sp"
+                            android:textSize="14dp"
                             android:gravity="center"
                             android:textAppearance="?android:attr/textAppearanceMedium" />
 
@@ -157,7 +157,7 @@
                             android:id="@+id/odTitleTextView"
                             android:text="RIGHT (O.D.)"
                             android:textStyle="bold"
-                            android:textSize="14sp"
+                            android:textSize="14dp"
                             android:gravity="center"
                             android:textAppearance="?android:attr/textAppearanceMedium" />
 
@@ -189,7 +189,7 @@
                         <TextView
                             android:id="@+id/osTitleTextView"
                             android:text="LEFT (O.S.)"
-                            android:textSize="14sp"
+                            android:textSize="14dp"
                             android:gravity="center"
                             android:textStyle="bold"
                             android:textAppearance="?android:attr/textAppearanceMedium" />
@@ -235,7 +235,7 @@
                 android:gravity="center_vertical"
                 android:text="VISION SUMMARY"
                 android:textStyle="bold"
-                android:textSize="16sp"
+                android:textSize="16dp"
                 android:textColor="#1DADF3"
                 android:paddingStart="15dip"
                 android:layout_below="@+id/scoreLayout"
@@ -250,10 +250,10 @@
                     android:id="@+id/visionSummaryWebView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="30sp"
-                    android:layout_marginRight="30sp"
-                    android:layout_marginTop="20sp"
-                    android:layout_marginBottom="20sp"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="30dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="20dp"
                     android:color="#FFFFFF"
                     android:scaleType="fitXY">
                 </WebView>
@@ -282,7 +282,7 @@
                 android:textStyle="bold"
                 android:gravity="center"
                 android:text="LEFT\nNEARSIGHTEDNESS: LOW\nASTIGMATISM: LOW"
-                android:textSize="12sp" />
+                android:textSize="12dp" />
 
                 <TextView
                     android:id="@+id/rightText"
@@ -292,7 +292,7 @@
                     android:textStyle="bold"
                     android:gravity="center"
                     android:text="RIGHT\nNEARSIGHTEDNESS: LOW\nASTIGMATISM: LOW"
-                    android:textSize="12sp" />
+                    android:textSize="12dp" />
 
             </LinearLayout>
                 <TextView
@@ -304,7 +304,7 @@
                     android:layout_marginRight="30dp"
                     android:gravity="center"
                     android:text="You have low nearsightedness, low astigmstism on both the left eye and the right eye"
-                    android:textSize="15sp"
+                    android:textSize="15dp"
                     android:layout_alignParentStart="true"
                     android:background="@drawable/text_border"/>
 
@@ -317,7 +317,7 @@
                     android:layout_marginTop="10dp"
                     android:gravity="center"
                     android:text="FARSIGHTEDNESS"
-                    android:textSize="12sp"
+                    android:textSize="12dp"
                     android:layout_alignParentStart="true" />
 
                 <LinearLayout android:background="#FFFFFF"
@@ -336,7 +336,7 @@
                         android:textStyle="bold"
                         android:gravity="right"
                         android:text="LEFT  "
-                        android:textSize="14sp" />
+                        android:textSize="14dp" />
 
                     <TextView
                         android:id="@+id/rightTitle"
@@ -366,7 +366,7 @@
                         android:gravity="center"
                         android:text="ASTIGMATISM"
                         android:rotation="-90"
-                        android:textSize="12sp" />
+                        android:textSize="12dp" />
 
                     <ImageView
                         android:id="@+id/visionMap"
@@ -384,7 +384,7 @@
                         android:paddingTop="20dp"
                         android:text="ASTIGMATISM"
                         android:rotation="-90"
-                        android:textSize="12sp"
+                        android:textSize="12dp"
                         android:gravity="center" />
 
                 </LinearLayout>
@@ -396,7 +396,7 @@
                     android:layout_marginBottom="10dp"
                     android:gravity="center"
                     android:text="NEARSIGHTEDNESS"
-                    android:textSize="12sp"
+                    android:textSize="12dp"
                     android:layout_alignParentStart="true" />
 
                 <LinearLayout android:background="#FFFFFF"
@@ -413,7 +413,7 @@
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:text=""
-                        android:textSize="10sp" />
+                        android:textSize="10dp" />
 
                     <ImageView
                         android:id="@+id/lowLegend"
@@ -433,7 +433,7 @@
                         android:layout_height="20dp"
                         android:gravity="left"
                         android:text="LOW"
-                        android:textSize="10sp" />
+                        android:textSize="10dp" />
 
                     <ImageView
                         android:id="@+id/moderateLegend"
@@ -453,7 +453,7 @@
                         android:layout_height="wrap_content"
                         android:gravity="left"
                         android:text="MODERATE"
-                        android:textSize="10sp" />
+                        android:textSize="10dp" />
 
                     <ImageView
                         android:id="@+id/highLegend"
@@ -473,7 +473,7 @@
                         android:layout_height="wrap_content"
                         android:gravity="left"
                         android:text="HIGH"
-                        android:textSize="10sp" />
+                        android:textSize="10dp" />
 
                     <TextView
                         android:id="@+id/empty2Text"
@@ -482,7 +482,7 @@
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:text=""
-                        android:textSize="10sp" />
+                        android:textSize="10dp" />
 
                 </LinearLayout>
             </LinearLayout>
@@ -496,7 +496,7 @@
                 android:gravity="center_vertical"
                 android:text="TRACKING DATA"
                 android:textStyle="bold"
-                android:textSize="16sp"
+                android:textSize="16dp"
                 android:textColor="#1DADF3"
                 android:paddingStart="15dip" />
 
@@ -508,7 +508,7 @@
                 android:layout_height="80dip"
                 android:text="SPHERICAL EQUIVALENT (RIGHT O.D.)"
                 android:textStyle="bold"
-                android:textSize="14sp"
+                android:textSize="14dp"
                 android:gravity="center"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
@@ -521,9 +521,9 @@
                     android:id="@+id/trackingDataOdWebView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="30sp"
-                    android:layout_marginRight="30sp"
-                    android:layout_marginBottom="10sp"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="30dp"
+                    android:layout_marginBottom="10dp"
                     android:color="#FFFFFF"
                     android:scaleType="fitXY">
                 </WebView>
@@ -537,7 +537,7 @@
                 android:layout_height="80dip"
                 android:text="SPHERICAL EQUIVALENT (LEFT O.S.)"
                 android:textStyle="bold"
-                android:textSize="14sp"
+                android:textSize="14dp"
                 android:gravity="center"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
@@ -549,9 +549,9 @@
                     android:id="@+id/trackingDataOsWebView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="50sp"
-                    android:layout_marginLeft="30sp"
-                    android:layout_marginRight="30sp"
+                    android:layout_marginBottom="50dp"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="30dp"
                     android:color="#FFFFFF"
                     android:scaleType="fitXY">
                 </WebView>

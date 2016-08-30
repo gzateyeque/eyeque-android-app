@@ -11,17 +11,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop = "15sp"
+        android:layout_marginTop = "15dp"
         android:text="@string/forgotPswdHeaderTextString"
         android:id="@+id/forgotPswdHeaderTextView"
         android:layout_below="@+id/bannerWebView"
         android:textColor="@color/background_material_dark"
-        android:textSize="20sp"/>
+        android:textSize="20dp"/>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_marginTop = "15sp"
+        android:layout_marginTop = "15dp"
         android:id="@+id/forgotPswdHeaderDivView"
         android:layout_below="@+id/forgotPswdHeaderTextView"
         android:background="@android:color/darker_gray"/>

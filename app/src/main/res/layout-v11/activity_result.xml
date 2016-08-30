@@ -10,7 +10,7 @@
 
     <com.eyeque.mono.PatternView
         android:layout_width="fill_parent"
-        android:layout_height="260sp"
+        android:layout_height="260dp"
         android:id="@+id/drawView"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
@@ -20,17 +20,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop = "10sp"
+        android:layout_marginTop = "10dp"
         android:layout_below="@+id/drawView"
         android:text="Test Completion"
         android:id="@+id/testCompleteHeaderTextView"
         android:textColor="@color/background_material_dark"
-        android:textSize="20sp"/>
+        android:textSize="20dp"/>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_marginTop = "10sp"
+        android:layout_marginTop = "10dp"
         android:layout_below="@+id/testCompleteHeaderTextView"
         android:id="@+id/testCompletionDivider"
         android:background="@android:color/darker_gray"/>
@@ -58,13 +58,13 @@
                 android:drawableRight="@drawable/info"
                 android:text="SPHERICAL EQUIVALENT "
                 android:textStyle="bold"
-                android:textSize="14sp"
+                android:textSize="14dp"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:layout_gravity="center_horizontal" />
 
             <TableLayout
                 android:id="@+id/resultTableLayout"
-                android:layout_marginTop = "5sp"
+                android:layout_marginTop = "5dp"
                 android:stretchColumns="*"
                 android:background="#FFFFFF"
                 android:layout_width="fill_parent"
@@ -120,7 +120,7 @@
                 android:text="Get more details about your vision and track your vision history by logging into your dashboard at EyeQue.com."
                 android:id="@+id/testResultText"
                 android:textColor="@android:color/darker_gray"
-                android:textSize="15sp"/>
+                android:textSize="15dp"/>
 
             <TextView
                 android:layout_width="match_parent"
@@ -132,7 +132,7 @@
                 android:onClick="onClick"
                 android:clickable="true"
                 android:textColor="#046EEA"
-                android:textSize="15sp"/>
+                android:textSize="15dp"/>
 
             <Button
                 android:id="@+id/uploadButton"

@@ -11,16 +11,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop = "15sp"
+        android:layout_marginTop = "15dp"
         android:text="About"
         android:id="@+id/aboutHeaderTextView"
         android:textColor="@color/background_material_dark"
-        android:textSize="20sp"/>
+        android:textSize="20dp"/>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_marginTop = "15sp"
+        android:layout_marginTop = "15dp"
         android:id="@+id/aboutHeaderDivView"
         android:layout_below="@+id/aboutHeaderTextView"
         android:background="@android:color/darker_gray"/>
@@ -54,7 +54,7 @@
                 android:text="MyEyeQue Android App"
                 android:id="@+id/appTextStringView"
                 android:layout_below="@+id/LogoImageView"
-                android:textSize="22sp"
+                android:textSize="22dp"
                 android:layout_centerHorizontal="true" >
             </TextView>
 
@@ -67,7 +67,7 @@
                 android:text="Version 1.0.1"
                 android:id="@+id/verTextStringView"
                 android:layout_below="@+id/appTextStringView"
-                android:textSize="16sp"
+                android:textSize="16dp"
                 android:layout_centerHorizontal="true" >
             </TextView>
 
@@ -81,7 +81,7 @@
                 android:id="@+id/rateAppTextStringView"
                 android:layout_below="@+id/verTextStringView"
                 android:textColor="@android:color/holo_blue_light"
-                android:textSize="16sp"
+                android:textSize="16dp"
                 android:layout_centerHorizontal="true" >
             </TextView>
 
@@ -94,7 +94,7 @@
                 android:text="Visit EyeQue.com for more information"
                 android:id="@+id/visitWebTextStringView"
                 android:layout_below="@+id/rateAppTextStringView"
-                android:textSize="16sp"
+                android:textSize="16dp"
                 android:layout_centerHorizontal="true" >
             </TextView>
 
@@ -108,20 +108,20 @@
                 android:id="@+id/websiteTextStringView"
                 android:layout_below="@+id/visitWebTextStringView"
                 android:textColor="@android:color/holo_blue_light"
-                android:textSize="17sp"
+                android:textSize="17dp"
                 android:layout_centerHorizontal="true" >
             </TextView>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop = "160dp"
+                android:layout_marginTop = "140dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:text="Copyright &#169; EyeQue Corp. All Rights Reserved"
                 android:id="@+id/copyrightTextStringView"
                 android:layout_below="@+id/websiteTextStringView"
-                android:textSize="13sp"
+                android:textSize="13dp"
                 android:layout_centerHorizontal="true" >
             </TextView>
 
