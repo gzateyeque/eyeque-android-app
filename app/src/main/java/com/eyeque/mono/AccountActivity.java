@@ -168,7 +168,6 @@ public class AccountActivity extends AppCompatActivity {
             final JSONObject finalParams = new JSONObject();
 
             try {
-                finalParams.put("token", SingletonDataHolder.token);
                 params.put("email", SingletonDataHolder.email);
                 params.put("firstname", firstName);
                 params.put("lastname", lastName);
