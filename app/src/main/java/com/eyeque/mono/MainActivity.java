@@ -175,6 +175,7 @@ public class MainActivity extends Activity {
         dtv.setVisibility(View.INVISIBLE);
         atv.setVisibility(View.INVISIBLE);
         tv.setVisibility(View.INVISIBLE);
+        final MediaPlayer mp = new MediaPlayer();
 
         exitButton = (Button) findViewById(R.id.exitButton);
         exitButton.setOnClickListener(new View.OnClickListener() {
@@ -200,6 +201,9 @@ public class MainActivity extends Activity {
                                 // Toast.makeText(getApplicationContext(),
                                 // "You clicked on YES", Toast.LENGTH_SHORT)
                                 // .show();
+                                if (mp.isPlaying()) {
+                                    mp.stop();
+                                }
                                 finish();
                             }
                         });
@@ -231,11 +235,63 @@ public class MainActivity extends Activity {
             eyeImageView.setImageResource(R.drawable.eye_left1);
         }
         inTestTv.setText("Test 1/9");
+
+
+        if (mp.isPlaying()) {
+            mp.stop();
+        }
+        try {
+            mp.reset();
+            mp.setDataSource(getApplicationContext(),
+                    Uri.parse("android.resource://com.eyeque.mono/" + R.raw.fri_1));
+            mp.prepare();
+            mp.start();
+        } catch (IllegalStateException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        // catch (InterruptedException e) {
+            // e.printStackTrace();
+        // }
+
+        /****
+        try {
+            Thread.sleep(13000);
+            mp.reset();
+            mp.setDataSource(getApplicationContext(),
+                    Uri.parse("android.resource://com.eyeque.mono/" + R.raw.frp_1));
+            mp.prepare();
+            mp.start();
+        } catch (IllegalStateException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            Thread.sleep(10000);
+            mp.reset();
+            mp.setDataSource(getApplicationContext(),
+                    Uri.parse("android.resource://com.eyeque.mono/" + R.raw.fri_2));
+            mp.prepare();
+            mp.start();
+        } catch (IllegalStateException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+         ****/
+
         /**
          * Add callback handler to change the pattern in pattern view
          */
 
-        final MediaPlayer mp = new MediaPlayer();
+
         contButton = (Button) findViewById(R.id.contButton);
         contButton.setOnClickListener(new View.OnClickListener() {
             String str;
@@ -264,10 +320,15 @@ public class MainActivity extends Activity {
                         case 0:
                             if (deviceId == 4)
                                 mp.setDataSource(getApplicationContext(),
+                                        // Uri.parse("android.resource://com.eyeque.mono/" + R.raw.mm1));
                                         Uri.parse("android.resource://com.eyeque.mono/" + R.raw.mm1));
                             else
-                                mp.setDataSource(getApplicationContext(),
-                                        Uri.parse("android.resource://com.eyeque.mono/" + R.raw.m0));
+                                if (pattern.getWhichEye())
+                                    mp.setDataSource(getApplicationContext(),
+                                        Uri.parse("android.resource://com.eyeque.mono/" + R.raw.frp_2));
+                                else
+                                    mp.setDataSource(getApplicationContext(),
+                                            Uri.parse("android.resource://com.eyeque.mono/" + R.raw.flp_2));
                             break;
 
                         case 1:
@@ -275,16 +336,24 @@ public class MainActivity extends Activity {
                                 mp.setDataSource(getApplicationContext(),
                                         Uri.parse("android.resource://com.eyeque.mono/" + R.raw.mm2));
                             else
+                            if (pattern.getWhichEye())
                                 mp.setDataSource(getApplicationContext(),
-                                        Uri.parse("android.resource://com.eyeque.mono/" + R.raw.m1));
+                                        Uri.parse("android.resource://com.eyeque.mono/" + R.raw.frp_3));
+                            else
+                                mp.setDataSource(getApplicationContext(),
+                                        Uri.parse("android.resource://com.eyeque.mono/" + R.raw.flp_3));
                             break;
                         case 2:
                             if (deviceId == 4)
                                 mp.setDataSource(getApplicationContext(),
                                         Uri.parse("android.resource://com.eyeque.mono/" + R.raw.mm3));
                             else
+                            if (pattern.getWhichEye())
                                 mp.setDataSource(getApplicationContext(),
-                                        Uri.parse("android.resource://com.eyeque.mono/" + R.raw.m2));
+                                        Uri.parse("android.resource://com.eyeque.mono/" + R.raw.frp_4));
+                            else
+                                mp.setDataSource(getApplicationContext(),
+                                        Uri.parse("android.resource://com.eyeque.mono/" + R.raw.flp_4));
 
                             break;
                         case 3:
@@ -292,48 +361,71 @@ public class MainActivity extends Activity {
                                 mp.setDataSource(getApplicationContext(),
                                         Uri.parse("android.resource://com.eyeque.mono/" + R.raw.mm4));
                             else
+                            if (pattern.getWhichEye())
                                 mp.setDataSource(getApplicationContext(),
-                                        Uri.parse("android.resource://com.eyeque.mono/" + R.raw.m3));
+                                        Uri.parse("android.resource://com.eyeque.mono/" + R.raw.frp_5));
+                            else
+                                mp.setDataSource(getApplicationContext(),
+                                        Uri.parse("android.resource://com.eyeque.mono/" + R.raw.flp_5));
                             break;
                         case 4:
                             if (deviceId == 4)
                                 mp.setDataSource(getApplicationContext(),
                                         Uri.parse("android.resource://com.eyeque.mono/" + R.raw.mm5));
                             else
+                            if (pattern.getWhichEye())
                                 mp.setDataSource(getApplicationContext(),
-                                        Uri.parse("android.resource://com.eyeque.mono/" + R.raw.m4));
+                                        Uri.parse("android.resource://com.eyeque.mono/" + R.raw.frp_6));
+                            else
+                                mp.setDataSource(getApplicationContext(),
+                                        Uri.parse("android.resource://com.eyeque.mono/" + R.raw.flp_6));
                             break;
                         case 5:
                             if (deviceId == 4)
                                 mp.setDataSource(getApplicationContext(),
                                         Uri.parse("android.resource://com.eyeque.mono/" + R.raw.mm6));
                             else
+                            if (pattern.getWhichEye())
                                 mp.setDataSource(getApplicationContext(),
-                                        Uri.parse("android.resource://com.eyeque.mono/" + R.raw.m5));
+                                        Uri.parse("android.resource://com.eyeque.mono/" + R.raw.frp_7));
+                            else
+                                mp.setDataSource(getApplicationContext(),
+                                        Uri.parse("android.resource://com.eyeque.mono/" + R.raw.flp_7));
                             break;
                         case 6:
                             if (deviceId == 4)
                                 mp.setDataSource(getApplicationContext(),
                                         Uri.parse("android.resource://com.eyeque.mono/" + R.raw.mm7));
                             else
+                            if (pattern.getWhichEye())
                                 mp.setDataSource(getApplicationContext(),
-                                        Uri.parse("android.resource://com.eyeque.mono/" + R.raw.m6));
+                                        Uri.parse("android.resource://com.eyeque.mono/" + R.raw.frp_8));
+                            else
+                                mp.setDataSource(getApplicationContext(),
+                                        Uri.parse("android.resource://com.eyeque.mono/" + R.raw.flp_8));
                             break;
                         case 7:
                             if (deviceId == 4)
                                 mp.setDataSource(getApplicationContext(),
                                         Uri.parse("android.resource://com.eyeque.mono/" + R.raw.mm8));
                             else
+                            if (pattern.getWhichEye())
                                 mp.setDataSource(getApplicationContext(),
-                                        Uri.parse("android.resource://com.eyeque.mono/" + R.raw.m7));
+                                        Uri.parse("android.resource://com.eyeque.mono/" + R.raw.frp_9));
+                            else
+                                mp.setDataSource(getApplicationContext(),
+                                        Uri.parse("android.resource://com.eyeque.mono/" + R.raw.flp_9));
                             break;
                         case 8:
                             if (deviceId == 4)
                                 mp.setDataSource(getApplicationContext(),
                                         Uri.parse("android.resource://com.eyeque.mono/" + R.raw.mm9));
+                            if (pattern.getWhichEye())
+                                mp.setDataSource(getApplicationContext(),
+                                        Uri.parse("android.resource://com.eyeque.mono/" + R.raw.fr_last));
                             else
                                 mp.setDataSource(getApplicationContext(),
-                                        Uri.parse("android.resource://com.eyeque.mono/" + R.raw.m8));
+                                        Uri.parse("android.resource://com.eyeque.mono/" + R.raw.fl_last));
                             break;
                         default:
                             if (deviceId == 4)
@@ -387,14 +479,14 @@ public class MainActivity extends Activity {
                             if (!pattern.getWhichEye() && pattern.isAllPatternComplete()) {
 
                                 // Announce Test Complete audio
-                                mp.setDataSource(getApplicationContext(),
-                                        Uri.parse("android.resource://com.eyeque.mono/" + R.raw.mm81));
+                                // mp.setDataSource(getApplicationContext(),
+                                        // Uri.parse("android.resource://com.eyeque.mono/" + R.raw.mm81));
                             } else if (pattern.getWhichEye())
                                 mp.setDataSource(getApplicationContext(),
-                                        Uri.parse("android.resource://com.eyeque.mono/" + R.raw.switchl));
+                                        Uri.parse("android.resource://com.eyeque.mono/" + R.raw.flp_1));
                             else
                                 mp.setDataSource(getApplicationContext(),
-                                        Uri.parse("android.resource://com.eyeque.mono/" + R.raw.switchr));
+                                        Uri.parse("android.resource://com.eyeque.mono/" + R.raw.frp_1));
                             mp.prepare();
                             mp.start();
                         } catch (IllegalStateException e) {
