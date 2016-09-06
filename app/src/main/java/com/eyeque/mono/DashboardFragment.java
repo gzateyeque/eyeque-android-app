@@ -112,13 +112,28 @@ public class DashboardFragment extends Fragment {
         int color;
         View rootView = inflater.inflate(R.layout.fragment_dashboard, container, false);
 
-        thisContext = getActivity().getApplicationContext();
+         thisContext = getActivity().getApplicationContext();
+
+        /***
         final TextView eyeglassTitleTv = (TextView) rootView.findViewById(R.id.visionRecordTitle);
         eyeglassTitleTv.setText("EYEGLASS NUMBER ("
                                 + SingletonDataHolder.firstName
                                 + " "
                                 + SingletonDataHolder.lastName
                                 + ")");
+         ***/
+
+        final TextView avatarNameTv = (TextView) rootView.findViewById(R.id.avatarName);
+        avatarNameTv.setText("Welcome, "
+                + SingletonDataHolder.firstName
+                + " "
+                + SingletonDataHolder.lastName);
+
+        final ImageView avatarImage = (ImageView) rootView.findViewById(R.id.avatarImageView);
+        if (SingletonDataHolder.gender == 1)
+            avatarImage.setImageResource(R.drawable.male_face);
+        else
+            avatarImage.setImageResource(R.drawable.female_face);
         // GetDahsboardInfo();
 
         // Progress bar
@@ -474,7 +489,7 @@ public class DashboardFragment extends Fragment {
                         SingletonDataHolder.urlOdTracking = result.getString("url_spheod");
                         SingletonDataHolder.urlOSTracking = result.getString("url_spheos");
                         SingletonDataHolder.urlVisionSummary = result.getString("url_vision_summary");
-                        // SingletonDataHolder.pupillaryDistance = eyeglassResult.getInt("pd") + 62;
+                        SingletonDataHolder.pupillaryDistance = eyeglassResult.getInt("pd");
                         SingletonDataHolder.currentTestScore = eyeglassResult.getInt("score");
                         SingletonDataHolder.eyeglassNumPurchasable = eyeglassResult.getBoolean("purchasable");
                         SingletonDataHolder.eyeglassNumCount = eyeglassNumList.length();
@@ -849,8 +864,9 @@ public class DashboardFragment extends Fragment {
                 public void onResponse(String response) {
                     // Log.i(TAG, response);
                     Toast.makeText(thisContext, "Succeeded", Toast.LENGTH_LONG).show();
-                    loadData();
-                    loadEyeglassNumber();
+                    GetDahsboardInfo();
+                    // loadData();
+                    // loadEyeglassNumber();
                 }
             }, new Response.ErrorListener() {
                 @Override
