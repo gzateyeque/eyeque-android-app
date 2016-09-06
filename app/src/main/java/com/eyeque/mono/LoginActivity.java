@@ -736,8 +736,12 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                     try {
                         JSONObject jsonResponse = new JSONObject(response);
                         SingletonDataHolder.userId = Integer.parseInt(jsonResponse.getString("id"));
+                        SingletonDataHolder.email = jsonResponse.getString("email");
                         SingletonDataHolder.firstName = jsonResponse.getString("firstname");
                         SingletonDataHolder.lastName = jsonResponse.getString("lastname");
+                        SingletonDataHolder.gender = Integer.parseInt(jsonResponse.getString("gender"));
+                        Log.i("*** Birth Year ***", jsonResponse.getString("dob").substring(1,5));
+                        SingletonDataHolder.birthYear = Integer.valueOf(jsonResponse.getString("dob").substring(0,4));
                         SingletonDataHolder.deviceSerialNum = "";
                         Log.i("*** customer id ***", Integer.toString(SingletonDataHolder.userId));
 
