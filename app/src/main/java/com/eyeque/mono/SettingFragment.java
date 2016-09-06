@@ -127,15 +127,7 @@ public class SettingFragment extends Fragment {
             }
         });
 
-        try {
-            DatabaseHelper dbHelper = new DatabaseHelper(container.getContext());
-            myDb = dbHelper.getWritableDatabase();
-            Log.d("TAG", "open database successfully");
-            String sql = "delete from " + Constants.USER_ENTITY_TABLE;
-            myDb.execSQL(sql);
-        } catch (IOException e) {
-            Log.d("TAG", "open database failed");
-        }
+
         // Inflate the layout for this fragment
         // return inflater.inflate(R.layout.fragment_dashboard, container, false);
         // Check local persistent mono.db database
@@ -169,7 +161,25 @@ public class SettingFragment extends Fragment {
         logoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                try {
+                    DatabaseHelper dbHelper = new DatabaseHelper(v.getContext());
+                    myDb = dbHelper.getWritableDatabase();
+                    Log.d("TAG", "delete toekn successfully");
+                    String sql = "delete from " + Constants.USER_ENTITY_TABLE;
+                    myDb.execSQL(sql);
+                } catch (IOException e) {
+                    Log.d("TAG", "open database failed");
+                }
+                SingletonDataHolder.token = "";
+                SingletonDataHolder.userId = 0;
+                SingletonDataHolder.email = "";
+                SingletonDataHolder.firstName = "";
+                SingletonDataHolder.lastName = "";
+                SingletonDataHolder.gender = 0;
+                SingletonDataHolder.birthYear = 0;
+                getActivity().getFragmentManager().popBackStack();
                 Intent i = new Intent(getActivity(), LoginActivity.class);
+                i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK |  Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(i);
             }
         });
