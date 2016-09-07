@@ -12,7 +12,7 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@drawable/eyeque_app_icon"
+        android:icon="@drawable/app_icon_square"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
