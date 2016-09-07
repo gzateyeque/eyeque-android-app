@@ -113,14 +113,13 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"
+                android:layout_marginTop="20dp"
                 android:gravity="center_horizontal"
-                android:text="Get more details about your vision and track your vision history by logging into your dashboard at EyeQue.com."
+                android:text="Score: 40/40"
                 android:id="@+id/testResultText"
-                android:textColor="@android:color/darker_gray"
-                android:textSize="15dp"/>
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textSize="16dp"/>
+
 
             <TextView
                 android:layout_width="match_parent"

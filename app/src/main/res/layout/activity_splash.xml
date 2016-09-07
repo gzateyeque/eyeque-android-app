@@ -6,8 +6,10 @@
     tools:context="com.eyeque.mono.SplashActivity">
 
     <ImageView
-        android:scaleType="fitXY"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:id="@+id/splashImageView" />
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/splashImageView"
+        android:layout_marginLeft="80dp"
+        android:layout_marginRight="80dp"
+        android:layout_gravity="center_vertical"/>
 </LinearLayout>
