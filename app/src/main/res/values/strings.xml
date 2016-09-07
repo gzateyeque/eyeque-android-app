@@ -22,6 +22,7 @@
     <string name="serialOrderTextString">Don\&#39;t have a device? Order now</string>
     <string name="forgotPswdHeaderTextString">Forgot Password</string>
     <string name="smemailHeaderTextString">EyeQue Email Link</string>
+    <string name="accountHeaderTextString">Account</string>
 
     <string name="uploadButtonTextString">Upload</string>
     <string name="powerTextString">Power: TBC</string>
@@ -41,7 +42,8 @@
     <string name="title_activity_splash">SplashActivity</string>
     <string name="title_activity_login">Sign in</string>
     <string name="title_activity_sm_email_reg">Email Registration</string>
-    <string name="facebookGoogleTextString">Login using Facebook or Google account</string>
+    <string name="title_activity_account">Account</string>
+    <string name="facebookGoogleTextString">Use Facebook or Google account</string>
     <string name="forgotPaswordTextString">Forgot Your Password?</string>
     <string name="agreementTextString">I agree to the EyeQue Term of Service and Privacy Policy</string>
     <string name="newsletterTextString">Keep me updated about EyeQue product, news and promotions</string>
