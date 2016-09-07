@@ -171,6 +171,7 @@ public class SettingFragment extends Fragment {
                     Log.d("TAG", "open database failed");
                 }
                 SingletonDataHolder.token = "";
+                SingletonDataHolder.newRegUser = true;
                 SingletonDataHolder.userId = 0;
                 SingletonDataHolder.email = "";
                 SingletonDataHolder.firstName = "";

@@ -141,7 +141,7 @@ public class PatternView extends View {
             // cv.drawText("Please attach device here", 720-500, 520, p);
             int fontSize = 72 * SingletonDataHolder.phonePpi / 576;
             Typeface typeface = Typeface.create(Typeface.SANS_SERIF, Typeface.NORMAL);
-            String text = "Please attach device here";
+            String text = "Attach Miniscope here";
             p.setTypeface(typeface);
             p.setTextSize(fontSize);
             p.setStrokeWidth(6 * SingletonDataHolder.phonePpi / 576);

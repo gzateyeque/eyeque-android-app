@@ -125,15 +125,15 @@ public class DashboardFragment extends Fragment {
 
         final TextView avatarNameTv = (TextView) rootView.findViewById(R.id.avatarName);
         avatarNameTv.setText("Welcome, "
-                + SingletonDataHolder.firstName
-                + " "
-                + SingletonDataHolder.lastName);
+                + SingletonDataHolder.firstName);
 
+        /***
         final ImageView avatarImage = (ImageView) rootView.findViewById(R.id.avatarImageView);
         if (SingletonDataHolder.gender == 1)
             avatarImage.setImageResource(R.drawable.male_face);
         else
             avatarImage.setImageResource(R.drawable.female_face);
+         ***/
         // GetDahsboardInfo();
 
         // Progress bar
@@ -567,7 +567,7 @@ public class DashboardFragment extends Fragment {
     }
 
     private void loadData() {
-        scoreTv.setText("Your test score: " + Integer.toString(SingletonDataHolder.currentTestScore));
+        scoreTv.setText("Your progress: " + Integer.toString(SingletonDataHolder.currentTestScore));
 
         if (SingletonDataHolder.currentTestScore >= 100)
             progressBar.setProgress(100);
@@ -575,11 +575,11 @@ public class DashboardFragment extends Fragment {
             progressBar.setProgress(SingletonDataHolder.currentTestScore);
 
         if (SingletonDataHolder.eyeglassNumPurchasable)
-            eyeglassNumDescTv.setText("Your new eyeglass number is available");
+            eyeglassNumDescTv.setText("Your new eyeglass numbers is available");
         else if (!SingletonDataHolder.eyeglassNumPurchasable && SingletonDataHolder.currentTestScore >= 100)
-            eyeglassNumDescTv.setText("No updated eyeglass number");
+            eyeglassNumDescTv.setText("No updated eyeglass numbers available");
         else
-            eyeglassNumDescTv.setText("Your eyeglass number will be avaiable once your test score reaches 100");
+            eyeglassNumDescTv.setText("Your eyeglass numbers will be avaiable once your progress reaches 100");
 
 
         if (SingletonDataHolder.eyeglassNumPurchasable)

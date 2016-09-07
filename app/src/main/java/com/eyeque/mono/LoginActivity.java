@@ -581,7 +581,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                         SingletonDataHolder.email = socialMediaEmail;
                     else
                         SingletonDataHolder.email = gEmail;
-                    DbStoreToken();
+                    // DbStoreToken();
                     CheckOnboard();
                 }
             }, new Response.ErrorListener() {
@@ -665,6 +665,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                     Log.i(TAG, response);
                     // Pass authentication
                     showProgress(false);
+                    SingletonDataHolder.newRegUser = true;
                     if (loginType != 1)
                         SingletonDataHolder.email = socialMediaEmail;
                     else
@@ -737,11 +738,14 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                         JSONObject jsonResponse = new JSONObject(response);
                         SingletonDataHolder.userId = Integer.parseInt(jsonResponse.getString("id"));
                         SingletonDataHolder.email = jsonResponse.getString("email");
-                        SingletonDataHolder.firstName = jsonResponse.getString("firstname");
-                        SingletonDataHolder.lastName = jsonResponse.getString("lastname");
-                        SingletonDataHolder.gender = Integer.parseInt(jsonResponse.getString("gender"));
-                        Log.i("*** Birth Year ***", jsonResponse.getString("dob").substring(1,5));
-                        SingletonDataHolder.birthYear = Integer.valueOf(jsonResponse.getString("dob").substring(0,4));
+                            SingletonDataHolder.firstName = jsonResponse.getString("firstname");
+                            SingletonDataHolder.lastName = jsonResponse.getString("lastname");
+                        if (jsonResponse.has("gender"))
+                            SingletonDataHolder.gender = Integer.parseInt(jsonResponse.getString("gender"));
+                        if (jsonResponse.has("dob")) {
+                            Log.i("*** Birth Year ***", jsonResponse.getString("dob").substring(1, 5));
+                            SingletonDataHolder.birthYear = Integer.valueOf(jsonResponse.getString("dob").substring(0, 4));
+                        }
                         SingletonDataHolder.deviceSerialNum = "";
                         Log.i("*** customer id ***", Integer.toString(SingletonDataHolder.userId));
 
@@ -765,6 +769,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                                     } else {
                                         Log.i("********5*********", "false");
                                         isOnBoardNeeded = false;
+                                        DbStoreToken();
                                         SingletonDataHolder.deviceSerialNum = attrValue;
                                         Intent topIntent = new Intent(getBaseContext(), TopActivity.class);
                                         startActivity(topIntent);

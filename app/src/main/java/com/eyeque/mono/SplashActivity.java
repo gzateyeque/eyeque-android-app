@@ -105,7 +105,7 @@ public class SplashActivity extends Activity {
         }
 
         final ImageView splashView = (ImageView) findViewById(R.id.splashImageView);
-        splashView.setImageResource(R.drawable.splash);
+        splashView.setImageResource(R.drawable.eyeque_logo);
 
         Thread splashThread = new Thread() {
             public void run() {
@@ -157,11 +157,12 @@ public class SplashActivity extends Activity {
                         SingletonDataHolder.email = jsonResponse.getString("email");
                         SingletonDataHolder.firstName = jsonResponse.getString("firstname");
                         SingletonDataHolder.lastName = jsonResponse.getString("lastname");
-                        SingletonDataHolder.gender = Integer.parseInt(jsonResponse.getString("gender"));
-                        Log.i("*** Birth Year ***", jsonResponse.getString("dob").substring(1,5));
-                        SingletonDataHolder.birthYear = Integer.valueOf(jsonResponse.getString("dob").substring(0,4));
-                        Log.i("*** customer id ***", Integer.toString(SingletonDataHolder.userId));
-
+                        if (jsonResponse.has("gender"))
+                            SingletonDataHolder.gender = Integer.parseInt(jsonResponse.getString("gender"));
+                        if (jsonResponse.has("dob")) {
+                            Log.i("*** Birth Year ***", jsonResponse.getString("dob").substring(1, 5));
+                            SingletonDataHolder.birthYear = Integer.valueOf(jsonResponse.getString("dob").substring(0, 4));
+                        }
                         if (jsonResponse.has("custom_attributes")) {
                             JSONArray jsonCustArrArray = jsonResponse.getJSONArray("custom_attributes");
 

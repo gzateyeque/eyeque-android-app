@@ -736,6 +736,7 @@ public class MainActivity extends Activity {
                     try {
                         final JSONObject result = new JSONObject(response);
                         resultIntent.putExtra("TestId", result.getInt("test_condition_id"));
+                        resultIntent.putExtra("Score", result.getInt("score"));
                         resultIntent.putExtra("ODE", String.format("%.2f", Double.parseDouble(result.getString("sphe_od"))));
                         resultIntent.putExtra("OSE", String.format("%.2f", Double.parseDouble(result.getString("sphe_os"))));
 

@@ -9,7 +9,7 @@ import android.provider.BaseColumns;
 
 public class Constants {
 
-    public final static String BuildNumber = "1.0.1 Pre Release A";
+    public final static String BuildNumber = "1.0.1 Pre Release B";
     public static final double PI = 3.141592653589793d;
     public final static int sdkVersion = Build.VERSION.SDK_INT;
 

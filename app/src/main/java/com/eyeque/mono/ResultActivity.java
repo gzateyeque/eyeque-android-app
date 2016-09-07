@@ -45,6 +45,7 @@ public class ResultActivity extends Activity {
     private static int deviceId;
     private static int serverId;
     private static int testId;
+    private static int score;
     private static int confirmCode = 2;
     private static double odSph;
     private static double odCyl;
@@ -94,6 +95,7 @@ public class ResultActivity extends Activity {
             numMeasurement = 6;
 
         testId = getIntent().getIntExtra("TestId", 0);
+        score = getIntent().getIntExtra("Score", 0);
         odSph = getIntent().getDoubleExtra("ODS", 0.00);
         odCyl = getIntent().getDoubleExtra("ODC", 0.00);
         odAxis = getIntent().getDoubleExtra("ODA", 0.00);
@@ -109,9 +111,11 @@ public class ResultActivity extends Activity {
         Button uploadButton = (Button) findViewById(R.id.uploadButton);
         final TextView odSpheTextView = (TextView) findViewById(R.id.odSpheTextView);
         final TextView osSpheTextView = (TextView) findViewById(R.id.osSpheTextView);
+        final TextView testResultTextView = (TextView) findViewById(R.id.testResultText);
 
         odSpheTextView.setText(odSe);
         osSpheTextView.setText(osSe);
+        testResultTextView.setText("Test Score: " + Integer.toString(score) + " of 40");
 
         final TextView btnOpenPopup = (TextView)findViewById(R.id.testResultTextView);
         btnOpenPopup.setOnClickListener(new Button.OnClickListener(){

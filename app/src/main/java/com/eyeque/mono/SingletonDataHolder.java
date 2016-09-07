@@ -14,6 +14,7 @@ public class SingletonDataHolder {
 
     // Session value set
     public static int loginType = 1;
+    public static Boolean newRegUser = false;
     public static String token = "";
     public static int userId = 0;
     public static String email = "";

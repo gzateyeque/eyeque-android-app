@@ -1,6 +1,8 @@
 package com.eyeque.mono;
 
+import android.content.ContentValues;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -32,11 +34,14 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONArray;
+
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
 public class AgreementActivity extends AppCompatActivity {
     private WebView webview;
+    private static SQLiteDatabase myDb = null;
     private boolean userChecked = false;
     private boolean newsletterChecked = true;
     private static final String TAG = "Agreement Acvitity";
@@ -52,6 +57,15 @@ public class AgreementActivity extends AppCompatActivity {
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         // finally change the color
         // window.setStatusBarColor(this.getResources().getColor(R.color.colorPrimaryDark));
+
+        try {
+            String email, token;
+            DatabaseHelper dbHelper = new DatabaseHelper(getApplicationContext());
+            myDb = dbHelper.getWritableDatabase();
+            Log.d("TAG", "open database successfully");
+        } catch (IOException e) {
+            Log.d("TAG", "open database failed");
+        }
 
         Log.i("** Token **", SingletonDataHolder.token);
         Log.i("** Email **", SingletonDataHolder.email);
@@ -172,6 +186,8 @@ public class AgreementActivity extends AppCompatActivity {
                     Log.i(TAG, response);
                     // Pass authentication
                     // showProgress(false);
+                    SingletonDataHolder.newRegUser = false;
+                    DbStoreToken();
                     Intent topIntent = new Intent(getBaseContext(), TopActivity.class);
                     startActivity(topIntent);
                     finish();
@@ -210,5 +226,20 @@ public class AgreementActivity extends AppCompatActivity {
             queue.add(postRequest);
         } else
             Toast.makeText(AgreementActivity.this, "No Internet Connection", Toast.LENGTH_SHORT).show();
+    }
+
+    private void DbStoreToken() {
+        // Create a new map of values, where column names are the keys
+        ContentValues values = new ContentValues();
+        values.put(Constants.USER_ENTITY_VERSION_COLUMN, 1);
+        values.put(Constants.USER_ENTITY_TOKEN_COLUMN, SingletonDataHolder.token);
+
+        // Insert the new row, returning the primary key value of the new row
+        long newRowId;
+        newRowId = myDb.insert(
+                Constants.USER_ENTITY_TABLE,
+                null,
+                values);
+        Log.d("**** Toekn DB ***", Long.toString(newRowId));
     }
 }
