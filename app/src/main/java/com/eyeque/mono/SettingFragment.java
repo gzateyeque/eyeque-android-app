@@ -113,7 +113,7 @@ public class SettingFragment extends Fragment {
                         startActivity(intent);
                         break;
                     case 2:
-                        uri = Uri.parse("http://api.eyeque.com:8080/tmpweb/#/page/faq");
+                        uri = Uri.parse("Constants.UrlFaq");
                         intent = new Intent(Intent.ACTION_VIEW, uri);
                         startActivity(intent);
                         break;
@@ -152,11 +152,12 @@ public class SettingFragment extends Fragment {
                 view.loadUrl("about:blank");
             }
         });
-        // NetConnection conn = new NetConnection();
-        // if (!conn.isConnected(getActivity())) {
-            // webview.getSettings().setCacheMode( WebSettings.LOAD_CACHE_ELSE_NETWORK );
-        // }
+        NetConnection conn = new NetConnection();
+        if (!conn.isConnected(getActivity())) {
+            webview.getSettings().setCacheMode( WebSettings.LOAD_CACHE_ELSE_NETWORK );
+        }
         webview.loadUrl(Constants.UrlBanner);
+
         Button logoutButton = (Button) rootView.findViewById(R.id.logoutButton);
         logoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
