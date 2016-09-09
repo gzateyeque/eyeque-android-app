@@ -5,9 +5,11 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.support.v7.widget.ButtonBarLayout;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.widget.LinearLayout;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebSettings;
@@ -58,6 +60,7 @@ public class DashboardFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private LinearLayout scoreLayout;
     private TextView scoreTv;
     private TextView eyeglassNumDescTv;
     private ProgressBar progressBar;
@@ -137,10 +140,13 @@ public class DashboardFragment extends Fragment {
         // GetDahsboardInfo();
 
         // Progress bar
+        scoreLayout = (LinearLayout) rootView.findViewById(R.id.egPanelLayout);
+        /***
         scoreTv = (TextView) rootView.findViewById(R.id.scoreText);
         eyeglassNumDescTv = (TextView) rootView.findViewById(R.id.eyeglassNumberDescription);
         progressBar = (ProgressBar) rootView.findViewById(R.id.progessSeekBar);
         newEyeglassNumberBtn = (Button) rootView.findViewById(R.id.newEyeglassNumber);
+         ***/
         eyeglassTableLayout=(TableLayout) rootView.findViewById(R.id.resultTableLayout);
         eyeglassNumListExpandIv = (ImageButton) rootView.findViewById(R.id.expandButton);
 
@@ -414,13 +420,15 @@ public class DashboardFragment extends Fragment {
         }
         // trackingDataOsWebView.loadUrl(SingletonDataHolder.urlOSTracking);
 
-
+        /***
         newEyeglassNumberBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 GetNewEyeglassNumber();
             }
         });
+        ***/
+
         return rootView;
     }
 
@@ -567,6 +575,76 @@ public class DashboardFragment extends Fragment {
     }
 
     private void loadData() {
+
+        scoreLayout.removeAllViewsInLayout();
+
+        if (SingletonDataHolder.eyeglassNumPurchasable) {
+            eyeglassNumDescTv = new TextView(thisContext);
+            LayoutParams eyeglassNumDescTvParams = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
+            eyeglassNumDescTv.setGravity(Gravity.CENTER);
+            eyeglassNumDescTv.setText("Your new eyeglass numbers is avaiable");
+            eyeglassNumDescTv.setTextColor(Color.BLACK);
+            eyeglassNumDescTv.setTextSize(16);
+            scoreLayout.addView(eyeglassNumDescTv, eyeglassNumDescTvParams);
+
+            newEyeglassNumberBtn = new Button(thisContext);
+            LinearLayout.LayoutParams newEyeglassNumberBtnParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+            newEyeglassNumberBtnParams.setMargins(170, 20, 170, 0);
+            newEyeglassNumberBtn.setBackgroundColor(Color.parseColor("#ffa500"));
+            newEyeglassNumberBtn.setText("GET NEW EYEGLASS NUMBERS");
+            newEyeglassNumberBtn.setTextColor(Color.WHITE);
+            newEyeglassNumberBtn.setTypeface(null, Typeface.BOLD);
+            newEyeglassNumberBtn.setTextSize(16);
+            newEyeglassNumberBtn.setGravity(Gravity.CENTER);
+            // newEyeglassNumberBtn.setLayoutParams(newEyeglassNumberBtnParams);
+            scoreLayout.addView(newEyeglassNumberBtn, newEyeglassNumberBtnParams);
+
+            newEyeglassNumberBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    GetNewEyeglassNumber();
+                }
+            });
+        } else if (SingletonDataHolder.currentTestScore < 100){
+            scoreTv = new TextView(thisContext);
+            LinearLayout.LayoutParams scoreTvParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+            scoreTv.setGravity(Gravity.CENTER);
+            scoreTv.setText("Progress: " + Integer.toString(SingletonDataHolder.currentTestScore) + "%");
+            scoreTv.setTextColor(Color.BLACK);
+            scoreTv.setTextSize(17);
+            scoreLayout.addView(scoreTv, scoreTvParams);
+
+            progressBar = new ProgressBar(thisContext, null, android.R.attr.progressBarStyleHorizontal);
+            LinearLayout.LayoutParams progressBarParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+            progressBarParams.setMargins(150, 0, 150, 0);
+            progressBar.setMax(100);
+            if (SingletonDataHolder.currentTestScore >= 100)
+                progressBar.setProgress(100);
+            else
+                progressBar.setProgress(SingletonDataHolder.currentTestScore);
+            scoreLayout.addView(progressBar, progressBarParams);
+
+            eyeglassNumDescTv = new TextView(thisContext);
+            LinearLayout.LayoutParams eyeglassNumDescTvParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+            eyeglassNumDescTvParams.setMargins(30, 0, 30, 0);
+            eyeglassNumDescTv.setGravity(Gravity.CENTER);
+            eyeglassNumDescTv.setText("Yout eyeglass numbers will be avaiable once your progress reachs 100%");
+            eyeglassNumDescTv.setTextColor(Color.GRAY);
+            eyeglassNumDescTv.setTextSize(16);
+            scoreLayout.addView(eyeglassNumDescTv, eyeglassNumDescTvParams);
+        } else {
+            eyeglassNumDescTv = new TextView(thisContext);
+            LinearLayout.LayoutParams eyeglassNumDescTvParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+            eyeglassNumDescTvParams.setMargins(30, 0, 30, 0);
+            eyeglassNumDescTv.setGravity(Gravity.CENTER);
+            eyeglassNumDescTv.setText("Perform more tests to get your updated eyeglass numbers");
+            eyeglassNumDescTv.setTextColor(Color.GRAY);
+            eyeglassNumDescTv.setTextSize(16);
+            scoreLayout.addView(eyeglassNumDescTv, eyeglassNumDescTvParams);
+        }
+    }
+
+    private void loadData1() {
         scoreTv.setText("Your progress: " + Integer.toString(SingletonDataHolder.currentTestScore));
 
         if (SingletonDataHolder.currentTestScore >= 100)
@@ -612,21 +690,24 @@ public class DashboardFragment extends Fragment {
         for (int i = 0; i < SingletonDataHolder.eyeglassNumCount; i++) {
             Log.i("***--- AXIS-2 ---***", Integer.toString(SingletonDataHolder.eyeglassNumberList[i].odAxis));
         }
-        if (SingletonDataHolder.pupillaryDistance > 0) {
-            pdTblRow = new TableRow(thisContext);
-            pdTblRow.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
-            TextView pdTextView = new TextView(thisContext);
+
+        pdTblRow = new TableRow(thisContext);
+        pdTblRow.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
+        TextView pdTextView = new TextView(thisContext);
+        if (SingletonDataHolder.pupillaryDistance > 0)
             pdTextView.setText("PD: " + Integer.toString(SingletonDataHolder.pupillaryDistance));
-            pdTextView.setTextColor(Color.BLACK);
-            TableRow.LayoutParams pdTextViewParams = new TableRow.LayoutParams();
-            pdTextViewParams.column = 0;
-            pdTextViewParams.span = 4;
-            pdTextViewParams.gravity = Gravity.CENTER;
-            pdTextViewParams.topMargin = 20;
-            pdTextViewParams.bottomMargin = 10;
-            pdTblRow.addView(pdTextView, pdTextViewParams);
-            eyeglassTableLayout.addView(pdTblRow);
-        }
+        else
+        pdTextView.setText("");
+        pdTextView.setTextColor(Color.BLACK);
+        TableRow.LayoutParams pdTextViewParams = new TableRow.LayoutParams();
+        pdTextViewParams.column = 0;
+        pdTextViewParams.span = 4;
+        pdTextViewParams.gravity = Gravity.CENTER;
+        pdTextViewParams.topMargin = 10;
+        pdTextViewParams.bottomMargin = 10;
+        pdTblRow.addView(pdTextView, pdTextViewParams);
+        eyeglassTableLayout.addView(pdTblRow);
+
 
         // Set display row
         if (eyeglassNumListToggle)
