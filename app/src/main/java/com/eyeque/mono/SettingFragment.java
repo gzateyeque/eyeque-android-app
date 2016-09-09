@@ -113,7 +113,7 @@ public class SettingFragment extends Fragment {
                         startActivity(intent);
                         break;
                     case 2:
-                        uri = Uri.parse("Constants.UrlFaq");
+                        uri = Uri.parse(Constants.UrlFaq);
                         intent = new Intent(Intent.ACTION_VIEW, uri);
                         startActivity(intent);
                         break;
