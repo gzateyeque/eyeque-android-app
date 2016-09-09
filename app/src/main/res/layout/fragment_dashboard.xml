@@ -69,6 +69,16 @@
                 android:orientation="vertical"
                 android:background="#FFFFFF" >
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="0dp"
+                    android:id="@+id/egPanelLayout"
+                    android:orientation="vertical"
+                    android:background="#FFFFFF" >
+                </LinearLayout>
+                <!--
                 <TextView
                     android:id="@+id/scoreText"
                     android:layout_marginTop="10dp"
@@ -115,12 +125,12 @@
                     android:layout_marginLeft="70dp"
                     android:layout_marginRight="70dp"
                     android:textColor="#FFFFFF" />
+                    -->
 
                 <TableLayout
                     android:id="@+id/resultTableLayout"
-                    android:layout_below="@+id/scoreLayout"
-                    android:layout_marginTop = "10dp"
-                    android:layout_marginBottom="5dp"
+                    android:layout_marginTop = "0dp"
+                    android:layout_marginBottom="0dp"
                     android:stretchColumns="*"
                     android:background="#FFFFFF"
                     android:layout_width="fill_parent"
