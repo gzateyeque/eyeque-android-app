@@ -11,6 +11,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -527,6 +528,19 @@ public class ResultActivity extends Activity {
             queue.add(postRequest);
         } else
             Toast.makeText(ResultActivity.this, "No Internet Connection", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+
+        switch (keyCode) {
+            case KeyEvent.KEYCODE_VOLUME_DOWN:
+                return true;
+            case KeyEvent.KEYCODE_VOLUME_UP:
+                return true;
+            default:
+                return super.onKeyDown(keyCode, event);
+        }
     }
 
 }

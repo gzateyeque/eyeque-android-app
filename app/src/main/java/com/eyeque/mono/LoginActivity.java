@@ -186,6 +186,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             webview.getSettings().setCacheMode( WebSettings.LOAD_CACHE_ELSE_NETWORK );
         }
         webview.loadUrl(Constants.UrlBanner);
+        // webview.loadUrl("http://192.168.110.151:8989/webview/banner/index.html");
 
         // Set up the login form.
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
@@ -1013,5 +1014,18 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         }
     }
         ***/
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+
+        switch (keyCode) {
+            case KeyEvent.KEYCODE_VOLUME_DOWN:
+                return true;
+            case KeyEvent.KEYCODE_VOLUME_UP:
+                return true;
+            default:
+                return super.onKeyDown(keyCode, event);
+        }
+    }
 }
 
