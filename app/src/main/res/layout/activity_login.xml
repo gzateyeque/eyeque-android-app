@@ -10,7 +10,7 @@
     <WebView
         android:id="@+id/bannerWebView"
         android:layout_width="fill_parent"
-        android:layout_height="175dp"
+        android:layout_height="180dp"
         android:scaleType="fitXY">
     </WebView>
 

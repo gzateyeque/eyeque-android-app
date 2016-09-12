@@ -118,7 +118,7 @@
                 android:layout_marginTop = "140dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:text="Copyright &#169; EyeQue Corp. All Rights Reserved"
+                android:text="Copyright &#169; 2016 EyeQue Corp. All Rights Reserved"
                 android:id="@+id/copyrightTextStringView"
                 android:layout_below="@+id/websiteTextStringView"
                 android:textSize="13dp"
