@@ -579,13 +579,16 @@ public class DashboardFragment extends Fragment {
         scoreLayout.removeAllViewsInLayout();
 
         if (SingletonDataHolder.eyeglassNumPurchasable) {
+
+            /****
             eyeglassNumDescTv = new TextView(thisContext);
             LayoutParams eyeglassNumDescTvParams = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
             eyeglassNumDescTv.setGravity(Gravity.CENTER);
-            eyeglassNumDescTv.setText("Your new eyeglass numbers is avaiable");
+            eyeglassNumDescTv.setText("Your new eyeglass numbers is ready");
             eyeglassNumDescTv.setTextColor(Color.BLACK);
             eyeglassNumDescTv.setTextSize(16);
             scoreLayout.addView(eyeglassNumDescTv, eyeglassNumDescTvParams);
+             ****/
 
             newEyeglassNumberBtn = new Button(thisContext);
             LinearLayout.LayoutParams newEyeglassNumberBtnParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
@@ -628,7 +631,7 @@ public class DashboardFragment extends Fragment {
             LinearLayout.LayoutParams eyeglassNumDescTvParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
             eyeglassNumDescTvParams.setMargins(30, 0, 30, 0);
             eyeglassNumDescTv.setGravity(Gravity.CENTER);
-            eyeglassNumDescTv.setText("Yout eyeglass numbers will be avaiable once your progress reachs 100%");
+            eyeglassNumDescTv.setText("Yout eyeglass numbers will be available once your progress reachs 100%");
             eyeglassNumDescTv.setTextColor(Color.GRAY);
             eyeglassNumDescTv.setTextSize(16);
             scoreLayout.addView(eyeglassNumDescTv, eyeglassNumDescTvParams);

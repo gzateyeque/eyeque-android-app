@@ -243,7 +243,7 @@ public class MainActivity extends Activity {
         try {
             mp.reset();
             mp.setDataSource(getApplicationContext(),
-                    Uri.parse("android.resource://com.eyeque.mono/" + R.raw.fri_1));
+                    Uri.parse("android.resource://com.eyeque.mono/" + R.raw.start_test));
             mp.prepare();
             mp.start();
         } catch (IllegalStateException e) {
