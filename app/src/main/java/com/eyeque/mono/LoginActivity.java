@@ -746,7 +746,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                         if (jsonResponse.has("gender"))
                             SingletonDataHolder.gender = Integer.parseInt(jsonResponse.getString("gender"));
                         if (jsonResponse.has("dob")) {
-                            Log.i("*** Birth Year ***", jsonResponse.getString("dob").substring(1, 5));
+                            Log.i("*** Birth Year ***", jsonResponse.getString("dob").substring(0, 4));
                             SingletonDataHolder.birthYear = Integer.valueOf(jsonResponse.getString("dob").substring(0, 4));
                         }
                         SingletonDataHolder.deviceSerialNum = "";

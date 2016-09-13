@@ -154,7 +154,7 @@ public class SmEmailRegActivity extends AppCompatActivity implements LoaderCallb
             mEmailView.setEnabled(false);
         }
 
-        populateAutoComplete();
+        // populateAutoComplete();
 
         mPasswordView = (EditText) findViewById(R.id.password);
         mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
@@ -291,13 +291,18 @@ public class SmEmailRegActivity extends AppCompatActivity implements LoaderCallb
             StringRequest postRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {
-                    Log.i(TAG, response);
+                    Log.i("**** SM SingUp ***", response);
+                    // Acquire session token
+                    String username = sm_type + sm_id;
+                    Log.i("$$$$$SMTYPE", sm_type);
+                    Log.i("$$$$$SMID+", sm_id);
+                    Log.i("$$$$$SM UN+", sm_token);
+                    SignIn(username, sm_token);
                     // Pass authentication
-                    showProgress(false);
-                    SingletonDataHolder.email = sm_email;
-                    Intent nameIntent = new Intent(getBaseContext(), NameActivity.class);
-                    startActivity(nameIntent);
-                    finish();
+                    // showProgress(false);
+                    // Intent nameIntent = new Intent(getBaseContext(), NameActivity.class);
+                    // startActivity(nameIntent);
+                    // finish();
                 }
             }, new Response.ErrorListener() {
                 @Override
@@ -330,6 +335,69 @@ public class SmEmailRegActivity extends AppCompatActivity implements LoaderCallb
             queue.add(postRequest);
         }
         else
+            Toast.makeText(SmEmailRegActivity.this, "No Internet Connection", Toast.LENGTH_SHORT).show();
+    }
+
+    private void SignIn(String email, String password) {
+        NetConnection conn = new NetConnection();
+        if (conn.isConnected(getApplicationContext())) {
+            // Show a progress spinner, and kick off a background task to
+            // perform the user login attempt.
+            showProgress(true);
+
+            RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
+            String url = Constants.UrlSignIn;
+            final JSONObject params = new JSONObject();
+            try {
+                params.put("username", email);
+                params.put("password", password);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            StringRequest postRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+                    showProgress(false);
+                    Log.i("*** SM Token ***", response);
+                    // Pass authentication
+                    response = response.replace("\"", "");
+                    SingletonDataHolder.token = response;
+                    SingletonDataHolder.email = sm_email;
+                    showProgress(false);
+                    Intent nameIntent = new Intent(getBaseContext(), NameActivity.class);
+                    startActivity(nameIntent);
+                    finish();
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    showProgress(false);
+                    Log.d("Error.Response", error.toString());
+                    Toast.makeText(SmEmailRegActivity.this, "Login failed", Toast.LENGTH_SHORT).show();
+                }
+            }) {
+                @Override
+                public byte[] getBody() throws AuthFailureError {
+                    Log.i("$$$---JSON2---$$$", params.toString());
+                    return params.toString().getBytes();
+                }
+
+                @Override
+                public String getBodyContentType() {
+                    return "application/json";
+                }
+
+                @Override
+                public Map<String, String> getHeaders() throws AuthFailureError {
+                    Map<String, String> headers = new HashMap<>();
+                    headers.put("Content-Type", "application/json;charset=UTF-8");
+                    return headers;
+                }
+            };
+            RetryPolicy policy = new DefaultRetryPolicy(Constants.NETCONN_TIMEOUT_VALUE, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+            postRequest.setRetryPolicy(policy);
+            queue.add(postRequest);
+        } else
             Toast.makeText(SmEmailRegActivity.this, "No Internet Connection", Toast.LENGTH_SHORT).show();
     }
 

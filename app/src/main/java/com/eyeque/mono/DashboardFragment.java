@@ -612,7 +612,7 @@ public class DashboardFragment extends Fragment {
             scoreTv = new TextView(thisContext);
             LinearLayout.LayoutParams scoreTvParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
             scoreTv.setGravity(Gravity.CENTER);
-            scoreTv.setText("Progress: " + Integer.toString(SingletonDataHolder.currentTestScore) + "%");
+            scoreTv.setText("Progress: " + Integer.toString(SingletonDataHolder.currentTestScore));
             scoreTv.setTextColor(Color.BLACK);
             scoreTv.setTextSize(17);
             scoreLayout.addView(scoreTv, scoreTvParams);
@@ -631,7 +631,7 @@ public class DashboardFragment extends Fragment {
             LinearLayout.LayoutParams eyeglassNumDescTvParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
             eyeglassNumDescTvParams.setMargins(30, 0, 30, 0);
             eyeglassNumDescTv.setGravity(Gravity.CENTER);
-            eyeglassNumDescTv.setText("Yout eyeglass numbers will be available once your progress reachs 100%");
+            eyeglassNumDescTv.setText("Yout eyeglass numbers will be available once your progress reachs 100");
             eyeglassNumDescTv.setTextColor(Color.GRAY);
             eyeglassNumDescTv.setTextSize(16);
             scoreLayout.addView(eyeglassNumDescTv, eyeglassNumDescTvParams);

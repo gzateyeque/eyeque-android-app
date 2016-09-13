@@ -165,7 +165,7 @@ public class AgreementActivity extends AppCompatActivity {
             final JSONObject finalParams = new JSONObject();
 
             try {
-                finalParams.put("token", SingletonDataHolder.token);
+                // finalParams.put("token", SingletonDataHolder.token);
                 params.put("email", SingletonDataHolder.email);
                 params.put("firstname", SingletonDataHolder.firstName);
                 params.put("lastname", SingletonDataHolder.lastName);
@@ -188,6 +188,12 @@ public class AgreementActivity extends AppCompatActivity {
                     // Pass authentication
                     // showProgress(false);
                     SingletonDataHolder.newRegUser = false;
+                    try {
+                        JSONObject jsonResponse = new JSONObject(response);
+                        SingletonDataHolder.userId = Integer.parseInt(jsonResponse.getString("id"));
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
                     DbStoreToken();
                     Intent topIntent = new Intent(getBaseContext(), TopActivity.class);
                     startActivity(topIntent);
