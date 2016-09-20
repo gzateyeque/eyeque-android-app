@@ -40,7 +40,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class TopActivity extends AppCompatActivity
-        implements AttachDeviceFragment.OnFragmentInteractionListener,
+        implements TutorialFragment.OnFragmentInteractionListener,
                    Test2Fragment.OnFragmentInteractionListener,
                     DashboardFragment.OnFragmentInteractionListener,
                     SettingFragment.OnFragmentInteractionListener {
@@ -145,15 +145,10 @@ public class TopActivity extends AppCompatActivity
                 break;
             case R.id.test_item:
                 if (checkDeviceCompatibility)
-                    fragmentClass = AttachDeviceFragment.class;
+                    // fragmentClass = AttachDeviceFragment.class;
+                    fragmentClass = TutorialFragment.class;
                 else
                     fragmentClass = Test2Fragment.class;
-                /***
-                if (SingletonDataHolder.phoneType == "Galaxy 6")
-                    fragmentClass = AttachDeviceFragment.class;
-                else
-                    fragmentClass = Test2Fragment.class;
-                 ***/
                 break;
             case R.id.account_item:
                 fragmentClass = SettingFragment.class;
@@ -175,7 +170,7 @@ public class TopActivity extends AppCompatActivity
     }
 
     @Override
-    public void onAttachDeviceFragmentInteraction(Uri uri) {}
+    public void onTutorialFragmentInteraction(Uri uri) {}
 
     @Override
     public void onTest2FragmentInteraction(Uri uri) {}
