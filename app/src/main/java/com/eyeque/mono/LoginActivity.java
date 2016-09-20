@@ -675,7 +675,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                         SingletonDataHolder.email = gEmail;
 
                     if (signUpType == 2) {
-                        SignIn(socialMediaId, socialMediaTok);
+                        String username = socialMediaType + socialMediaId;
+                        SignIn(username, socialMediaTok);
                     } else
                         SignIn(gEmail, gPassword);
                     // Intent nameIntent = new Intent(getBaseContext(), NameActivity.class);
