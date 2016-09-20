@@ -42,7 +42,7 @@ public class Constants {
     public static final String UrlYoutube = ContentRestFulBaseURL + "tutorial_video/index.html";
     public static final String UrlTermsOfService = ContentRestFulBaseURL + "user_agreement/terms";
     public static final String UrlPrivacyPolicy = ContentRestFulBaseURL + "user_agreement/policy";
-    public static final String UrlFaq =  "http://54.201.220.133:8080/tmpweb/#/page/faq";
+    public static final String UrlFaq =  ContentRestFulBaseURL + "faq";
 
     // Restful API Call URL
     public static final String UrlBuyDevice = ApiRestfulBaseURL + "eyeque-mini-scope.html";
