@@ -90,7 +90,7 @@ public class PatternView extends View {
         // Paint p = new Paint();
         // Log.i("OnDraw", "drawType = " + String.valueOf(getDrawType()));
 
-        color = Color.rgb(100, 100, 100);
+        color = Color.rgb(200, 200, 200);
         // Draw Square
         switch (deviceId) {
             case 2:
