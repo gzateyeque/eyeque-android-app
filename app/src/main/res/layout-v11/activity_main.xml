@@ -70,6 +70,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/powerText"
         android:text="@string/powerTextString"
+        android:textColor="#FFFFFF"
         android:layout_below="@+id/testHeaderDivView"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
@@ -90,6 +91,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/distText"
         android:text="@string/distTextString"
+        android:textColor="#FFFFFF"
         android:layout_below="@+id/testHeaderDivView"
         android:layout_alignParentRight="true"
         android:layout_marginRight="20dp"
@@ -154,7 +156,7 @@
         android:id="@+id/closerButton"
         android:text="@string/closerButtonTextString"
         android:background="@color/bb_darkBackgroundColor"
-        android:textColor="#646464"
+        android:textColor="#C8C8C8"
         android:textSize="70dp"
         android:layout_below="@+id/alignSeekBar" />
 
@@ -166,7 +168,7 @@
         android:id="@+id/furtherButton"
         android:text="@string/furtherButtonTextString"
         android:background="@color/bb_darkBackgroundColor"
-        android:textColor="#646464"
+        android:textColor="#C8C8C8"
         android:textSize="60dp"
         android:layout_alignParentEnd="true"
         android:layout_below="@+id/alignSeekBar" />

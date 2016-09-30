@@ -129,8 +129,8 @@
 
                 <TableLayout
                     android:id="@+id/resultTableLayout"
-                    android:layout_marginTop = "0dp"
-                    android:layout_marginBottom="0dp"
+                    android:layout_marginTop = "10dp"
+                    android:layout_marginBottom="10dp"
                     android:stretchColumns="*"
                     android:background="#FFFFFF"
                     android:layout_width="fill_parent"
@@ -254,6 +254,7 @@
                     -->
                 </TableLayout>
 
+                <!--
                 <ImageButton
                     android:id="@+id/expandButton"
                     android:layout_width="40dp"
@@ -264,6 +265,7 @@
                     android:background="#FFFFFF"
                     android:scaleType="fitXY" >
                 </ImageButton>
+                -->
             </LinearLayout>
 
             <TextView

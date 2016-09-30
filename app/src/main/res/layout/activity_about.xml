@@ -98,6 +98,7 @@
                 android:layout_centerHorizontal="true" >
             </TextView>
 
+            <!--
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -111,6 +112,7 @@
                 android:textSize="17dp"
                 android:layout_centerHorizontal="true" >
             </TextView>
+            -->
 
             <TextView
                 android:layout_width="wrap_content"
@@ -120,10 +122,40 @@
                 android:layout_marginRight="10dp"
                 android:text="Copyright &#169; 2016 EyeQue Corp. All Rights Reserved"
                 android:id="@+id/copyrightTextStringView"
-                android:layout_below="@+id/websiteTextStringView"
+                android:layout_below="@+id/visitWebTextStringView"
                 android:textSize="13dp"
                 android:layout_centerHorizontal="true" >
             </TextView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/termsOfServiceButton"
+                android:text="Terms of Service"
+                android:textColor="@android:color/holo_blue_light"
+                android:background="?attr/selectableItemBackground"
+                android:textAllCaps="false"
+                android:textSize="15dp"
+                android:layout_below="@+id/copyrightTextStringView"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="30dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/privatePolicyButton"
+                android:text="Private Policy"
+                android:textColor="@android:color/holo_blue_light"
+                android:background="?attr/selectableItemBackground"
+                android:textAllCaps="false"
+                android:textSize="15dp"
+                android:layout_below="@+id/copyrightTextStringView"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="30dp"/>
 
         </RelativeLayout>
     </ScrollView>

@@ -115,7 +115,7 @@
                 android:textAllCaps="false"
                 android:gravity="center"
                 android:background="?attr/selectableItemBackground"
-                android:textColor="#046EEA"
+                android:textColor="@android:color/darker_gray"
                 android:textSize="25dp"
                 android:textStyle="normal"
                 android:layout_alignParentBottom="true"

@@ -51,36 +51,37 @@
 
             <TextView
                 android:id="@+id/testResultTextView"
-                android:layout_height="18dp"
+                android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
                 android:layout_marginTop="10dp"
                 android:layout_centerHorizontal="true"
                 android:drawableRight="@drawable/info"
                 android:text="SPHERICAL EQUIVALENT "
                 android:textStyle="bold"
-                android:textSize="14dp"
+                android:textSize="18dp"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:layout_gravity="center_horizontal" />
 
             <TableLayout
                 android:id="@+id/resultTableLayout"
-                android:layout_marginTop = "5dp"
+                android:layout_marginTop = "10dp"
                 android:stretchColumns="*"
                 android:background="#FFFFFF"
                 android:layout_width="fill_parent"
-                android:layout_height="40dp" >
+                android:layout_height="80dp" >
 
                 <TableRow
-                    android:id="@+id/tableOsRow"
+                    android:id="@+id/tableOdRow"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content" >
 
                     <TextView
                         android:id="@+id/odTitleTextView"
-                        android:text="RIGHT (O.D.)"
-                        android:gravity="center"
+                        android:text="RIGHT EYE: "
+                        android:gravity="right"
                         android:textStyle="bold"
-                        android:textSize="14dp"
+                        android:textSize="16dp"
+                        android:paddingRight="20dp"
                         android:textAppearance="?android:attr/textAppearanceMedium" />
 
                     <TextView
@@ -90,12 +91,20 @@
                         android:textSize="28dp"
                         android:textAppearance="?android:attr/textAppearanceMedium" />
 
+                </TableRow>
+
+                <TableRow
+                    android:id="@+id/tableOsRow"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content" >
+
                     <TextView
                         android:id="@+id/osTitleTextView"
-                        android:text="LEFT (O.S.)"
-                        android:gravity="center"
+                        android:text="LEFT EYE: "
+                        android:gravity="right"
                         android:textStyle="bold"
-                        android:textSize="14dp"
+                        android:textSize="16dp"
+                        android:paddingRight="26dp"
                         android:textAppearance="?android:attr/textAppearanceMedium" />
 
 
