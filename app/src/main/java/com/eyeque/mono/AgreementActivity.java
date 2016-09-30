@@ -46,6 +46,7 @@ public class AgreementActivity extends AppCompatActivity {
     private boolean userChecked = false;
     private boolean newsletterChecked = true;
     private static final String TAG = "Agreement Acvitity";
+    private Button nextButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -114,7 +115,8 @@ public class AgreementActivity extends AppCompatActivity {
         textView.setMovementMethod(LinkMovementMethod.getInstance());
         textView.setHighlightColor(Color.TRANSPARENT);
 
-        Button nextButton = (Button) findViewById(R.id.agreementNextButton);
+        nextButton = (Button) findViewById(R.id.agreementNextButton);
+        nextButton.setEnabled(false);
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -132,10 +134,16 @@ public class AgreementActivity extends AppCompatActivity {
     public void userItemClicked(View v) {
         //code to check if this checkbox is checked!
         CheckBox checkBox = (CheckBox) v;
-        if (checkBox.isChecked())
+        if (checkBox.isChecked()) {
             userChecked = true;
-        else
+            nextButton.setEnabled(true);
+            nextButton.setTextColor(Color.parseColor("#046EEA"));
+        }
+        else {
             userChecked = false;
+            nextButton.setEnabled(false);
+            nextButton.setTextColor(Color.rgb(151, 151, 151));
+        }
     }
 
     public void newsItemClicked(View v) {

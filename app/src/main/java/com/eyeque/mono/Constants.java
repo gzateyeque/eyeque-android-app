@@ -9,7 +9,7 @@ import android.provider.BaseColumns;
 
 public class Constants {
 
-    public final static String BuildNumber = "1.0.1 Pre Release C";
+    public final static String BuildNumber = "1.0.1 Pre-Release D";
     public static final double PI = 3.141592653589793d;
     public final static int sdkVersion = Build.VERSION.SDK_INT;
 
@@ -43,6 +43,7 @@ public class Constants {
     public static final String UrlTermsOfService = ContentRestFulBaseURL + "user_agreement/terms";
     public static final String UrlPrivacyPolicy = ContentRestFulBaseURL + "user_agreement/policy";
     public static final String UrlFaq =  ContentRestFulBaseURL + "faq";
+    public static final String UrlSupport =  ContentRestFulBaseURL + "faq";
 
     // Restful API Call URL
     public static final String UrlBuyDevice = ApiRestfulBaseURL + "eyeque-mini-scope.html";

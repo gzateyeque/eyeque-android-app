@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Button;
 
 public class AboutActivity extends AppCompatActivity {
 
@@ -27,10 +28,30 @@ public class AboutActivity extends AppCompatActivity {
             }
         });
 
+        /***
         TextView websiteTv = (TextView) findViewById(R.id.websiteTextStringView);
         websiteTv.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Uri uri =  Uri.parse("http://www.eyeque.com");
+                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                startActivity(intent);
+            }
+        });
+         ****/
+
+        TextView termsOfServiceTv = (TextView) findViewById(R.id.termsOfServiceButton);
+        termsOfServiceTv.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Uri uri = Uri.parse(Constants.UrlTermsOfService);
+                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                startActivity(intent);
+            }
+        });
+
+        TextView privatePolicyTv = (TextView) findViewById(R.id.privatePolicyButton);
+        privatePolicyTv.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Uri uri = Uri.parse(Constants.UrlPrivacyPolicy);
                 Intent intent = new Intent(Intent.ACTION_VIEW, uri);
                 startActivity(intent);
             }

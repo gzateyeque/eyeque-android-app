@@ -190,6 +190,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
         // Set up the login form.
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
+        if (!SingletonDataHolder.email.matches(""))
+            mEmailView.setText(SingletonDataHolder.email);
         // populateAutoComplete();
 
         mPasswordView = (EditText) findViewById(R.id.password);
@@ -750,7 +752,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                             Log.i("*** Birth Year ***", jsonResponse.getString("dob").substring(0, 4));
                             SingletonDataHolder.birthYear = Integer.valueOf(jsonResponse.getString("dob").substring(0, 4));
                         }
-                        SingletonDataHolder.deviceSerialNum = "";
+                        // SingletonDataHolder.deviceSerialNum = "";
                         Log.i("*** customer id ***", Integer.toString(SingletonDataHolder.userId));
 
                         if (jsonResponse.has("custom_attributes")) {
@@ -766,12 +768,12 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
                                 if (attrName.matches("device_number")) {
                                     if (attrValue.matches("") || (attrValue.matches("null") || attrValue == null)) {
-                                        Log.i("********4*********", "true");
+                                        Log.i("*****Device4*****", attrValue);
                                         isOnBoardNeeded = true;
                                         Intent nameIntent = new Intent(getBaseContext(), NameActivity.class);
                                         startActivity(nameIntent);
                                     } else {
-                                        Log.i("********5*********", "false");
+                                        Log.i("****Device5******", attrValue);
                                         isOnBoardNeeded = false;
                                         DbStoreToken();
                                         SingletonDataHolder.deviceSerialNum = attrValue;

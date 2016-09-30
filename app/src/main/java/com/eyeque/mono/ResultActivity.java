@@ -114,8 +114,9 @@ public class ResultActivity extends Activity {
         final TextView osSpheTextView = (TextView) findViewById(R.id.osSpheTextView);
         final TextView testResultTextView = (TextView) findViewById(R.id.testResultText);
 
-        odSpheTextView.setText(odSe);
-        osSpheTextView.setText(osSe);
+
+        odSpheTextView.setText(odSe + " D");
+        osSpheTextView.setText(osSe + " D");
         testResultTextView.setText("Test Score: " + Integer.toString(score) + " of 40");
 
         final TextView btnOpenPopup = (TextView)findViewById(R.id.testResultTextView);

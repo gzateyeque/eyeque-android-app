@@ -582,7 +582,7 @@ public class MainActivity extends Activity {
                     closerButton.setTextColor(releasedColor);
                 }
                 else if (event.getAction() == MotionEvent.ACTION_UP) {
-                    int pressedColor = Color.rgb(64,64,64);
+                    int pressedColor = Color.rgb(200,200,200);
                     closerButton.setTextColor(pressedColor);
                 }
                 return false;
@@ -632,7 +632,7 @@ public class MainActivity extends Activity {
                     furtherButton.setTextColor(releasedColor);
                 }
                 else if (event.getAction() == MotionEvent.ACTION_UP) {
-                    int pressedColor = Color.rgb(64,64,64);
+                    int pressedColor = Color.rgb(200,200,200);
                     furtherButton.setTextColor(pressedColor);
                 }
                 return false;
@@ -737,8 +737,14 @@ public class MainActivity extends Activity {
                         final JSONObject result = new JSONObject(response);
                         resultIntent.putExtra("TestId", result.getInt("test_condition_id"));
                         resultIntent.putExtra("Score", result.getInt("score"));
-                        resultIntent.putExtra("ODE", String.format("%.2f", Double.parseDouble(result.getString("sphe_od"))));
-                        resultIntent.putExtra("OSE", String.format("%.2f", Double.parseDouble(result.getString("sphe_os"))));
+                        if (Double.parseDouble(result.getString("sphe_od")) > 0)
+                            resultIntent.putExtra("ODE", String.format("+%.2f", Double.parseDouble(result.getString("sphe_od"))));
+                        else
+                            resultIntent.putExtra("ODE", String.format("%.2f", Double.parseDouble(result.getString("sphe_od"))));
+                        if (Double.parseDouble(result.getString("sphe_os")) > 0)
+                            resultIntent.putExtra("OSE", String.format("+%.2f", Double.parseDouble(result.getString("sphe_os"))));
+                        else
+                            resultIntent.putExtra("OSE", String.format("%.2f", Double.parseDouble(result.getString("sphe_os"))));
 
                         /**** For video shooting
                         resultIntent.putExtra("ODE", "-2.25");

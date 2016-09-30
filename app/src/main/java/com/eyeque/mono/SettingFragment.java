@@ -91,8 +91,9 @@ public class SettingFragment extends Fragment {
 
         final ListView settingListView = (ListView) rootView.findViewById(R.id.settingListView);
         listItems.add("Account");
-        listItems.add("Buy Device");
-        listItems.add("Frequent Asked Questions");
+        listItems.add("Shop");
+        listItems.add("FAQs");
+        listItems.add("Help");
         listItems.add("About");
         adapter = new ArrayAdapter<String>(rootView.getContext(), android.R.layout.simple_list_item_1, listItems);
         settingListView.setAdapter(adapter);
@@ -118,6 +119,10 @@ public class SettingFragment extends Fragment {
                         startActivity(intent);
                         break;
                     case 3:
+                        uri = Uri.parse(Constants.UrlSupport);
+                        intent = new Intent(Intent.ACTION_VIEW, uri);
+                        startActivity(intent);
+                    case 4:
                         intent = new Intent(getActivity(), AboutActivity.class);
                         startActivity(intent);
                         break;
@@ -174,7 +179,7 @@ public class SettingFragment extends Fragment {
                 SingletonDataHolder.token = "";
                 SingletonDataHolder.newRegUser = true;
                 SingletonDataHolder.userId = 0;
-                SingletonDataHolder.email = "";
+                // SingletonDataHolder.email = "";
                 SingletonDataHolder.firstName = "";
                 SingletonDataHolder.lastName = "";
                 SingletonDataHolder.gender = 0;
