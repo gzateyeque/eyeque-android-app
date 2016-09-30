@@ -124,17 +124,19 @@
         <activity
             android:name="com.facebook.FacebookActivity"
             android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
-            android:label="@string/app_name"
+            android:label="@string/app_name" />
+        <!--
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+            -->
 
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />
 
         <activity
-            android:name=".TutorialActivity"
+            android:name=".AttachDeviceActivity"
             android:configChanges="orientation"
-            android:label="@string/title_activity_tutorial"
+            android:label="@string/title_activity_attach_device"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
