@@ -36,38 +36,38 @@ public class GenderActivity extends AppCompatActivity {
         final ImageButton femaleButton = (ImageButton) findViewById(R.id.femaleButton);
         final ImageButton maleButton = (ImageButton) findViewById(R.id.maleButton);
 
-        femaleButton.setImageResource(R.drawable.female);
+        femaleButton.setImageResource(R.drawable.female_unselected);
         femaleButton.setBackgroundDrawable(null);
         femaleButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 femaleToggle = !femaleToggle;
                 if (femaleToggle) {
-                    femaleButton.setImageResource(R.drawable.female_blue);
+                    femaleButton.setImageResource(R.drawable.female_selected);
                     if (maleToggle) {
-                        maleButton.setImageResource(R.drawable.male);
+                        maleButton.setImageResource(R.drawable.male_unselected);
                         maleToggle = !maleToggle;
                     }
                 } else {
-                    femaleButton.setImageResource(R.drawable.female);
+                    femaleButton.setImageResource(R.drawable.female_selected);
                 }
             }
         });
 
-        maleButton.setImageResource(R.drawable.male);
+        maleButton.setImageResource(R.drawable.male_unselected);
         maleButton.setBackgroundDrawable(null);
         maleButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 maleToggle = !maleToggle;
                 if (maleToggle) {
-                    maleButton.setImageResource(R.drawable.male_blue);
+                    maleButton.setImageResource(R.drawable.male_selected);
                     if (femaleToggle) {
-                        femaleButton.setImageResource(R.drawable.female);
+                        femaleButton.setImageResource(R.drawable.female_unselected);
                         femaleToggle = !femaleToggle;
                     }
                 } else {
-                    maleButton.setImageResource(R.drawable.male);
+                    maleButton.setImageResource(R.drawable.male_unselected);
                 }
             }
         });
