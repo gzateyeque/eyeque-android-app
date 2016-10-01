@@ -63,7 +63,7 @@
                     android:layout_marginRight="0dp"
                     android:layout_weight="1"
                     android:adjustViewBounds="true"
-                    android:padding="10dp"
+                    android:padding="5dp"
                     android:scaleType="fitXY" >
                 </ImageButton>
 
@@ -89,7 +89,7 @@
                     android:layout_marginRight="10dp"
                     android:layout_weight="1"
                     android:adjustViewBounds="true"
-                    android:padding="10dp"
+                    android:padding="5dp"
                     android:scaleType="fitXY">
                 </ImageButton>
             </LinearLayout>
