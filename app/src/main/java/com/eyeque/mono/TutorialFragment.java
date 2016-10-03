@@ -5,6 +5,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
@@ -23,6 +24,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.webkit.WebView;
 import android.widget.Toast;
+import android.view.ViewGroup.LayoutParams;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -85,18 +87,28 @@ public class TutorialFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         int color;
-        View rootView = inflater.inflate(R.layout.activity_tutorial, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_tutorial, container, false);
 
 
         // Draw the device mounting line. Hard code for now.
         // Need to dynamically populate when supporting multiple devices
         deviceId = 3;
-        patternView = (PatternView) rootView.findViewById(R.id.drawView);
-        patternView.setDeviceId((int) deviceId);
-        patternView.setdrawDeviceOnly(true);
-        patternView.start();
+
+        if (getActivity().getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
+            Log.i("***** PORT ********", "hhehwjrwjrewj");
+            patternView = (PatternView) rootView.findViewById(R.id.drawView);
+            patternView.setDeviceId((int) deviceId);
+            patternView.setdrawDeviceOnly(true);
+            patternView.start();
+        }
 
         webView = (WebView) rootView.findViewById(R.id.tutorialWebView);
+
+        if (getActivity().getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            Log.i("***** LAND ********", "hhehwjrwjrewj");
+            webView.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, 400));
+        }
+
         WebSettings settings = webView.getSettings();
         settings.setJavaScriptEnabled(true);
         webView.setScrollBarStyle(WebView.SCROLLBARS_OUTSIDE_OVERLAY);
@@ -123,6 +135,7 @@ public class TutorialFragment extends Fragment {
         if (mListener != null) {
             mListener.onTutorialFragmentInteraction(uri);
         }
+        Log.i("***** 1 ********", "hhehwjrwjrewj");
     }
 
     @Override
@@ -134,12 +147,15 @@ public class TutorialFragment extends Fragment {
             throw new RuntimeException(context.toString()
                     + " must implement OnTutorialFragmentInteractionListener");
         }
+        Log.i("***** onATTACH ********", "hhehwjrwjrewj");
     }
 
     @Override
     public void onDetach() {
         super.onDetach();
         mListener = null;
+        webView.loadUrl("about:blank");
+        Log.i("***** deATTACH ********", "hhehwjrwjrewj");
     }
 
     /**
@@ -156,4 +172,5 @@ public class TutorialFragment extends Fragment {
         // TODO: Update argument type and name
         void onTutorialFragmentInteraction(Uri uri);
     }
+
 }

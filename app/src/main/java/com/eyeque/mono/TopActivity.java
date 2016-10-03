@@ -32,12 +32,11 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnMenuTabSelectedListener;
-
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.util.HashMap;
 import java.util.Map;
+import android.content.pm.ActivityInfo;
 
 public class TopActivity extends AppCompatActivity
         implements TutorialFragment.OnFragmentInteractionListener,
@@ -48,6 +47,10 @@ public class TopActivity extends AppCompatActivity
     private CoordinatorLayout coordinatorLayout;
     private static final String TAG = "Home";
     private static boolean checkDeviceCompatibility = false;
+    static private Fragment dashboardFragment;
+    static private Fragment tutorialFragment;
+    static private Fragment deviceCompatFragment;
+    static private Fragment settingFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -139,24 +142,45 @@ public class TopActivity extends AppCompatActivity
         // Create a new fragment and specify the fragment to show based on nav item clicked
         Fragment fragment = null;
         Class fragmentClass;
-        switch(menuItem) {
-            case R.id.home_item:
-                fragmentClass = DashboardFragment.class;
-                break;
-            case R.id.test_item:
-                if (checkDeviceCompatibility)
-                    // fragmentClass = AttachDeviceFragment.class;
-                    fragmentClass = TutorialFragment.class;
-                else
-                    fragmentClass = Test2Fragment.class;
-                break;
-            case R.id.account_item:
-                fragmentClass = SettingFragment.class;
-                break;
-            default:
-                fragmentClass = DashboardFragment.class;
+        FragmentManager fragmentManager = getFragmentManager();
+
+        try {
+            switch(menuItem) {
+                case R.id.home_item:
+                    this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+                    fragmentClass = DashboardFragment.class;
+                    dashboardFragment = (Fragment) fragmentClass.newInstance();
+                    break;
+                case R.id.test_item:
+                    if (checkDeviceCompatibility) {
+                        this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
+                        // fragmentClass = AttachDeviceFragment.class;
+                        fragmentClass = TutorialFragment.class;
+                        deviceCompatFragment = (Fragment) fragmentClass.newInstance();
+                    }
+                    else {
+                        this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+                        fragmentClass = Test2Fragment.class;
+                        tutorialFragment = (Fragment) fragmentClass.newInstance();
+                    }
+                    break;
+                case R.id.account_item:
+                    this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+                    fragmentClass = SettingFragment.class;
+                    settingFragment = (Fragment) fragmentClass.newInstance();
+                    if (tutorialFragment != null)
+                        fragmentManager.beginTransaction().remove(tutorialFragment);
+                    break;
+                default:
+                    fragmentClass = DashboardFragment.class;
+            }
+            fragment = (Fragment) fragmentClass.newInstance();
+            fragmentManager.beginTransaction().replace(R.id.frame_container, fragment).commit();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
+        /***
         try {
             fragment = (Fragment) fragmentClass.newInstance();
         } catch (Exception e) {
@@ -165,7 +189,10 @@ public class TopActivity extends AppCompatActivity
 
         // Insert the fragment by replacing any existing fragment
         FragmentManager fragmentManager = getFragmentManager();
+        if (fragmentClass != TutorialFragment.class && fragmentClass != null)
+            fragmentManager.beginTransaction().remove(fragment)
         fragmentManager.beginTransaction().replace(R.id.frame_container, fragment).commit();
+         ***/
 
     }
 

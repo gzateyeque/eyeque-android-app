@@ -2,6 +2,7 @@ package com.eyeque.mono;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
@@ -117,7 +118,7 @@ public class DashboardFragment extends Fragment {
         int color;
         View rootView = inflater.inflate(R.layout.fragment_dashboard, container, false);
 
-         thisContext = getActivity().getApplicationContext();
+        thisContext = getActivity().getApplicationContext();
 
         /***
         final TextView eyeglassTitleTv = (TextView) rootView.findViewById(R.id.visionRecordTitle);
@@ -505,6 +506,7 @@ public class DashboardFragment extends Fragment {
                         SingletonDataHolder.urlVisionSummary = result.getString("url_vision_summary");
                         SingletonDataHolder.pupillaryDistance = eyeglassResult.getInt("pd");
                         SingletonDataHolder.currentTestScore = eyeglassResult.getInt("score");
+                        SingletonDataHolder.freetrial = eyeglassResult.getInt("freetrial");
                         SingletonDataHolder.eyeglassNumPurchasable = eyeglassResult.getBoolean("purchasable");
                         SingletonDataHolder.eyeglassNumCount = eyeglassNumList.length();
 
@@ -654,7 +656,17 @@ public class DashboardFragment extends Fragment {
             eyeglassNumDescTv.setTextColor(Color.GRAY);
             eyeglassNumDescTv.setTextSize(16);
             scoreLayout.addView(eyeglassNumDescTv, eyeglassNumDescTvParams);
-        } else {
+        } else if (SingletonDataHolder.freetrial < 1) {
+            eyeglassNumDescTv = new TextView(thisContext);
+            LinearLayout.LayoutParams eyeglassNumDescTvParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+            eyeglassNumDescTvParams.setMargins(30, 0, 30, 0);
+            eyeglassNumDescTv.setGravity(Gravity.CENTER);
+            eyeglassNumDescTv.setText("The free trial has ended, please upgrade your app");
+            eyeglassNumDescTv.setTextColor(Color.GRAY);
+            eyeglassNumDescTv.setTextSize(16);
+            scoreLayout.addView(eyeglassNumDescTv, eyeglassNumDescTvParams);
+        }
+        else {
             eyeglassNumDescTv = new TextView(thisContext);
             LinearLayout.LayoutParams eyeglassNumDescTvParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
             eyeglassNumDescTvParams.setMargins(30, 0, 30, 0);

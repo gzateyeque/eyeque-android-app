@@ -29,6 +29,7 @@ public class SingletonDataHolder {
     public static String urlOSTracking = "";
     public static String urlVisionSummary = "";
     public static int currentTestScore = 0;
+    public static int freetrial = 0;
     public static int pupillaryDistance = 0;
     public static Boolean eyeglassNumPurchasable= false;
 

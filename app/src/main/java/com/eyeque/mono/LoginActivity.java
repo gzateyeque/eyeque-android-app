@@ -592,7 +592,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
-                    showProgress(false);
+                    // showProgress(false);
                     Log.d("Error.Response", error.toString());
 
                     if (loginType == 1) {
