@@ -5,7 +5,7 @@
     android:fitsSystemWindows="true"
     android:id="@+id/fragmentSetting"
     tools:context="com.eyeque.mono.SettingFragment"
-    android:background="@color/colorLayoutBase">
+    android:background="#FFFFFF">
 
     <ScrollView
         android:layout_width="fill_parent"
@@ -15,7 +15,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#F9F7F9"
+            android:background="#FFFF"
             >
 
             <WebView
@@ -38,7 +38,10 @@
                 style="?android:textAppearanceSmall"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="500dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_below="@+id/bannerWebView"
+                android:layout_marginTop="300dp"
                 android:text="Logout"
                 android:textStyle="bold"
                 android:background="@android:color/darker_gray"
