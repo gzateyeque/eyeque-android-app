@@ -18,6 +18,14 @@
             android:fitsSystemWindows="true"
             >
 
+            <WebView
+                android:id="@+id/deviceCompatWebView"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:scaleType="fitXY">
+            </WebView>
+
+            <!--
             <TextView
                 android:id="@+id/deviceCompatTitle"
                 android:layout_width="wrap_content"
@@ -52,7 +60,7 @@
                 android:layout_marginTop="5dp"
                 android:layout_below="@+id/compatDeviceTextView"
                 android:src="@drawable/compat_device_list" />
-
+            -->
         </RelativeLayout>
     </ScrollView>
 </FrameLayout>
