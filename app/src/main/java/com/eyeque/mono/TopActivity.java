@@ -222,7 +222,7 @@ public class TopActivity extends AppCompatActivity
             final String url = Constants.UrlPhoneConfig;
             final JSONObject params = new JSONObject();
             try {
-                params.put("name", SingletonDataHolder.devicName);
+                params.put("name", SingletonDataHolder.deviceName);
                 params.put("phoneBrand", SingletonDataHolder.phoneBrand);
                 params.put("phoneModel", SingletonDataHolder.phoneModel);
                 params.put("phoneType", "");

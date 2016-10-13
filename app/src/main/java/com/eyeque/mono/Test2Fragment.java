@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
@@ -38,6 +39,7 @@ public class Test2Fragment extends Fragment {
     // private PatternView patternView;
     private static int deviceId;
     private PatternView patternView;
+    private WebView webView;
 
 
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -92,6 +94,42 @@ public class Test2Fragment extends Fragment {
         deviceId = 3;
         // Inflate the layout for this fragment
         // return inflater.inflate(R.layout.fragment_dashboard, container, false);
+
+        webView = (WebView) rootView.findViewById(R.id.deviceCompatWebView);
+        WebSettings settings = webView.getSettings();
+        settings.setJavaScriptEnabled(true);
+        // webview.setScrollBarStyle(WebView.SCROLLBARS_OUTSIDE_OVERLAY);
+        webView.getSettings().setLoadWithOverviewMode(true);
+        webView.getSettings().setUseWideViewPort(true);
+
+        webView.setWebViewClient(new WebViewClient() {
+            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                view.loadUrl(url);
+                return true;
+            }
+
+            public void onPageFinished(WebView view, String url) {
+            }
+
+            public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
+                view.loadUrl("about:blank");
+            }
+        });
+        NetConnection conn = new NetConnection();
+        if (!conn.isConnected(getActivity())) {
+            webView.getSettings().setCacheMode( WebSettings.LOAD_CACHE_ELSE_NETWORK );
+        }
+        webView.loadUrl(Constants.UrlDeviceList);
+
+        /***
+        WebSettings settings = webView.getSettings();
+        settings.setJavaScriptEnabled(true);
+        webView.setScrollBarStyle(WebView.SCROLLBARS_OUTSIDE_OVERLAY);
+        webView.getSettings().setLoadWithOverviewMode(true);
+        webView.getSettings().setUseWideViewPort(true);
+        webView.loadUrl(Constants.UrlDeviceList);
+         ***/
+
         return rootView;
     }
 

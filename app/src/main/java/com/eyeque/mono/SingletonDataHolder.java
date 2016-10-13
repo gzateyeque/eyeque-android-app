@@ -82,7 +82,7 @@ public class SingletonDataHolder {
     public static String phoneModel = "";
     public static String phoneType = "";
     public static int phonePpi = 577;
-    public static String devicName = "Device5";
+    public static String deviceName = "EQ100";
     public static double deviceWidth = 2.0f;
     public static double deviceHeight = 1.375f;
     // Pattern drawing configuration
@@ -117,7 +117,7 @@ public class SingletonDataHolder {
      public static String phoneType = "Galaxy 6";
      public static int phonePpi = 577;
      // Device configuration
-     public static String devicName = "Device 5";
+     public static String deviceName = "EQ100";
      public static double DEVICE_WIDTH = 2.0f;
      public static double DEVICE_HEIGHT = 1.375f;
      // Pattern drawing configuration
@@ -150,7 +150,7 @@ public class SingletonDataHolder {
      public static String PHONE_TYPE = "Galaxy 5";
      public static int PHONE_PPI = 432;
      // Device configuration
-     public static String DEVICE_NAME = "Device 5";
+     public static String DEVICE_NAME = "EQ100";
      public static double DEVICE_WIDTH = 2.0f;
      public static double DEVICE_HEIGHT = 1.375f;
      // Pattern drawing configuration

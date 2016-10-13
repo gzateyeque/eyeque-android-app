@@ -686,7 +686,8 @@ public class MainActivity extends Activity {
                 if (deviceId == 2)
                     params.put("deviceName", "Device 3");
                 else if (deviceId == 3)
-                    params.put("deviceName", "Device5");
+                    // params.put("deviceName", "Device5");
+                    params.put("deviceName", SingletonDataHolder.deviceName);
                 else
                     params.put("deviceName", "Device 1");
                 params.put("phoneType", SingletonDataHolder.phoneType);

@@ -93,7 +93,7 @@ public class SettingFragment extends Fragment {
         final ListView settingListView = (ListView) rootView.findViewById(R.id.settingListView);
         listItems.add("Account");
         listItems.add("Shop");
-        listItems.add("FAQs");
+        listItems.add("FAQ");
         listItems.add("Help");
         listItems.add("About");
         adapter = new ArrayAdapter<String>(rootView.getContext(), android.R.layout.simple_list_item_1, listItems);
@@ -123,6 +123,7 @@ public class SettingFragment extends Fragment {
                         uri = Uri.parse(Constants.UrlSupport);
                         intent = new Intent(Intent.ACTION_VIEW, uri);
                         startActivity(intent);
+                        break;
                     case 4:
                         intent = new Intent(getActivity(), AboutActivity.class);
                         startActivity(intent);

@@ -9,7 +9,7 @@ import android.provider.BaseColumns;
 
 public class Constants {
 
-    public final static String BuildNumber = "1.0.1 Pre-Release D";
+    public final static String BuildNumber = "1.0.1";
     public static final double PI = 3.141592653589793d;
     public final static int sdkVersion = Build.VERSION.SDK_INT;
 
@@ -21,9 +21,19 @@ public class Constants {
     // public final static String LocalRestfulBaseURL = "http://192.168.110.85:8080";
     public final static String AccessToken = "e46cghc52pqd8kvgqmv8ovsi1ufcfetg";
     public static String RestfulBaseURL = AwsEc2RestfulBaseURL;
-    public static String ApiRestfulBaseURL = "http://apidev.eyeque.com/";
-    public static String ContentRestFulBaseURL = "http://apidev.eyeque.com:8080/";
-    public static String UserdataRestfulBaseURL = "http://apidev.eyeque.com:8987/";
+
+    /*** DEV Server
+     public static String ApiRestfulBaseURL = "http://store.eyeque.com/";
+     public static String WebSiteBaseURL = "http://wp.eyeque.com/";
+     public static String ContentRestFulBaseURL = "http://apidev.eyeque.com:8080/";
+     public static String UserdataRestfulBaseURL = "http://store.eyeque.com:8987/";
+     */
+
+    // Production Server
+    public static String ApiRestfulBaseURL = "http://store.eyeque.com/";
+    public static String WebSiteBaseURL = "http://www.eyeque.com/";
+    public static String WebSiteMobileBaseURL = "http://www.eyeque.com/m/";
+    public static String UserdataRestfulBaseURL = "http://store.eyeque.com:8987/";
 
     // Line distance scale parameters
     public static final int MINVAL_DEVICE_1 = 270;
@@ -38,15 +48,17 @@ public class Constants {
     public final static int NETCONN_TIMEOUT_VALUE = 10000;
 
     // Content URL
-    public static final String UrlBanner = ContentRestFulBaseURL + "banner";
-    public static final String UrlYoutube = ContentRestFulBaseURL + "tutorial_video/index.html";
-    public static final String UrlTermsOfService = ContentRestFulBaseURL + "user_agreement/terms";
-    public static final String UrlPrivacyPolicy = ContentRestFulBaseURL + "user_agreement/policy";
-    public static final String UrlFaq =  ContentRestFulBaseURL + "faq";
-    public static final String UrlSupport =  ContentRestFulBaseURL + "faq";
+    public static final String UrlBanner = WebSiteMobileBaseURL + "banner";
+    public static final String UrlYoutube = WebSiteMobileBaseURL + "tutorial_video/index.html";
+    public static final String UrlDeviceList = WebSiteMobileBaseURL + "devicelist";
+    public static final String UrlTermsOfService = WebSiteBaseURL + "terms_of_service";
+    public static final String UrlPrivacyPolicy = WebSiteBaseURL + "privacy_policy";
+    public static final String UrlBuyDevice = WebSiteBaseURL + "shop";
+    public static final String UrlFaq =  WebSiteBaseURL + "faq";
+    public static final String UrlSupport =  WebSiteBaseURL + "support";
 
     // Restful API Call URL
-    public static final String UrlBuyDevice = ApiRestfulBaseURL + "eyeque-mini-scope.html";
+
     public static final String UrlTrackingDataOd = UserdataRestfulBaseURL + "index.html?hash=default&column=sphEOD";
     public static final String UrlTrackingDataOs = UserdataRestfulBaseURL + "index.html?hash=default&column=sphEOS";
     public static final String UrlSignIn = ApiRestfulBaseURL + "index.php/rest/V1/integration/customer/token";
@@ -130,7 +142,7 @@ public class Constants {
     public static String PHONE_TYPE = "Galaxy 6";
     public static int PHONE_PPI = 577;
     // Device configuration
-    public static String DEVICE_NAME = "Device 5";
+    public static String DEVICE_NAME = "EQ100";
     public static double DEVICE_WIDTH = 2.0f;
     public static double DEVICE_HEIGHT = 1.375f;
     // Pattern drawing configuration

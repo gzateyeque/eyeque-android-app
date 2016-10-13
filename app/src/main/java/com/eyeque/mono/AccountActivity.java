@@ -180,7 +180,12 @@ public class AccountActivity extends AppCompatActivity {
                     params.put("gender", 2);
                 params.put("dob", birthYearEt.getText().toString() + "-01-01");
                 tmpParams.put("attribute_code", "device_number");
-                tmpParams.put("value", SingletonDataHolder.deviceSerialNum);
+                if (SingletonDataHolder.deviceSerialNum.matches("")) {
+                    Log.i("&&&&&&&&&&&&&&&&&&&&", "Serail # Empty");
+                    tmpParams.put("value", "M1D3E4F5");
+                }
+                else
+                    tmpParams.put("value", SingletonDataHolder.deviceSerialNum);
                 attrArray.put(tmpParams);
                 params.put("custom_attributes", attrArray);
                 finalParams.put("customer", params);

@@ -110,11 +110,12 @@ public class ResultActivity extends Activity {
         osRmse = getIntent().getDoubleExtra("OSR", 0.00);
 
         Button uploadButton = (Button) findViewById(R.id.uploadButton);
+        final TextView testCompleteHeaderTextView = (TextView) findViewById(R.id.testCompleteHeaderTextView);
         final TextView odSpheTextView = (TextView) findViewById(R.id.odSpheTextView);
         final TextView osSpheTextView = (TextView) findViewById(R.id.osSpheTextView);
         final TextView testResultTextView = (TextView) findViewById(R.id.testResultText);
 
-
+        testCompleteHeaderTextView.setText("Test Completion for " + SingletonDataHolder.firstName);
         odSpheTextView.setText(odSe + " D");
         osSpheTextView.setText(osSe + " D");
         testResultTextView.setText("Test Score: " + Integer.toString(score) + " of 40");

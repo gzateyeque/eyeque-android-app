@@ -135,6 +135,7 @@ public class TutorialFragment extends Fragment {
         if (mListener != null) {
             mListener.onTutorialFragmentInteraction(uri);
         }
+        webView.loadUrl(Constants.UrlYoutube);
         Log.i("***** 1 ********", "hhehwjrwjrewj");
     }
 
@@ -147,7 +148,6 @@ public class TutorialFragment extends Fragment {
             throw new RuntimeException(context.toString()
                     + " must implement OnTutorialFragmentInteractionListener");
         }
-        Log.i("***** onATTACH ********", "hhehwjrwjrewj");
     }
 
     @Override
@@ -156,6 +156,12 @@ public class TutorialFragment extends Fragment {
         mListener = null;
         webView.loadUrl("about:blank");
         Log.i("***** deATTACH ********", "hhehwjrwjrewj");
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        webView.onPause();
     }
 
     /**
