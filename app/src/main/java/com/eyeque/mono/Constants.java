@@ -9,7 +9,7 @@ import android.provider.BaseColumns;
 
 public class Constants {
 
-    public final static String BuildNumber = "1.0.1";
+    public final static String BuildNumber = "1.0.2";
     public static final double PI = 3.141592653589793d;
     public final static int sdkVersion = Build.VERSION.SDK_INT;
 
@@ -56,6 +56,7 @@ public class Constants {
     public static final String UrlBuyDevice = WebSiteBaseURL + "shop";
     public static final String UrlFaq =  WebSiteBaseURL + "faq";
     public static final String UrlSupport =  WebSiteBaseURL + "support";
+    public static final String UrlRateApp = "https://play.google.com/store/apps/details?id=com.eyeque.mono";
 
     // Restful API Call URL
 

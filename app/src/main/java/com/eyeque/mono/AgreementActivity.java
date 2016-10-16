@@ -181,6 +181,7 @@ public class AgreementActivity extends AppCompatActivity {
                 params.put("store_id", 1);
                 params.put("gender", SingletonDataHolder.gender);
                 params.put("dob", Integer.toString(SingletonDataHolder.birthYear) + "-01-01");
+                params.put("group_id", SingletonDataHolder.groupId);
                 tmpParams.put("attribute_code", "device_number");
                 tmpParams.put("value", SingletonDataHolder.deviceSerialNum);
                 attrArray.put(tmpParams);

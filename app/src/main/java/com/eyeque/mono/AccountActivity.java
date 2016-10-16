@@ -174,11 +174,13 @@ public class AccountActivity extends AppCompatActivity {
                 params.put("lastname", lastName);
                 params.put("website_id", 1);
                 params.put("store_id", 1);
+                params.put("group_id", SingletonDataHolder.groupId);
                 if (maleChecked)
                     params.put("gender", 1);
                 else
                     params.put("gender", 2);
                 params.put("dob", birthYearEt.getText().toString() + "-01-01");
+                /****
                 tmpParams.put("attribute_code", "device_number");
                 if (SingletonDataHolder.deviceSerialNum.matches("")) {
                     Log.i("&&&&&&&&&&&&&&&&&&&&", "Serail # Empty");
@@ -187,7 +189,12 @@ public class AccountActivity extends AppCompatActivity {
                 else
                     tmpParams.put("value", SingletonDataHolder.deviceSerialNum);
                 attrArray.put(tmpParams);
+                if (!SingletonDataHolder.userDeviceType.matches("")) {
+                    tmpParams.put("attribute_code", "phone_type");
+                    tmpParams.put("value", SingletonDataHolder.userDeviceType);
+                    attrArray.put(tmpParams);
                 params.put("custom_attributes", attrArray);
+                 ****/
                 finalParams.put("customer", params);
             } catch (JSONException e) {
                 e.printStackTrace();

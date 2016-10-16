@@ -37,6 +37,7 @@ public class SplashActivity extends Activity {
     private boolean paused = false;
     private static SQLiteDatabase myDb = null;
     private static String dbToken;
+    private boolean isOnBoardNeeded = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,12 +57,11 @@ public class SplashActivity extends Activity {
         SingletonDataHolder.phoneModel = android.os.Build.MODEL;
         Log.d("**** Phone Type ****", SingletonDataHolder.phoneBrand + " " + SingletonDataHolder.phoneModel);
 
+
         if (SingletonDataHolder.token != "") {
-            Intent topIntent = new Intent(getBaseContext(), TopActivity.class);
-            startActivity(topIntent);
-            finish();
-            return;
+            ValidateToken();
         }
+
 
         // Check local persistent mono.db database
         try {
@@ -99,6 +99,7 @@ public class SplashActivity extends Activity {
                     // finish();
                     // return;
                 }
+
             }
         } catch (IOException e) {
             Log.d("TAG", "open database failed");
@@ -117,7 +118,7 @@ public class SplashActivity extends Activity {
                     }
                 } catch(Exception e) {}
                 finally {
-                    if (dbToken != null)
+                    if (dbToken != null && dbToken != "")
                         ValidateToken();
                     else {
                         Intent startIntent = new Intent(SplashActivity.this, LoginActivity.class);
@@ -163,6 +164,8 @@ public class SplashActivity extends Activity {
                             Log.i("*** Birth Year ***", jsonResponse.getString("dob").substring(1, 5));
                             SingletonDataHolder.birthYear = Integer.valueOf(jsonResponse.getString("dob").substring(0, 4));
                         }
+                        SingletonDataHolder.groupId = Integer.parseInt(jsonResponse.getString("group_id"));
+
                         if (jsonResponse.has("custom_attributes")) {
                             JSONArray jsonCustArrArray = jsonResponse.getJSONArray("custom_attributes");
 
@@ -174,25 +177,29 @@ public class SplashActivity extends Activity {
                                 if (attrName.matches("device_number")) {
                                     if (attrValue.matches("") || (attrValue.matches("null") || attrValue == null)) {
                                         Log.i("********4*********", "true");
-                                        // Intent nameIntent = new Intent(getBaseContext(), NameActivity.class);
-                                        // startActivity(nameIntent);
-                                        Intent startIntent = new Intent(SplashActivity.this, LoginActivity.class);
-                                        startActivity(startIntent);
+                                        isOnBoardNeeded = true;
                                     } else {
                                         Log.i("********5*********", "false");
-                                        Intent topIntent = new Intent(getBaseContext(), TopActivity.class);
-                                        startActivity(topIntent);
+                                        SingletonDataHolder.deviceSerialNum = attrValue;
+                                        isOnBoardNeeded = false;
                                     }
-                                    finish();
-                                    break;
                                 }
                             }
+                            if (isOnBoardNeeded) {
+                                Intent startIntent = new Intent(SplashActivity.this, LoginActivity.class);
+                                startActivity(startIntent);
+                            } else {
+                                Intent topIntent = new Intent(getBaseContext(), TopActivity.class);
+                                startActivity(topIntent);
+                            }
+                            finish();
                         } else {
                             Log.i("********4*********", "true");
                             // Intent nameIntent = new Intent(getBaseContext(), NameActivity.class);
                             // startActivity(nameIntent);
                             Intent startIntent = new Intent(SplashActivity.this, LoginActivity.class);
                             startActivity(startIntent);
+                            finish();
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();

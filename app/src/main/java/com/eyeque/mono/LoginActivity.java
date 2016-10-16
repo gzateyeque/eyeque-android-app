@@ -752,43 +752,58 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                             Log.i("*** Birth Year ***", jsonResponse.getString("dob").substring(0, 4));
                             SingletonDataHolder.birthYear = Integer.valueOf(jsonResponse.getString("dob").substring(0, 4));
                         }
-                        // SingletonDataHolder.deviceSerialNum = "";
+                        SingletonDataHolder.groupId = Integer.parseInt(jsonResponse.getString("group_id"));
                         Log.i("*** customer id ***", Integer.toString(SingletonDataHolder.userId));
 
                         if (jsonResponse.has("custom_attributes")) {
                             JSONArray jsonCustArrArray = jsonResponse.getJSONArray("custom_attributes");
 
+                            isOnBoardNeeded = true;
+                            // isOnBoardNeeded = true;
                             for (int i = 0; i < jsonCustArrArray.length(); i++) {
                                 JSONObject objectInArray = jsonCustArrArray.getJSONObject(i);
                                 String attrName = objectInArray.getString("attribute_code");
                                 String attrValue = objectInArray.getString("value");
-                                // Log.i("********1*********", Integer.toString(i));
-                                // Log.i("********2*********", attrName);
-                                // Log.i("********3*********", attrValue);
+                                Log.i("********1*********", Integer.toString(i));
+                                Log.i("********2*********", attrName);
+                                Log.i("********3*********", attrValue);
 
                                 if (attrName.matches("device_number")) {
                                     if (attrValue.matches("") || (attrValue.matches("null") || attrValue == null)) {
                                         Log.i("*****Device4*****", attrValue);
                                         isOnBoardNeeded = true;
-                                        Intent nameIntent = new Intent(getBaseContext(), NameActivity.class);
-                                        startActivity(nameIntent);
+                                        // Intent nameIntent = new Intent(getBaseContext(), NameActivity.class);
+                                        // startActivity(nameIntent);
                                     } else {
                                         Log.i("****Device5******", attrValue);
                                         isOnBoardNeeded = false;
                                         DbStoreToken();
                                         SingletonDataHolder.deviceSerialNum = attrValue;
-                                        Intent topIntent = new Intent(getBaseContext(), TopActivity.class);
-                                        startActivity(topIntent);
+                                        // Intent topIntent = new Intent(getBaseContext(), TopActivity.class);
+                                        // startActivity(topIntent);
                                     }
-                                    finish();
                                     break;
                                 }
                             }
+
+                            if (isOnBoardNeeded) {
+                                Intent nameIntent = new Intent(getBaseContext(), NameActivity.class);
+                                startActivity(nameIntent);
+                                finish();
+                            } else {
+                                Intent topIntent = new Intent(getBaseContext(), TopActivity.class);
+                                startActivity(topIntent);
+                                finish();
+                            }
+
+                            // When there is no Device Number field
+
                         } else {
                             Log.i("********4*********", "true");
                             isOnBoardNeeded = true;
                             Intent nameIntent = new Intent(getBaseContext(), NameActivity.class);
                             startActivity(nameIntent);
+                            finish();
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();

@@ -22,6 +22,7 @@ public class SingletonDataHolder {
     public static String lastName = "";
     public static Integer gender = 1;
     public static Integer birthYear = Calendar.getInstance().get(Calendar.YEAR) - 20;
+    public static Integer groupId = 1;
     public static String deviceSerialNum = "";
     public static int screenProtect = 0;
     public static int wearGlasses = 0;

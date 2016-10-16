@@ -34,7 +34,7 @@ public class DobActivity extends AppCompatActivity {
         // window.setStatusBarColor(this.getResources().getColor(R.color.colorPrimaryDark));
 
         dobEt = (EditText) findViewById(R.id.dobEditText);
-        dobEt.setHint(Html.fromHtml("<small>" + "Your Birth Year (format: YYYY)" + "</small>" ));
+        dobEt.setHint(Html.fromHtml("<small>" + "Your Birth Year (YYYY)" + "</small>" ));
 
         Button nextButton = (Button) findViewById(R.id.dobNextButton);
         nextButton.setOnClickListener(new View.OnClickListener() {

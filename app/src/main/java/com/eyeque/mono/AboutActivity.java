@@ -22,7 +22,7 @@ public class AboutActivity extends AppCompatActivity {
 
         rateAppTv.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Uri uri =  Uri.parse("http://www.eyeque.com");
+                Uri uri =  Uri.parse(Constants.UrlRateApp);
                 Intent intent = new Intent(Intent.ACTION_VIEW, uri);
                 startActivity(intent);
             }
