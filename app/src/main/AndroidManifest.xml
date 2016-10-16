@@ -45,9 +45,8 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".TopActivity"
-            android:configChanges="orientation"
+            android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/title_activity_top"
-            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".SubjectActivity"
