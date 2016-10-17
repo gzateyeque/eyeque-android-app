@@ -909,6 +909,7 @@ public class MainActivity extends Activity {
     }
 
 
+    /****
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         // final PatternView patternView = (PatternView) findViewById(R.id.drawView);
@@ -917,7 +918,7 @@ public class MainActivity extends Activity {
         final TextView dtv = (TextView) findViewById(R.id.distText);
         final SeekBar alignSeekBar = (SeekBar) findViewById(R.id.alignSeekBar);
 
-        /***
+
          switch (keyCode) {
          case KeyEvent.KEYCODE_VOLUME_DOWN:
          Log.d(TAG, "Volume Down Button is pressed");
@@ -946,9 +947,10 @@ public class MainActivity extends Activity {
          default:
          break;
          }
-         ***/
+
         return true;
     }
+    ****/
 
 
     @Override

@@ -296,6 +296,7 @@ public class TopActivity extends AppCompatActivity
             Toast.makeText(TopActivity.this, "Please connect to the Internet", Toast.LENGTH_SHORT).show();
     }
 
+    /****
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
 
@@ -308,4 +309,5 @@ public class TopActivity extends AppCompatActivity
                 return super.onKeyDown(keyCode, event);
         }
     }
+    ****/
 }
