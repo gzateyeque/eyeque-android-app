@@ -55,7 +55,8 @@ public class Pattern {
 
     private static final int MAX_DISTANCE_DEVICE_1 = 330;
     private static final int MAX_DISTANCE_DEVICE_3 = SingletonDataHolder.maxDistance;
-    private static final int MAX_DISTANCE_DEVICE_5 = SingletonDataHolder.maxDistance;
+    // private static final int MAX_DISTANCE_DEVICE_5 = SingletonDataHolder.maxDistance;
+    private static int MAX_DISTANCE_DEVICE_5 = (int) (INIT_DISTANCE_DEVICE_5 + 2/0.1428405590);
     private static final int MAX_DISTANCE_DEVICE_6 = 270;
 
     private static final int LINE_LENGTH_DEVICE_1 = 80;
@@ -397,7 +398,14 @@ public class Pattern {
         if (whichPattern > numOfPattern*2 -1) {
             whichPattern = 0;
         }
-        lineSpace =maxDist;
+
+        if (patternIndex > 0) {
+            if (whichEye)
+                lineSpace = (int) (rightDistValueList[patternIndex-1] + 3/0.1428405590);
+            else
+                lineSpace = (int) (leftDistValueList[patternIndex-1] + 3/0.1428405590);
+        } else
+            lineSpace =maxDist;
         drawPatternByDevice();
     }
 
