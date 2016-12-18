@@ -93,13 +93,22 @@ public class Pattern {
                 numOfPattern = 6;
                 break;
             case 2:
-                numOfPattern = 9;
+                if (SingletonDataHolder.testMode == 1)
+                    numOfPattern = 3;
+                else
+                    numOfPattern = 9;
                 break;
             case 3:
-                numOfPattern = 9;
+                if (SingletonDataHolder.testMode == 1)
+                    numOfPattern = 3;
+                else
+                    numOfPattern = 9;
                 break;
             case 4:
-                numOfPattern = 9;
+                if (SingletonDataHolder.testMode == 1)
+                    numOfPattern = 3;
+                else
+                    numOfPattern = 9;
                 break;
             default:
                 break;
@@ -127,7 +136,7 @@ public class Pattern {
         whichEye = true;
         completeAllPatterns = false;
         // Power value
-        powerValue = -15.75f;
+        // powerValue = -15.75f;
     }
 
     public void setDeviceId(int id) {
@@ -312,7 +321,10 @@ public class Pattern {
                 patternRotateAngleList = PATTERN_ROTATE_ANGLE_LIST_DEVICE_1;
                 break;
             case 2:
-                numOfPattern = 9;
+                if (SingletonDataHolder.testMode == 1)
+                    numOfPattern = 3;
+                else
+                    numOfPattern = 9;
                 initDist = INIT_DISTANCE_DEVICE_3;
                 maxDist = MAX_DISTANCE_DEVICE_3;
                 lineLength = LINE_LENGTH_DEVICE_3;
@@ -321,7 +333,10 @@ public class Pattern {
                 patternRotateAngleList = PATTERN_ROTATE_ANGLE_LIST_DEVICE_3;
                 break;
             case 3:
-                numOfPattern = 9;
+                if (SingletonDataHolder.testMode == 1)
+                    numOfPattern = 3;
+                else
+                    numOfPattern = 9;
                 initDist = INIT_DISTANCE_DEVICE_5;
                 maxDist = MAX_DISTANCE_DEVICE_5;
                 lineLength = LINE_LENGTH_DEVICE_5;
@@ -330,7 +345,10 @@ public class Pattern {
                 patternRotateAngleList = PATTERN_ROTATE_ANGLE_LIST_DEVICE_3;
                 break;
             case 4:
-                numOfPattern = 9;
+                if (SingletonDataHolder.testMode == 1)
+                    numOfPattern = 3;
+                else
+                    numOfPattern = 9;
                 initDist = INIT_DISTANCE_DEVICE_6;
                 maxDist = MAX_DISTANCE_DEVICE_6;
                 lineLength = LINE_LENGTH_DEVICE_6;
@@ -369,12 +387,12 @@ public class Pattern {
 
         patternEndTs = System.currentTimeMillis()/1000;
         if (whichEye) {
-            rightPowerValueList[patternIndex] = powerValue;
+            rightPowerValueList[patternIndex] = getPowerValue5();
             rightDistValueList[patternIndex] = getDistance();
             rightDurationList[patternIndex] = patternEndTs - patternStartTs;
         }
         else {
-            leftPowerValueList[patternIndex] = powerValue;
+            leftPowerValueList[patternIndex] = getPowerValue5();
             leftDistValueList[patternIndex] = getDistance();
             leftDurationList[patternIndex] = patternEndTs - patternStartTs;
         }
@@ -401,9 +419,9 @@ public class Pattern {
 
         if (patternIndex > 0) {
             if (whichEye)
-                lineSpace = (int) (rightDistValueList[patternIndex-1] + 3/0.1428405590);
+                lineSpace = (int) (rightDistValueList[patternIndex-1] + 1/0.1428405590);
             else
-                lineSpace = (int) (leftDistValueList[patternIndex-1] + 3/0.1428405590);
+                lineSpace = (int) (leftDistValueList[patternIndex-1] + 1/0.1428405590);
         } else
             lineSpace =maxDist;
         drawPatternByDevice();
@@ -654,6 +672,9 @@ public class Pattern {
             powerValue = SphericalStep0*diff;
         else
             powerValue = SphericalStep1*diff + SphericalStep2*diff*diff;
+
+        // Power correction EQ101
+        powerValue = powerValue/(1+0.012*powerValue);
 
         return powerValue;
     }
