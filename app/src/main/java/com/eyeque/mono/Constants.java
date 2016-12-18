@@ -9,7 +9,7 @@ import android.provider.BaseColumns;
 
 public class Constants {
 
-    public final static String BuildNumber = "1.0.3";
+    public final static String BuildNumber = "1.1.0";
     public static final double PI = 3.141592653589793d;
     public final static int sdkVersion = Build.VERSION.SDK_INT;
 
@@ -30,10 +30,10 @@ public class Constants {
      */
 
     // Production Server
-    public static String ApiRestfulBaseURL = "http://store.eyeque.com/";
+    public static String ApiRestfulBaseURL = "http://apidev.eyeque.com/";
     public static String WebSiteBaseURL = "http://www.eyeque.com/";
     public static String WebSiteMobileBaseURL = "http://www.eyeque.com/m/";
-    public static String UserdataRestfulBaseURL = "http://store.eyeque.com:8987/";
+    public static String UserdataRestfulBaseURL = "http://apidev.eyeque.com:8987/";
 
     // Line distance scale parameters
     public static final int MINVAL_DEVICE_1 = 270;
@@ -71,6 +71,7 @@ public class Constants {
     public static final String UrlSocMediaSignUp = ApiRestfulBaseURL + "index.php/rest/V1/socialcustomers";
     public static final String UrlPhoneConfig = ApiRestfulBaseURL + "index.php/rest/eyecloud/api/V2/devices";
     public static final String UrlUploadTest = ApiRestfulBaseURL + "index.php/rest/eyecloud/api/V2/tests";
+    public static final String UrlUploadTraining = ApiRestfulBaseURL + "index.php/rest/eyecloud/api/V2/trainings";
     public static final String UrlConfirmTest = ApiRestfulBaseURL + "index.php/rest/eyecloud/api/V2/discardtest";
     public static final String UrlDashboard = ApiRestfulBaseURL + "index.php/rest/eyecloud/api/V2/getdashboardinfo";
     public static final String UrlPurchaseEyeglassNumber = ApiRestfulBaseURL + "index.php/rest/eyecloud/api/V2/purchaseeyeglassnumbers";
