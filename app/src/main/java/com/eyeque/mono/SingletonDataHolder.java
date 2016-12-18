@@ -21,9 +21,12 @@ public class SingletonDataHolder {
     public static String firstName = "";
     public static String lastName = "";
     public static Integer gender = 1;
+    public static boolean profileWearEyeglass = false;
     public static Integer birthYear = Calendar.getInstance().get(Calendar.YEAR) - 20;
     public static Integer groupId = 1;
     public static String deviceSerialNum = "";
+    public static int testMode = 0;
+    public static boolean accommodationOn = true;
     public static int screenProtect = 0;
     public static int wearGlasses = 0;
     public static String urlOdTracking = "";
@@ -32,6 +35,7 @@ public class SingletonDataHolder {
     public static int currentTestScore = 0;
     public static int freetrial = 0;
     public static int pupillaryDistance = 0;
+    public static double nvadd = 0;
     public static Boolean eyeglassNumPurchasable= false;
 
     // Eyeglass Number
@@ -83,7 +87,7 @@ public class SingletonDataHolder {
     public static String phoneModel = "";
     public static String phoneType = "";
     public static int phonePpi = 577;
-    public static String deviceName = "EQ100";
+    public static String deviceName = "EQ101";
     public static double deviceWidth = 2.0f;
     public static double deviceHeight = 1.375f;
     // Pattern drawing configuration

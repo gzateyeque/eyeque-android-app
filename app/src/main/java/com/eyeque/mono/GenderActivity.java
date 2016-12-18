@@ -83,8 +83,8 @@ public class GenderActivity extends AppCompatActivity {
                         SingletonDataHolder.gender = 1;
                     else
                         SingletonDataHolder.gender = 2;
-                    Intent dobIntent = new Intent(getBaseContext(), DobActivity.class);
-                    startActivity(dobIntent);
+                    Intent wearEyeglassIntent = new Intent(getBaseContext(), WearEyeglassActivity.class);
+                    startActivity(wearEyeglassIntent);
                 }
             }
         });

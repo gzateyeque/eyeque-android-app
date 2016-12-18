@@ -505,6 +505,7 @@ public class DashboardFragment extends Fragment {
                         SingletonDataHolder.urlOSTracking = result.getString("url_spheos");
                         SingletonDataHolder.urlVisionSummary = result.getString("url_vision_summary");
                         SingletonDataHolder.pupillaryDistance = eyeglassResult.getInt("pd");
+                        SingletonDataHolder.nvadd = eyeglassResult.getInt("nvadd");
                         SingletonDataHolder.currentTestScore = eyeglassResult.getInt("score");
                         SingletonDataHolder.freetrial = eyeglassResult.getInt("freetrial");
                         SingletonDataHolder.eyeglassNumPurchasable = eyeglassResult.getBoolean("purchasable");
@@ -1017,12 +1018,28 @@ public class DashboardFragment extends Fragment {
                 pdTextView.setTextSize(16);
                 TableRow.LayoutParams pdTextViewParams = new TableRow.LayoutParams();
                 pdTextViewParams.column = 0;
-                pdTextViewParams.span = 4;
+                // pdTextViewParams.span = 4;
                 pdTextViewParams.gravity = Gravity.LEFT;
                 pdTextViewParams.leftMargin = 60;
                 pdTextViewParams.topMargin = 10;
                 pdTextViewParams.bottomMargin = 10;
                 pdTblRow.addView(pdTextView, pdTextViewParams);
+
+                TextView nvAddTextView = new TextView(thisContext);
+                if (SingletonDataHolder.nvadd <= 0)
+                    nvAddTextView.setText("NVADD: 0");
+                else
+                    nvAddTextView.setText("NVADD: " + String.format("+%.2f",(SingletonDataHolder.nvadd)));
+                nvAddTextView.setTextColor(Color.BLACK);
+                nvAddTextView.setTextSize(16);
+                TableRow.LayoutParams nvAddTextViewParams = new TableRow.LayoutParams();
+                nvAddTextViewParams.column = 2;
+                // nvAddTextViewParams.leftMargin = 60;
+                nvAddTextViewParams.topMargin = 10;
+                nvAddTextViewParams.bottomMargin = 10;
+                nvAddTextViewParams.gravity = Gravity.LEFT;
+                pdTblRow.addView(nvAddTextView, nvAddTextViewParams);
+
                 eyeglassTableLayout.addView(pdTblRow);
             }
 

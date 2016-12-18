@@ -61,6 +61,12 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
+            android:name=".PlayModeResultActivity"
+            android:configChanges="orientation"
+            android:label="PlayModeResultActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
             android:name=".ServerActivity"
             android:configChanges="orientation"
             android:label="@string/title_activity_server"
@@ -94,6 +100,12 @@
             android:name=".GenderActivity"
             android:configChanges="orientation"
             android:label="@string/title_activity_gender"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".WearEyeglassActivity"
+            android:configChanges="orientation"
+            android:label="Wear Eyeglass or Contact"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity

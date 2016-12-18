@@ -73,6 +73,21 @@
         android:paddingLeft="20dp"
         android:paddingRight="20dp" />
 
+    <Switch
+        android:id="@+id/accormSwitch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:checked="true"
+        android:text="Accomodation Pattern"
+        android:textColor="#FFFFFF"
+        android:layout_marginTop="0dp"
+        android:layout_below="@+id/contButton"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
     <SeekBar
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

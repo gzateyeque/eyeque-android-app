@@ -81,6 +81,10 @@ public class PatternView extends View {
         invalidate();
     }
 
+    public void reDraw() {
+        invalidate();
+    }
+
     @Override
     protected void onDraw(Canvas cv) {
         int color;
@@ -159,9 +163,18 @@ public class PatternView extends View {
                 cv.rotate(0);
             }
 
+            if (SingletonDataHolder.accommodationOn) {
+                for (float ii = 380 * SingletonDataHolder.phonePpi / 562; ii >= 230; ii -= 0.5) {
+                    // cv.save();
+                    aniRadius = ii + 20;
+                    color = Color.rgb(127, 70, 0);
+                    p.setColor(color);
+                    cv.drawCircle(SingletonDataHolder.centerX, SingletonDataHolder.centerY, ii, p);
+                }
+            }
 
+            /****
             // Draw Accormodation Pattern
-            /***
              p.setColor(Color.BLUE);  // p.setColor(getAniColor());
              p.setStyle(Paint.Style.STROKE);
              if (deviceId != 2) {
@@ -174,9 +187,15 @@ public class PatternView extends View {
              p.setStrokeWidth(24);
              cv.drawCircle(855, 520, getAniRadius(), p);
              }
-             ***/
 
-            /***
+            for (float ii = 150*SingletonDataHolder.phonePpi/562; ii >= 50; ii -= 0.5) {
+                // cv.save();
+                aniRadius = ii + 20;
+                color = Color.rgb(127,114,0;
+                p.setColor(color);
+                cv.drawCircle(SingletonDataHolder.centerX, SingletonDataHolder.centerY, ii, p);
+            }
+
             for (float ii = 150*SingletonDataHolder.phonePpi/562; ii >= 0; ii -= 0.5) {
                 // cv.save();
                 aniRadius = ii + 20;
@@ -194,7 +213,8 @@ public class PatternView extends View {
                 else
                     cv.drawCircle(SingletonDataHolder.centerX, SingletonDataHolder.centerY, ii, p);
             }
-            ***/
+             ****/
+
             p.setColor(Color.RED);
             if (deviceId == 2 || deviceId == 3) {
                 p.setStrokeWidth(SingletonDataHolder.lineWidth);
@@ -213,6 +233,13 @@ public class PatternView extends View {
                 cv.drawLine(pattern.getRedStartX(), pattern.getRedStartY(),
                         pattern.getRedEndX(), pattern.getRedEndY(), p);
             }
+
+            /***
+            int yellowColor = Color.rgb(240, 230, 140);
+            p.setStrokeWidth(120);
+            p.setColor(yellowColor);
+            cv.drawCircle(SingletonDataHolder.centerX, SingletonDataHolder.centerY, 280, p);
+             ***/
 
             // Draw GREEN line
             p.setColor(Color.GREEN);

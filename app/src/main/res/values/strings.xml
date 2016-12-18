@@ -7,30 +7,29 @@
 
     <!-- Strings for title in header -->
     <string name="startTitleTextString">EyeQue Vision Test</string>
-    <string name="resultTitleTextString">Vision Test Result</string>
     <string name="testHeaderTextString">In Test</string>
-    <string name="nameHeaderTextString">Setup (1/5)</string>
+    <string name="nameHeaderTextString">Setup (1/6)</string>
     <string name="nameTitleTextString">What\&#39;s your name&#63;</string>
-    <string name="genderHeaderTextString">Setup (2/5)</string>
+    <string name="genderHeaderTextString">Setup (2/6)</string>
     <string name="genderTitleTextString">What\&#39;s your gender&#63;</string>
     <string name="genderSlashTextString">&#47;</string>
-    <string name="dobHeaderTextString">Setup (3/5)</string>
+    <string name="wearEyeglassHeaderTextString">Setup (3/6)</string>
+    <string name="dobHeaderTextString">Setup (4/6)</string>
     <string name="dobTitleTextString">What\&#39;s your birth year&#63;</string>
-    <string name="serialHeaderTextString">Setup (4/5)</string>
-    <string name="agreementHeaderTextString">Setup (5/5)</string>
-    <string name="serialTitleTextString">What\&#39;s your device serial number</string>
+    <string name="wearEyeglassTitleTextString">Do you wear eyeglass or contacts&#63;</string>
+    <string name="serialHeaderTextString">Setup (5/6)</string>
+    <string name="agreementHeaderTextString">Setup (6/6)</string>
+    <string name="serialTitleTextString">What\&#39;s your miniscope\&#39;s serial number?</string>
     <string name="serialOrderTextString">Don\&#39;t have a device? Order now</string>
     <string name="forgotPswdHeaderTextString">Forgot Password</string>
     <string name="smemailHeaderTextString">EyeQue Email Link</string>
     <string name="accountHeaderTextString">Account</string>
 
-    <string name="uploadButtonTextString">Upload</string>
     <string name="powerTextString">Power: TBC</string>
     <string name="angleTextString">Angle: 0&#xb0;"</string>
     <string name="distTextString">Distance: 7.32</string>
     <string name="eyeButtonTextString">Right Eye</string>
     <string name="contButtonTextString">Next</string>
-    <string name="resultButtonTextString">Calculate</string>
     <string name="closerButtonTextString">-</string>
     <string name="furtherButtonTextString">+</string>
     <string name="exitTextString">Exit</string>
@@ -39,10 +38,8 @@
     <string name="title_activity_subject">DeviceActivity</string>
     <string name="title_activity_result">ResultActivity</string>
     <string name="title_activity_server">ServerActivity</string>
-    <string name="title_activity_splash">SplashActivity</string>
     <string name="title_activity_login">Sign in</string>
     <string name="title_activity_sm_email_reg">Email Registration</string>
-    <string name="title_activity_account">Account</string>
     <string name="facebookGoogleTextString">Use Facebook or Google account</string>
     <string name="forgotPaswordTextString">Forgot Your Password?</string>
     <string name="agreementTextString">I agree to the EyeQue Term of Service and Privacy Policy</string>
@@ -54,7 +51,6 @@
     <string name="title_activity_forgot_password">ForgotPswdActivity</string>
     <string name="title_activity_agreement">AgreementActivity</string>
     <string name="title_activity_top">EyeQue</string>
-    <string name="title_activity_tutorial">TutorialActivity</string>
     <string name="title_activity_test_condition">TestConditionActivity</string>
     <string name="title_activity_attach_device">AttachDeviceActivity</string>
     <string name="title_activity_about">AboutActivity</string>
@@ -62,22 +58,17 @@
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>
-    <string name="prompt_name">Your Name</string>
     <string name="action_sign_in">Sign in or register</string>
     <string name="action_sign_in_short">Sign in</string>
     <string name="error_invalid_email">This email address is invalid</string>
-    <string name="error_invalid_password">This password is too short</string>
+    <string name="error_invalid_password">Password needs at least 6 characters</string>
     <string name="error_incorrect_password">This password is incorrect</string>
     <string name="error_field_required">This field is required</string>
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
-    <string name="title_activity_login2">Sign in</string>
     <string name="nextButtonTextString">Next</string>
-    <string name="orderButtonTextString">Order EyeQue Device</string>
     <string name="action_forgot_password">Reset my password</string>
-    <string name="action_register">Register</string>
 
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

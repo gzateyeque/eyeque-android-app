@@ -137,6 +137,17 @@
             android:layout_marginRight="65dp"
             android:layout_marginTop="5dp"/>
 
+    <Switch
+        android:id="@+id/accormSwitch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:checked="true"
+        android:text="Circle Image"
+        android:textColor="#FFFFFF"
+        android:layout_marginTop="5dp"
+        android:layout_below="@+id/eyeRightText" />
+
     <SeekBar
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

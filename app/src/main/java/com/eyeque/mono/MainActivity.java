@@ -12,6 +12,8 @@ import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.Switch;
+import android.widget.CompoundButton;
 import android.view.Menu;
 import android.graphics.Color;
 import android.view.KeyEvent;
@@ -45,6 +47,8 @@ import java.util.Map;
 
 
 public class MainActivity extends Activity {
+
+    private int totalNumOfTest;
     private PatternView patternView;
     private Pattern pattern;
 
@@ -71,6 +75,7 @@ public class MainActivity extends Activity {
     private static int darkColor = Color.rgb(96, 96, 96);
     private static Button contButton;
     private static Button exitButton;
+    private static Switch accomodationSwitch;
 
     // Tag for log message
     private static final String TAG = MainActivity.class.getSimpleName();
@@ -167,6 +172,20 @@ public class MainActivity extends Activity {
         alignSeekBar.setProgress(maxVal);
         alignSeekBar.setVisibility(View.INVISIBLE);
 
+        accomodationSwitch = (Switch) findViewById(R.id.accormSwitch);
+        accomodationSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    // do something when checked is selected
+                    SingletonDataHolder.accommodationOn = true;
+                } else {
+                    SingletonDataHolder.accommodationOn = false;
+                    //do something when unchecked
+                }
+                patternView.reDraw();
+            }
+        });
+
         dtv.setText("Distance: " + String.valueOf(pattern.getDistance()));
         atv.setText("Angle: " + String.valueOf(patternView.getAngle()) + (char) 0x00B0);
         DecimalFormat precision = new DecimalFormat("#.##");
@@ -234,7 +253,10 @@ public class MainActivity extends Activity {
             eyeLeftText.setTextColor(brightColor);
             eyeImageView.setImageResource(R.drawable.eye_left1);
         }
-        inTestTv.setText("Test 1/9");
+        if (SingletonDataHolder.testMode == 1)
+            inTestTv.setText("Quick Test 1/3");
+        else
+            inTestTv.setText("Full Test 1/9");
 
 
         if (mp.isPlaying()) {
@@ -291,7 +313,6 @@ public class MainActivity extends Activity {
          * Add callback handler to change the pattern in pattern view
          */
 
-
         contButton = (Button) findViewById(R.id.contButton);
         contButton.setOnClickListener(new View.OnClickListener() {
             String str;
@@ -301,7 +322,10 @@ public class MainActivity extends Activity {
 
                 int patternIndex = patternView.getPatternInstance().getPattenIndex();
                 if (pattern.isAllPatternComplete() && patternIndex == 0) {
-                    calcResult();
+                    if (SingletonDataHolder.testMode == 1)
+                        calcResultPlayMode();
+                    else
+                        calcResult();
                     return;
                 }
 
@@ -347,74 +371,89 @@ public class MainActivity extends Activity {
                             if (deviceId == 4)
                                 mp.setDataSource(getApplicationContext(),
                                         Uri.parse("android.resource://com.eyeque.mono/" + R.raw.mm3));
-                            else
-                            if (pattern.getWhichEye())
-                                mp.setDataSource(getApplicationContext(),
-                                        Uri.parse("android.resource://com.eyeque.mono/" + R.raw.frp_4));
-                            else
-                                mp.setDataSource(getApplicationContext(),
-                                        Uri.parse("android.resource://com.eyeque.mono/" + R.raw.flp_4));
-
+                            else if (SingletonDataHolder.testMode == 1) {
+                                if (pattern.getWhichEye())
+                                    mp.setDataSource(getApplicationContext(),
+                                            Uri.parse("android.resource://com.eyeque.mono/" + R.raw.fr_last));
+                                else
+                                    mp.setDataSource(getApplicationContext(),
+                                            Uri.parse("android.resource://com.eyeque.mono/" + R.raw.fl_last));
+                            } else {
+                                if (pattern.getWhichEye())
+                                    mp.setDataSource(getApplicationContext(),
+                                            Uri.parse("android.resource://com.eyeque.mono/" + R.raw.frp_4));
+                                else
+                                    mp.setDataSource(getApplicationContext(),
+                                            Uri.parse("android.resource://com.eyeque.mono/" + R.raw.flp_4));
+                            }
                             break;
                         case 3:
                             if (deviceId == 4)
                                 mp.setDataSource(getApplicationContext(),
                                         Uri.parse("android.resource://com.eyeque.mono/" + R.raw.mm4));
                             else
-                            if (pattern.getWhichEye())
-                                mp.setDataSource(getApplicationContext(),
-                                        Uri.parse("android.resource://com.eyeque.mono/" + R.raw.frp_5));
-                            else
-                                mp.setDataSource(getApplicationContext(),
-                                        Uri.parse("android.resource://com.eyeque.mono/" + R.raw.flp_5));
+                                if (SingletonDataHolder.testMode == 0) {
+                                    if (pattern.getWhichEye())
+                                        mp.setDataSource(getApplicationContext(),
+                                                Uri.parse("android.resource://com.eyeque.mono/" + R.raw.frp_5));
+                                    else
+                                        mp.setDataSource(getApplicationContext(),
+                                                Uri.parse("android.resource://com.eyeque.mono/" + R.raw.flp_5));
+                                }
                             break;
                         case 4:
                             if (deviceId == 4)
                                 mp.setDataSource(getApplicationContext(),
                                         Uri.parse("android.resource://com.eyeque.mono/" + R.raw.mm5));
                             else
-                            if (pattern.getWhichEye())
-                                mp.setDataSource(getApplicationContext(),
-                                        Uri.parse("android.resource://com.eyeque.mono/" + R.raw.frp_6));
-                            else
-                                mp.setDataSource(getApplicationContext(),
-                                        Uri.parse("android.resource://com.eyeque.mono/" + R.raw.flp_6));
+                            if (SingletonDataHolder.testMode == 0) {
+                                if (pattern.getWhichEye())
+                                    mp.setDataSource(getApplicationContext(),
+                                            Uri.parse("android.resource://com.eyeque.mono/" + R.raw.frp_6));
+                                else
+                                    mp.setDataSource(getApplicationContext(),
+                                            Uri.parse("android.resource://com.eyeque.mono/" + R.raw.flp_6));
+                            }
                             break;
                         case 5:
                             if (deviceId == 4)
                                 mp.setDataSource(getApplicationContext(),
                                         Uri.parse("android.resource://com.eyeque.mono/" + R.raw.mm6));
                             else
-                            if (pattern.getWhichEye())
-                                mp.setDataSource(getApplicationContext(),
-                                        Uri.parse("android.resource://com.eyeque.mono/" + R.raw.frp_7));
-                            else
-                                mp.setDataSource(getApplicationContext(),
-                                        Uri.parse("android.resource://com.eyeque.mono/" + R.raw.flp_7));
+                            if (SingletonDataHolder.testMode == 0) {
+                                if (pattern.getWhichEye())
+                                    mp.setDataSource(getApplicationContext(),
+                                            Uri.parse("android.resource://com.eyeque.mono/" + R.raw.frp_7));
+                                else
+                                    mp.setDataSource(getApplicationContext(),
+                                            Uri.parse("android.resource://com.eyeque.mono/" + R.raw.flp_7));
+                            }
                             break;
                         case 6:
                             if (deviceId == 4)
                                 mp.setDataSource(getApplicationContext(),
                                         Uri.parse("android.resource://com.eyeque.mono/" + R.raw.mm7));
-                            else
-                            if (pattern.getWhichEye())
-                                mp.setDataSource(getApplicationContext(),
-                                        Uri.parse("android.resource://com.eyeque.mono/" + R.raw.frp_8));
-                            else
-                                mp.setDataSource(getApplicationContext(),
-                                        Uri.parse("android.resource://com.eyeque.mono/" + R.raw.flp_8));
+                            else if (SingletonDataHolder.testMode == 0) {
+                                if (pattern.getWhichEye())
+                                    mp.setDataSource(getApplicationContext(),
+                                            Uri.parse("android.resource://com.eyeque.mono/" + R.raw.frp_8));
+                                else
+                                    mp.setDataSource(getApplicationContext(),
+                                            Uri.parse("android.resource://com.eyeque.mono/" + R.raw.flp_8));
+                            }
                             break;
                         case 7:
                             if (deviceId == 4)
                                 mp.setDataSource(getApplicationContext(),
                                         Uri.parse("android.resource://com.eyeque.mono/" + R.raw.mm8));
-                            else
-                            if (pattern.getWhichEye())
-                                mp.setDataSource(getApplicationContext(),
-                                        Uri.parse("android.resource://com.eyeque.mono/" + R.raw.frp_9));
-                            else
-                                mp.setDataSource(getApplicationContext(),
-                                        Uri.parse("android.resource://com.eyeque.mono/" + R.raw.flp_9));
+                            else if (SingletonDataHolder.testMode == 0) {
+                                if (pattern.getWhichEye())
+                                    mp.setDataSource(getApplicationContext(),
+                                            Uri.parse("android.resource://com.eyeque.mono/" + R.raw.frp_9));
+                                else
+                                    mp.setDataSource(getApplicationContext(),
+                                            Uri.parse("android.resource://com.eyeque.mono/" + R.raw.flp_9));
+                            }
                             break;
                         case 8:
                             if (deviceId == 4)
@@ -463,9 +502,8 @@ public class MainActivity extends Activity {
                     }
 
                     if ((deviceId < 2 && patternIndex == 5)
-                            || (deviceId == 2 && patternIndex == 8)
-                            || (deviceId == 3 && patternIndex == 8)
-                            || (deviceId == 4 && patternIndex == 8)) {
+                            || (deviceId >= 2 && patternIndex == 8 && SingletonDataHolder.testMode == 0)
+                            || (deviceId >= 2 && patternIndex == 2 && SingletonDataHolder.testMode == 1)) {
                         try {
                             Thread.sleep(2000);                 //1000 milliseconds is one second.
                         } catch (InterruptedException ex) {
@@ -516,10 +554,12 @@ public class MainActivity extends Activity {
 
                 if (pattern.isAllPatternComplete()
                         && ((deviceId < 2 && patternIndex == 5)
-                        || (deviceId == 2 && patternIndex == 8)
-                        || (deviceId == 3 && patternIndex == 8)
-                        || (deviceId == 4 && patternIndex == 8)))
-                    calcResult();
+                        || (deviceId >= 2 && SingletonDataHolder.testMode == 0 && patternIndex == 8)
+                        || (deviceId >= 2 && SingletonDataHolder.testMode == 1 && patternIndex == 2)))
+                    if (SingletonDataHolder.testMode == 1)
+                        calcResultPlayMode();
+                    else
+                        calcResult();
                 else {
                     if (pattern.getWhichEye()) {
                         eyeRightText.setTextColor(brightColor);
@@ -530,10 +570,16 @@ public class MainActivity extends Activity {
                         eyeLeftText.setTextColor(brightColor);
                         eyeImageView.setImageResource(R.drawable.eye_left1);
                     }
-                    if (patternIndex == 8)
-                        str = "Test " + Integer.toString((patternIndex + 2) % 9) + "/9";
-                    else
-                        str = "Test " + Integer.toString(patternIndex + 2) + "/9";
+                    if (SingletonDataHolder.testMode == 0)
+                        if (patternIndex == 8)
+                            str = "Test " + Integer.toString((patternIndex + 2) % 9) + "/9";
+                        else
+                            str = "Test " + Integer.toString(patternIndex + 2) + "/9";
+                    if (SingletonDataHolder.testMode == 1)
+                        if (patternIndex == 2)
+                            str = "Quick Test " + Integer.toString((patternIndex + 2) % 3) + "/3";
+                        else
+                            str = "Quick Test " + Integer.toString(patternIndex + 2) + "/3";
                     inTestTv.setText(str);
                 }
             }
@@ -605,10 +651,8 @@ public class MainActivity extends Activity {
                     prevStopValue = lineSpace - minVal;
                     alignSeekBar.setProgress(lineSpace - minVal);
                 }
-
             }
         });
-
 
         furtherButton.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
@@ -796,81 +840,133 @@ public class MainActivity extends Activity {
         } else
             Toast.makeText(MainActivity.this,
                     "Please connect to the Internet to continue", Toast.LENGTH_SHORT).show();
+    }
 
-        /***
-        double[] results = pattern.calculateResults();
-        Intent resultIntent = new Intent(getBaseContext(), ResultActivity.class);
-        resultIntent.putExtra("subjectId", subjectId);
-        resultIntent.putExtra("deviceId", deviceId);
-        resultIntent.putExtra("serverId", serverId);
-        resultIntent.putExtra("ODS", results[0]);
-        resultIntent.putExtra("ODC", results[1]);
-        resultIntent.putExtra("ODA", results[2]);
-        resultIntent.putExtra("ODE", results[3]);
-        resultIntent.putExtra("ODR", results[4]);
-        resultIntent.putExtra("OSS", results[5]);
-        resultIntent.putExtra("OSC", results[6]);
-        resultIntent.putExtra("OSA", results[7]);
-        resultIntent.putExtra("OSE", results[8]);
-        resultIntent.putExtra("OSR", results[9]);
+    public void calcResultPlayMode() {
 
-        double[] patternCalcAngleList = pattern.getPatternCalcAngleList();
-        double[] leftPowerList = pattern.getLeftPowerValueList();
-        double[] rightPowerList = pattern.getRightPowerValueList();
-        int[] leftDistList = pattern.getLeftDistValueList();
-        int[] rightDistList = pattern.getRightDistValueList();
+        double sphOd, sphOs;
+        double a, b, c, A, B, C, p1, p2, p3;
 
-        resultIntent.putExtra("Angle-1", patternCalcAngleList[0]);
-        resultIntent.putExtra("Angle-2", patternCalcAngleList[1]);
-        resultIntent.putExtra("Angle-3", patternCalcAngleList[2]);
-        resultIntent.putExtra("Angle-4", patternCalcAngleList[3]);
-        resultIntent.putExtra("Angle-5", patternCalcAngleList[4]);
-        resultIntent.putExtra("Angle-6", patternCalcAngleList[5]);
+        A = Math.tan(2*SingletonDataHolder.calcAngleList[0]*3.14/180);
+        B = Math.tan(2*SingletonDataHolder.calcAngleList[1]*3.14/180);
+        C = Math.tan(2*SingletonDataHolder.calcAngleList[2]*3.14/180);
+        a = Math.cos(2*SingletonDataHolder.calcAngleList[0]*3.14/180);
+        b = Math.cos(2*SingletonDataHolder.calcAngleList[1]*3.14/180);
+        c = Math.cos(2*SingletonDataHolder.calcAngleList[2]*3.14/180);
+        p1 = pattern.getRightPowerValueList()[0]/a;
+        p2 = pattern.getRightPowerValueList()[1]/b;
+        p3 = pattern.getRightPowerValueList()[2]/c;
+        Log.i("Training SPHE-angle1:  ", Double.toString(SingletonDataHolder.calcAngleList[0]));
+        Log.i("Training SPHE-angle2:  ", Double.toString(SingletonDataHolder.calcAngleList[1]));
+        Log.i("Training SPHE-angle3:  ", Double.toString(SingletonDataHolder.calcAngleList[2]));
+        Log.i("Training SPHE-measur:  ", Double.toString(pattern.getRightPowerValueList()[0]));
+        Log.i("Training SPHE-measur:  ", Double.toString(pattern.getRightPowerValueList()[1]));
+        Log.i("Training SPHE-measur:  ", Double.toString(pattern.getRightPowerValueList()[2]));
+        Log.i("Training SPHE-p1:  ", Double.toString(p1));
+        Log.i("Training SPHE-p2:  ", Double.toString(p2));
+        Log.i("Training SPHE-p3:  ", Double.toString(p3));
+        Log.i("Training SPHE-A:  ", Double.toString(A));
+        Log.i("Training SPHE-B:  ", Double.toString(B));
+        Log.i("Training SPHE-C:  ", Double.toString(C));
+        Log.i("Training SPHE-a:  ", Double.toString(a));
+        Log.i("Training SPHE-b:  ", Double.toString(b));
+        Log.i("Training SPHE-c:  ", Double.toString(c));
+        sphOd = ((p1-p2)/(A-B)-(p1-p3)/(A-C))/((1/a-1/b)/(A-B)-(1/a-1/c)/(A-C));
 
-        if (deviceId >= 2) {
-            resultIntent.putExtra("Angle-7", patternCalcAngleList[6]);
-            resultIntent.putExtra("Angle-8", patternCalcAngleList[7]);
-            resultIntent.putExtra("Angle-9", patternCalcAngleList[8]);
-        }
+        p1 = pattern.getLeftPowerValueList()[0]/a;
+        p2 = pattern.getLeftPowerValueList()[1]/b;
+        p3 = pattern.getLeftPowerValueList()[2]/c;
+        sphOs = ((p1-p2)/(A-B)-(p1-p3)/(A-C))/((1/a-1/b)/(A-B)-(1/a-1/c)/(A-C));
 
-        resultIntent.putExtra("L-Dist-1", leftDistList[0]);
-        resultIntent.putExtra("L-Dist-2", leftDistList[1]);
-        resultIntent.putExtra("L-Dist-3", leftDistList[2]);
-        resultIntent.putExtra("L-Dist-4", leftDistList[3]);
-        resultIntent.putExtra("L-Dist-5", leftDistList[4]);
-        resultIntent.putExtra("L-Dist-6", leftDistList[5]);
+        Log.i("Training SPHE-OD:  ", Double.toString(sphOd));
+        Log.i("Training SPHE-OS:  ", Double.toString(sphOs));
 
-        if (deviceId >= 2) {
-            resultIntent.putExtra("L-Dist-7", leftDistList[6]);
-            resultIntent.putExtra("L-Dist-8", leftDistList[7]);
-            resultIntent.putExtra("L-Dist-9", leftDistList[8]);
-        }
+        // Upload the data
+        NetConnection conn = new NetConnection();
+        if (conn.isConnected(getApplicationContext())) {
+            Toast.makeText(MainActivity.this,
+                    "Upload data...", Toast.LENGTH_LONG).show();
+            // contButton.setEnabled(false);
+            // exitButton.setEnabled(false);
+            RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
+            final String url = Constants.UrlUploadTraining;
 
-        resultIntent.putExtra("R-Dist-1", rightDistList[0]);
-        resultIntent.putExtra("R-Dist-2", rightDistList[1]);
-        resultIntent.putExtra("R-Dist-3", rightDistList[2]);
-        resultIntent.putExtra("R-Dist-4", rightDistList[3]);
-        resultIntent.putExtra("R-Dist-5", rightDistList[4]);
-        resultIntent.putExtra("R-Dist-6", rightDistList[5]);
+            String rightDistanceValues = Integer.toString(pattern.getRightDistValueList()[0]) + ","
+                    + Integer.toString(pattern.getRightDistValueList()[1]) + ","
+                    + Integer.toString(pattern.getRightDistValueList()[2]);
+            String leftDistanceValues = Integer.toString(pattern.getLeftDistValueList()[0]) + ","
+                    + Integer.toString(pattern.getLeftDistValueList()[1]) + ","
+                    + Integer.toString(pattern.getLeftDistValueList()[2]);
+            final JSONObject params = new JSONObject();
+            final JSONObject finalParam = new JSONObject();
+            try {
+                params.put("subjectID", SingletonDataHolder.userId);
+                if (deviceId == 2)
+                    params.put("deviceName", "Device 3");
+                else if (deviceId == 3)
+                    // params.put("deviceName", "Device5");
+                    params.put("deviceName", SingletonDataHolder.deviceName);
+                else
+                    params.put("deviceName", "Device 1");
+                params.put("phoneType", SingletonDataHolder.phoneType);
+                params.put("background", 1);
+                params.put("sphOD", Double.toString(sphOd));
+                params.put("sphOS", Double.toString(sphOs));
+                params.put("measuresOD", rightDistanceValues);
+                params.put("measuresOS", leftDistanceValues);
+                finalParam.put("training", params);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
 
-        if (deviceId >= 2) {
-            resultIntent.putExtra("R-Dist-7", rightDistList[6]);
-            resultIntent.putExtra("R-Dist-8", rightDistList[7]);
-            resultIntent.putExtra("R-Dist-9", rightDistList[8]);
-        }
+            StringRequest postRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+                    Log.i(TAG, response);
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    contButton.setEnabled(true);
+                    exitButton.setEnabled(true);
+                    Toast.makeText(MainActivity.this,
+                            "Can't connect to the server", Toast.LENGTH_SHORT).show();
+                    Log.d("Error.Response", error.toString());
+                }
+            }) {
+                @Override
+                public byte[] getBody() throws AuthFailureError {
+                    Log.i("$$$-UPLOAD TRAINING-$$$", finalParam.toString());
+                    return finalParam.toString().getBytes();
+                }
 
-        Log.i("MA-OD Spherical:  ", Double.toString(results[0]));
-        Log.i("MA-OD Cylindrical:  ", Double.toString(results[1]));
-        Log.i("MA-OD Axis:  ", Double.toString(results[2]));
-        Log.i("MA-OD SE:  ", Double.toString(results[3]));
-        Log.i("MA-OS Spherical:  ", Double.toString(results[5]));
-        Log.i("MA-OS Cylindrical:  ", Double.toString(results[6]));
-        Log.i("MA-OS Axis:  ", Double.toString(results[7]));
-        Log.i("MA-OS SE:  ", Double.toString(results[8]));
+                @Override
+                public String getBodyContentType() {
+                    return "application/json";
+                }
 
+                @Override
+                public Map<String, String> getHeaders() throws AuthFailureError {
+                    Map<String, String> headers = new HashMap<>();
+                    String authString = "Bearer " + SingletonDataHolder.token;
+                    headers.put("Content-Type", "application/json;charset=UTF-8");
+                    headers.put("Authorization", authString);
+                    Log.i("$$$---HEADER---$$$", headers.toString());
+                    return headers;
+                }
+            };
+            RetryPolicy policy = new DefaultRetryPolicy(Constants.NETCONN_TIMEOUT_VALUE, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+            postRequest.setRetryPolicy(policy);
+            queue.add(postRequest);
+        } else
+            Toast.makeText(MainActivity.this,
+                    "Upload failed", Toast.LENGTH_SHORT).show();
+
+        Intent resultIntent = new Intent(getBaseContext(), PlayModeResultActivity.class);
+        resultIntent.putExtra("ODE", String.format("%.2f", Math.round(sphOd*4)/4f));
+        resultIntent.putExtra("OSE", String.format("%.2f", Math.round(sphOs*4)/4f));
         startActivity(resultIntent);
         finish();
-        ***/
 
     }
 
