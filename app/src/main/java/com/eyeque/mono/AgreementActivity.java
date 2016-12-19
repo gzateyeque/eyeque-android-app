@@ -168,7 +168,8 @@ public class AgreementActivity extends AppCompatActivity {
             RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
 
             final JSONObject params = new JSONObject();
-            final JSONObject tmpParams = new JSONObject();
+            final JSONObject tmpParams1 = new JSONObject();
+            final JSONObject tmpParams2 = new JSONObject();
             final JSONArray attrArray = new JSONArray();
             final JSONObject finalParams = new JSONObject();
 
@@ -182,11 +183,18 @@ public class AgreementActivity extends AppCompatActivity {
                 params.put("gender", SingletonDataHolder.gender);
                 params.put("dob", Integer.toString(SingletonDataHolder.birthYear) + "-01-01");
                 params.put("group_id", SingletonDataHolder.groupId);
-                tmpParams.put("attribute_code", "device_number");
-                tmpParams.put("value", SingletonDataHolder.deviceSerialNum);
-                attrArray.put(tmpParams);
+                tmpParams1.put("attribute_code", "device_number");
+                tmpParams1.put("value", SingletonDataHolder.deviceSerialNum);
+                attrArray.put(tmpParams1);
+                tmpParams2.put("attribute_code", "wear_eyeglasses");
+                if (SingletonDataHolder.profileWearEyeglass == true )
+                    tmpParams2.put("value", "yes");
+                else
+                    tmpParams2.put("value", "no");
+                attrArray.put(tmpParams2);
                 params.put("custom_attributes", attrArray);
                 finalParams.put("customer", params);
+                Log.i("CUSTOMER ATTR", params.toString());
             } catch (JSONException e) {
                 e.printStackTrace();
             }
