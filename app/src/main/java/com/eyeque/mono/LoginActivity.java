@@ -18,6 +18,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.provider.ContactsContract;
 import android.text.TextUtils;
 import android.view.View;
@@ -125,6 +126,9 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private static AccessToken tok;
     private static int retVal = 0;
 
+    // Record last clcik time to check the qick double tapping
+    private long mLastClickTime = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -210,8 +214,12 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         mEmailSignInButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (SystemClock.elapsedRealtime() - mLastClickTime < 1000){
+                    return;
+                }
                 loginType = 1;
                 attemptLogin();
+                mLastClickTime = SystemClock.elapsedRealtime();
             }
         });
 
