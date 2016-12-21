@@ -30,10 +30,10 @@ public class Constants {
      */
 
     // Production Server
-    public static String ApiRestfulBaseURL = "http://apidev.eyeque.com/";
+    public static String ApiRestfulBaseURL = "http://store.eyeque.com/";
     public static String WebSiteBaseURL = "http://www.eyeque.com/";
     public static String WebSiteMobileBaseURL = "http://www.eyeque.com/m/";
-    public static String UserdataRestfulBaseURL = "http://apidev.eyeque.com:8987/";
+    public static String UserdataRestfulBaseURL = "http://store.eyeque.com:8987/";
 
     // Line distance scale parameters
     public static final int MINVAL_DEVICE_1 = 270;
