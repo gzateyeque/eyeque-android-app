@@ -419,9 +419,9 @@ public class Pattern {
 
         if (patternIndex > 0) {
             if (whichEye)
-                lineSpace = (int) (rightDistValueList[patternIndex-1] + 1/0.1428405590);
+                lineSpace = (int) (rightDistValueList[patternIndex-1] + 5/0.1428405590 * SingletonDataHolder.phonePpi/562);
             else
-                lineSpace = (int) (leftDistValueList[patternIndex-1] + 1/0.1428405590);
+                lineSpace = (int) (leftDistValueList[patternIndex-1] + 5/0.1428405590 * SingletonDataHolder.phonePpi/562);
         } else
             lineSpace =maxDist;
         drawPatternByDevice();
@@ -649,18 +649,12 @@ public class Pattern {
 
     public double getPowerValue5() {
 
-        /*
-        final double SphericalStep0 = -0.01157814480679;
-        final double SphericalStep1 = 0.121861836795073;
-        final double SphericalStep2 = 0.00014547630349013;
-        final double SphericalStep3 = 3.45806173446284E-07;
-        */
-
         // final double SphericalStep0 = 1.291059697E-01;
         // final double SphericalStep1 = 1.187528027E-01;
-        double SphericalStep0 = 1.428405590E-01;
-        double SphericalStep1 = 1.276384330E-01;
-        double SphericalStep2 = 6.454937531E-05;
+        double SphericalStep0 = 0.127068;
+        double SphericalStep1 = 0.00039076;
+        double SphericalStep2 = 0.13464368;
+        double SphericalStep3 = 0.00019929366;
 
         int dist = getDistance();
         int diff = dist - initDist;   // initDist = 330
@@ -669,12 +663,12 @@ public class Pattern {
                 + SphericalStep2*deltaDist*deltaDist + SphericalStep3*deltaDist*deltaDist*deltaDist;
         */
         if (diff > 0)
-            powerValue = SphericalStep0*diff;
+            powerValue = SphericalStep0*diff + SphericalStep1*diff*diff;
         else
-            powerValue = SphericalStep1*diff + SphericalStep2*diff*diff;
+            powerValue = SphericalStep2*diff + SphericalStep3*diff*diff;
 
         // Power correction EQ101
-        powerValue = powerValue/(1+0.012*powerValue);
+        powerValue = powerValue/(1.00+0.012*powerValue);
 
         return powerValue;
     }

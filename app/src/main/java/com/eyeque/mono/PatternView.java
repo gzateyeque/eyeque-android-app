@@ -164,9 +164,9 @@ public class PatternView extends View {
             }
 
             if (SingletonDataHolder.accommodationOn) {
-                for (float ii = 380 * SingletonDataHolder.phonePpi / 562; ii >= 230; ii -= 0.5) {
+                for (float ii = 380 * SingletonDataHolder.phonePpi / 562; ii >= 230 * SingletonDataHolder.phonePpi / 562; ii -= 0.5) {
                     // cv.save();
-                    aniRadius = ii + 20;
+                    aniRadius = ii + 20 * SingletonDataHolder.phonePpi / 562;
                     color = Color.rgb(127, 70, 0);
                     p.setColor(color);
                     cv.drawCircle(SingletonDataHolder.centerX, SingletonDataHolder.centerY, ii, p);
