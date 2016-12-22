@@ -20,7 +20,6 @@ import android.webkit.WebViewClient;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
@@ -36,6 +35,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Arrays;
+import java.util.ArrayList;
 import android.content.pm.ActivityInfo;
 
 public class TopActivity extends AppCompatActivity
@@ -235,6 +236,7 @@ public class TopActivity extends AppCompatActivity
                 public void onResponse(String string) {
                     // Parse serial check response
                     try {
+                        // String sphericalStep;
                         Log.i("*** JSON Device Rtn ***", string);
                         JSONObject jsonObj = new JSONObject(string);
                         checkDeviceCompatibility = true;
@@ -249,11 +251,7 @@ public class TopActivity extends AppCompatActivity
                         SingletonDataHolder.initDistance = jsonObj.getInt("initial_distance");
                         SingletonDataHolder.minDistance = jsonObj.getInt("min_distance");
                         SingletonDataHolder.maxDistance = jsonObj.getInt("max_distance");
-                        // SingletonDataHolder.lineLength = 130*SingletonDataHolder.phonePpi/577;
-                        // SingletonDataHolder.lineWidth = 36*SingletonDataHolder.phonePpi/577;
-                        // SingletonDataHolder.initDistance = 326*SingletonDataHolder.phonePpi/577;;
-                        // SingletonDataHolder.minDistance = 227*SingletonDataHolder.phonePpi/577;
-                        // SingletonDataHolder.maxDistance = 410*SingletonDataHolder.phonePpi/577;
+                        SingletonDataHolder.sphericalStep = new ArrayList<String>(Arrays.asList(jsonObj.getString("spherical_step").split(",")));
                     } catch (JSONException e) {
                         e.printStackTrace();
                         Toast.makeText(TopActivity.this, "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
