@@ -658,14 +658,17 @@ public class Pattern {
 
         int dist = getDistance();
         int diff = dist - initDist;   // initDist = 330
-        /* Previous Caliculation
-        powerValue = SphericalStep0 + SphericalStep1*deltaDist
-                + SphericalStep2*deltaDist*deltaDist + SphericalStep3*deltaDist*deltaDist*deltaDist;
-        */
-        if (diff > 0)
-            powerValue = SphericalStep0*diff + SphericalStep1*diff*diff;
-        else
-            powerValue = SphericalStep2*diff + SphericalStep3*diff*diff;
+
+        if (diff > 0) {
+            // powerValue = SingletonDataHolder.SphericalStep0 * diff + SingletonDataHolder.SphericalStep1 * diff * diff;
+            powerValue = Double.parseDouble(SingletonDataHolder.sphericalStep.get(0)) * diff
+                        + Double.parseDouble(SingletonDataHolder.sphericalStep.get(1)) * diff * diff;
+        }
+        else {
+            // powerValue = SingletonDataHolder.SphericalStep2 * diff + SingletonDataHolder.SphericalStep3 * diff * diff;
+            powerValue = Double.parseDouble(SingletonDataHolder.sphericalStep.get(2)) * diff
+                        + Double.parseDouble(SingletonDataHolder.sphericalStep.get(3)) * diff * diff;
+        }
 
         // Power correction EQ101
         powerValue = powerValue/(1.00+0.012*powerValue);
