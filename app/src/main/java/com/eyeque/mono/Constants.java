@@ -23,10 +23,10 @@ public class Constants {
     public static String RestfulBaseURL = AwsEc2RestfulBaseURL;
 
     /*** DEV Server
-     public static String ApiRestfulBaseURL = "http://store.eyeque.com/";
+     public static String ApiRestfulBaseURL = "http://apidev.eyeque.com/";
      public static String WebSiteBaseURL = "http://wp.eyeque.com/";
      public static String ContentRestFulBaseURL = "http://apidev.eyeque.com:8080/";
-     public static String UserdataRestfulBaseURL = "http://store.eyeque.com:8987/";
+     public static String UserdataRestfulBaseURL = "http://apidev.eyeque.com:8987/";
      */
 
     // Production Server
