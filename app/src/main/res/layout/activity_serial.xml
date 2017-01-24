@@ -63,12 +63,27 @@
             android:textSize="30dp"
             android:layout_centerHorizontal="true" />
 
+            <TextView
+                android:id="@+id/serailNumDEscTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop = "20dp"
+                android:layout_marginLeft = "20dp"
+                android:layout_marginRight = "10dp"
+                android:gravity="center_horizontal"
+                android:text="The 8 character EyeQue serial number is located inside of the PVT package. You need to enter the serial number here to complete the setup process and to unlock the myEyeQue App.
+If you don't have the serial  number, you can come back later to complete the setup process."
+                android:textColor="#046EEA"
+                android:textSize="15dp"
+                android:layout_below="@+id/serialEditText"
+                android:layout_alignParentStart="true" />
+
             <Button
                 android:id="@+id/serialNextButton"
                 android:layout_width="170dip"
                 android:layout_height="50dip"
                 android:layout_marginTop="50dp"
-                android:layout_below="@+id/serialEditText"
+                android:layout_below="@+id/serailNumDEscTextView"
                 android:text="@string/nextButtonTextString"
                 android:textAllCaps="false"
                 android:gravity="center"
