@@ -883,7 +883,7 @@ public class DashboardFragment extends Fragment {
                 TextView odCylTextView = new TextView(thisContext);
                 odCylTextView.setTextColor(Color.BLACK);
                 odCylTextView.setGravity(1);
-                if (SingletonDataHolder.eyeglassNumberList[i].odCyl > -0.4)
+                if (Math.abs(SingletonDataHolder.eyeglassNumberList[i].odCyl) < 0.4)
                     odCylTextView.setText("--");
                 else
                     odCylTextView.setText(String.format("%.2f", SingletonDataHolder.eyeglassNumberList[i].odCyl));
@@ -902,7 +902,7 @@ public class DashboardFragment extends Fragment {
                 odAxisTextView.setTextColor(Color.BLACK);
                 odAxisTextView.setGravity(1);
                 Log.i("***--- AXIS ---***", Integer.toString(SingletonDataHolder.eyeglassNumberList[i].odAxis));
-                if (SingletonDataHolder.eyeglassNumberList[i].odCyl > -0.4)
+                if (Math.abs(SingletonDataHolder.eyeglassNumberList[i].odCyl) < 0.4)
                     odAxisTextView.setText("--");
                 else
                     odAxisTextView.setText(Integer.toString(SingletonDataHolder.eyeglassNumberList[i].odAxis));
@@ -960,7 +960,7 @@ public class DashboardFragment extends Fragment {
                 TextView osCylTextView = new TextView(thisContext);
                 osCylTextView.setTextColor(Color.BLACK);
                 osCylTextView.setGravity(1);
-                if (SingletonDataHolder.eyeglassNumberList[i].osCyl > -0.4)
+                if (Math.abs(SingletonDataHolder.eyeglassNumberList[i].osCyl) < 0.4)
                     osCylTextView.setText("--");
                 else
                     osCylTextView.setText(String.format("%.2f", SingletonDataHolder.eyeglassNumberList[i].osCyl));
@@ -978,7 +978,7 @@ public class DashboardFragment extends Fragment {
                 TextView osAxisTextView = new TextView(thisContext);
                 osAxisTextView.setTextColor(Color.BLACK);
                 osAxisTextView.setGravity(1);
-                if (SingletonDataHolder.eyeglassNumberList[i].osCyl > -0.4)
+                if (Math.abs(SingletonDataHolder.eyeglassNumberList[i].osCyl) < 0.4)
                     osAxisTextView.setText("--");
                 else
                     osAxisTextView.setText(Integer.toString(SingletonDataHolder.eyeglassNumberList[i].osAxis));

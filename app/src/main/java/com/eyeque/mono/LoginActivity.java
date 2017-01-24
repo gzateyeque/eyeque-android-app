@@ -239,8 +239,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         forgotPswdTv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent dobIntent = new Intent(getBaseContext(), ForgotPswdActivity.class);
-                startActivity(dobIntent);
+                Intent forgotPasswordIntent = new Intent(getBaseContext(), ForgotPswdActivity.class);
+                startActivity(forgotPasswordIntent);
             }
         });
 
@@ -792,6 +792,15 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                                     }
                                     break;
                                 }
+                                /***
+                                if (attrName.matches("wear_eyeglasses")) {
+                                    if (attrValue.matches("yes")) {
+                                        SingletonDataHolder.profileWearEyeglass = true;
+                                    } else {
+                                        SingletonDataHolder.profileWearEyeglass = false;
+                                    }
+                                }
+                                 ***/
                             }
 
                             if (isOnBoardNeeded) {
